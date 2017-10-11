@@ -8,6 +8,6 @@
           * Jobaer Ahmed
           * Lídia Nyman
           * Maoyi Huang
-          * Nandha Gopal
+          * Nandha Gopal Elangovan
 
 
