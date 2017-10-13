@@ -1,0 +1,614 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.1" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
+  realizations="true" associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="android.app.printerapp.MainActivity" project="PrinterApp" 
+    file="/PrinterApp/app/src/main/java/android/app/printerapp/MainActivity.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2659" y="1336"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="true" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="android.app.printerapp.model.ModelFile" project="PrinterApp" 
+    file="/PrinterApp/app/src/main/java/android/app/printerapp/model/ModelFile.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3166" y="947"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="true" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="android.app.printerapp.model.ModelPrinter" project="PrinterApp" 
+    file="/PrinterApp/app/src/main/java/android/app/printerapp/model/ModelPrinter.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2241" y="309"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="true" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="android.app.printerapp.model.ModelProfile" project="PrinterApp" 
+    file="/PrinterApp/app/src/main/java/android/app/printerapp/model/ModelProfile.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1609" y="829"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="true" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="android.app.printerapp.history.HistoryDrawerAdapter" project="PrinterApp" 
+    file="/PrinterApp/app/src/main/java/android/app/printerapp/history/HistoryDrawerAdapter.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3191" y="1196"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="true" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="android.app.printerapp.viewer.sidepanel.SidePanelHandler" project="PrinterApp" 
+    file="/PrinterApp/app/src/main/java/android/app/printerapp/viewer/sidepanel/SidePanelHandler.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1371" y="-228"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="true" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="android.app.printerapp.octoprint.HttpClientHandler" project="PrinterApp" 
+    file="/PrinterApp/app/src/main/java/android/app/printerapp/octoprint/HttpClientHandler.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1090" y="450"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="true" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="android.app.printerapp.devices.DevicesGridAdapter" project="PrinterApp" 
+    file="/PrinterApp/app/src/main/java/android/app/printerapp/devices/DevicesGridAdapter.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3170" y="-166"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="true" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="android.app.printerapp.viewer.sidepanel.SidePanelProfileAdapter" 
+    project="PrinterApp" 
+    file="/PrinterApp/app/src/main/java/android/app/printerapp/viewer/sidepanel/SidePanelProfileAdapter.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="985" y="-220"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="true" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="android.app.printerapp.octoprint.OctoprintFiles" project="PrinterApp" 
+    file="/PrinterApp/app/src/main/java/android/app/printerapp/octoprint/OctoprintFiles.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1942" y="1537"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="true" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="android.app.printerapp.devices.discovery.DiscoveryDevicesGridAdapter" 
+    project="PrinterApp" 
+    file="/PrinterApp/app/src/main/java/android/app/printerapp/devices/discovery/DiscoveryDevicesGridAdapter.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2463" y="-263"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="true" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="android.app.printerapp.devices.camera.CameraHandler" project="PrinterApp" 
+    file="/PrinterApp/app/src/main/java/android/app/printerapp/devices/camera/CameraHandler.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2156" y="795"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="true" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="android.app.printerapp.viewer.SlicingHandler" project="PrinterApp" 
+    file="/PrinterApp/app/src/main/java/android/app/printerapp/viewer/SlicingHandler.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1326" y="292"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="true" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="android.app.printerapp.devices.discovery.DiscoveryController" 
+    project="PrinterApp" 
+    file="/PrinterApp/app/src/main/java/android/app/printerapp/devices/discovery/DiscoveryController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2073" y="-294"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="true" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="android.app.printerapp.ListContent.DrawerListItem" project="PrinterApp" 
+    file="/PrinterApp/app/src/main/java/android/app/printerapp/ListContent.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3199" y="720"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="true" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="android.app.printerapp.viewer.DataStorage" project="PrinterApp" 
+    file="/PrinterApp/app/src/main/java/android/app/printerapp/viewer/DataStorage.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1060" y="1333"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="true" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="android.app.printerapp.viewer.sidepanel.SidePanelPrinterAdapter" 
+    project="PrinterApp" 
+    file="/PrinterApp/app/src/main/java/android/app/printerapp/viewer/sidepanel/SidePanelPrinterAdapter.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1779" y="-324"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="true" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="android.app.printerapp.model.ModelJob" project="PrinterApp" 
+    file="/PrinterApp/app/src/main/java/android/app/printerapp/model/ModelJob.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3170" y="332"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="true" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="android.app.printerapp.devices.database.DatabaseController" project="PrinterApp" 
+    file="/PrinterApp/app/src/main/java/android/app/printerapp/devices/database/DatabaseController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1634" y="1609"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="true" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="android.app.printerapp.viewer.FileBrowserAdapter" project="PrinterApp" 
+    file="/PrinterApp/app/src/main/java/android/app/printerapp/viewer/FileBrowserAdapter.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1613" y="1047"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="true" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="android.app.printerapp.ListContent" project="PrinterApp" 
+    file="/PrinterApp/app/src/main/java/android/app/printerapp/ListContent.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2899" y="939"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="true" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="android.app.printerapp.devices.DevicesListController" project="PrinterApp" 
+    file="/PrinterApp/app/src/main/java/android/app/printerapp/devices/DevicesListController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2791" y="-157"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="true" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="android.app.printerapp.DialogController" project="PrinterApp" 
+    file="/PrinterApp/app/src/main/java/android/app/printerapp/DialogController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3182" y="580"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="true" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="android.app.printerapp.octoprint.OctoprintControl" project="PrinterApp" 
+    file="/PrinterApp/app/src/main/java/android/app/printerapp/octoprint/OctoprintControl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1674" y="162"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="true" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="android.app.printerapp.NotificationReceiver" project="PrinterApp" 
+    file="/PrinterApp/app/src/main/java/android/app/printerapp/NotificationReceiver.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3172" y="74"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="true" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="android.app.printerapp.viewer.sidepanel.SidePanelHandler.GenericTextWatcher" 
+    project="PrinterApp" 
+    file="/PrinterApp/app/src/main/java/android/app/printerapp/viewer/sidepanel/SidePanelHandler.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1139" y="153"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="true" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <dependency id="27">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="13"/>  
+  </dependency>  
+  <association id="28">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="29" name="mCam"/>      
+      <multiplicity id="30" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="31">    
+    <bendpoint x="2907" y="594"/>    
+    <bendpoint x="3094" y="700"/>    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <dependency id="32">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <dependency id="33">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <association id="34">    
+    <bendpoint x="2135" y="-13"/>    
+    <bendpoint x="2133" y="180"/>    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="35" name="mServiceList"/>      
+      <multiplicity id="36" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="37">    
+    <bendpoint x="3182" y="152"/>    
+    <bendpoint x="3169" y="163"/>    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <association id="38">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="39" name="mDialog"/>      
+      <multiplicity id="40" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="41">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="42">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <nesting id="43">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="26"/>  
+  </nesting>  
+  <dependency id="44">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="13"/>  
+  </dependency>  
+  <nesting id="45">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="15"/>  
+  </nesting>  
+  <association id="46">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="47" name="mDrawerAdapter"/>      
+      <multiplicity id="48" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="49">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <dependency id="50">    
+    <bendpoint x="1739" y="901"/>    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <dependency id="51">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="52">    
+    <bendpoint x="2338" y="1684"/>    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <association id="53">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="54" name="mJob"/>      
+      <multiplicity id="55" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="56">    
+    <bendpoint x="3034" y="382"/>    
+    <bendpoint x="3034" y="276"/>    
+    <bendpoint x="3034" y="170"/>    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="25"/>  
+  </dependency>  
+  <association id="57">    
+    <bendpoint x="2232" y="-123"/>    
+    <bendpoint x="2259" y="-141"/>    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="58" name="mFinalPrinter"/>      
+      <multiplicity id="59" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="60">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="61" name="mDataList"/>      
+      <multiplicity id="62" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="63">    
+    <bendpoint x="2967" y="43"/>    
+    <bendpoint x="3025" y="123"/>    
+    <bendpoint x="3077" y="147"/>    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <association id="64">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="65" name="mDevicesGridItems"/>      
+      <multiplicity id="66" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="67">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <dependency id="68">    
+    <bendpoint x="2140" y="276"/>    
+    <bendpoint x="2098" y="382"/>    
+    <bendpoint x="1487" y="488"/>    
+    <bendpoint x="1487" y="594"/>    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <dependency id="69">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <dependency id="70">    
+    <bendpoint x="2035" y="276"/>    
+    <bendpoint x="2077" y="382"/>    
+    <bendpoint x="2098" y="488"/>    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <association id="71">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="72" name="profileAdapter"/>      
+      <multiplicity id="73" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="74">    
+    <bendpoint x="2035" y="170"/>    
+    <bendpoint x="2035" y="167"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="75" name="mPrinter"/>      
+      <multiplicity id="76" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="77">    
+    <bendpoint x="2999" y="170"/>    
+    <bendpoint x="2954" y="276"/>    
+    <bendpoint x="2909" y="382"/>    
+    <bendpoint x="2867" y="488"/>    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="78">    
+    <bendpoint x="804" y="170"/>    
+    <bendpoint x="828" y="276"/>    
+    <bendpoint x="853" y="382"/>    
+    <bendpoint x="853" y="488"/>    
+    <bendpoint x="853" y="594"/>    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <dependency id="79">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="80">    
+    <bendpoint x="874" y="488"/>    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="81">    
+    <bendpoint x="2098" y="276"/>    
+    <bendpoint x="2035" y="382"/>    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="10"/>  
+  </dependency>  
+  <association id="82">    
+    <bendpoint x="1128" y="170"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="83" name="mSlicingHandler"/>      
+      <multiplicity id="84" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="85">    
+    <bendpoint x="2886" y="594"/>    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <association id="86">    
+    <bendpoint x="2888" y="170"/>    
+    <bendpoint x="2888" y="276"/>    
+    <bendpoint x="2379" y="382"/>    
+    <bendpoint x="2316" y="488"/>    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="87" name="mOriginal"/>      
+      <multiplicity id="88" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="89">    
+    <bendpoint x="1128" y="382"/>    
+    <bendpoint x="1128" y="488"/>    
+    <bendpoint x="1128" y="594"/>    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <dependency id="90">    
+    <bendpoint x="2867" y="276"/>    
+    <bendpoint x="2867" y="382"/>    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <association id="91">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="92" name="mAdapter"/>      
+      <multiplicity id="93" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="94">    
+    <bendpoint x="1452" y="170"/>    
+    <bendpoint x="1420" y="276"/>    
+    <bendpoint x="1388" y="382"/>    
+    <bendpoint x="1170" y="488"/>    
+    <bendpoint x="1170" y="594"/>    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <dependency id="95">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <association id="96">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="97" name="mDrawerListItems"/>      
+      <multiplicity id="98" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="99">    
+    <bendpoint x="2014" y="382"/>    
+    <bendpoint x="2077" y="488"/>    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="100" name="mPrinter"/>      
+      <multiplicity id="101" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="102">    
+    <bendpoint x="2909" y="170"/>    
+    <bendpoint x="2909" y="276"/>    
+    <bendpoint x="2846" y="382"/>    
+    <bendpoint x="2846" y="488"/>    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="103" name="mCurrent"/>      
+      <multiplicity id="104" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="105">    
+    <bendpoint x="2499" y="128"/>    
+    <bendpoint x="2445" y="171"/>    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="106" name="mList"/>      
+      <multiplicity id="107" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="108">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <association id="109">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="110" name="printerAdapter"/>      
+      <multiplicity id="111" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="112">    
+    <bendpoint x="2373" y="170"/>    
+    <bendpoint x="2373" y="276"/>    
+    <bendpoint x="2400" y="382"/>    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="113">    
+    <bendpoint x="2930" y="170"/>    
+    <bendpoint x="2930" y="276"/>    
+    <bendpoint x="2930" y="382"/>    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="false" package="false" protected="false" private="false" static="false"/>    
+    <operations public="false" package="false" protected="false" private="false" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

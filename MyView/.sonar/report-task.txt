@@ -1,0 +1,6 @@
+projectKey=my:project.octoprint.IM3
+serverUrl=http://localhost:9000
+serverVersion=6.5.0.27846
+dashboardUrl=http://localhost:9000/dashboard/index/my:project.octoprint.IM3
+ceTaskId=AV7-A3UlCUj1rS4t09HJ
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AV7-A3UlCUj1rS4t09HJ
