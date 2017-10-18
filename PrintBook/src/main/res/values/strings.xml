@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">PrintBook</string>
     <string name="welcome">Welcome To Swerea!</string>
+    <string name="visual">visual</string>
+    <string name="fetch">fetch</string>
+    <string name="upload">upload</string>
+    <string name="check">check</string>
 </resources>
