@@ -5,4 +5,7 @@
     <string name="fetch">fetch</string>
     <string name="upload">upload</string>
     <string name="check">check</string>
+    <string name="action_settings">action_settings</string>
+    <string name="drawer_open">drawer_open</string>
+    <string name="drawer_close">drawer_close</string>
 </resources>
