@@ -1,5 +1,8 @@
 package g5.printbook;
 
+/**
+ Created by mao & nan on 2017-10-20
+**/
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -42,27 +45,28 @@ public class HomePage extends ActionBarActivity {
         visual = (Button)findViewById(R.id.button3);
         check = (Button)findViewById(R.id.button4);
 
+        //The clicklistener for buttons
         fetch.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                   // Code here executes on main thread after user presses button
                 System.out.print("fetch the model");
             }
         });
-
+        //The clicklistener for buttons
         upload.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
                 System.out.print("upload the model");
             }
         });
-
+        //The clicklistener for buttons
         visual.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
                 System.out.print("view the model");
             }
         });
-
+        //The clicklistener for buttons
         check.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
