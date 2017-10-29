@@ -1,11 +1,16 @@
 <resources>
     <string name="app_name">PrintBook</string>
     <string name="welcome">Welcome To Swerea!</string>
-    <string name="visual">visual</string>
-    <string name="fetch">fetch</string>
-    <string name="upload">upload</string>
-    <string name="check">check</string>
+    <string name="visual">visual the STL model</string>
+    <string name="fetch">fetch the model</string>
+    <string name="upload">upload the STL model</string>
+    <string name="check">check the model</string>
     <string name="action_settings">action_settings</string>
     <string name="drawer_open">drawer_open</string>
     <string name="drawer_close">drawer_close</string>
+    <string name="np">this is the new project page</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="back">back</string>
 </resources>

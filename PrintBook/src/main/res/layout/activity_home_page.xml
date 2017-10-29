@@ -7,73 +7,72 @@
 
     <!-- The first child in the layout is for the main Activity UI-->
     <RelativeLayout
+        android:id="@+id/HomePage_RelativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#ffffffff"
+        android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        tools:context=".MainActivity"
-        android:background="#ffffffff">
+        tools:context=".HomePage">
 
         <TextView
+            android:id="@+id/welcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="Welcome to Swerea!"
-            android:textSize="24sp"
-            android:gravity="center"
             android:layout_marginTop="100dp"
-            android:id="@+id/textView2" />
+            android:gravity="center"
+            android:text="@string/welcome"
+            android:textSize="24sp" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/fetch"
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:layout_alignLeft="@+id/textView2"
-            android:layout_alignStart="@+id/textView2"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:text="@string/fetch"
-            tools:text="Fetch your STL model" />
+            android:text="@string/fetch" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/upload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/button"
-            android:layout_alignLeft="@+id/button"
-            android:layout_alignRight="@+id/button"
-            android:layout_alignStart="@+id/button"
-            android:layout_below="@+id/button"
+            android:layout_alignEnd="@+id/fetch"
+            android:layout_alignLeft="@+id/fetch"
+            android:layout_alignRight="@+id/fetch"
+            android:layout_alignStart="@+id/fetch"
+            android:layout_below="@+id/fetch"
             android:layout_marginTop="28dp"
-            android:text="@string/upload"
-            tools:text="Upload your STL model" />
+            android:text="@string/upload" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/visual"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/button2"
-            android:layout_alignLeft="@+id/button2"
-            android:layout_alignRight="@+id/button2"
-            android:layout_alignStart="@+id/button2"
-            android:layout_below="@+id/button2"
+            android:layout_alignEnd="@+id/upload"
+            android:layout_alignLeft="@+id/upload"
+            android:layout_alignRight="@+id/upload"
+            android:layout_alignStart="@+id/upload"
+            android:layout_below="@+id/upload"
             android:layout_marginTop="46dp"
-            android:text="@string/visual"
-            tools:text="Visualize your 3D model" />
+            android:text="@string/visual" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/button3"
-            android:layout_alignLeft="@+id/button3"
+            android:layout_alignEnd="@+id/visual"
+            android:layout_alignLeft="@+id/visual"
             android:layout_alignParentBottom="true"
-            android:layout_alignRight="@+id/button3"
-            android:layout_alignStart="@+id/button3"
+            android:layout_alignRight="@+id/visual"
+            android:layout_alignStart="@+id/visual"
             android:layout_marginBottom="18dp"
-            android:text="@string/check"
-            tools:text="check your model " />
+            android:text="@string/check" />
 
     </RelativeLayout>
 
@@ -82,7 +81,7 @@
         android:id="@+id/navList"
         android:layout_width="200dp"
         android:layout_height="match_parent"
-        android:layout_gravity="left|start"
+        android:layout_gravity="start"
         android:background="#ffffffff" />
 
 </android.support.v4.widget.DrawerLayout>
