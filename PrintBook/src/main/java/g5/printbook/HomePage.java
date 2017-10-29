@@ -43,7 +43,7 @@ public class HomePage extends ActionBarActivity {
         fetch = (Button)findViewById(R.id.fetch);
         upload = (Button)findViewById(R.id.upload);
         visual = (Button)findViewById(R.id.visual);
-        check = (Button)findViewById(R.id.button4);
+        check = (Button)findViewById(R.id.check);
 
         //The clicklistener for buttons
         fetch.setOnClickListener(new View.OnClickListener() {
