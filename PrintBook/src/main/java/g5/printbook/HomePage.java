@@ -5,6 +5,7 @@ package g5.printbook;
 **/
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,9 +16,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
-
-import static android.R.attr.button;
 
 
 public class HomePage extends ActionBarActivity {
@@ -40,37 +40,37 @@ public class HomePage extends ActionBarActivity {
         mActivityTitle = getTitle().toString();
 
 
-        fetch = (Button)findViewById(R.id.button);
-        upload = (Button)findViewById(R.id.button2);
-        visual = (Button)findViewById(R.id.button3);
+        fetch = (Button)findViewById(R.id.fetch);
+        upload = (Button)findViewById(R.id.upload);
+        visual = (Button)findViewById(R.id.visual);
         check = (Button)findViewById(R.id.button4);
 
         //The clicklistener for buttons
         fetch.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                   // Code here executes on main thread after user presses button
-                System.out.print("fetch the model");
+                Toast.makeText(HomePage.this, "fetch the model!", Toast.LENGTH_SHORT).show();
             }
         });
         //The clicklistener for buttons
         upload.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-                System.out.print("upload the model");
+                Toast.makeText(HomePage.this, "upload the model!", Toast.LENGTH_SHORT).show();
             }
         });
         //The clicklistener for buttons
         visual.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-                System.out.print("view the model");
+                Toast.makeText(HomePage.this, "view the model!", Toast.LENGTH_SHORT).show();
             }
         });
         //The clicklistener for buttons
         check.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-                System.out.print("check the model");
+                Toast.makeText(HomePage.this, "check the model!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -82,14 +82,40 @@ public class HomePage extends ActionBarActivity {
     }
 
     private void addDrawerItems() {
-        String[] osArray = { "New Project", "Settings", "About" };
+        String[] osArray = { "New Project", "Settings", "About", "4th" };
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(mAdapter);
 
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(HomePage.this, "Time for an upgrade!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(HomePage.this, "something here", Toast.LENGTH_SHORT).show();
+
+                switch (position) {
+                    case 0: {
+                        ((RelativeLayout) findViewById(R.id.HomePage_RelativeLayout)).removeAllViews();
+
+                        NewProjectFragment fragmentNp = new NewProjectFragment();
+                        FragmentManager manager = getSupportFragmentManager();
+                        manager.beginTransaction()
+                                .replace(R.id.HomePage_RelativeLayout, fragmentNp)
+                                .commit();
+                        break;
+                    }
+                    case 1: {
+                        Toast.makeText(HomePage.this, "turn to about page", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    case 2: {
+                        Toast.makeText(HomePage.this, "turn to settings page", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+
+                    default:Toast.makeText(HomePage.this, "nothing!", Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
     }
