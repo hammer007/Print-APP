@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     useLibrary 'org.apache.http.legacy'
     compileSdkVersion 26
-    buildToolsVersion "25.0.2"
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "g5.printbook"
@@ -25,13 +25,15 @@ android {
 buildscript {
     repositories {
         jcenter()
+        google()
     }
 
     dependencies {
-        classpath "com.android.tools.build:gradle:2.3.3"
+        classpath 'com.android.tools.build:gradle:3.0.0'
     }
 }
 dependencies {
+    implementation 'com.android.support:design:26.1.0'
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -43,4 +45,5 @@ dependencies {
 }
 repositories {
     maven { url 'http://repo1.maven.org/maven2' }
+    google()
 }
