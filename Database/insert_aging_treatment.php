@@ -13,7 +13,7 @@
                           + "VALUES('$aging_id', '$temperature', '$time', '$cycles', '$comment')";
 
     if(!$db) die('Something went wrong while connecting to database');
-    $result = mysqli_query($db->connect(), $insert_to_post_printing) or die('unable to insert to printing');
+    $result = mysqli_query($db->connect(), $insert_to_aging_treatment) or die('unable to insert to printing');
     if ($result) {
         $response["success"] = 1;
         $response["message"] = "printing successfully inserted.";
