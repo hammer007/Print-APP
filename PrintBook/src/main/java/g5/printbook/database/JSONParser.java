@@ -83,6 +83,7 @@ public class JSONParser {
                 sb.append(line + "\n");
             }
             is.close();
+            System.out.print("sb:" +sb );
             json = sb.toString();
         } catch (Exception e) {
             Log.e("Buffer Error", "Error converting result " + e.toString());
