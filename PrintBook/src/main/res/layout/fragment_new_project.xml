@@ -1,19 +1,217 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/newproject_scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="3dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
     tools:context="g5.printbook.NewProjectFragment">
 
-    <Button
+    <TextView
+        android:id="@+id/preprinting_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pre Printing"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/projectID_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Project"
-        android:padding="8dp"
-        android:textColor="#fff"
-        android:background="@color/colorPrimary"
-        android:textSize="20dp"
-        android:id="@+id/textView"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/preprinting_textView"
+        android:layout_toEndOf="@+id/projectID_textView"
+        android:layout_toRightOf="@+id/projectID_textView"
+        android:ems="10"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/projectID_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/projectID_editText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="Project ID"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/partnumber_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/projectID_textView"
+        android:layout_marginTop="20dp"
+        android:text="Part Number"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/partnumber_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/projectID_editText"
+        android:layout_toEndOf="@+id/partnumber_textView"
+        android:layout_toRightOf="@+id/partnumber_textView"
+        android:ems="10"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/numberparts_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/partnumber_editText"
+        android:layout_marginTop="16dp"
+        android:text="Number of Parts"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/numberofparts_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/prinringparameters_textView"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_toEndOf="@+id/numberparts_textView"
+        android:layout_toRightOf="@+id/numberparts_textView"
+        android:ems="10"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/prinringparameters_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/numberparts_textView"
+        android:layout_marginTop="15dp"
+        android:text="Printing Parameters"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/printingparameters_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/prinringparameters_textView"
+        android:layout_toEndOf="@+id/prinringparameters_textView"
+        android:layout_toRightOf="@+id/prinringparameters_textView"
+        android:ems="10"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/coment_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/prinringparameters_textView"
+        android:layout_marginTop="18dp"
+        android:text="Comment"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/comment_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/prinringparameters_textView"
+        android:layout_toEndOf="@+id/coment_textView"
+        android:layout_toRightOf="@+id/coment_textView"
+        android:ems="10"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/Printing_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/comment_editText"
+        android:layout_marginTop="46dp"
+        android:text="Printing"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/slmid_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/Printing_textView"
+        android:layout_marginTop="20dp"
+        android:text="SLM ID"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/slmid_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/Printing_textView"
+        android:layout_toEndOf="@+id/slmid_textView"
+        android:layout_toRightOf="@+id/slmid_textView"
+        android:ems="10"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/starttime_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/slmid_editText"
+        android:layout_marginTop="12dp"
+        android:text="Start Time"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/starttime_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/starttime_textView"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_toEndOf="@+id/starttime_textView"
+        android:layout_toRightOf="@+id/starttime_textView"
+        android:ems="10"
+        android:inputType="date|time" />
+
+    <TextView
+        android:id="@+id/endtime_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="16dp"
+        android:text="End Time"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/endtime_textView"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_toEndOf="@+id/endtime_textView"
+        android:layout_toRightOf="@+id/endtime_textView"
+        android:ems="10"
+        android:inputType="date|time" />
 
 </RelativeLayout>
