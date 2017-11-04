@@ -1,16 +1,24 @@
 package g5.printbook.database;
 
+import android.content.Context;
+import android.nfc.Tag;
 import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.Toast;
+
 import org.apache.http.NameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.List;
 
+import static android.content.ContentValues.TAG;
+
 /**
  * Created by Geek on 10/21/2017.
  */
 
-public class CRUD extends AsyncTask<String, String, String> {
+public class CRUD extends AsyncTask<String, String, Integer> {
+    int success = -1;
     Config config = new Config();
     JSONParser jsonParser = new JSONParser();
     String do_what = config.TAG_CREATE_NOTHING;
@@ -20,31 +28,24 @@ public class CRUD extends AsyncTask<String, String, String> {
         this.do_what = do_what;
     }
     @Override
-    protected String doInBackground(String... strings) {
-        int success = -1;
+    protected Integer doInBackground(String... strings) {
         if(do_what == config.TAG_CREATE_PROJECT)  success = insertToDB(config.url_create_project);
-        else if (do_what == config.TAG_INSERT_TO_PREPRINTING) success = insertToDB(config.url_insert_preprinting);
-        if (success == 1) System.out.print("success");
-        else System.out.print("fail");
-        return null;
+        else if (do_what == config.TAG_INSERT_PREPRINTING) success = insertToDB(config.url_insert_preprinting);
+        return success;
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
     }
-    protected void onPostExecute(String file_url) {}
+    protected int onPostExecute(int success) {return success;}
     private int insertToDB(String doWhat){
-        System.out.print(" params " +params);
         JSONObject json = jsonParser.makeHttpRequest(doWhat, "POST", params);
-        int success = -1;
         try {
-            System.out.print( "" + json);
             success = json.getInt(config.TAG_SUCCESS);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return success;
     }
-
 }
