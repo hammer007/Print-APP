@@ -1,7 +1,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:id="@+id/newproject_scrollView">
 
     <RelativeLayout
@@ -157,7 +157,8 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/preprinting_relativeLayout">
+            android:layout_below="@+id/preprinting_relativeLayout"
+            android:id="@+id/printing_relativeLayout">
 
             <TextView
                 android:id="@+id/Printing_textView"
@@ -365,32 +366,12 @@
                 android:ems="10"
                 android:inputType="text"/>
 
-            <TextView
-                android:id="@+id/powerused_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/powderwaste_textView"
-                android:layout_marginTop="20dp"
-                android:text="Power Used (13-12):"
-                android:textSize="18sp"/>
-
-            <EditText
-                android:id="@+id/powerused_editText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/powerused_textView"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_toEndOf="@+id/powerused_textView"
-                android:layout_toRightOf="@+id/powerused_textView"
-                android:ems="10"
-                android:inputType="text"/>
 
             <TextView
                 android:id="@+id/material_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/powerused_textView"
+                android:layout_below="@+id/powderwaste_textView"
                 android:layout_marginTop="20dp"
                 android:text="Material:"
                 android:textSize="18sp"/>
@@ -588,7 +569,15 @@
 
         </RelativeLayout>
 
-
+        <Button
+            android:id="@+id/submit_Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/printing_relativeLayout"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:text="Submit" />
 
     </RelativeLayout>
 </ScrollView>
