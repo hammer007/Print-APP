@@ -15,14 +15,10 @@
     $value_3 = $_POST['value_3'];
     $tap_3 = $_POST['tap_3'];
     $average = $_POST['average'];
-	
+
     require_once __DIR__ . '/db_connect.php';
     $db = new DB_CONNECT();
-    $insert_to_hall_flow = "INSERT INTO printbook.hallflow(hallflow_id, material_id, project_id, operator, date, humidity, temperature, value_1," +
-                          + "tap_1, value_2, tap_2, value_3, tap_3, average) " +
-                          + "VALUES('$hallflow_id', '$material_id', '$project_id', '$operator', '$date', '$humidity', '$temperature', '$value_1'," +
-                          + "'$tap_1', '$value_2', '$tap_2', '$value_3', '$tap_3', '$average')";
-
+    $insert_to_hall_flow = "INSERT INTO printbook.hallflow(hallflow_id, material_id, project_id, operator, date, humidity, temperature, value_1,tap_1, value_2, tap_2, value_3, tap_3, average) VALUES('$hallflow_id', '$material_id', '$project_id', '$operator', '$date', '$humidity', '$temperature', '$value_1','$tap_1', '$value_2', '$tap_2', '$value_3', '$tap_3', '$average')";
     if(!$db) die('Something went wrong while connecting to database');
     $result = mysqli_query($db->connect(), $insert_to_hall_flow) or die('unable to insert to hallflow');
     if ($result) {
