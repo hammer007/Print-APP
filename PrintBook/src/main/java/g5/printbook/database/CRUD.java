@@ -31,6 +31,7 @@ public class CRUD extends AsyncTask<String, String, Integer> {
     protected Integer doInBackground(String... strings) {
         if(do_what == config.TAG_CREATE_PROJECT)  success = insertToDB(config.url_create_project);
         else if (do_what == config.TAG_INSERT_PREPRINTING) success = insertToDB(config.url_insert_preprinting);
+        else if (do_what == config.TAG_INSERT_PRINTING) success = insertToDB(config.url_insert_printing);
         return success;
     }
 

@@ -38,6 +38,9 @@ public class NewProjectFragment extends Fragment {
     Button printingSave_Button, preprintingSave_Button;
     EditText projectID_editText, partnumber_editText, numberofparts_editText, printingparameters_editText, comment_editText;
     EditText slmid_editText, starttime_editText, endtime_editText, date_editText, operator_editText;
+    EditText typeofmachine_editText, powerweight_editText, powerweightatEnd_editText, powderwaste_editText, material_editText;
+    EditText buildplatform_editText, printTune_editText, powderCondition_editText, reused_times_editText;
+    EditText numberofLayers_editText, dpcFactor_editText, minExposureTime_editText, printingComments_editText;
 
 
     public NewProjectFragment() {
@@ -60,15 +63,21 @@ public class NewProjectFragment extends Fragment {
                 if(TextUtils.isEmpty(projectID_editText.getText().toString())) projectID_editText.setError( "Id is Required!" );
                 else {
                     int success = createProject();
+                    int success_pre_printing = -1;
+                    int success_printing = -1;
                     if(success == 1) {
-                        int success_pre_printing = insert_to_pre_printing();
+                        success_pre_printing = insert_to_pre_printing();
                         if(success_pre_printing == 1){
-                            success = insert_to_printing();
-                            if(success == 1) Toast.makeText(getContext(), "SUCCESS; THE PROJECT HAS BEEN INSERTED", Toast.LENGTH_LONG);
+                            success_printing = insert_to_printing();
+                            Toast.makeText(getContext(), "Am here" , Toast.LENGTH_LONG);
+                            if(success_printing == 1) Toast.makeText(getContext(), "SUCCESS; THE PROJECT HAS BEEN INSERTED", Toast.LENGTH_LONG);
                             else Toast.makeText(getContext(), "SOME PROBLEM WHEN INSERTING TO PRINTING TABLE", Toast.LENGTH_LONG);
                         }else Toast.makeText(getContext(), "SOME PROBLEM INSERTING TO PRE PRINTING, PRE PRINTING TABLE REJECTING", Toast.LENGTH_LONG);
                     }
                     else Toast.makeText(getContext(), "SOME PROBLEM WITH PROJECT CREATION, PROJECT TABLE REJECTING", Toast.LENGTH_LONG);
+                    success = -1;
+                    success_pre_printing = -1;
+                    success_printing = -1;
                 }
 
             }
@@ -80,27 +89,26 @@ public class NewProjectFragment extends Fragment {
     private int insert_to_printing() {
         int success = -1;
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair(config.PRINTING_printing_id, "2"));
+        //AUTO INCREMENT params.add(new BasicNameValuePair(config.PRINTING_printing_id, 2 + ""));
         params.add(new BasicNameValuePair(config.PRINTING_slm_id, slmid_editText.getText().toString()));
         params.add(new BasicNameValuePair(config.PRINTING_start_time, starttime_editText.getText().toString()));
         params.add(new BasicNameValuePair(config.PRINTING_end_time, endtime_editText.getText().toString()));
         params.add(new BasicNameValuePair(config.PRINTING_date, date_editText.getText().toString()));
         params.add(new BasicNameValuePair(config.PRINTING_operator, operator_editText.getText().toString()));
-        //FIXME when lidia updates the edit boxes
-        params.add(new BasicNameValuePair(config.PRINTING_machine_type, "2"));
-        params.add(new BasicNameValuePair(config.PRINTING_powder_weight_start, projectID_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PRINTING_powder_weight_end, projectID_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PRINTING_powder_waste_weight, numberofparts_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PRINTING_powder_used, printingparameters_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PRINTING_material_id, comment_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PRINTING_build_platform_weight, "2"));
-        params.add(new BasicNameValuePair(config.PRINTING_print_time, projectID_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PRINTING_powder_condition, projectID_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PRINTING_reused_times, numberofparts_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PRINTING_number_of_layers, printingparameters_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PRINTING_dpc_factor, comment_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PRINTING_exposure_time, printingparameters_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PRINTING_comments, comment_editText.getText().toString()));
+        params.add(new BasicNameValuePair(config.PRINTING_machine_type, typeofmachine_editText.getText().toString()));
+        params.add(new BasicNameValuePair(config.PRINTING_powder_weight_start, powerweight_editText.getText().toString()));
+        params.add(new BasicNameValuePair(config.PRINTING_powder_weight_end, powerweightatEnd_editText.getText().toString()));
+        params.add(new BasicNameValuePair(config.PRINTING_powder_used, ((Integer.parseInt(powerweight_editText.getText().toString()) - Integer.parseInt(powerweightatEnd_editText.getText().toString())) + "")));
+        params.add(new BasicNameValuePair(config.PRINTING_powder_waste_weight, powderwaste_editText.getText().toString()));
+        params.add(new BasicNameValuePair(config.PRINTING_material_id, material_editText.getText().toString()));
+        params.add(new BasicNameValuePair(config.PRINTING_build_platform_weight, buildplatform_editText.getText().toString()));
+        params.add(new BasicNameValuePair(config.PRINTING_print_time, printTune_editText.getText().toString()));
+        params.add(new BasicNameValuePair(config.PRINTING_powder_condition, powderCondition_editText.getText().toString()));
+        params.add(new BasicNameValuePair(config.PRINTING_reused_times, reused_times_editText.getText().toString()));
+        params.add(new BasicNameValuePair(config.PRINTING_number_of_layers, numberofLayers_editText.getText().toString()));
+        params.add(new BasicNameValuePair(config.PRINTING_dpc_factor, dpcFactor_editText.getText().toString()));
+        params.add(new BasicNameValuePair(config.PRINTING_exposure_time, minExposureTime_editText.getText().toString()));
+        params.add(new BasicNameValuePair(config.PRINTING_comments, printingComments_editText.getText().toString()));
         crud = new CRUD(params, config.TAG_INSERT_PRINTING);
         try {
             success = crud.execute().get();
@@ -109,6 +117,7 @@ public class NewProjectFragment extends Fragment {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+        Log.d(TAG, "Am here too" + params);
         return success;
     }
 
@@ -132,7 +141,7 @@ public class NewProjectFragment extends Fragment {
     private int insert_to_pre_printing(){
         int success = -1;
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair(config.PREPRINTING_pre_printing_id, "2"));
+        params.add(new BasicNameValuePair(config.PREPRINTING_pre_printing_id, "4"));
         params.add(new BasicNameValuePair(config.PREPRINTING_project_id, projectID_editText.getText().toString()));
         params.add(new BasicNameValuePair(config.PREPRINTING_build_id, projectID_editText.getText().toString()));
         params.add(new BasicNameValuePair(config.PREPRINTING_no_parts, numberofparts_editText.getText().toString()));
@@ -156,11 +165,24 @@ public class NewProjectFragment extends Fragment {
         numberofparts_editText =  (EditText)view.findViewById(R.id.numberofparts_editText);
         printingparameters_editText = (EditText)view.findViewById(R.id.printingparameters_editText);
         comment_editText = (EditText)view.findViewById(R.id.comment_editText);
-        slmid_editText = (EditText)view.findViewById(R.id.comment_editText);
-        starttime_editText = (EditText)view.findViewById(R.id.comment_editText);
-        endtime_editText =  (EditText)view.findViewById(R.id.comment_editText);
-        date_editText = (EditText)view.findViewById(R.id.comment_editText);
-        operator_editText = (EditText)view.findViewById(R.id.comment_editText);
+        slmid_editText = (EditText)view.findViewById(R.id.slmid_editText);
+        starttime_editText = (EditText)view.findViewById(R.id.starttime_editText);
+        endtime_editText =  (EditText)view.findViewById(R.id.endtime_editText);
+        date_editText = (EditText)view.findViewById(R.id.date_editText);
+        operator_editText = (EditText)view.findViewById(R.id.operator_editText);
+        typeofmachine_editText = (EditText)view.findViewById(R.id.typeofmachine_editText);
+        powerweight_editText = (EditText)view.findViewById(R.id.powerweight_editText);
+        powerweightatEnd_editText = (EditText)view.findViewById(R.id.powerweightatEnd_editText);
+        powderwaste_editText = (EditText)view.findViewById(R.id.powderwaste_editText);
+        material_editText = (EditText)view.findViewById(R.id.material_editText);
+        buildplatform_editText = (EditText)view.findViewById(R.id.buildplatform_editText);
+        printTune_editText = (EditText)view.findViewById(R.id.printTune_editText);
+        powderCondition_editText = (EditText)view.findViewById(R.id.powderCondition_editText);
+        reused_times_editText = (EditText)view.findViewById(R.id.if_editText);
+        numberofLayers_editText = (EditText)view.findViewById(R.id.numberofLayers_editText);
+        dpcFactor_editText = (EditText)view.findViewById(R.id.dpcFactor_editText);
+        minExposureTime_editText = (EditText)view.findViewById(R.id.minExposureTime_editText);
+        printingComments_editText = (EditText)view.findViewById(R.id.printingComments_editText);
         printingSave_Button = (Button)view.findViewById(R.id.printingSave_Button);
         preprintingSave_Button = (Button)view.findViewById(R.id.preprintingSave_Button);
     }
