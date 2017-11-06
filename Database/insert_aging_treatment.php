@@ -6,11 +6,10 @@
     $time = $_POST['time'];
     $cycles = $_POST['cycles'];
     $comment = $_POST['comment'];
-	
+
     require_once __DIR__ . '/db_connect.php';
     $db = new DB_CONNECT();
-    $insert_to_aging_treatment = "INSERT INTO printbook.aging_treatment(aging_id, temperature, time, cycles, comment)" +
-                          + "VALUES('$aging_id', '$temperature', '$time', '$cycles', '$comment')";
+    $insert_to_aging_treatment = "INSERT INTO printbook.aging_treatment(aging_id, temperature, time, cycles, comment) VALUES('$aging_id', '$temperature', '$time', '$cycles', '$comment')";
 
     if(!$db) die('Something went wrong while connecting to database');
     $result = mysqli_query($db->connect(), $insert_to_aging_treatment) or die('unable to insert to printing');

@@ -23,12 +23,7 @@
 
     require_once __DIR__ . '/db_connect.php';
     $db = new DB_CONNECT();
-    $insert_to_rinting = "INSERT INTO printbook.printing(slm_id, start_time, end_time, date, operator, machine_type, powder_weight_start, powder_weight_end," +
-                          + "powder_waste_weight, powder_used, material_id, build_platform_weight, print_time, powder_condition, reused_times, number_of_layers," +
-                          + "dpc_factor, exposure_time, comments) " +
-                          + "VALUES('$slm_id', '$start_time', '$end_time', '$date', '$operator', '$machine_type', '$powder_weight_start', '$powder_weight_end'," +
-                          + "'$powder_waste_weight', '$powder_used', '$material_id', '$build_platform_weight', '$print_time', '$powder_condition', '$reused_times'," +
-                          + "'$number_of_layers','$dpc_factor', '$exposure_time', '$comments')";
+    $insert_to_rinting = "INSERT INTO printbook.printing(slm_id,start_time,end_time,date,operator,machine_type,powder_weight_start,powder_weight_end,powder_waste_weight,powder_used,material_id,build_platform_weight,print_time,powder_condition,reused_times,number_of_layers,dpc_factor,exposure_time,comments)VALUES('$slm_id','$start_time','$end_time','$date','$operator','$machine_type','$powder_weight_start','$powder_weight_end','$powder_waste_weight','$powder_used','$material_id','$build_platform_weight', '$print_time', '$powder_condition', '$reused_times','$number_of_layers','$dpc_factor', '$exposure_time', '$comments')";
 
     if(!$db) die('Something went wrong while connecting to database');
     $result = mysqli_query($db->connect(), $insert_to_rinting) or die('unable to insert to printing');

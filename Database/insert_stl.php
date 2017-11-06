@@ -7,8 +7,7 @@
 
     require_once __DIR__ . '/db_connect.php';
     $db = new DB_CONNECT();
-    $insert_to_stl = "INSERT INTO printbook.stl(STL_ID, URL, Project_ID) " +
-                                  + "VALUES('$stl_id', '$url', '$project_id')";
+    $insert_to_stl = "INSERT INTO printbook.stl(STL_ID, URL, Project_ID) VALUES('$stl_id', '$url', '$project_id')";
 
     if(!$db) die('Something went wrong while connecting to database');
     $result = mysqli_query($db->connect(), $insert_to_stl) or die('unable to insert to printing');
