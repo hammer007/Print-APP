@@ -20,8 +20,18 @@
 
     <string-array name="powder_condition_string">
         <item>New</item>
-        <item>used</item>
+        <item>Reused</item>
         <item>Mixed</item>
+    </string-array>
+
+    <string-array name="support_removal_string">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="WEDM_string">
+        <item>Yes</item>
+        <item>No</item>
     </string-array>
 
 

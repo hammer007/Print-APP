@@ -12,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,23 +32,26 @@ import static android.content.ContentValues.TAG;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewProjectFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     Config config;
     CRUD crud;
-    Button printingSave_Button, preprintingSave_Button, preprinting_expand_button, printing_expand_button;
+    Button printingSave_Button, preprintingSave_Button, preprinting_expand_button, printing_expand_button, posprinting_expand_button;
     EditText projectID_editText, partnumber_editText, numberofparts_editText, printingparameters_editText, comment_editText;
     EditText slmid_editText, starttime_editText, endtime_editText, date_editText, operator_editText;
     EditText typeofmachine_editText, powerweight_editText, powerweightatEnd_editText, powderwaste_editText, material_editText;
     EditText buildplatform_editText, printTune_editText, powderCondition_editText, reused_times_editText;
     EditText numberofLayers_editText, dpcFactor_editText, minExposureTime_editText, printingComments_editText;
+    EditText postID_editText, urlphoto_editText;
+    TextView postID_Text, urlphoto_Text, supportremoval_Text, WEDM_Text;
     TextView projectID_Text, partnumber_Text, numberofparts_Text, printingparameters_Text, comment_Text, if_textView;
     TextView slmid_Text, starttime_Text, endtime_Text, date_Text, operator_Text, typeofmachine_Text, powerweight_Text;
     TextView powerweightatEnd_Text, powderwaste_Text,material_Text, buildplatform_Text, printTune_Text, powderCondition_Text, numberofLayers_Text;
     TextView dpcFactor_Text, minExposureTime_Text, printingComments_Text;
-    Spinner spinner;
-    boolean expanded_preprinting = false,expanded_printing = false;
-    public NewProjectFragment() {
+    Spinner spinner, supportremovalSpinner, WEDMSpinner;
+    boolean expanded_preprinting = false,expanded_printing = false,expanded_posprinting = false;
+
+    public NewPrintJobFragment() {
         // Required empty public constructor
     }
 
@@ -61,9 +63,12 @@ public class NewProjectFragment extends Fragment implements AdapterView.OnItemSe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_new_project, container, false);
+        View view = inflater.inflate(R.layout.fragment_new_printjob, container, false);
         initialize(view);
         spinner.setOnItemSelectedListener(this);
+        supportremovalSpinner.setOnItemSelectedListener(this);
+        WEDMSpinner.setOnItemSelectedListener(this);
+
         printingSave_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,6 +122,22 @@ public class NewProjectFragment extends Fragment implements AdapterView.OnItemSe
 
             }
         });
+
+        posprinting_expand_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(expanded_posprinting) {
+                    hide_posprinting();
+                    expanded_posprinting = false;
+                }
+                else{
+                    show_posprinting();
+                    expanded_posprinting = true;
+                }
+
+            }
+        });
+
         return view;
 
     }
@@ -194,12 +215,27 @@ public class NewProjectFragment extends Fragment implements AdapterView.OnItemSe
         return success;
     }
 
+    //TODO: Insert Post-Printing fields into database
+
     private void initialize(View view) {
         spinner = (Spinner) view.findViewById(R.id.powderCondition_editText);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.powder_condition_string, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+        supportremovalSpinner = (Spinner) view.findViewById(R.id.supportRemoval_editText);
+        ArrayAdapter<CharSequence> supportremovalAdapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.support_removal_string, android.R.layout.simple_spinner_item);
+        supportremovalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        supportremovalSpinner.setAdapter(supportremovalAdapter);
+
+        WEDMSpinner = (Spinner) view.findViewById(R.id.WEDM_editText);
+        ArrayAdapter<CharSequence> WEDMSpinnerAdapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.WEDM_string, android.R.layout.simple_spinner_item);
+        WEDMSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        WEDMSpinner.setAdapter(WEDMSpinnerAdapter);
+
         preprinting_expand_button = (Button)view.findViewById(R.id.preprinting_expand_button);
         projectID_editText = (EditText)view.findViewById(R.id.projectID_editText);
         partnumber_editText = (EditText)view.findViewById(R.id.partnumber_editText);
@@ -254,8 +290,18 @@ public class NewProjectFragment extends Fragment implements AdapterView.OnItemSe
 
         printingSave_Button = (Button)view.findViewById(R.id.printingSave_Button);
         preprintingSave_Button = (Button)view.findViewById(R.id.preprintingSave_Button);
+        //------ Post-Printing Fields ------//
+        posprinting_expand_button = (Button)view.findViewById(R.id.posprinting_expand_button);
+        postID_Text = (TextView)view.findViewById(R.id.postID_textView);
+        postID_editText = (EditText)view.findViewById(R.id.postID_editText);
+        urlphoto_Text = (TextView)view.findViewById(R.id.urlphoto_textView);
+        urlphoto_editText = (EditText)view.findViewById(R.id.urlphoto_editText);
+        supportremoval_Text = (TextView)view.findViewById(R.id.supportRemoval_textView);
+        WEDM_Text = (TextView)view.findViewById(R.id.WEDM_textView);
+
         hide_preprining();
         hide_prining();
+        hide_posprinting();
     }
 
     @Override
@@ -265,13 +311,13 @@ public class NewProjectFragment extends Fragment implements AdapterView.OnItemSe
                 reused_times_editText.setVisibility(View.GONE);
                 if_textView.setVisibility(View.GONE);
                 break;
-            case 2:
-                reused_times_editText.setVisibility(View.GONE);
-                if_textView.setVisibility(View.GONE);
-                break;
             case 1:
                 reused_times_editText.setVisibility(View.VISIBLE);
                 if_textView.setVisibility(View.VISIBLE);
+                break;
+            case 2:
+                reused_times_editText.setVisibility(View.GONE);
+                if_textView.setVisibility(View.GONE);
                 break;
 
         }
@@ -391,5 +437,41 @@ public class NewProjectFragment extends Fragment implements AdapterView.OnItemSe
         minExposureTime_Text.setVisibility(View.VISIBLE);
         printingComments_Text.setVisibility(View.VISIBLE);
         printing_expand_button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.shrink, 0);
+    }
+
+    private void hide_posprinting(){
+
+        postID_Text.setVisibility(View.GONE);
+        postID_editText.setVisibility(View.GONE);
+        //TODO: add Project ID here ----
+        urlphoto_Text.setVisibility(View.GONE);
+        urlphoto_editText.setVisibility(View.GONE);
+        supportremoval_Text.setVisibility(View.GONE);
+        supportremovalSpinner.setVisibility(View.GONE);
+        WEDM_Text.setVisibility(View.GONE);
+        WEDMSpinner.setVisibility(View.GONE);
+
+
+
+        posprinting_expand_button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.expand, 0);
+
+    }
+
+    private void show_posprinting(){
+
+        postID_Text.setVisibility(View.VISIBLE);
+        postID_editText.setVisibility(View.VISIBLE);
+        //TODO: add Project ID here ----
+        urlphoto_Text.setVisibility(View.VISIBLE);
+        urlphoto_editText.setVisibility(View.VISIBLE);
+        supportremoval_Text.setVisibility(View.VISIBLE);
+        supportremovalSpinner.setVisibility(View.VISIBLE);
+        WEDM_Text.setVisibility(View.VISIBLE);
+        WEDMSpinner.setVisibility(View.VISIBLE);
+
+
+
+        posprinting_expand_button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.shrink, 0);
+
     }
 }

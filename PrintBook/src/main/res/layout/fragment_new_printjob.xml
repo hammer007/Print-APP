@@ -12,7 +12,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
-        tools:context="g5.printbook.NewProjectFragment">
+        tools:context="g5.printbook.NewPrintJobFragment">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -175,6 +175,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:drawableRight="@drawable/expand"/>
+
             <TextView
                 android:id="@+id/slmid_textView"
                 android:layout_width="wrap_content"
@@ -459,7 +460,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/powderCondition_textView"
                 android:layout_marginTop="20dp"
-                android:text="If:"
+                android:text="How many times:"
                 android:textSize="18sp"/>
 
             <EditText
@@ -571,11 +572,121 @@
 
         </RelativeLayout>
 
+        <RelativeLayout
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_below="@+id/printing_relativeLayout"
+             android:id="@+id/posprinting_relativeLayout">
+
+            <Button
+                android:id="@+id/posprinting_expand_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="40dp"
+                android:text="Post-Printing"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:drawableRight="@drawable/expand"/>
+
+            <TextView
+                android:id="@+id/postID_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/posprinting_expand_button"
+                android:layout_marginTop="20dp"
+                android:text="Post ID:"
+                android:textSize="18sp"/>
+
+            <EditText
+                android:id="@+id/postID_editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/postID_textView"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_toEndOf="@+id/postID_textView"
+                android:layout_toRightOf="@+id/postID_textView"
+                android:ems="10"
+                android:inputType="text"/>
+
+            <!-- TODO: Add the Project ID field -->
+
+            <TextView
+                android:id="@+id/urlphoto_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/postID_textView"
+                android:layout_marginTop="20dp"
+                android:text="URL Photo:"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/urlphoto_editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/urlphoto_textView"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_toEndOf="@+id/urlphoto_textView"
+                android:layout_toRightOf="@+id/urlphoto_textView"
+                android:ems="10"
+                android:inputType="text"/>
+
+            <TextView
+                android:id="@+id/supportRemoval_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/urlphoto_textView"
+                android:layout_marginTop="20dp"
+                android:text="Support Removal:"
+                android:textSize="18sp"/>
+            <Spinner
+                android:id="@+id/supportRemoval_editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/supportRemoval_textView"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_toEndOf="@+id/supportRemoval_textView"
+                android:layout_toRightOf="@+id/supportRemoval_textView"
+                android:ems="10"
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown"/>
+
+            <TextView
+                android:id="@+id/WEDM_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/supportRemoval_textView"
+                android:layout_marginTop="20dp"
+                android:text="WEDM:"
+                android:textSize="18sp"/>
+            <Spinner
+                android:id="@+id/WEDM_editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/WEDM_textView"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_toEndOf="@+id/WEDM_textView"
+                android:layout_toRightOf="@+id/WEDM_textView"
+                android:ems="10"
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown"/>
+
+
+  </RelativeLayout>
+
         <Button
             android:id="@+id/submit_Button"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/printing_relativeLayout"
+            android:layout_below="@+id/posprinting_relativeLayout"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"

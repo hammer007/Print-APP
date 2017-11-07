@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_newproject) {
 
             //Set the fragment initially
-            NewProjectFragment fragment = new NewProjectFragment();
+            NewPrintJobFragment fragment = new NewPrintJobFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment);
