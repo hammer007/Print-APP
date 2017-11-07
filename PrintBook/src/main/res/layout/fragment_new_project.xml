@@ -19,14 +19,15 @@
             android:layout_height="wrap_content"
             android:id="@+id/preprinting_relativeLayout">
 
-        <TextView
-            android:id="@+id/preprinting_textView"
+        <Button
+            android:id="@+id/preprinting_expand_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Pre Printing"
             android:textAlignment="center"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:drawableRight="@drawable/expand"/>
 
         <EditText
             android:id="@+id/projectID_editText"
@@ -34,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/preprinting_textView"
+            android:layout_below="@+id/preprinting_expand_button"
             android:layout_toEndOf="@+id/projectID_textView"
             android:layout_toRightOf="@+id/projectID_textView"
             android:ems="10"
@@ -160,8 +161,8 @@
             android:layout_below="@+id/preprinting_relativeLayout"
             android:id="@+id/printing_relativeLayout">
 
-            <TextView
-                android:id="@+id/Printing_textView"
+            <Button
+                android:id="@+id/Printing_expand_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -172,14 +173,15 @@
                 android:text="Printing"
                 android:textAlignment="center"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:drawableRight="@drawable/expand"/>
             <TextView
                 android:id="@+id/slmid_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/Printing_textView"
+                android:layout_below="@+id/Printing_expand_button"
                 android:layout_marginTop="20dp"
                 android:text="SLM ID:"
                 android:textSize="18sp" />
@@ -190,7 +192,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_below="@+id/Printing_textView"
+                android:layout_below="@+id/Printing_expand_button"
                 android:layout_toEndOf="@+id/slmid_textView"
                 android:layout_toRightOf="@+id/slmid_textView"
                 android:ems="10"
@@ -438,8 +440,7 @@
                 android:layout_marginTop="20dp"
                 android:text="Powder Condition:"
                 android:textSize="18sp"/>
-
-            <EditText
+            <Spinner
                 android:id="@+id/powderCondition_editText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -449,7 +450,8 @@
                 android:layout_toEndOf="@+id/powderCondition_textView"
                 android:layout_toRightOf="@+id/powderCondition_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown"/>
 
             <TextView
                 android:id="@+id/if_textView"
