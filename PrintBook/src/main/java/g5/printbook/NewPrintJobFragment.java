@@ -36,20 +36,27 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
 
     Config config;
     CRUD crud;
-    Button printingSave_Button, preprintingSave_Button, preprinting_expand_button, printing_expand_button, posprinting_expand_button;
+    Button printingSave_Button, preprintingSave_Button, preprinting_expand_button, printing_expand_button, posprinting_expand_button, postprintingSave_Button;
     EditText projectID_editText, partnumber_editText, numberofparts_editText, printingparameters_editText, comment_editText;
-    EditText slmid_editText, starttime_editText, endtime_editText, date_editText, operator_editText;
+    EditText slmid_editText, starttime_editText, endtime_editText, date_editText, operator_editText, agingComment_editText;
     EditText typeofmachine_editText, powerweight_editText, powerweightatEnd_editText, powderwaste_editText, material_editText;
-    EditText buildplatform_editText, printTune_editText, powderCondition_editText, reused_times_editText;
-    EditText numberofLayers_editText, dpcFactor_editText, minExposureTime_editText, printingComments_editText;
-    EditText postID_editText, urlphoto_editText;
-    TextView postID_Text, urlphoto_Text, supportremoval_Text, WEDM_Text;
-    TextView projectID_Text, partnumber_Text, numberofparts_Text, printingparameters_Text, comment_Text, if_textView;
+    EditText buildplatform_editText, printTune_editText, powderCondition_editText, reused_times_editText, agingNumberofCycles_editText;
+    EditText numberofLayers_editText, dpcFactor_editText, minExposureTime_editText, printingComments_editText, hardeningComment_editText;
+    EditText postID_editText, urlphoto_editText, WEDMcomments_editText, blastingType_editText, blastingTime_editText, hardeningTime_editText;
+    EditText blastingComment_editText, stressTemp_editText, stressTime_editText, stressComment_editText, hardeningTemp_editText;
+    EditText temperingTemp_editText, temperingTime_editText, temperingNumberofCycles_editText, temperingComment_editText, solutionTreatmentTemp_editText;
+    EditText solutionTreatmentTime_editText, solutionTreatmentComment_editText, agingTemp_editText, agingTime_editText;
+    TextView solutionTreatmentTime_Text, solutionTreatmentComment_Text, agingTreatment_Text, agingTemp_Text, agingTime_Text, agingComment_Text;
+    TextView temperingTemp_Text, temperingTime_Text, temperingNumberofCycles_Text, temperingComment_Text, solutionTreatment_Text;
+    TextView stressComment_Text, hardening_Text, hardeningTemp_Text, hardeningTime_Text, hardeningComment_Text, tempering_Text, agingNumberofCycles_Text;
+    TextView blastingComment_Text, heatTreatment_Text, stressRelieving_Text, stressTemp_Text, stressTime_Text, stressShieldingGas_Text;
+    TextView postID_Text, urlphoto_Text, supportremoval_Text, WEDM_Text, WEDMcomments_Text, blasting_Text, blastingType_Text, blastingTime_Text;
+    TextView projectID_Text, partnumber_Text, numberofparts_Text, printingparameters_Text, comment_Text, if_textView, solutionTreatmentTemp_Text;
     TextView slmid_Text, starttime_Text, endtime_Text, date_Text, operator_Text, typeofmachine_Text, powerweight_Text;
     TextView powerweightatEnd_Text, powderwaste_Text,material_Text, buildplatform_Text, printTune_Text, powderCondition_Text, numberofLayers_Text;
     TextView dpcFactor_Text, minExposureTime_Text, printingComments_Text;
-    Spinner spinner, supportremovalSpinner, WEDMSpinner;
-    boolean expanded_preprinting = false,expanded_printing = false,expanded_posprinting = false;
+    Spinner spinner, supportremovalSpinner, WEDMSpinner, blastingSpinner, shieldingSpinner;
+    boolean expanded_preprinting = false, expanded_printing = false, expanded_posprinting = false;
 
     public NewPrintJobFragment() {
         // Required empty public constructor
@@ -68,6 +75,8 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         spinner.setOnItemSelectedListener(this);
         supportremovalSpinner.setOnItemSelectedListener(this);
         WEDMSpinner.setOnItemSelectedListener(this);
+        blastingSpinner.setOnItemSelectedListener(this);
+        shieldingSpinner.setOnItemSelectedListener(this);
 
         printingSave_Button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -236,6 +245,18 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         WEDMSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         WEDMSpinner.setAdapter(WEDMSpinnerAdapter);
 
+        blastingSpinner = (Spinner) view.findViewById(R.id.blasting_editText);
+        ArrayAdapter<CharSequence> blastingSpinnerAdapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.blasting_string, android.R.layout.simple_spinner_item);
+        blastingSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        blastingSpinner.setAdapter(blastingSpinnerAdapter);
+
+        shieldingSpinner = (Spinner) view.findViewById(R.id.shielding_editText);
+        ArrayAdapter<CharSequence> shieldingSpinnerAdapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.blasting_string, android.R.layout.simple_spinner_item);
+        shieldingSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        shieldingSpinner.setAdapter(shieldingSpinnerAdapter);
+
         preprinting_expand_button = (Button)view.findViewById(R.id.preprinting_expand_button);
         projectID_editText = (EditText)view.findViewById(R.id.projectID_editText);
         partnumber_editText = (EditText)view.findViewById(R.id.partnumber_editText);
@@ -290,6 +311,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
 
         printingSave_Button = (Button)view.findViewById(R.id.printingSave_Button);
         preprintingSave_Button = (Button)view.findViewById(R.id.preprintingSave_Button);
+
         //------ Post-Printing Fields ------//
         posprinting_expand_button = (Button)view.findViewById(R.id.posprinting_expand_button);
         postID_Text = (TextView)view.findViewById(R.id.postID_textView);
@@ -298,6 +320,57 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         urlphoto_editText = (EditText)view.findViewById(R.id.urlphoto_editText);
         supportremoval_Text = (TextView)view.findViewById(R.id.supportRemoval_textView);
         WEDM_Text = (TextView)view.findViewById(R.id.WEDM_textView);
+        WEDMcomments_Text = (TextView)view.findViewById(R.id.WEDMcomments_textView);
+        WEDMcomments_editText = (EditText) view.findViewById(R.id.WEDMcomments_editText);
+        blasting_Text = (TextView)view.findViewById(R.id.blasting_textView);
+        blastingType_Text = (TextView) view.findViewById(R.id.blastingType_textView);
+        blastingType_editText = (EditText)view.findViewById(R.id.blastingType_editText);
+        blastingTime_Text = (TextView)view.findViewById(R.id.blastingTime_textView);
+        blastingTime_editText = (EditText)view.findViewById(R.id.blastingTime_editText);
+        blastingComment_Text = (TextView)view.findViewById(R.id.blastingComment_textView);
+        blastingComment_editText = (EditText)view.findViewById(R.id.blastingComment_editText);
+        heatTreatment_Text = (TextView)view.findViewById(R.id.heatTreatment_textView);
+        stressRelieving_Text = (TextView)view.findViewById(R.id.stressRelieving_textView);
+        stressTemp_Text = (TextView)view.findViewById(R.id.stressTemp_textView);
+        stressTemp_editText = (EditText)view.findViewById(R.id.stressTemp_editText);
+        stressTime_Text = (TextView)view.findViewById(R.id.stressTime_textView);
+        stressTime_editText = (EditText)view.findViewById(R.id.stressTime_editText);
+        stressShieldingGas_Text = (TextView) view.findViewById(R.id.stressShieldingGas_textView);
+        stressComment_Text = (TextView) view.findViewById(R.id.stressComment_textView);
+        stressComment_editText = (EditText)view.findViewById(R.id.stressComment_editText);
+        hardening_Text = (TextView)view.findViewById(R.id.hardening_textView);
+        hardeningTemp_Text = (TextView)view.findViewById(R.id.hardeningTemp_textView);
+        hardeningTemp_editText = (EditText)view.findViewById(R.id.hardeningTemp_editText);
+        hardeningTime_Text = (TextView)view.findViewById(R.id.hardeningTime_textView);
+        hardeningTime_editText = (EditText)view.findViewById(R.id.hardeningTime_editText);
+        hardeningComment_Text = (TextView)view.findViewById(R.id.hardeningComment_textView);
+        hardeningComment_editText = (EditText)view.findViewById(R.id.hardeningComment_editText);
+        tempering_Text = (TextView)view.findViewById(R.id.tempering_textView);
+        temperingTemp_Text = (TextView)view.findViewById(R.id.temperingTemp_textView);
+        temperingTemp_editText = (EditText)view.findViewById(R.id.temperingTemp_editText);
+        temperingTime_Text = (TextView)view.findViewById(R.id.temperingTime_textView);
+        temperingTime_editText = (EditText)view.findViewById(R.id.temperingTime_editText);
+        temperingNumberofCycles_Text = (TextView)view.findViewById(R.id.temperingNumberofCycles_textView);
+        temperingNumberofCycles_editText = (EditText)view.findViewById(R.id.temperingNumberofCycles_editText);
+        temperingComment_Text = (TextView)view.findViewById(R.id.temperingComment_textView);
+        temperingComment_editText = (EditText)view.findViewById(R.id.temperingComment_editText);
+        solutionTreatment_Text = (TextView)view.findViewById(R.id.solutionTreatment_textView);
+        solutionTreatmentTemp_Text = (TextView)view.findViewById(R.id.solutionTreatmentTemp_textView);
+        solutionTreatmentTemp_editText = (EditText)view.findViewById(R.id.solutionTreatmentTemp_editText);
+        solutionTreatmentTime_Text = (TextView)view.findViewById(R.id.solutionTreatmentTime_textView);
+        solutionTreatmentTime_editText = (EditText)view.findViewById(R.id.solutionTreatmentTime_editText);
+        solutionTreatmentComment_Text = (TextView)view.findViewById(R.id.solutionTreatmentComment_textView);
+        solutionTreatmentComment_editText = (EditText)view.findViewById(R.id.solutionTreatmentComment_editText);
+        agingTreatment_Text = (TextView)view.findViewById(R.id.agingTreatment_textView);
+        agingTemp_Text = (TextView)view.findViewById(R.id.agingTemp_textView);
+        agingTemp_editText = (EditText)view.findViewById(R.id.agingTemp_editText);
+        agingTime_Text = (TextView)view.findViewById(R.id.agingTime_textView);
+        agingTime_editText = (EditText)view.findViewById(R.id.agingTime_editText);
+        agingNumberofCycles_Text = (TextView)view.findViewById(R.id.agingNumberofCycles_textView);
+        agingNumberofCycles_editText = (EditText)view.findViewById(R.id.agingNumberofCycles_editText);
+        agingComment_Text = (TextView)view.findViewById(R.id.agingComment_textView);
+        agingComment_editText = (EditText)view.findViewById(R.id.agingComment_editText);
+        postprintingSave_Button = (Button)view.findViewById(R.id.postprintingSave_Button);
 
         hide_preprining();
         hide_prining();
@@ -450,8 +523,59 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         supportremovalSpinner.setVisibility(View.GONE);
         WEDM_Text.setVisibility(View.GONE);
         WEDMSpinner.setVisibility(View.GONE);
-
-
+        WEDMcomments_Text.setVisibility(View.GONE);
+        WEDMcomments_editText.setVisibility(View.GONE);
+        blasting_Text.setVisibility(View.GONE);
+        blastingSpinner.setVisibility(View.GONE);
+        blastingType_Text.setVisibility(View.GONE);
+        blastingType_editText.setVisibility(View.GONE);
+        blastingTime_Text.setVisibility(View.GONE);
+        blastingTime_editText.setVisibility(View.GONE);
+        blastingComment_Text.setVisibility(View.GONE);
+        blastingComment_editText.setVisibility(View.GONE);
+        heatTreatment_Text.setVisibility(View.GONE);
+        stressRelieving_Text.setVisibility(View.GONE);
+        stressTemp_Text.setVisibility(View.GONE);
+        stressTemp_editText.setVisibility(View.GONE);
+        stressTime_Text.setVisibility(View.GONE);
+        stressTime_editText.setVisibility(View.GONE);
+        stressShieldingGas_Text.setVisibility(View.GONE);
+        shieldingSpinner.setVisibility(View.GONE);
+        stressComment_Text.setVisibility(View.GONE);
+        stressComment_editText.setVisibility(View.GONE);
+        hardening_Text.setVisibility(View.GONE);
+        hardeningTemp_Text.setVisibility(View.GONE);
+        hardeningTemp_editText.setVisibility(View.GONE);
+        hardeningTime_Text.setVisibility(View.GONE);
+        hardeningTime_editText.setVisibility(View.GONE);
+        hardeningComment_Text.setVisibility(View.GONE);
+        hardeningComment_editText.setVisibility(View.GONE);
+        tempering_Text.setVisibility(View.GONE);
+        temperingTemp_Text.setVisibility(View.GONE);
+        temperingTemp_editText.setVisibility(View.GONE);
+        temperingTime_Text.setVisibility(View.GONE);
+        temperingTime_editText.setVisibility(View.GONE);
+        temperingNumberofCycles_Text.setVisibility(View.GONE);
+        temperingNumberofCycles_editText.setVisibility(View.GONE);
+        temperingComment_Text.setVisibility(View.GONE);
+        temperingComment_editText.setVisibility(View.GONE);
+        solutionTreatment_Text.setVisibility(View.GONE);
+        solutionTreatmentTemp_Text.setVisibility(View.GONE);
+        solutionTreatmentTemp_editText.setVisibility(View.GONE);
+        solutionTreatmentTime_Text.setVisibility(View.GONE);
+        solutionTreatmentTime_editText.setVisibility(View.GONE);
+        solutionTreatmentComment_Text.setVisibility(View.GONE);
+        solutionTreatmentComment_editText.setVisibility(View.GONE);
+        agingTreatment_Text.setVisibility(View.GONE);
+        agingTemp_Text.setVisibility(View.GONE);
+        agingTemp_editText.setVisibility(View.GONE);
+        agingTime_Text.setVisibility(View.GONE);
+        agingTime_editText.setVisibility(View.GONE);
+        agingNumberofCycles_Text.setVisibility(View.GONE);
+        agingNumberofCycles_editText.setVisibility(View.GONE);
+        agingComment_Text.setVisibility(View.GONE);
+        agingComment_editText.setVisibility(View.GONE);
+        postprintingSave_Button.setVisibility(View.GONE);
 
         posprinting_expand_button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.expand, 0);
 
@@ -468,8 +592,59 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         supportremovalSpinner.setVisibility(View.VISIBLE);
         WEDM_Text.setVisibility(View.VISIBLE);
         WEDMSpinner.setVisibility(View.VISIBLE);
-
-
+        WEDMcomments_Text.setVisibility(View.VISIBLE);
+        WEDMcomments_editText.setVisibility(View.VISIBLE);
+        blasting_Text.setVisibility(View.VISIBLE);
+        blastingSpinner.setVisibility(View.VISIBLE);
+        blastingType_Text.setVisibility(View.VISIBLE);
+        blastingType_editText.setVisibility(View.VISIBLE);
+        blastingTime_Text.setVisibility(View.VISIBLE);
+        blastingTime_editText.setVisibility(View.VISIBLE);
+        blastingComment_Text.setVisibility(View.VISIBLE);
+        blastingComment_editText.setVisibility(View.VISIBLE);
+        heatTreatment_Text.setVisibility(View.VISIBLE);
+        stressRelieving_Text.setVisibility(View.VISIBLE);
+        stressTemp_Text.setVisibility(View.VISIBLE);
+        stressTemp_editText.setVisibility(View.VISIBLE);
+        stressTime_Text.setVisibility(View.VISIBLE);
+        stressTime_editText.setVisibility(View.VISIBLE);
+        stressShieldingGas_Text.setVisibility(View.VISIBLE);
+        shieldingSpinner.setVisibility(View.VISIBLE);
+        stressComment_Text.setVisibility(View.VISIBLE);
+        stressComment_editText.setVisibility(View.VISIBLE);
+        hardening_Text.setVisibility(View.VISIBLE);
+        hardeningTemp_Text.setVisibility(View.VISIBLE);
+        hardeningTemp_editText.setVisibility(View.VISIBLE);
+        hardeningTime_Text.setVisibility(View.VISIBLE);
+        hardeningTime_editText.setVisibility(View.VISIBLE);
+        hardeningComment_Text.setVisibility(View.VISIBLE);
+        hardeningComment_editText.setVisibility(View.VISIBLE);
+        tempering_Text.setVisibility(View.VISIBLE);
+        temperingTemp_Text.setVisibility(View.VISIBLE);
+        temperingTemp_editText.setVisibility(View.VISIBLE);
+        temperingTime_Text.setVisibility(View.VISIBLE);
+        temperingTime_editText.setVisibility(View.VISIBLE);
+        temperingNumberofCycles_Text.setVisibility(View.VISIBLE);
+        temperingNumberofCycles_editText.setVisibility(View.VISIBLE);
+        temperingComment_Text.setVisibility(View.VISIBLE);
+        temperingComment_editText.setVisibility(View.VISIBLE);
+        solutionTreatment_Text.setVisibility(View.VISIBLE);
+        solutionTreatmentTemp_Text.setVisibility(View.VISIBLE);
+        solutionTreatmentTemp_editText.setVisibility(View.VISIBLE);
+        solutionTreatmentTime_Text.setVisibility(View.VISIBLE);
+        solutionTreatmentTime_editText.setVisibility(View.VISIBLE);
+        solutionTreatmentComment_Text.setVisibility(View.VISIBLE);
+        solutionTreatmentComment_editText.setVisibility(View.VISIBLE);
+        agingTreatment_Text.setVisibility(View.VISIBLE);
+        agingTemp_Text.setVisibility(View.VISIBLE);
+        agingTemp_editText.setVisibility(View.VISIBLE);
+        agingTime_Text.setVisibility(View.VISIBLE);
+        agingTime_editText.setVisibility(View.VISIBLE);
+        agingNumberofCycles_Text.setVisibility(View.VISIBLE);
+        agingNumberofCycles_editText.setVisibility(View.VISIBLE);
+        agingComment_Text.setVisibility(View.VISIBLE);
+        agingComment_editText.setVisibility(View.VISIBLE);
+        postprintingSave_Button.setVisibility(View.VISIBLE);
 
         posprinting_expand_button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.shrink, 0);
 

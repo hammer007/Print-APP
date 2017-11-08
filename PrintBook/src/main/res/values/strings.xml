@@ -34,5 +34,15 @@
         <item>No</item>
     </string-array>
 
+    <string-array name="blasting_string">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="shielding_string">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
 
 </resources>
