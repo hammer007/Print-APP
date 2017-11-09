@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 31, 2017 at 02:01 PM
+-- Generation Time: Nov 09, 2017 at 05:15 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -16,9 +16,9 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
-
-CREATE Database `printbook`;
-
+--
+-- Database: `printbook`
+--
 
 -- --------------------------------------------------------
 
@@ -132,6 +132,13 @@ CREATE TABLE `material` (
   `Project_ID` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `material`
+--
+
+INSERT INTO `material` (`Material_ID`, `URL_Image`, `Project_ID`) VALUES
+('1', '1', '1');
+
 -- --------------------------------------------------------
 
 --
@@ -171,6 +178,14 @@ CREATE TABLE `pre_printing` (
   `comment` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `pre_printing`
+--
+
+INSERT INTO `pre_printing` (`pre_printing_id`, `project_id`, `build_id`, `no_parts`, `printing_parameter`, `comment`) VALUES
+('64', '1', '1', 12, 'hey', 'hey hey'),
+('78', '2', '2', 100, 'tehere', 'erfdsf');
+
 -- --------------------------------------------------------
 
 --
@@ -200,6 +215,13 @@ CREATE TABLE `printing` (
   `comments` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `printing`
+--
+
+INSERT INTO `printing` (`printing_id`, `slm_id`, `start_time`, `end_time`, `date`, `operator`, `machine_type`, `powder_weight_start`, `powder_weight_end`, `powder_waste_weight`, `powder_used`, `material_id`, `build_platform_weight`, `print_time`, `powder_condition`, `reused_times`, `number_of_layers`, `dpc_factor`, `exposure_time`, `comments`) VALUES
+(3, 1, '00:00:00', '00:00:00', '2017-10-10 00:00:00', '', '', 10, 1, 1, 9, '1', '', '00:00:00', '', 1, 11, 1, '00:00:00', '');
+
 -- --------------------------------------------------------
 
 --
@@ -207,9 +229,18 @@ CREATE TABLE `printing` (
 --
 
 CREATE TABLE `project` (
-  `Project_ID` varchar(80) NOT NULL,
-  `Name` varchar(255) NOT NULL
+  `project_id` varchar(80) NOT NULL,
+  `project_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `project`
+--
+
+INSERT INTO `project` (`project_id`, `project_name`) VALUES
+('1', 'dummy value'),
+('2', 'dummy value'),
+('3', 'dummy value');
 
 -- --------------------------------------------------------
 
@@ -380,9 +411,9 @@ ALTER TABLE `printing`
 -- Indexes for table `project`
 --
 ALTER TABLE `project`
-  ADD PRIMARY KEY (`Project_ID`),
-  ADD KEY `Name` (`Name`),
-  ADD KEY `Project_ID` (`Project_ID`);
+  ADD PRIMARY KEY (`project_id`),
+  ADD KEY `Name` (`project_name`),
+  ADD KEY `Project_ID` (`project_id`);
 
 --
 -- Indexes for table `shear_cell`
@@ -437,7 +468,7 @@ ALTER TABLE `hardening`
 -- AUTO_INCREMENT for table `printing`
 --
 ALTER TABLE `printing`
-  MODIFY `printing_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `printing_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `solution_treatment`
 --
@@ -467,7 +498,7 @@ ALTER TABLE `betsurface`
 -- Constraints for table `cad`
 --
 ALTER TABLE `cad`
-  ADD CONSTRAINT `cad_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `project` (`Project_ID`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `cad_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `project` (`project_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `flow_energy`
@@ -479,13 +510,30 @@ ALTER TABLE `flow_energy`
 -- Constraints for table `hall_flow`
 --
 ALTER TABLE `hall_flow`
-  ADD CONSTRAINT `hall_flow_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `project` (`Project_ID`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `hall_flow_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `project` (`project_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `material`
 --
 ALTER TABLE `material`
-  ADD CONSTRAINT `material_ibfk_1` FOREIGN KEY (`Project_ID`) REFERENCES `project` (`Project_ID`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `material_ibfk_1` FOREIGN KEY (`Project_ID`) REFERENCES `project` (`project_id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `post_printing`
+--
+ALTER TABLE `post_printing`
+  ADD CONSTRAINT `post_printing_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `project` (`project_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `post_printing_ibfk_2` FOREIGN KEY (`stress_id`) REFERENCES `stress_relieving` (`stress_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `post_printing_ibfk_3` FOREIGN KEY (`hardening_id`) REFERENCES `hardening` (`hardening_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `post_printing_ibfk_4` FOREIGN KEY (`tempering_id`) REFERENCES `tempering` (`tempering_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `post_printing_ibfk_5` FOREIGN KEY (`solution_id`) REFERENCES `solution_treatment` (`solution_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `post_printing_ibfk_6` FOREIGN KEY (`aging_id`) REFERENCES `aging_treatment` (`aging_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Constraints for table `pre_printing`
+--
+ALTER TABLE `pre_printing`
+  ADD CONSTRAINT `pre_printing_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `project` (`project_id`);
 
 --
 -- Constraints for table `printing`
@@ -497,14 +545,14 @@ ALTER TABLE `printing`
 -- Constraints for table `shear_cell`
 --
 ALTER TABLE `shear_cell`
-  ADD CONSTRAINT `shear_cell_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `project` (`Project_ID`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `shear_cell_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `project` (`project_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `shear_cell_ibfk_2` FOREIGN KEY (`material_id`) REFERENCES `material` (`Material_ID`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Constraints for table `stl`
 --
 ALTER TABLE `stl`
-  ADD CONSTRAINT `stl_ibfk_1` FOREIGN KEY (`Project_ID`) REFERENCES `project` (`Project_ID`);
+  ADD CONSTRAINT `stl_ibfk_1` FOREIGN KEY (`Project_ID`) REFERENCES `project` (`project_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
