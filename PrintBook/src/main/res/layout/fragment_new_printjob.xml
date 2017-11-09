@@ -118,7 +118,7 @@
             android:layout_toEndOf="@+id/prinringparameters_textView"
             android:layout_toRightOf="@+id/prinringparameters_textView"
             android:ems="10"
-            android:inputType="number" />
+            android:inputType="text" />
 
         <TextView
             android:id="@+id/coment_textView"
@@ -283,7 +283,7 @@
                 android:layout_toEndOf="@+id/operator_textView"
                 android:layout_toRightOf="@+id/operator_textView"
                 android:ems="10"
-                android:inputType="number"/>
+                android:inputType="text"/>
 
             <TextView
                 android:id="@+id/typeofmachine_textView"
@@ -325,7 +325,7 @@
                 android:layout_toEndOf="@+id/powerweight_textView"
                 android:layout_toRightOf="@+id/powerweight_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="number"/>
 
             <TextView
                 android:id="@+id/powerweightatEnd_textView"
@@ -346,7 +346,7 @@
                 android:layout_toEndOf="@+id/powerweightatEnd_textView"
                 android:layout_toRightOf="@+id/powerweightatEnd_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="number"/>
 
             <TextView
                 android:id="@+id/powderwaste_textView"
@@ -367,7 +367,7 @@
                 android:layout_toEndOf="@+id/powderwaste_textView"
                 android:layout_toRightOf="@+id/powderwaste_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="number"/>
 
 
             <TextView
@@ -494,7 +494,7 @@
                 android:layout_toEndOf="@+id/numberofLayers_textView"
                 android:layout_toRightOf="@+id/numberofLayers_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="number"/>
 
             <TextView
                 android:id="@+id/dpcFactor_textView"
@@ -515,7 +515,7 @@
                 android:layout_toEndOf="@+id/dpcFactor_textView"
                 android:layout_toRightOf="@+id/dpcFactor_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="number"/>
 
             <TextView
                 android:id="@+id/minExposureTime_textView"
