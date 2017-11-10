@@ -36,7 +36,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
 
     Config config;
     CRUD crud;
-    Button printingSave_Button, preprintingSave_Button, preprinting_expand_button, printing_expand_button, posprinting_expand_button, postprintingSave_Button;
+    Button printingSave_Button, preprintingSave_Button, submit_Button, preprinting_expand_button, printing_expand_button, posprinting_expand_button, postprintingSave_Button;
     EditText projectID_editText, partnumber_editText, numberofparts_editText, printingparameters_editText, comment_editText;
     EditText slmid_editText, starttime_editText, endtime_editText, date_editText, operator_editText, agingComment_editText;
     EditText typeofmachine_editText, powerweight_editText, powerweightatEnd_editText, powderwaste_editText, material_editText;
@@ -78,7 +78,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         blastingSpinner.setOnItemSelectedListener(this);
         shieldingSpinner.setOnItemSelectedListener(this);
 
-        printingSave_Button.setOnClickListener(new View.OnClickListener() {
+        submit_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(TextUtils.isEmpty(projectID_editText.getText().toString())) projectID_editText.setError( "Id is Required!" );
@@ -168,7 +168,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         params.add(new BasicNameValuePair(config.PRINTING_material_id, material_editText.getText().toString()));
         params.add(new BasicNameValuePair(config.PRINTING_build_platform_weight, buildplatform_editText.getText().toString()));
         params.add(new BasicNameValuePair(config.PRINTING_print_time, printTune_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PRINTING_powder_condition, powderCondition_editText.getText().toString()));
+        //params.add(new BasicNameValuePair(config.PRINTING_powder_condition, powderCondition_editText.getText().toString()));
         params.add(new BasicNameValuePair(config.PRINTING_reused_times, reused_times_editText.getText().toString()));
         params.add(new BasicNameValuePair(config.PRINTING_number_of_layers, numberofLayers_editText.getText().toString()));
         params.add(new BasicNameValuePair(config.PRINTING_dpc_factor, dpcFactor_editText.getText().toString()));
@@ -206,7 +206,8 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
     private int insert_to_pre_printing(){
         int success = -1;
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair(config.PREPRINTING_pre_printing_id, "4"));
+        int id = (int)(100*Math.random());
+        params.add(new BasicNameValuePair(config.PREPRINTING_pre_printing_id, "" + id));
         params.add(new BasicNameValuePair(config.PREPRINTING_project_id, projectID_editText.getText().toString()));
         params.add(new BasicNameValuePair(config.PREPRINTING_build_id, projectID_editText.getText().toString()));
         params.add(new BasicNameValuePair(config.PREPRINTING_no_parts, numberofparts_editText.getText().toString()));
@@ -311,6 +312,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
 
         printingSave_Button = (Button)view.findViewById(R.id.printingSave_Button);
         preprintingSave_Button = (Button)view.findViewById(R.id.preprintingSave_Button);
+        submit_Button = (Button)view.findViewById(R.id.submit_Button);
 
         //------ Post-Printing Fields ------//
         posprinting_expand_button = (Button)view.findViewById(R.id.posprinting_expand_button);
