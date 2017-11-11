@@ -278,8 +278,8 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         date_editText = (EditText)view.findViewById(R.id.date_editText);
         operator_editText = (EditText)view.findViewById(R.id.operator_editText);
         typeofmachine_editText = (EditText)view.findViewById(R.id.typeofmachine_editText);
-        powerweight_editText = (EditText)view.findViewById(R.id.powerweight_editText);
-        powerweightatEnd_editText = (EditText)view.findViewById(R.id.powerweightatEnd_editText);
+        powerweight_editText = (EditText)view.findViewById(R.id.powderweight_editText);
+        powerweightatEnd_editText = (EditText)view.findViewById(R.id.powderweightatEnd_editText);
         powderwaste_editText = (EditText)view.findViewById(R.id.powderwaste_editText);
         material_editText = (EditText)view.findViewById(R.id.material_editText);
         buildplatform_editText = (EditText)view.findViewById(R.id.buildplatform_editText);
@@ -298,8 +298,8 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         date_Text = (TextView)view.findViewById(R.id.date_textView);
         operator_Text = (TextView)view.findViewById(R.id.operator_textView);
         typeofmachine_Text = (TextView)view.findViewById(R.id.typeofmachine_textView);
-        powerweight_Text = (TextView)view.findViewById(R.id.powerweight_textView);
-        powerweightatEnd_Text = (TextView)view.findViewById(R.id.powerweightatEnd_textView);
+        powerweight_Text = (TextView)view.findViewById(R.id.powderweight_textView);
+        powerweightatEnd_Text = (TextView)view.findViewById(R.id.powderweightatEnd_textView);
         powderwaste_Text = (TextView)view.findViewById(R.id.powderwaste_textView);
         material_Text = (TextView)view.findViewById(R.id.material_textView);
         buildplatform_Text = (TextView)view.findViewById(R.id.buildplatform_textView);

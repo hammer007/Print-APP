@@ -60,7 +60,7 @@
             tools:text="Fetch your STL model" />
 
         <Button
-            android:id="@+id/check_button"
+            android:id="@+id/createMaterial_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingTop="50dp"
@@ -68,8 +68,8 @@
             android:textSize="18sp"
             android:background="@drawable/shadow"
             android:backgroundTint="@color/colorPrimaryDark"
-            android:text="Check your model"
-            tools:text="Check your model" />
+            android:text="Create Material"
+            tools:text="Create Material" />
 
     </LinearLayout>
 

@@ -12,6 +12,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
+        android:paddingBottom="25dp"
         tools:context="g5.printbook.NewPrintJobFragment">
 
         <RelativeLayout
@@ -27,6 +28,7 @@
             android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:background="@color/colorPrimaryGreen"
             android:drawableRight="@drawable/expand"/>
 
         <EditText
@@ -49,7 +51,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:text="Project ID:"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/partnumber_textView"
@@ -60,7 +63,8 @@
             android:layout_below="@+id/projectID_textView"
             android:layout_marginTop="20dp"
             android:text="Part Number:"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold"/>
 
         <EditText
             android:id="@+id/partnumber_editText"
@@ -83,7 +87,8 @@
             android:layout_below="@+id/partnumber_editText"
             android:layout_marginTop="20dp"
             android:text="Number of Parts:"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold"/>
 
         <EditText
             android:id="@+id/numberofparts_editText"
@@ -106,7 +111,8 @@
             android:layout_below="@+id/numberparts_textView"
             android:layout_marginTop="20dp"
             android:text="Printing Parameters:"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold"/>
 
         <EditText
             android:id="@+id/printingparameters_editText"
@@ -129,7 +135,8 @@
             android:layout_below="@+id/prinringparameters_textView"
             android:layout_marginTop="20dp"
             android:text="Comments:"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold"/>
 
         <EditText
             android:id="@+id/comment_editText"
@@ -174,6 +181,7 @@
                 android:textAlignment="center"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:background="@color/colorPrimaryGreen"
                 android:drawableRight="@drawable/expand"/>
 
             <TextView
@@ -185,7 +193,8 @@
                 android:layout_below="@+id/Printing_expand_button"
                 android:layout_marginTop="20dp"
                 android:text="SLM ID:"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/slmid_editText"
@@ -208,7 +217,8 @@
                 android:layout_below="@+id/slmid_editText"
                 android:layout_marginTop="20dp"
                 android:text="Start Time:"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/starttime_editText"
@@ -229,7 +239,8 @@
                 android:layout_below="@+id/starttime_textView"
                 android:layout_marginTop="20dp"
                 android:text="End Time:"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/endtime_editText"
@@ -250,7 +261,8 @@
                 android:layout_below="@+id/endtime_textView"
                 android:layout_marginTop="20dp"
                 android:text="Date:"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/date_editText"
@@ -271,7 +283,8 @@
                 android:layout_below="@+id/date_textView"
                 android:layout_marginTop="20dp"
                 android:text="Operator:"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/operator_editText"
@@ -292,7 +305,8 @@
                 android:layout_below="@+id/operator_textView"
                 android:layout_marginTop="20dp"
                 android:text="Type of Machine:"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/typeofmachine_editText"
@@ -307,44 +321,46 @@
                 android:inputType="text"/>
 
             <TextView
-                android:id="@+id/powerweight_textView"
+                android:id="@+id/powderweight_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/typeofmachine_textView"
                 android:layout_marginTop="20dp"
-                android:text="Power Weight:"
-                android:textSize="18sp"/>
+                android:text="Powder Weight:"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
-                android:id="@+id/powerweight_editText"
+                android:id="@+id/powderweight_editText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/powerweight_textView"
+                android:layout_alignBottom="@+id/powderweight_textView"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_toEndOf="@+id/powerweight_textView"
-                android:layout_toRightOf="@+id/powerweight_textView"
+                android:layout_toEndOf="@+id/powderweight_textView"
+                android:layout_toRightOf="@+id/powderweight_textView"
                 android:ems="10"
                 android:inputType="number"/>
 
             <TextView
-                android:id="@+id/powerweightatEnd_textView"
+                android:id="@+id/powderweightatEnd_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/powerweight_editText"
+                android:layout_below="@+id/powderweight_editText"
                 android:layout_marginTop="20dp"
-                android:text="Power Weight at End:"
-                android:textSize="18sp"/>
+                android:text="Powder Weight at End:"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
-                android:id="@+id/powerweightatEnd_editText"
+                android:id="@+id/powderweightatEnd_editText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/powerweightatEnd_textView"
+                android:layout_alignBottom="@+id/powderweightatEnd_textView"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_toEndOf="@+id/powerweightatEnd_textView"
-                android:layout_toRightOf="@+id/powerweightatEnd_textView"
+                android:layout_toEndOf="@+id/powderweightatEnd_textView"
+                android:layout_toRightOf="@+id/powderweightatEnd_textView"
                 android:ems="10"
                 android:inputType="number"/>
 
@@ -352,10 +368,11 @@
                 android:id="@+id/powderwaste_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/powerweightatEnd_textView"
+                android:layout_below="@+id/powderweightatEnd_textView"
                 android:layout_marginTop="20dp"
                 android:text="Powder Waste:"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/powderwaste_editText"
@@ -377,7 +394,8 @@
                 android:layout_below="@+id/powderwaste_textView"
                 android:layout_marginTop="20dp"
                 android:text="Material:"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/material_editText"
@@ -398,7 +416,8 @@
                 android:layout_below="@+id/material_textView"
                 android:layout_marginTop="20dp"
                 android:text="Build Platform Weight:"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/buildplatform_editText"
@@ -419,7 +438,8 @@
                 android:layout_below="@+id/buildplatform_textView"
                 android:layout_marginTop="20dp"
                 android:text="Print Tune:"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/printTune_editText"
@@ -440,7 +460,8 @@
                 android:layout_below="@+id/printTune_textView"
                 android:layout_marginTop="20dp"
                 android:text="Powder Condition:"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textStyle="bold"/>
             <Spinner
                 android:id="@+id/powderCondition_editText"
                 android:layout_width="wrap_content"
@@ -461,7 +482,8 @@
                 android:layout_below="@+id/powderCondition_textView"
                 android:layout_marginTop="20dp"
                 android:text="How many times:"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/if_editText"
@@ -482,7 +504,8 @@
                 android:layout_below="@+id/if_textView"
                 android:layout_marginTop="20dp"
                 android:text="Number of Layers:"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/numberofLayers_editText"
@@ -503,7 +526,8 @@
                 android:layout_below="@+id/numberofLayers_textView"
                 android:layout_marginTop="20dp"
                 android:text="DPC Factor:"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/dpcFactor_editText"
@@ -524,7 +548,8 @@
                 android:layout_below="@+id/dpcFactor_textView"
                 android:layout_marginTop="20dp"
                 android:text="Min Exposure Time:"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/minExposureTime_editText"
@@ -545,7 +570,8 @@
                 android:layout_below="@+id/minExposureTime_textView"
                 android:layout_marginTop="20dp"
                 android:text="Comments:"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/printingComments_editText"
@@ -591,6 +617,7 @@
                 android:textAlignment="center"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:background="@color/colorPrimaryGreen"
                 android:drawableRight="@drawable/expand"/>
 
             <TextView
@@ -600,7 +627,8 @@
                 android:layout_below="@+id/posprinting_expand_button"
                 android:layout_marginTop="20dp"
                 android:text="Post ID:"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/postID_editText"
@@ -623,7 +651,8 @@
                 android:layout_below="@+id/postID_textView"
                 android:layout_marginTop="20dp"
                 android:text="URL Photo:"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/urlphoto_editText"
@@ -644,7 +673,8 @@
                 android:layout_below="@+id/urlphoto_textView"
                 android:layout_marginTop="20dp"
                 android:text="Support Removal:"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textStyle="bold"/>
             <Spinner
                 android:id="@+id/supportRemoval_editText"
                 android:layout_width="wrap_content"
@@ -665,7 +695,9 @@
                 android:layout_below="@+id/supportRemoval_textView"
                 android:layout_marginTop="20dp"
                 android:text="WEDM:"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
             <Spinner
                 android:id="@+id/WEDM_editText"
                 android:layout_width="wrap_content"
@@ -686,7 +718,8 @@
                 android:layout_below="@+id/WEDM_textView"
                 android:layout_marginTop="20dp"
                 android:text="WEDM Comments:"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/WEDMcomments_editText"
@@ -707,7 +740,8 @@
                 android:layout_below="@+id/WEDMcomments_textView"
                 android:layout_marginTop="20dp"
                 android:text="Blasting:"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <Spinner
                 android:id="@+id/blasting_editText"
@@ -729,7 +763,8 @@
                 android:layout_below="@+id/blasting_textView"
                 android:layout_marginTop="20dp"
                 android:text="Blasting Type:"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/blastingType_editText"
@@ -750,7 +785,8 @@
                 android:layout_below="@+id/blastingType_textView"
                 android:layout_marginTop="20dp"
                 android:text="Blasting Time:"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/blastingTime_editText"
@@ -771,7 +807,8 @@
                 android:layout_below="@+id/blastingTime_textView"
                 android:layout_marginTop="20dp"
                 android:text="Blasting Comment:"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/blastingComment_editText"
@@ -793,7 +830,8 @@
                 android:layout_marginTop="20dp"
                 android:text="Heat Treatment(Material Dependant):"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:background="@color/colorlightGreen"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/stressRelieving_textView"
