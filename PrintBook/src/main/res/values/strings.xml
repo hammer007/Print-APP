@@ -42,6 +42,23 @@
         <item>Yes</item>
         <item>No</item>
     </string-array>
+    <string name="title_activity_login">Sign in</string>
+    <string name="title_main">Home</string>
 
+    <!-- Strings related to login -->
+    <string name="prompt_username">username</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_login">Login</string>
+    <string name="action_signup">Sign up</string>
+    <string name="action_login_short">Login</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect or account not found</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
 
+    <item name="visible" type="id"/>
+    <item name="masked" type="id"/>
 </resources>

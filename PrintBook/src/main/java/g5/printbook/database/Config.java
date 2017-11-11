@@ -33,6 +33,8 @@ public class Config {
     public static final String PRINTING_comments = "comments";
     public static final String PROJECT_id = "project_id";
     public static final String PROJECT_name = "project_name";
+    public static final String LOGIN_username = "username";
+    public static final String LOGIN_password = "password";
     public static final String TAG_INSERT_PREPRINTING = "insert_pre_printing";
     public static final String TAG_INSERT_PRINTING = "insert_printing";
     public static final String TAG_CREATE_PROJECT = "create_project";
@@ -41,4 +43,5 @@ public class Config {
     public static final String url_create_project = "http://10.0.2.2:8081/PrintBook/create_project.php";
     public static final String url_insert_preprinting = "http://10.0.2.2:8081/PrintBook/insert_pre_printing.php";
     public static final String url_insert_printing = "http://10.0.2.2:8081/PrintBook/insert_printing.php";
+    public static final String url_login = "http://10.0.2.2:8081/PrintBook/login.php";
 }
