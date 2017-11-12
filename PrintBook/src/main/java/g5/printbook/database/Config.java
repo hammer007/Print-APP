@@ -44,4 +44,6 @@ public class Config {
     public static final String url_insert_preprinting = "http://10.0.2.2:8081/PrintBook/insert_pre_printing.php";
     public static final String url_insert_printing = "http://10.0.2.2:8081/PrintBook/insert_printing.php";
     public static final String url_login = "http://10.0.2.2:8081/PrintBook/login.php";
+    public static final String ServerUploadPath = "http://10.0.2.2:8081/PrintBook/upload_magic_to_server.php" ;
+
 }
