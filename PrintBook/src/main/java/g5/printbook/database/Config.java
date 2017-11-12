@@ -40,10 +40,10 @@ public class Config {
     public static final String TAG_CREATE_PROJECT = "create_project";
     public static final String TAG_CREATE_NOTHING = "nothing";
     public static final String TAG_SUCCESS = "success";
-    public static final String url_create_project = "http://10.0.2.2:8081/PrintBook/create_project.php";
-    public static final String url_insert_preprinting = "http://10.0.2.2:8081/PrintBook/insert_pre_printing.php";
-    public static final String url_insert_printing = "http://10.0.2.2:8081/PrintBook/insert_printing.php";
-    public static final String url_login = "http://10.0.2.2:8081/PrintBook/login.php";
-    public static final String ServerUploadPath = "http://10.0.2.2:8081/PrintBook/upload_magic_to_server.php" ;
+    public static final String url_create_project = "https://group5sep.000webhostapp.com/create_project.php";//"http://10.0.2.2:8081/PrintBook/create_project.php";
+    public static final String url_insert_preprinting = "https://group5sep.000webhostapp.com/insert_pre_printing.php";
+    public static final String url_insert_printing = "https://group5sep.000webhostapp.com/insert_printing.php";
+    public static final String url_login = "https://group5sep.000webhostapp.com/login.php";
+    public static final String ServerUploadPath = "https://group5sep.000webhostapp.com/upload_magic_to_server.php" ;
 
 }
