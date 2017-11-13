@@ -45,6 +45,11 @@
     <string name="title_activity_login">Sign in</string>
     <string name="title_main">Home</string>
 
+    <string-array name="jobType_string">
+        <item>Public</item>
+        <item>Private</item>
+    </string-array>
+
     <!-- Strings related to login -->
     <string name="prompt_username">username</string>
     <string name="prompt_password">Password</string>
