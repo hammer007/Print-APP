@@ -118,7 +118,11 @@ public class Login extends AppCompatActivity {
             focusView = usernameText;
             cancel = true;
         }
-
+        if (TextUtils.isEmpty(password)) {
+            passwordText.setError(getString(R.string.error_field_required));
+            focusView = passwordText;
+            cancel = true;
+        }
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
