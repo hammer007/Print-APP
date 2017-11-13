@@ -12,6 +12,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -54,8 +57,21 @@ public class NewProjectMandatoryFragment extends Fragment {
     String ImageName = "slm_id", ImagePath = "image_path" ;
     Config config;
     boolean check = true;
+    View focusView = null;
     public NewProjectMandatoryFragment() {
         // Required empty public constructor
+    }
+    public static NewProjectMandatoryFragment newInstance(int slm_id) {
+        NewProjectMandatoryFragment myFragment = new NewProjectMandatoryFragment();
+
+        Bundle args = new Bundle();
+        args.putInt("slm_id", slm_id);
+        myFragment.setArguments(args);
+
+        return myFragment;
+    }
+    public int getShowSlmId() {
+        return getArguments().getInt("slm_id", 0);
     }
 
     @Override
@@ -82,9 +98,37 @@ public class NewProjectMandatoryFragment extends Fragment {
             public void onClick(View view) {
 
                 submitted_slmId = slm_id.getText().toString();
+                if (TextUtils.isEmpty(submitted_slmId)) {
+                    slm_id.setError(getString(R.string.error_field_required));
+                    focusView = slm_id;
+                    focusView.requestFocus();
+                }else {
+                    ImageUploadToServerFunction();
+                    NewPrintJobFragment fragment = new NewPrintJobFragment();
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    Bundle args = new Bundle();
+                    args.putString("slm_id", submitted_slmId);
+                    fragment.setArguments(args);
+                    fragmentTransaction.replace(R.id.fragment_container, fragment);
+                    fragmentTransaction.commit();
+                }
 
-                ImageUploadToServerFunction();
-
+            }
+        });
+        create_printjob_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                submitted_slmId = slm_id.getText().toString();
+                if (TextUtils.isEmpty(submitted_slmId)) {
+                    slm_id.setError(getString(R.string.error_field_required));
+                    focusView = slm_id;
+                    focusView.requestFocus();
+                }else {
+                    ImageUploadToServerFunction();
+                    Intent intent = new Intent(getContext(), MainActivity.class);
+                    startActivity(intent);
+                }
             }
         });
         return view;

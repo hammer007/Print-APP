@@ -206,7 +206,7 @@
                 android:layout_toEndOf="@+id/slmid_textView"
                 android:layout_toRightOf="@+id/slmid_textView"
                 android:ems="10"
-                android:inputType="number" />
+                android:inputType="none" />
 
             <TextView
                 android:id="@+id/starttime_textView"
