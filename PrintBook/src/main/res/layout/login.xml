@@ -60,15 +60,15 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:inputType="textPassword"
-                    android:text="@string/prompt_password" />
+                    android:hint="@string/prompt_password"/>
             </android.support.design.widget.TextInputLayout>
 
             <AutoCompleteTextView
                 android:id="@+id/username"
                 android:layout_width="359dp"
+                android:hint="@string/prompt_username"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/prompt_username" />
+                android:layout_weight="1" />
 
             <Button
                 android:id="@+id/login_button"
