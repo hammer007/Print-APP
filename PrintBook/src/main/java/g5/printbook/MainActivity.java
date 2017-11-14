@@ -21,7 +21,11 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        MainFragment fragment = new MainFragment();
+        android.support.v4.app.FragmentTransaction fragmentTransaction =
+                getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -75,23 +79,29 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
+
             //Set the fragment initially
             MainFragment fragment = new MainFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment);
             fragmentTransaction.commit();
-            // Handle the camera action
+            // Handle the new project action
         } else if (id == R.id.nav_newproject) {
+
             //Set the fragment initially
-            NewProjectFragment fragment = new NewProjectFragment();
+            //NewPrintJobFragment fragment = new NewPrintJobFragment();
+            NewProjectMandatoryFragment fragment = new NewProjectMandatoryFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment);
             fragmentTransaction.commit();
 
 
-        } else if (id == R.id.nav_contact) {
+        } else if (id == R.id.nav_about) {
+
+            setContentView(R.layout.about_us_main);
+
 
         }
 

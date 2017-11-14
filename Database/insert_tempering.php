@@ -9,8 +9,7 @@
 
     require_once __DIR__ . '/db_connect.php';
     $db = new DB_CONNECT();
-    $insert_to_tempering = "INSERT INTO printbook.tempering(tempering_id, temperature, time, cycles, comment) " +
-                                  + "VALUES('$tempering_id', '$temperature', '$time', '$cycles', '$comment')";
+    $insert_to_tempering = "INSERT INTO printbook.tempering(tempering_id, temperature, time, cycles, comment) VALUES('$tempering_id', '$temperature', '$time', '$cycles', '$comment')";
 
     if(!$db) die('Something went wrong while connecting to database');
     $result = mysqli_query($db->connect(), $insert_to_tempering) or die('unable to insert to printing');

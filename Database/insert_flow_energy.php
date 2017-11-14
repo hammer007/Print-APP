@@ -21,12 +21,7 @@
 
     require_once __DIR__ . '/db_connect.php';
     $db = new DB_CONNECT();
-    $insert_to_flow_energy = "INSERT INTO printbook.flow_energy(flow_id, material_id, date, temperature, humidity, operator, powder_condition, reused_time," +
-                          + "rumbling, rumbling_times, bfe_mj, si, fri, se_mj_g, cbd_g_ml, cetap50_mj,bdtap50_g_ml)" + 
-                          + "VALUES('$flow_id', '$material_id', '$date', '$temperature', '$humidity', '$operator', '$powder_condition', '$reused_time'," +
-                          + "'$rumbling', '$rumbling_times', '$bfe_mj', '$si', '$fri', '$se_mj_g', '$cbd_g_ml'," +
-                          + "'$cetap50_mj','$bdtap50_g_ml')";
-
+    $insert_to_flow_energy = "INSERT INTO printbook.flow_energy(flow_id, material_id, date, temperature, humidity, operator, powder_condition, reused_time, rumbling, rumbling_times, bfe_mj, si, fri, se_mj_g, cbd_g_ml, cetap50_mj,bdtap50_g_ml VALUES('$flow_id', '$material_id', '$date', '$temperature', '$humidity', '$operator', '$powder_condition', '$reused_time','$rumbling', '$rumbling_times', '$bfe_mj', '$si', '$fri', '$se_mj_g', '$cbd_g_ml','$cetap50_mj','$bdtap50_g_ml')";
     if(!$db) die('Something went wrong while connecting to database');
     $result = mysqli_query($db->connect(), $insert_to_flow_energy) or die('unable to insert to flow_energy');
     if ($result) {
