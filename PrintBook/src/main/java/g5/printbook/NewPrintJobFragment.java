@@ -257,15 +257,15 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         shieldingSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         shieldingSpinner.setAdapter(shieldingSpinnerAdapter);
 
-        preprinting_expand_button = (Button)view.findViewById(R.id.preprinting_expand_button);
-        projectID_editText = (EditText)view.findViewById(R.id.projectID_editText);
-        partnumber_editText = (EditText)view.findViewById(R.id.partnumber_editText);
+        preprinting_expand_button = (Button)view.findViewById(R.id.searched_result_preprinting_expand_button);
+        projectID_editText = (EditText)view.findViewById(R.id.searched_result_projectID_editText);
+        partnumber_editText = (EditText)view.findViewById(R.id.searched_result_partnumber_editText);
         numberofparts_editText =  (EditText)view.findViewById(R.id.numberofparts_editText);
         printingparameters_editText = (EditText)view.findViewById(R.id.printingparameters_editText);
         comment_editText = (EditText)view.findViewById(R.id.comment_editText);
 
-        projectID_Text = (TextView) view.findViewById(R.id.projectID_textView);
-        partnumber_Text = (TextView)view.findViewById(R.id.partnumber_textView);
+        projectID_Text = (TextView) view.findViewById(R.id.searched_result_projectID_textView);
+        partnumber_Text = (TextView)view.findViewById(R.id.searched_result_partnumber_textView);
         numberofparts_Text =  (TextView)view.findViewById(R.id.numberparts_textView);
         printingparameters_Text = (TextView)view.findViewById(R.id.prinringparameters_textView);
         comment_Text = (TextView)view.findViewById(R.id.coment_textView);
@@ -275,7 +275,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         starttime_editText = (EditText)view.findViewById(R.id.starttime_editText);
         endtime_editText =  (EditText)view.findViewById(R.id.endtime_editText);
         date_editText = (EditText)view.findViewById(R.id.date_editText);
-        operator_editText = (EditText)view.findViewById(R.id.operator_editText);
+        operator_editText = (EditText)view.findViewById(R.id.search_result_operator_editText);
         typeofmachine_editText = (EditText)view.findViewById(R.id.typeofmachine_editText);
         powerweight_editText = (EditText)view.findViewById(R.id.powderweight_editText);
         powerweightatEnd_editText = (EditText)view.findViewById(R.id.powderweightatEnd_editText);
