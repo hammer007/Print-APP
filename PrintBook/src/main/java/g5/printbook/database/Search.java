@@ -14,6 +14,7 @@ import java.util.List;
  * Created by Geek on 11/13/2017.
  */
 public class Search extends AsyncTask<String, String, String[]> {
+    String returned [] = new String[19];
     JSONParser jsonParser = new JSONParser();
     String url;
     Config config;
@@ -24,7 +25,6 @@ public class Search extends AsyncTask<String, String, String[]> {
     }
     @Override
     protected String[] doInBackground(String... strings) {
-        String printing_id [] = new String[1];
         JSONObject json = jsonParser.makeHttpRequest(
                 url, "GET", params);
         Log.d("SEARCH VALUE", "" +json);
@@ -39,15 +39,47 @@ public class Search extends AsyncTask<String, String, String[]> {
             try {
                 productObj = json
                         .getJSONArray("printJob");
-                JSONObject product = productObj.getJSONObject(0);
-                printing_id[0] = product.getString("printing_id");
+                returned[0] = "101";
+                returned = gather_returned_files(productObj);
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }else{
-            printing_id[0] = "-101";
+            returned[0] = "-101";
         }
-        return printing_id;
+        return returned;
+    }
+
+    private String [] gather_returned_files(JSONArray productObj) {
+        JSONObject product = null;
+        try {
+            product = productObj.getJSONObject(0);
+            //returned[0] = product.getString(config.PRINTING_printing_id);
+            returned[1] = product.getString(config.PRINTING_start_time);
+            Log.d("ONE ONE", returned[1]);
+            returned[2] = product.getString(config.PRINTING_end_time);
+            returned[3] = product.getString(config.PRINTING_date);
+            returned[4] = product.getString(config.PRINTING_operator);
+            returned[5] = product.getString(config.PRINTING_machine_type);
+            returned[6] = product.getString(config.PRINTING_powder_weight_start);
+            returned[7] = product.getString(config.PRINTING_powder_weight_end);
+            returned[8] = product.getString(config.PRINTING_powder_waste_weight);
+            returned[9] = product.getString(config.PRINTING_powder_used);
+            returned[10] = product.getString(config.PRINTING_material_id);
+            returned[11] = product.getString(config.PRINTING_build_platform_weight);
+            returned[12] = product.getString(config.PRINTING_print_time);
+            returned[13] = product.getString(config.PRINTING_powder_condition);
+            returned[14] = product.getString(config.PRINTING_reused_times);
+            returned[15] = product.getString(config.PRINTING_number_of_layers);
+            returned[16] = product.getString(config.PRINTING_dpc_factor);
+            returned[17] = product.getString(config.PRINTING_exposure_time);
+            returned[18] = product.getString(config.PRINTING_comments);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return returned;
     }
 
     @Override
