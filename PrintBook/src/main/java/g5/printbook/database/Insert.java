@@ -1,10 +1,7 @@
 package g5.printbook.database;
 
-import android.content.Context;
-import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.json.JSONException;
@@ -17,13 +14,13 @@ import static android.content.ContentValues.TAG;
  * Created by Geek on 10/21/2017.
  */
 
-public class CRUD extends AsyncTask<String, String, Integer> {
+public class Insert extends AsyncTask<String, String, Integer> {
     int success = -1;
     Config config = new Config();
     JSONParser jsonParser = new JSONParser();
     String do_what = config.TAG_CREATE_NOTHING;
     List<NameValuePair> params;
-    public CRUD(List<NameValuePair> param, String do_what){
+    public Insert(List<NameValuePair> param, String do_what){
         this.params = param;
         this.do_what = do_what;
     }

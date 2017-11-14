@@ -101,8 +101,12 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_about) {
 
             setContentView(R.layout.about_us_main);
-
-
+        } else if (id == R.id.nav_search){
+            SearchFragment fragment = new SearchFragment();
+            android.support.v4.app.FragmentTransaction fragmentTransaction =
+                    getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

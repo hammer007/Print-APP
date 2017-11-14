@@ -12,14 +12,23 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -42,11 +51,13 @@ import g5.printbook.database.Config;
 import static android.app.Activity.RESULT_OK;
 
 
-public class NewProjectMandatoryFragment extends Fragment {
+public class NewProjectMandatoryFragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
     private Button magic_upload_button, create_printjob_continue, create_printjob_save;
     private ImageView imageView;
     EditText slm_id;
+    TextView jobType_Text, users_Text;
+    Spinner jobTypeSpinner, usersSpinner;
     Bitmap bitmap;
     View view;
     private String submitted_slmId;
@@ -54,21 +65,38 @@ public class NewProjectMandatoryFragment extends Fragment {
     String ImageName = "slm_id", ImagePath = "image_path" ;
     Config config;
     boolean check = true;
+    View focusView = null;
     public NewProjectMandatoryFragment() {
         // Required empty public constructor
     }
+    public static NewProjectMandatoryFragment newInstance(int slm_id) {
+        NewProjectMandatoryFragment myFragment = new NewProjectMandatoryFragment();
+
+        Bundle args = new Bundle();
+        args.putInt("slm_id", slm_id);
+        myFragment.setArguments(args);
+
+        return myFragment;
+    }
+    public int getShowSlmId() {
+        return getArguments().getInt("slm_id", 0);
+    }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
+    public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState);}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         view = inflater.inflate(R.layout.fragment_new_project_mandatory, container, false);
+
         initialize();
+
+        jobTypeSpinner.setOnItemSelectedListener(this);
+        usersSpinner.setOnItemSelectedListener(this);
+
+
         magic_upload_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,12 +110,57 @@ public class NewProjectMandatoryFragment extends Fragment {
             public void onClick(View view) {
 
                 submitted_slmId = slm_id.getText().toString();
-
-                ImageUploadToServerFunction();
+                if (TextUtils.isEmpty(submitted_slmId)) {
+                    slm_id.setError(getString(R.string.error_field_required));
+                    focusView = slm_id;
+                    focusView.requestFocus();
+                }else {
+                    ImageUploadToServerFunction();
+                    NewPrintJobFragment fragment = new NewPrintJobFragment();
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    Bundle args = new Bundle();
+                    args.putString("slm_id", submitted_slmId);
+                    fragment.setArguments(args);
+                    fragmentTransaction.replace(R.id.fragment_container, fragment);
+                    fragmentTransaction.commit();
+                }
 
             }
         });
+        create_printjob_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                submitted_slmId = slm_id.getText().toString();
+                if (TextUtils.isEmpty(submitted_slmId)) {
+                    slm_id.setError(getString(R.string.error_field_required));
+                    focusView = slm_id;
+                    focusView.requestFocus();
+                }else {
+                    ImageUploadToServerFunction();
+                    Intent intent = new Intent(getContext(), MainActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
         return view;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+        switch (position) {
+
+            case 0: usersSpinner.setVisibility(View.GONE);
+                    users_Text.setVisibility(View.GONE);
+                break;
+
+            case 1: usersSpinner.setVisibility(View.VISIBLE);
+                    users_Text.setVisibility(View.VISIBLE);
+                break;
+
+
+        }
     }
 
     private void ImageUploadToServerFunction(){
@@ -148,6 +221,11 @@ public class NewProjectMandatoryFragment extends Fragment {
         AsyncTaskUploadClass AsyncTaskUploadClassOBJ = new AsyncTaskUploadClass();
 
         AsyncTaskUploadClassOBJ.execute();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
     public class ImageProcessClass{
@@ -262,6 +340,21 @@ public class NewProjectMandatoryFragment extends Fragment {
         create_printjob_continue = (Button)view.findViewById(R.id.create_printjob_continue);
         create_printjob_save = (Button)view.findViewById(R.id.create_printjob_save);
         slm_id = (EditText)view.findViewById(R.id.SLM_ID_EDITTEXT);
+
+        jobTypeSpinner = (Spinner) view.findViewById(R.id.jobType_editText);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.jobType_string, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        jobTypeSpinner.setAdapter(adapter);
+
+        usersSpinner = (Spinner) view.findViewById(R.id.users_editText);
+        ArrayAdapter<CharSequence> usersAdapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.users_string, android.R.layout.simple_spinner_item);
+        usersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        usersSpinner.setAdapter(usersAdapter);
+
+        jobType_Text = (TextView)view.findViewById(R.id.jobType_textView);
+        users_Text = (TextView)view.findViewById(R.id.users_TextView);
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import g5.printbook.database.CRUD;
+import g5.printbook.database.Insert;
 import g5.printbook.database.Config;
 
 import static android.content.ContentValues.TAG;
@@ -35,7 +35,8 @@ import static android.content.ContentValues.TAG;
 public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     Config config;
-    CRUD crud;
+    Insert insert;
+    String slm_id;
     Button printingSave_Button, preprintingSave_Button, submit_Button, preprinting_expand_button, printing_expand_button, posprinting_expand_button, postprintingSave_Button;
     EditText projectID_editText, partnumber_editText, numberofparts_editText, printingparameters_editText, comment_editText;
     EditText slmid_editText, starttime_editText, endtime_editText, date_editText, operator_editText, agingComment_editText;
@@ -71,7 +72,10 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_new_printjob, container, false);
+        slm_id = getArguments().getString("slm_id");
         initialize(view);
+        slmid_editText.setText(slm_id);
+        slmid_editText.setEnabled(false);
         spinner.setOnItemSelectedListener(this);
         supportremovalSpinner.setOnItemSelectedListener(this);
         WEDMSpinner.setOnItemSelectedListener(this);
@@ -150,7 +154,6 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         return view;
 
     }
-
     private int insert_to_printing() {
         int success = -1;
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -174,9 +177,9 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         params.add(new BasicNameValuePair(config.PRINTING_dpc_factor, dpcFactor_editText.getText().toString()));
         params.add(new BasicNameValuePair(config.PRINTING_exposure_time, minExposureTime_editText.getText().toString()));
         params.add(new BasicNameValuePair(config.PRINTING_comments, printingComments_editText.getText().toString()));
-        crud = new CRUD(params, config.TAG_INSERT_PRINTING);
+        insert = new Insert(params, config.TAG_INSERT_PRINTING);
         try {
-            success = crud.execute().get();
+            success = insert.execute().get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -185,15 +188,14 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         Log.d(TAG, "Am here too" + params);
         return success;
     }
-
     private int createProject() {
         int success = -1;
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair(config.PROJECT_id, projectID_editText.getText().toString()));
         params.add(new BasicNameValuePair(config.PROJECT_name, "dummy value"));
-        crud = new CRUD(params, config.TAG_CREATE_PROJECT);
+        insert = new Insert(params, config.TAG_CREATE_PROJECT);
         try {
-            success = crud.execute().get();
+            success = insert.execute().get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -202,7 +204,6 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         return success;
 
     }
-
     private int insert_to_pre_printing(){
         int success = -1;
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -214,9 +215,9 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         params.add(new BasicNameValuePair(config.PREPRINTING_printing_parameter, printingparameters_editText.getText().toString()));
         params.add(new BasicNameValuePair(config.PREPRINTING_comment, comment_editText.getText().toString()));
         Log.d(TAG, "params" + params);
-        crud = new CRUD(params, config.TAG_INSERT_PREPRINTING);
+        insert = new Insert(params, config.TAG_INSERT_PREPRINTING);
         try {
-            success = crud.execute().get();
+            success = insert.execute().get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -224,9 +225,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         }
         return success;
     }
-
     //TODO: Insert Post-Printing fields into database
-
     private void initialize(View view) {
         spinner = (Spinner) view.findViewById(R.id.powderCondition_editText);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
@@ -378,7 +377,6 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         hide_prining();
         hide_posprinting();
     }
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch (position) {
@@ -397,7 +395,6 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
 
         }
     }
-
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
@@ -431,7 +428,6 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         printingparameters_Text.setVisibility(View.VISIBLE);
         comment_Text.setVisibility(View.VISIBLE);
     }
-
     private void hide_prining() {
         slmid_editText.setVisibility(View.GONE);
         starttime_editText.setVisibility(View.GONE);
@@ -474,7 +470,6 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         printing_expand_button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.expand, 0);
 
     }
-
     private void show_prining() {
         slmid_editText.setVisibility(View.VISIBLE);
         starttime_editText.setVisibility(View.VISIBLE);
@@ -513,7 +508,6 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         printingComments_Text.setVisibility(View.VISIBLE);
         printing_expand_button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.shrink, 0);
     }
-
     private void hide_posprinting(){
 
         postID_Text.setVisibility(View.GONE);
@@ -582,7 +576,6 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         posprinting_expand_button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.expand, 0);
 
     }
-
     private void show_posprinting(){
 
         postID_Text.setVisibility(View.VISIBLE);
