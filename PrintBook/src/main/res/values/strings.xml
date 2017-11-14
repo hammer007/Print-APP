@@ -1,0 +1,77 @@
+<resources>
+    <string name="app_name">PrintBook</string>
+    <string name="welcome">Welcome To Swerea!</string>
+    <string name="visual">visual the STL model</string>
+    <string name="fetch">fetch the model</string>
+    <string name="upload">upload the STL model</string>
+    <string name="check">check the model</string>
+    <string name="action_settings">action_settings</string>
+    <string name="drawer_open">drawer_open</string>
+    <string name="drawer_close">drawer_close</string>
+    <string name="np">this is the new project page</string>
+
+    <string name="SLM_ID">SLM ID</string>
+    <string name="back">back</string>
+    <string name="title_activity_home_page">PrintBook</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string-array name="powder_condition_string">
+        <item>New</item>
+        <item>Reused</item>
+        <item>Mixed</item>
+    </string-array>
+
+    <string-array name="support_removal_string">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="WEDM_string">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="blasting_string">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="shielding_string">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+    <string name="title_activity_login">Sign in</string>
+    <string name="title_main">Home</string>
+    <string name="sign_up">Signup</string>
+
+    <string-array name="jobType_string">
+        <item>Public</item>
+        <item>Private</item>
+    </string-array>
+
+    <string-array name="users_string">
+        <item></item>
+    </string-array>
+
+    <!-- Strings related to login -->
+    <string name="prompt_username">username</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_login">Login</string>
+    <string name="action_signup">Sign up</string>
+    <string name="action_login_short">Login</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect or account not found</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <item name="visible" type="id" />
+    <item name="masked" type="id" />
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
