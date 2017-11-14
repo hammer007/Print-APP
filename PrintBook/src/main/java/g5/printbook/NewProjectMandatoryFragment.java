@@ -27,6 +27,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -43,6 +44,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -66,6 +68,7 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
     Config config;
     boolean check = true;
     View focusView = null;
+    String SLM_FOUND = "";
     public NewProjectMandatoryFragment() {
         // Required empty public constructor
     }
@@ -115,15 +118,23 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
                     focusView = slm_id;
                     focusView.requestFocus();
                 }else {
-                    ImageUploadToServerFunction();
-                    NewPrintJobFragment fragment = new NewPrintJobFragment();
-                    FragmentManager fragmentManager = getFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    Bundle args = new Bundle();
-                    args.putString("slm_id", submitted_slmId);
-                    fragment.setArguments(args);
-                    fragmentTransaction.replace(R.id.fragment_container, fragment);
-                    fragmentTransaction.commit();
+                    String uploaded = ImageUploadToServerFunction();
+                    String success_message = "SLM ALREADY EXISTS";
+                    if (uploaded.contains(success_message))
+                        Toast.makeText(view.getContext(), "SLM ALREADY EXISTS", Toast.LENGTH_LONG).show();
+                    else if(uploaded.contains("PROBLEM IN UPLOADING")){
+                        Toast.makeText(view.getContext(), "PROBLEM IN UPLOADING", Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        NewPrintJobFragment fragment = new NewPrintJobFragment();
+                        FragmentManager fragmentManager = getFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        Bundle args = new Bundle();
+                        args.putString("slm_id", submitted_slmId);
+                        fragment.setArguments(args);
+                        fragmentTransaction.replace(R.id.fragment_container, fragment);
+                        fragmentTransaction.commit();
+                    }
                 }
 
             }
@@ -137,9 +148,17 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
                     focusView = slm_id;
                     focusView.requestFocus();
                 }else {
-                    ImageUploadToServerFunction();
-                    Intent intent = new Intent(getContext(), MainActivity.class);
-                    startActivity(intent);
+                    String uploaded = ImageUploadToServerFunction();
+                    String success_message = "SLM ALREADY EXISTS";
+                    if (uploaded.contains(success_message))
+                        Toast.makeText(view.getContext(), "SLM ALREADY EXISTS", Toast.LENGTH_LONG).show();
+                    else if(uploaded.contains("PROBLEM IN UPLOADING")){
+                        Toast.makeText(view.getContext(), "PROBLEM IN UPLOADING", Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        Intent intent = new Intent(getContext(), MainActivity.class);
+                        startActivity(intent);
+                    }
                 }
             }
         });
@@ -163,7 +182,7 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
         }
     }
 
-    private void ImageUploadToServerFunction(){
+    private String ImageUploadToServerFunction(){
 
         ByteArrayOutputStream byteArrayOutputStreamObject ;
 
@@ -220,7 +239,14 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
         }
         AsyncTaskUploadClass AsyncTaskUploadClassOBJ = new AsyncTaskUploadClass();
 
-        AsyncTaskUploadClassOBJ.execute();
+        try {
+            SLM_FOUND = AsyncTaskUploadClassOBJ.execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return SLM_FOUND;
     }
 
     @Override
