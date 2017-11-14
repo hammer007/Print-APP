@@ -1,0 +1,54 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="g5.printbook.SearchFragment">
+
+    <SearchView
+        android:id="@+id/search_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="21dp" />
+
+    <EditText
+        android:id="@+id/search_by_slm_EditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/search_view"
+        android:layout_alignLeft="@+id/search_view"
+        android:layout_alignStart="@+id/search_view"
+        android:layout_marginLeft="37dp"
+        android:layout_marginStart="37dp"
+        android:ems="25"
+        android:hint="SLM ID"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/search_by_slm_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/search_by_slm_EditText"
+        android:layout_alignBottom="@+id/search_by_slm_EditText"
+        android:layout_marginLeft="41dp"
+        android:layout_marginStart="41dp"
+        android:layout_toEndOf="@+id/search_by_slm_EditText"
+        android:layout_toRightOf="@+id/search_by_slm_EditText"
+        android:text="@android:string/search_go" />
+
+    <EditText
+        android:id="@+id/searched_result_printingid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search_by_slm_button"
+        android:layout_marginEnd="230dp"
+        android:layout_marginRight="230dp"
+        android:layout_marginTop="47dp"
+        android:layout_toLeftOf="@+id/search_by_slm_button"
+        android:layout_toStartOf="@+id/search_by_slm_button"
+        android:hint="PRINTING ID"/>
+
+
+</RelativeLayout>
