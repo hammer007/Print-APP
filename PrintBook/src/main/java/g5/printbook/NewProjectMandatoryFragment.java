@@ -83,17 +83,18 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); }
+    public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState);}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         view = inflater.inflate(R.layout.fragment_new_project_mandatory, container, false);
 
         initialize();
 
         jobTypeSpinner.setOnItemSelectedListener(this);
-        //usersSpinner.setOnItemSelectedListener(this);
+        usersSpinner.setOnItemSelectedListener(this);
 
 
         magic_upload_button.setOnClickListener(new View.OnClickListener() {
@@ -148,7 +149,18 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
+        switch (position) {
 
+            case 0: usersSpinner.setVisibility(View.GONE);
+                    users_Text.setVisibility(View.GONE);
+                break;
+
+            case 1: usersSpinner.setVisibility(View.VISIBLE);
+                    users_Text.setVisibility(View.VISIBLE);
+                break;
+
+
+        }
     }
 
     private void ImageUploadToServerFunction(){
@@ -334,6 +346,12 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
                 R.array.jobType_string, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         jobTypeSpinner.setAdapter(adapter);
+
+        usersSpinner = (Spinner) view.findViewById(R.id.users_editText);
+        ArrayAdapter<CharSequence> usersAdapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.users_string, android.R.layout.simple_spinner_item);
+        usersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        usersSpinner.setAdapter(usersAdapter);
 
         jobType_Text = (TextView)view.findViewById(R.id.jobType_textView);
         users_Text = (TextView)view.findViewById(R.id.users_TextView);

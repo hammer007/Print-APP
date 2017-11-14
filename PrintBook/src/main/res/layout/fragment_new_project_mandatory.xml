@@ -6,6 +6,7 @@
     tools:context=".NewProjectMandatoryFragment">
 
     <RelativeLayout
+        android:id="@+id/mandatoryFragment_RelativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -19,6 +20,7 @@
         android:id="@+id/SLM_ID_TEXT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:textSize="18sp"
         android:textStyle="bold"
         android:text="SLM ID:" />
@@ -31,7 +33,9 @@
         android:layout_alignParentRight="true"
         android:layout_alignBottom="@+id/SLM_ID_TEXT"
         android:layout_toEndOf="@+id/SLM_ID_TEXT"
-        android:layout_toRightOf="@+id/SLM_ID_TEXT"/>
+        android:layout_toRightOf="@+id/SLM_ID_TEXT"
+        android:ems="10"
+        android:inputType="text"/>
 
         <TextView
             android:id="@+id/jobType_textView"
@@ -74,7 +78,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_toRightOf="@+id/users_TextView"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="29dp"
             android:ems="10"
             android:background="@android:drawable/btn_dropdown"
             android:spinnerMode="dropdown"/>
@@ -121,6 +125,7 @@
         android:layout_weight="0"
         android:text="Continue"
         android:layout_gravity="right"
+        android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/create_printjob_save">
     </Button>
         </RelativeLayout>
