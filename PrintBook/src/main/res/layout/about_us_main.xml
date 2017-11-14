@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:paddingLeft="20dp"
-                android:text="* Abel Asefa"
+                android:text="* Abel Asefa (abelandk@gmail.com)"
                 android:textSize="20sp"
                 android:textStyle="bold|italic" />
 
