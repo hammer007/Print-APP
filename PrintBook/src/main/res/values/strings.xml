@@ -44,6 +44,7 @@
     </string-array>
     <string name="title_activity_login">Sign in</string>
     <string name="title_main">Home</string>
+    <string name="sign_up">Signup</string>
 
     <string-array name="jobType_string">
         <item>Public</item>

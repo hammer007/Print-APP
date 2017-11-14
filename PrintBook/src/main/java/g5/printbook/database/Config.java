@@ -35,6 +35,13 @@ public class Config {
     public static final String PROJECT_name = "project_name";
     public static final String LOGIN_username = "username";
     public static final String LOGIN_password = "password";
+    public static final String SIGNUP_first_name = "first_name";
+    public static final String SIGNUP_last_name = "last_name";
+    public static final String SIGNUP_user_name = "user_name";
+    public static final String SIGNUP_email_address = "email_address";
+    public static final String SIGNUP_password_name = "password";
+    public static final String SIGNUP_retype_password_name = "retype_password";
+    public static final String TAG_INSERT_SIGNUP = "insert_sign_up";
     public static final String TAG_INSERT_PREPRINTING = "insert_pre_printing";
     public static final String TAG_INSERT_PRINTING = "insert_printing";
     public static final String TAG_CREATE_PROJECT = "create_project";
@@ -44,7 +51,8 @@ public class Config {
     public static final String url_insert_preprinting = "https://group5sep.000webhostapp.com/insert_pre_printing.php";
     public static final String url_insert_printing = "https://group5sep.000webhostapp.com/insert_printing.php";
     public static final String url_login = "https://group5sep.000webhostapp.com/login.php";
-    public static final String ServerUploadPath = "https://group5sep.000webhostapp.com/upload_magic_to_server.php";
+    public static final String ServerUploadPath = "https://group5sep.000webhostapp.com/upload_magic_to_server.php" ;
     public static final String url_search = "https://group5sep.000webhostapp.com/search.php";
+    public static final String url_insert_sign_up = "https://group5sep.000webhostapp.com/insert_sign_up.php";
 
 }

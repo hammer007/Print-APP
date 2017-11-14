@@ -86,8 +86,22 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        Button signUpformButton = (Button) findViewById(R.id.signup_button);
+        signUpformButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                // Launching new Activity on selecting single List Item
+               gotoSignupPage();
+            }
+        });
+
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+    }
+
+    private void gotoSignupPage() {
+        Intent i = new Intent(this , Signup.class);
+        startActivity(i);
     }
 
 
