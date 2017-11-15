@@ -22,6 +22,10 @@
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/swereaivf_logo" />
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
             <ImageView
                 android:id="@+id/vinnovaView"
                 android:layout_width="match_parent"
@@ -30,9 +34,13 @@
                 android:cropToPadding="true"
                 app:srcCompat="@drawable/vinnova_logo" />
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
             <TextView
                 android:id="@+id/textView"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:text="Developed By"
@@ -41,7 +49,7 @@
 
             <TextView
                 android:id="@+id/textView1"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:paddingLeft="20dp"
@@ -55,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:paddingLeft="20dp"
-                android:text="*Jobaer Ahmed"
+                android:text="Jobaer Ahmed (ahmedjobaer2@gmail.com) "
                 android:textSize="20sp"
                 android:textStyle="bold|italic" />
 
@@ -65,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:paddingLeft="20dp"
-                android:text="*Lídia Nyman"
+                android:text="Lídia Nyman"
                 android:textSize="20sp"
                 android:textStyle="bold|italic"
                 tools:ignore="RtlHardcoded,RtlSymmetry" />
@@ -76,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:paddingLeft="20dp"
-                android:text="*Maoyi Huang"
+                android:text="Maoyi Huang"
                 android:textSize="20sp"
                 android:textStyle="bold|italic" />
 
@@ -86,13 +94,11 @@
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:paddingLeft="20dp"
-                android:text="*Nandha Gopal"
+                android:text="Nandha Gopal(nandhujit@gmail.com)"
                 android:textSize="20sp"
                 android:textStyle="bold|italic" />
 
-
         </LinearLayout>
-
     </ScrollView>
 </RelativeLayout>
 
