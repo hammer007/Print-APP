@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:id="@+id/newproject_scrollView">
 
     <RelativeLayout
@@ -206,7 +207,8 @@
                 android:layout_toEndOf="@+id/slmid_textView"
                 android:layout_toRightOf="@+id/slmid_textView"
                 android:ems="10"
-                android:inputType="none" />
+                android:inputType="none"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/starttime_textView"
@@ -230,7 +232,11 @@
                 android:layout_toEndOf="@+id/starttime_textView"
                 android:layout_toRightOf="@+id/starttime_textView"
                 android:ems="10"
-                android:inputType="date|time" />
+                android:focusable="false"
+                android:clickable="true"
+                android:inputType="none"
+                android:gravity="center"
+                android:drawableRight="@drawable/time" />
 
             <TextView
                 android:id="@+id/endtime_textView"
@@ -252,7 +258,11 @@
                 android:layout_toEndOf="@+id/endtime_textView"
                 android:layout_toRightOf="@+id/endtime_textView"
                 android:ems="10"
-                android:inputType="date|time" />
+                android:focusable="false"
+                android:clickable="true"
+                android:inputType="none"
+                android:gravity="center"
+                android:drawableRight="@drawable/time" />
 
             <TextView
                 android:id="@+id/date_textView"
@@ -274,7 +284,11 @@
                 android:layout_toEndOf="@+id/date_textView"
                 android:layout_toRightOf="@+id/date_textView"
                 android:ems="10"
-                android:inputType="date|time"/>
+                android:focusable="false"
+                android:clickable="true"
+                android:inputType="none"
+                android:gravity="center"
+                android:drawableRight="@drawable/calandar"/>
 
             <TextView
                 android:id="@+id/operator_textView"
@@ -296,7 +310,8 @@
                 android:layout_toEndOf="@+id/operator_textView"
                 android:layout_toRightOf="@+id/operator_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/typeofmachine_textView"
@@ -318,7 +333,8 @@
                 android:layout_toEndOf="@+id/typeofmachine_textView"
                 android:layout_toRightOf="@+id/typeofmachine_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/powderweight_textView"
@@ -340,7 +356,8 @@
                 android:layout_toEndOf="@+id/powderweight_textView"
                 android:layout_toRightOf="@+id/powderweight_textView"
                 android:ems="10"
-                android:inputType="number"/>
+                android:inputType="number"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/powderweightatEnd_textView"
@@ -362,7 +379,8 @@
                 android:layout_toEndOf="@+id/powderweightatEnd_textView"
                 android:layout_toRightOf="@+id/powderweightatEnd_textView"
                 android:ems="10"
-                android:inputType="number"/>
+                android:inputType="number"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/powderwaste_textView"
@@ -384,7 +402,8 @@
                 android:layout_toEndOf="@+id/powderwaste_textView"
                 android:layout_toRightOf="@+id/powderwaste_textView"
                 android:ems="10"
-                android:inputType="number"/>
+                android:inputType="number"
+                android:gravity="center"/>
 
 
             <TextView
@@ -395,7 +414,8 @@
                 android:layout_marginTop="20dp"
                 android:text="Material:"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:gravity="center"/>
 
             <EditText
                 android:id="@+id/material_editText"
@@ -407,7 +427,8 @@
                 android:layout_toEndOf="@+id/material_textView"
                 android:layout_toRightOf="@+id/material_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/buildplatform_textView"
@@ -429,7 +450,8 @@
                 android:layout_toEndOf="@+id/buildplatform_textView"
                 android:layout_toRightOf="@+id/buildplatform_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="number"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/printTune_textView"
@@ -437,7 +459,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/buildplatform_textView"
                 android:layout_marginTop="20dp"
-                android:text="Print Tune:"
+                android:text="Calculated Print Time:"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
 
@@ -451,7 +473,8 @@
                 android:layout_toEndOf="@+id/printTune_textView"
                 android:layout_toRightOf="@+id/printTune_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/powderCondition_textView"
@@ -473,7 +496,8 @@
                 android:layout_toRightOf="@+id/powderCondition_textView"
                 android:ems="10"
                 android:background="@android:drawable/btn_dropdown"
-                android:spinnerMode="dropdown"/>
+                android:spinnerMode="dropdown"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/if_textView"
@@ -495,7 +519,8 @@
                 android:layout_toEndOf="@+id/if_textView"
                 android:layout_toRightOf="@+id/if_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="number"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/numberofLayers_textView"
@@ -517,7 +542,8 @@
                 android:layout_toEndOf="@+id/numberofLayers_textView"
                 android:layout_toRightOf="@+id/numberofLayers_textView"
                 android:ems="10"
-                android:inputType="number"/>
+                android:inputType="number"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/dpcFactor_textView"
@@ -539,7 +565,8 @@
                 android:layout_toEndOf="@+id/dpcFactor_textView"
                 android:layout_toRightOf="@+id/dpcFactor_textView"
                 android:ems="10"
-                android:inputType="number"/>
+                android:inputType="number"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/minExposureTime_textView"
@@ -561,7 +588,8 @@
                 android:layout_toEndOf="@+id/minExposureTime_textView"
                 android:layout_toRightOf="@+id/minExposureTime_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/printingComments_textView"
@@ -583,7 +611,8 @@
                 android:layout_toEndOf="@+id/printingComments_textView"
                 android:layout_toRightOf="@+id/printingComments_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:gravity="center"/>
 
             <Button
                 android:id="@+id/printingSave_Button"
