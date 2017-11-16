@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="Sign Up"
+            android:text="@string/fsign_up"
             android:textColor="#5a8b28"
             android:textSize="33sp"
             android:textStyle="bold" />
@@ -30,7 +30,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="First Name"
+                android:hint="@string/first_name"
                 android:inputType="textPersonName" />
         </android.support.design.widget.TextInputLayout>
 
@@ -46,7 +46,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Last Name"
+            android:hint="@string/last_name"
             android:inputType="textPersonName" />
         </android.support.design.widget.TextInputLayout>
 
@@ -61,7 +61,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="User Name"
+            android:hint="@string/user_name"
             android:inputType="textPersonName" />
         </android.support.design.widget.TextInputLayout>
 
@@ -76,7 +76,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Email Address"
+                android:hint="@string/email_address"
                 android:inputType="textEmailAddress" />
         </android.support.design.widget.TextInputLayout>
 
@@ -91,7 +91,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Password"
+                android:hint="@string/pass_word"
                 android:inputType="textPassword" />
         </android.support.design.widget.TextInputLayout>
 
@@ -101,22 +101,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
 
-        <EditText
+            <EditText
                 android:id="@+id/new_retype_password"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Password"
+                android:hint="@string/rpass_word"
                 android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
 
-        <Button
-            android:id="@+id/sign_up_button"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="#5a8b28"
-            android:text="Sign Up"
-            android:textColor="#fff" />
+    <Button
+        android:id="@+id/sign_up_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="#5a8b28"
+        android:text="@string/lsign_up"
+        android:textColor="#fff" />
 
     </LinearLayout>

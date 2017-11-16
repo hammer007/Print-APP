@@ -68,6 +68,14 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="user_name">User Name</string>
+    <string name="email_address">Email Address</string>
+    <string name="pass_word">Password</string>
+    <string name="fsign_up">Sign Up</string>
+    <string name="rpass_word">Password</string>
+    <string name="lsign_up">Sign Up</string>
 
     <item name="visible" type="id" />
     <item name="masked" type="id" />
