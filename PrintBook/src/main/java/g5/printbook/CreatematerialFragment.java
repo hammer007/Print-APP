@@ -40,7 +40,7 @@ public class  CreatematerialFragment extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.create_material);
 
         // Method to enable runtime permission.
         RequestRunTimePermission();
