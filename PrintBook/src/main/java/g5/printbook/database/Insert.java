@@ -30,6 +30,7 @@ public class Insert extends AsyncTask<String, String, Integer> {
         else if (do_what == config.TAG_INSERT_PREPRINTING) success = insertToDB(config.url_insert_preprinting);
         else if (do_what == config.TAG_INSERT_PRINTING) success = insertToDB(config.url_insert_printing);
         else if (do_what == config.TAG_INSERT_SIGNUP) success = insertToDB(config.url_insert_sign_up);
+        else if (do_what == config.TAG_INSERT_POSTPRINTING) success = insertToDB(config.url_insert_post_printing);
         return success;
     }
 

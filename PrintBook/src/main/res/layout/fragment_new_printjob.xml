@@ -22,7 +22,7 @@
             android:id="@+id/preprinting_relativeLayout">
 
         <Button
-            android:id="@+id/searched_result_preprinting_expand_button"
+            android:id="@+id/preprinting_expand_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Pre Printing"
@@ -33,49 +33,72 @@
             android:drawableRight="@drawable/expand"/>
 
         <EditText
-            android:id="@+id/searched_result_projectID_editText"
+            android:id="@+id/projectID_editText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/searched_result_preprinting_expand_button"
-            android:layout_toEndOf="@+id/searched_result_projectID_textView"
-            android:layout_toRightOf="@+id/searched_result_projectID_textView"
+            android:layout_below="@+id/preprinting_expand_button"
+            android:layout_toEndOf="@+id/projectID_textView"
+            android:layout_toRightOf="@+id/projectID_textView"
             android:ems="10"
             android:inputType="text" />
 
         <TextView
-            android:id="@+id/searched_result_projectID_textView"
+            android:id="@+id/projectID_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/searched_result_projectID_editText"
+            android:layout_alignBottom="@+id/projectID_editText"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:text="Project ID:"
+            android:text="Project Number:"
             android:textSize="18sp"
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/searched_result_partnumber_textView"
+            android:id="@+id/partnumber_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/searched_result_projectID_textView"
+            android:layout_below="@+id/projectID_textView"
             android:layout_marginTop="20dp"
             android:text="Part Number:"
             android:textSize="18sp"
             android:textStyle="bold"/>
 
         <EditText
-            android:id="@+id/searched_result_partnumber_editText"
+            android:id="@+id/partnumber_editText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/searched_result_projectID_editText"
-            android:layout_toEndOf="@+id/searched_result_partnumber_textView"
-            android:layout_toRightOf="@+id/searched_result_partnumber_textView"
+            android:layout_below="@+id/projectID_editText"
+            android:layout_toEndOf="@+id/partnumber_textView"
+            android:layout_toRightOf="@+id/partnumber_textView"
+            android:ems="10"
+            android:inputType="number" />
+        <TextView
+            android:id="@+id/buildId_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/partnumber_editText"
+            android:layout_marginTop="20dp"
+            android:text="Build Id:"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/buildId_editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/partnumber_editText"
+            android:layout_toEndOf="@+id/buildId_textView"
+            android:layout_toRightOf="@+id/buildId_textView"
             android:ems="10"
             android:inputType="number" />
 
@@ -85,7 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/searched_result_partnumber_editText"
+            android:layout_below="@+id/buildId_textView"
             android:layout_marginTop="20dp"
             android:text="Number of Parts:"
             android:textSize="18sp"
@@ -381,12 +404,34 @@
                 android:ems="10"
                 android:inputType="number"
                 android:gravity="center"/>
+            <TextView
+                android:id="@+id/powderused_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/powderweightatEnd_textView"
+                android:layout_marginTop="20dp"
+                android:text="Powder Used:"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
+            <EditText
+                android:id="@+id/powderused_editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/powderused_textView"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_toEndOf="@+id/powderused_textView"
+                android:layout_toRightOf="@+id/powderused_textView"
+                android:ems="10"
+                android:inputType="none"
+                android:gravity="center"
+                android:enabled="false"/>
             <TextView
                 android:id="@+id/powderwaste_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/powderweightatEnd_textView"
+                android:layout_below="@+id/powderused_textView"
                 android:layout_marginTop="20dp"
                 android:text="Powder Waste:"
                 android:textSize="18sp"

@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -136,6 +137,7 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
                         fragmentTransaction.commit();
                     }
                 }
+                Toast.makeText(getContext(), "Image selected : " + imageView.isSelected(),Toast.LENGTH_LONG).show();
 
             }
         });

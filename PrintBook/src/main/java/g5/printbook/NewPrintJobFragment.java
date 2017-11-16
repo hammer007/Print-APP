@@ -3,9 +3,12 @@ package g5.printbook;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,10 +48,10 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
     Insert insert;
     String slm_id;
     Button printingSave_Button, preprintingSave_Button, submit_Button, preprinting_expand_button, printing_expand_button, posprinting_expand_button, postprintingSave_Button;
-    EditText projectID_editText, partnumber_editText, numberofparts_editText, printingparameters_editText, comment_editText;
+    EditText projectID_editText, partnumber_editText, buildId_editText, numberofparts_editText, printingparameters_editText, comment_editText;
     EditText slmid_editText, starttime_editText, endtime_editText, date_editText, operator_editText, agingComment_editText;
     EditText typeofmachine_editText, powerweight_editText, powerweightatEnd_editText, powderwaste_editText, material_editText;
-    EditText buildplatform_editText, printTune_editText, powderCondition_editText, reused_times_editText, agingNumberofCycles_editText;
+    EditText buildplatform_editText, printTune_editText, powderused_editText, reused_times_editText, agingNumberofCycles_editText;
     EditText numberofLayers_editText, dpcFactor_editText, minExposureTime_editText, printingComments_editText, hardeningComment_editText;
     EditText postID_editText, urlphoto_editText, WEDMcomments_editText, blastingType_editText, blastingTime_editText, hardeningTime_editText;
     EditText blastingComment_editText, stressTemp_editText, stressTime_editText, stressComment_editText, hardeningTemp_editText;
@@ -62,7 +65,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
     TextView projectID_Text, partnumber_Text, numberofparts_Text, printingparameters_Text, comment_Text, if_textView, solutionTreatmentTemp_Text;
     TextView slmid_Text, starttime_Text, endtime_Text, date_Text, operator_Text, typeofmachine_Text, powerweight_Text;
     TextView powerweightatEnd_Text, powderwaste_Text,material_Text, buildplatform_Text, printTune_Text, powderCondition_Text, numberofLayers_Text;
-    TextView dpcFactor_Text, minExposureTime_Text, printingComments_Text;
+    TextView dpcFactor_Text, minExposureTime_Text, printingComments_Text, buildId_textView, powderused_textView;
     Spinner spinner, supportremovalSpinner, WEDMSpinner, blastingSpinner, shieldingSpinner;
     boolean expanded_preprinting = false, expanded_printing = false, expanded_posprinting = false;
 
@@ -91,26 +94,24 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         submit_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(TextUtils.isEmpty(projectID_editText.getText().toString())) projectID_editText.setError( "Id is Required!" );
-                else {
-                    int success = createProject();
-                    int success_pre_printing = -1;
-                    int success_printing = -1;
-                    if(success == 1) {
-                        success_pre_printing = insert_to_pre_printing();
-                        if(success_pre_printing == 1){
-                            success_printing = insert_to_printing();
-                            Toast.makeText(getContext(), "Am here" , Toast.LENGTH_LONG);
-                            if(success_printing == 1) Toast.makeText(getContext(), "SUCCESS; THE PROJECT HAS BEEN INSERTED", Toast.LENGTH_LONG);
-                            else Toast.makeText(getContext(), "SOME PROBLEM WHEN INSERTING TO PRINTING TABLE", Toast.LENGTH_LONG);
-                        }else Toast.makeText(getContext(), "SOME PROBLEM INSERTING TO PRE PRINTING, PRE PRINTING TABLE REJECTING", Toast.LENGTH_LONG);
-                    }
-                    else Toast.makeText(getContext(), "SOME PROBLEM WITH PROJECT CREATION, PROJECT TABLE REJECTING", Toast.LENGTH_LONG);
-                    success = -1;
-                    success_pre_printing = -1;
-                    success_printing = -1;
+                int success = createProject();
+                int success_pre_printing = -1, success_printing = -1, success_postprinting = -1;
+                success_pre_printing = insert_to_pre_printing();
+                success_printing = insert_to_printing();
+                success_postprinting = insert_to_postprinting();
+                if(success == 1 & success_postprinting == 1 & success_pre_printing ==1 & success_printing ==1){
+                    Toast.makeText(getContext(), "SUCCESSFUL", Toast.LENGTH_LONG).show();
                 }
+                else if(success != 1 & success_postprinting != 1 & success_pre_printing !=1 & success_printing !=1){
+                    Toast.makeText(getContext(), "Nothing was Successful", Toast.LENGTH_LONG).show();
+                }
+                else if(success != 1) Toast.makeText(getContext(), "Insertion to Project was Successful", Toast.LENGTH_LONG).show();
+                else if(success_postprinting != 1) Toast.makeText(getContext(), "Insertion to Post printing was Successful", Toast.LENGTH_LONG).show();
+                else if(success_pre_printing != 1) Toast.makeText(getContext(), "Insertion to Pre printing was Successful", Toast.LENGTH_LONG).show();
+                else if(success_printing != 1) Toast.makeText(getContext(), "Insertion to Printing was Successful", Toast.LENGTH_LONG).show();
 
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                startActivity(intent);
             }
         });
         preprinting_expand_button.setOnClickListener(new View.OnClickListener() {
@@ -156,26 +157,10 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
 
             }
         });
-        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                String myFormat = "yyyy/MM/dd"; //In which you need put here
-                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
-                date_editText.setText(sdf.format(myCalendar.getTime()));
-            }
-
-        };
         date_editText.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 //To show current date in the datepicker
                 Calendar mcurrentDate = Calendar.getInstance();
                 int mYear = mcurrentDate.get(Calendar.YEAR);
@@ -186,7 +171,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
                 mDatePicker = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
                     public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
                         selectedmonth = selectedmonth + 1;
-                        date_editText.setText("" + selectedday + "/" + selectedmonth + "/" + selectedyear);
+                        date_editText.setText("" + selectedyear + "/" + selectedmonth + "/" + selectedday);
                     }
                 }, mYear, mMonth, mDay);
                 mDatePicker.setTitle("Select Date");
@@ -205,6 +190,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                         starttime_editText.setText( selectedHour + ":" + selectedMinute);
+                        Log.d(TAG, "START TIME 2" + starttime_editText.getText().toString());
                     }
                 }, hour, minute, true);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time");
@@ -231,32 +217,115 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
 
             }
         });
+        powderwaste_editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!(TextUtils.isEmpty(powerweight_editText.getText().toString()) || TextUtils.isEmpty(powerweightatEnd_editText.getText().toString())))
+                {
+                    powderused_editText.setText( "" + (Integer.parseInt(powerweight_editText.getText().toString()) - Integer.parseInt(powerweightatEnd_editText.getText().toString())));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(!(TextUtils.isEmpty(powerweight_editText.getText().toString()) || TextUtils.isEmpty(powerweightatEnd_editText.getText().toString())))
+                {
+                    powderused_editText.setText( "" + (Integer.parseInt(powerweight_editText.getText().toString()) - Integer.parseInt(powerweightatEnd_editText.getText().toString())));
+                }
+            }
+        });
 
         return view;
 
     }
+
+    private int insert_to_postprinting() {
+        String blastingTime = blastingTime_editText.getText().toString();
+        if(TextUtils.isEmpty(blastingTime)) blastingTime = "null";
+        int success = -1;
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        //AUTO INCREMENT params.add(new BasicNameValuePair(config.PRINTING_printing_id, 2 + ""));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_slm_id, slmid_editText.getText().toString()));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_support_removal, supportremovalSpinner.getSelectedItem().toString()));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_wedm, WEDMSpinner.getSelectedItem().toString()));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_wedm_comment, WEDMcomments_editText.getText().toString()));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_blasting, blastingSpinner.getSelectedItem().toString()));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_blasting_time, blastingTime));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_blasting_type, blastingType_editText.getText().toString()));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_blasting_comment, blastingComment_editText.getText().toString()));
+        insert = new Insert(params, config.TAG_INSERT_POSTPRINTING);
+        try {
+            success = insert.execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return success;
+    }
     private int insert_to_printing() {
+        String starttime = starttime_editText.getText().toString();
+        String endtime = endtime_editText.getText().toString();
+        String date = date_editText.getText().toString();
+        String powerweight = powerweight_editText.getText().toString();
+        String powderatend = powerweightatEnd_editText.getText().toString();
+        String powderused=null;
+        String powderwaste = powderwaste_editText.getText().toString();
+        String buildplatform = buildplatform_editText.getText().toString();
+        String printTime = printTune_editText.getText().toString();
+        String reused_times = reused_times_editText.getText().toString();
+        String numberofLayers = numberofLayers_editText.getText().toString();
+        String dpcFactor = dpcFactor_editText.getText().toString();
+        String minExposureTime = minExposureTime_editText.getText().toString();
+        if(TextUtils.isEmpty(starttime)) starttime = "null";
+        if(TextUtils.isEmpty(endtime)) endtime = "null";
+        if(TextUtils.isEmpty(date)) date = "null";
+        if(!(TextUtils.isEmpty(powerweight) || TextUtils.isEmpty(powderatend)))
+        {
+            powderused = "" + (Integer.parseInt(powerweight_editText.getText().toString()) - Integer.parseInt(powerweightatEnd_editText.getText().toString()));
+        }
+        if(TextUtils.isEmpty(powerweight))
+        {
+            powerweight = "null";
+            powderused = "null";
+        }
+        if(TextUtils.isEmpty(powderatend)){
+            powderatend = "null";
+            powderused = "null";
+        }
+        if(TextUtils.isEmpty(powderwaste)) powderwaste = "null";
+        if(TextUtils.isEmpty(buildplatform)) buildplatform = "null";
+        if(TextUtils.isEmpty(printTime)) printTime = "null";
+        if(TextUtils.isEmpty(reused_times)) reused_times = "null";
+        if(TextUtils.isEmpty(numberofLayers)) numberofLayers = "null";
+        if(TextUtils.isEmpty(dpcFactor)) dpcFactor = "null";
+        if(TextUtils.isEmpty(minExposureTime)) minExposureTime = "null";
         int success = -1;
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         //AUTO INCREMENT params.add(new BasicNameValuePair(config.PRINTING_printing_id, 2 + ""));
         params.add(new BasicNameValuePair(config.PRINTING_slm_id, slmid_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PRINTING_start_time, starttime_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PRINTING_end_time, endtime_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PRINTING_date, date_editText.getText().toString()));
+        params.add(new BasicNameValuePair(config.PRINTING_start_time, starttime));
+        params.add(new BasicNameValuePair(config.PRINTING_end_time, endtime));
+        params.add(new BasicNameValuePair(config.PRINTING_date, date));
         params.add(new BasicNameValuePair(config.PRINTING_operator, operator_editText.getText().toString()));
         params.add(new BasicNameValuePair(config.PRINTING_machine_type, typeofmachine_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PRINTING_powder_weight_start, powerweight_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PRINTING_powder_weight_end, powerweightatEnd_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PRINTING_powder_used, ((Integer.parseInt(powerweight_editText.getText().toString()) - Integer.parseInt(powerweightatEnd_editText.getText().toString())) + "")));
-        params.add(new BasicNameValuePair(config.PRINTING_powder_waste_weight, powderwaste_editText.getText().toString()));
+        params.add(new BasicNameValuePair(config.PRINTING_powder_weight_start, powerweight));
+        params.add(new BasicNameValuePair(config.PRINTING_powder_weight_end, powderatend));
+        params.add(new BasicNameValuePair(config.PRINTING_powder_used, powderused));
+        params.add(new BasicNameValuePair(config.PRINTING_powder_waste_weight, powderwaste));
         params.add(new BasicNameValuePair(config.PRINTING_material_id, material_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PRINTING_build_platform_weight, buildplatform_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PRINTING_print_time, printTune_editText.getText().toString()));
-        //params.add(new BasicNameValuePair(config.PRINTING_powder_condition, powderCondition_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PRINTING_reused_times, reused_times_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PRINTING_number_of_layers, numberofLayers_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PRINTING_dpc_factor, dpcFactor_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PRINTING_exposure_time, minExposureTime_editText.getText().toString()));
+        params.add(new BasicNameValuePair(config.PRINTING_build_platform_weight, buildplatform));
+        params.add(new BasicNameValuePair(config.PRINTING_print_time, printTime));
+        params.add(new BasicNameValuePair(config.PRINTING_powder_condition, spinner.getSelectedItem().toString()));
+        params.add(new BasicNameValuePair(config.PRINTING_reused_times, reused_times));
+        params.add(new BasicNameValuePair(config.PRINTING_number_of_layers, numberofLayers));
+        params.add(new BasicNameValuePair(config.PRINTING_dpc_factor, dpcFactor));
+        params.add(new BasicNameValuePair(config.PRINTING_exposure_time, minExposureTime));
         params.add(new BasicNameValuePair(config.PRINTING_comments, printingComments_editText.getText().toString()));
         insert = new Insert(params, config.TAG_INSERT_PRINTING);
         try {
@@ -272,7 +341,11 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
     private int createProject() {
         int success = -1;
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair(config.PROJECT_id, projectID_editText.getText().toString()));
+        String projectId = projectID_editText.getText().toString();
+        String slm_id_project = slmid_editText.getText().toString();
+        if(projectId.isEmpty()) projectId = "null";
+        params.add(new BasicNameValuePair(config.PROJECT_number, projectId));
+        params.add(new BasicNameValuePair(config.PROJECT_slm_id, slm_id_project));
         params.add(new BasicNameValuePair(config.PROJECT_name, "dummy value"));
         insert = new Insert(params, config.TAG_CREATE_PROJECT);
         try {
@@ -286,15 +359,23 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
 
     }
     private int insert_to_pre_printing(){
+        String slm_id = slmid_editText.getText().toString();
+        String buildId = buildId_editText.getText().toString();
+        String numberofparts = numberofparts_editText.getText().toString();
+        String printingparameters = printingparameters_editText.getText().toString();
+        String comment = comment_editText.getText().toString();
+        if(TextUtils.isEmpty(buildId)) buildId = "null";
+        if(TextUtils.isEmpty(numberofparts)) numberofparts = "null";
+        if(TextUtils.isEmpty(printingparameters)) printingparameters = "null";
+        if(TextUtils.isEmpty(comment)) comment = "null";
         int success = -1;
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         int id = (int)(100*Math.random());
-        params.add(new BasicNameValuePair(config.PREPRINTING_pre_printing_id, "" + id));
-        params.add(new BasicNameValuePair(config.PREPRINTING_project_id, projectID_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PREPRINTING_build_id, projectID_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PREPRINTING_no_parts, numberofparts_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PREPRINTING_printing_parameter, printingparameters_editText.getText().toString()));
-        params.add(new BasicNameValuePair(config.PREPRINTING_comment, comment_editText.getText().toString()));
+        params.add(new BasicNameValuePair(config.PROJECT_slm_id, slm_id));
+        params.add(new BasicNameValuePair(config.PREPRINTING_build_id, buildId));
+        params.add(new BasicNameValuePair(config.PREPRINTING_no_parts, numberofparts));
+        params.add(new BasicNameValuePair(config.PREPRINTING_printing_parameter, printingparameters));
+        params.add(new BasicNameValuePair(config.PREPRINTING_comment, comment));
         Log.d(TAG, "params" + params);
         insert = new Insert(params, config.TAG_INSERT_PREPRINTING);
         try {
@@ -306,7 +387,6 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         }
         return success;
     }
-    //TODO: Insert Post-Printing fields into database
     private void initialize(View view) {
         spinner = (Spinner) view.findViewById(R.id.powderCondition_editText);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
@@ -338,15 +418,17 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         shieldingSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         shieldingSpinner.setAdapter(shieldingSpinnerAdapter);
 
-        preprinting_expand_button = (Button)view.findViewById(R.id.searched_result_preprinting_expand_button);
-        projectID_editText = (EditText)view.findViewById(R.id.searched_result_projectID_editText);
-        partnumber_editText = (EditText)view.findViewById(R.id.searched_result_partnumber_editText);
+        preprinting_expand_button = (Button)view.findViewById(R.id.preprinting_expand_button);
+        projectID_editText = (EditText)view.findViewById(R.id.projectID_editText);
+        partnumber_editText = (EditText)view.findViewById(R.id.partnumber_editText);
+        buildId_editText = (EditText)view.findViewById(R.id.buildId_editText);
+        buildId_textView = (TextView) view.findViewById(R.id.buildId_textView);
         numberofparts_editText =  (EditText)view.findViewById(R.id.numberofparts_editText);
         printingparameters_editText = (EditText)view.findViewById(R.id.printingparameters_editText);
         comment_editText = (EditText)view.findViewById(R.id.comment_editText);
 
-        projectID_Text = (TextView) view.findViewById(R.id.searched_result_projectID_textView);
-        partnumber_Text = (TextView)view.findViewById(R.id.searched_result_partnumber_textView);
+        projectID_Text = (TextView) view.findViewById(R.id.projectID_textView);
+        partnumber_Text = (TextView)view.findViewById(R.id.partnumber_textView);
         numberofparts_Text =  (TextView)view.findViewById(R.id.numberparts_textView);
         printingparameters_Text = (TextView)view.findViewById(R.id.prinringparameters_textView);
         comment_Text = (TextView)view.findViewById(R.id.coment_textView);
@@ -360,6 +442,8 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         typeofmachine_editText = (EditText)view.findViewById(R.id.typeofmachine_editText);
         powerweight_editText = (EditText)view.findViewById(R.id.powderweight_editText);
         powerweightatEnd_editText = (EditText)view.findViewById(R.id.powderweightatEnd_editText);
+        powderused_editText = (EditText)view.findViewById(R.id.powderused_editText);
+        powderused_textView = (TextView)view.findViewById(R.id.powderused_textView);
         powderwaste_editText = (EditText)view.findViewById(R.id.powderwaste_editText);
         material_editText = (EditText)view.findViewById(R.id.material_editText);
         buildplatform_editText = (EditText)view.findViewById(R.id.buildplatform_editText);
@@ -460,20 +544,31 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        switch (position) {
-            case 0:
-                reused_times_editText.setVisibility(View.GONE);
-                if_textView.setVisibility(View.GONE);
-                break;
-            case 1:
-                reused_times_editText.setVisibility(View.VISIBLE);
-                if_textView.setVisibility(View.VISIBLE);
-                break;
-            case 2:
-                reused_times_editText.setVisibility(View.GONE);
-                if_textView.setVisibility(View.GONE);
-                break;
+        Spinner spinners = (Spinner) parent;;
+        if(spinners.getId() == R.id.powderCondition_editText) {
+            switch (position) {
+                case 0:
+                    reused_times_editText.setVisibility(View.GONE);
+                    if_textView.setVisibility(View.GONE);
+                    break;
+                case 1:
+                    reused_times_editText.setVisibility(View.VISIBLE);
+                    if_textView.setVisibility(View.VISIBLE);
+                    break;
+                case 2:
+                    reused_times_editText.setVisibility(View.GONE);
+                    if_textView.setVisibility(View.GONE);
+                    break;
 
+            }
+        }
+        else if(spinners.getId() == R.id.supportRemoval_editText) {
+        }
+        else if(spinners.getId() == R.id.WEDM_editText) {
+        }
+        else if(spinners.getId() == R.id.blasting_editText) {
+        }
+        else if(spinners.getId() == R.id.shielding_editText) {
         }
     }
     @Override
@@ -484,6 +579,8 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
     private void hide_preprining(){
         projectID_editText.setVisibility(View.GONE);
         partnumber_editText.setVisibility(View.GONE);
+        buildId_textView.setVisibility(View.GONE);
+        buildId_editText.setVisibility(View.GONE);
         numberofparts_editText.setVisibility(View.GONE);
         printingparameters_editText.setVisibility(View.GONE);
         comment_editText.setVisibility(View.GONE);
@@ -498,6 +595,8 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
     private void show_preprining(){
         projectID_editText.setVisibility(View.VISIBLE);
         partnumber_editText.setVisibility(View.VISIBLE);
+        buildId_textView.setVisibility(View.VISIBLE);
+        buildId_editText.setVisibility(View.VISIBLE);
         numberofparts_editText.setVisibility(View.VISIBLE);
         printingparameters_editText.setVisibility(View.VISIBLE);
         comment_editText.setVisibility(View.VISIBLE);
@@ -518,6 +617,8 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         typeofmachine_editText.setVisibility(View.GONE);
         powerweight_editText.setVisibility(View.GONE);
         powerweightatEnd_editText.setVisibility(View.GONE);
+        powderused_editText.setVisibility(View.GONE);
+        powderused_textView.setVisibility(View.GONE);
         powderwaste_editText.setVisibility(View.GONE);
         material_editText.setVisibility(View.GONE);
         buildplatform_editText.setVisibility(View.GONE);
@@ -559,6 +660,8 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         operator_editText.setVisibility(View.VISIBLE);
         typeofmachine_editText.setVisibility(View.VISIBLE);
         powerweight_editText.setVisibility(View.VISIBLE);
+        powderused_editText.setVisibility(View.VISIBLE);
+        powderused_textView.setVisibility(View.VISIBLE);
         powerweightatEnd_editText.setVisibility(View.VISIBLE);
         powderwaste_editText.setVisibility(View.VISIBLE);
         material_editText.setVisibility(View.VISIBLE);
