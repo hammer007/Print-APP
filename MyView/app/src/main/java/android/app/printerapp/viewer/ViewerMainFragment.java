@@ -126,9 +126,6 @@ public class ViewerMainFragment extends Fragment {
     private static ScaleChangeListener mTextWatcherY;
     private static ScaleChangeListener mTextWatcherZ;
 
-    /**
-     * ****************************************************************************
-     */
     private static SlicingHandler mSlicingHandler;
     private static SidePanelHandler mSidePanelHandler;
 
@@ -139,10 +136,245 @@ public class ViewerMainFragment extends Fragment {
     private static LinearLayout mSizeText;
     private static int mCurrentAxis;
 
-    //private static Geometry.Point mPreviousOffset;
 
     //Empty constructor
     public ViewerMainFragment() {
+        /*the automatically created constructor for the class*/
+    }
+
+    public static File getmFile() {
+        return mFile;
+    }
+
+    public static void setmFile(File mFile) {
+        ViewerMainFragment.mFile = mFile;
+    }
+
+    public static ViewerSurfaceView getmSurface() {
+        return mSurface;
+    }
+
+    public static void setmSurface(ViewerSurfaceView mSurface) {
+        ViewerMainFragment.mSurface = mSurface;
+    }
+
+    public static FrameLayout getmLayout() {
+        return mLayout;
+    }
+
+    public static void setmLayout(FrameLayout mLayout) {
+        ViewerMainFragment.mLayout = mLayout;
+    }
+
+    public static ImageButton getmVisibilityModeButton() {
+        return mVisibilityModeButton;
+    }
+
+    public static void setmVisibilityModeButton(ImageButton mVisibilityModeButton) {
+        ViewerMainFragment.mVisibilityModeButton = mVisibilityModeButton;
+    }
+
+    public static SeekBar getmSeekBar() {
+        return mSeekBar;
+    }
+
+    public static void setmSeekBar(SeekBar mSeekBar) {
+        ViewerMainFragment.mSeekBar = mSeekBar;
+    }
+
+    public static List<DataStorage> getmDataList() {
+        return mDataList;
+    }
+
+    public static void setmDataList(List<DataStorage> mDataList) {
+        ViewerMainFragment.mDataList = mDataList;
+    }
+
+    public static ProgressBar getmProgress() {
+        return mProgress;
+    }
+
+    public static void setmProgress(ProgressBar mProgress) {
+        ViewerMainFragment.mProgress = mProgress;
+    }
+
+    public static Context getmContext() {
+        return mContext;
+    }
+
+    public static void setmContext(Context mContext) {
+        ViewerMainFragment.mContext = mContext;
+    }
+
+    public static View getmRootView() {
+        return mRootView;
+    }
+
+    public static void setmRootView(View mRootView) {
+        ViewerMainFragment.mRootView = mRootView;
+    }
+
+    public static LinearLayout getmStatusBottomBar() {
+        return mStatusBottomBar;
+    }
+
+    public static void setmStatusBottomBar(LinearLayout mStatusBottomBar) {
+        ViewerMainFragment.mStatusBottomBar = mStatusBottomBar;
+    }
+
+    public static FrameLayout getmBottomBar() {
+        return mBottomBar;
+    }
+
+    public static void setmBottomBar(FrameLayout mBottomBar) {
+        ViewerMainFragment.mBottomBar = mBottomBar;
+    }
+
+    public static LinearLayout getmRotationLayout() {
+        return mRotationLayout;
+    }
+
+    public static void setmRotationLayout(LinearLayout mRotationLayout) {
+        ViewerMainFragment.mRotationLayout = mRotationLayout;
+    }
+
+    public static LinearLayout getmScaleLayout() {
+        return mScaleLayout;
+    }
+
+    public static void setmScaleLayout(LinearLayout mScaleLayout) {
+        ViewerMainFragment.mScaleLayout = mScaleLayout;
+    }
+
+    public static CustomEditableSlider getmRotationSlider() {
+        return mRotationSlider;
+    }
+
+    public static void setmRotationSlider(CustomEditableSlider mRotationSlider) {
+        ViewerMainFragment.mRotationSlider = mRotationSlider;
+    }
+
+    public static ImageView getmActionImage() {
+        return mActionImage;
+    }
+
+    public static void setmActionImage(ImageView mActionImage) {
+        ViewerMainFragment.mActionImage = mActionImage;
+    }
+
+    public static EditText getmScaleEditX() {
+        return mScaleEditX;
+    }
+
+    public static void setmScaleEditX(EditText mScaleEditX) {
+        ViewerMainFragment.mScaleEditX = mScaleEditX;
+    }
+
+    public static EditText getmScaleEditY() {
+        return mScaleEditY;
+    }
+
+    public static void setmScaleEditY(EditText mScaleEditY) {
+        ViewerMainFragment.mScaleEditY = mScaleEditY;
+    }
+
+    public static EditText getmScaleEditZ() {
+        return mScaleEditZ;
+    }
+
+    public static void setmScaleEditZ(EditText mScaleEditZ) {
+        ViewerMainFragment.mScaleEditZ = mScaleEditZ;
+    }
+
+    public static ImageButton getmUniformScale() {
+        return mUniformScale;
+    }
+
+    public static void setmUniformScale(ImageButton mUniformScale) {
+        ViewerMainFragment.mUniformScale = mUniformScale;
+    }
+
+    public static ScaleChangeListener getmTextWatcherX() {
+        return mTextWatcherX;
+    }
+
+    public static void setmTextWatcherX(ScaleChangeListener mTextWatcherX) {
+        ViewerMainFragment.mTextWatcherX = mTextWatcherX;
+    }
+
+    public static ScaleChangeListener getmTextWatcherY() {
+        return mTextWatcherY;
+    }
+
+    public static void setmTextWatcherY(ScaleChangeListener mTextWatcherY) {
+        ViewerMainFragment.mTextWatcherY = mTextWatcherY;
+    }
+
+    public static ScaleChangeListener getmTextWatcherZ() {
+        return mTextWatcherZ;
+    }
+
+    public static void setmTextWatcherZ(ScaleChangeListener mTextWatcherZ) {
+        ViewerMainFragment.mTextWatcherZ = mTextWatcherZ;
+    }
+
+    /**
+     * ****************************************************************************
+     */
+    public static SlicingHandler getmSlicingHandler() {
+        return mSlicingHandler;
+    }
+
+    public static void setmSlicingHandler(SlicingHandler mSlicingHandler) {
+        ViewerMainFragment.mSlicingHandler = mSlicingHandler;
+    }
+
+    public static SidePanelHandler getmSidePanelHandler() {
+        return mSidePanelHandler;
+    }
+
+    public static void setmSidePanelHandler(SidePanelHandler mSidePanelHandler) {
+        ViewerMainFragment.mSidePanelHandler = mSidePanelHandler;
+    }
+
+    public static int[] getmCurrentPlate() {
+        return mCurrentPlate;
+    }
+
+    public static void setmCurrentPlate(int[] mCurrentPlate) {
+        ViewerMainFragment.mCurrentPlate = mCurrentPlate;
+    }
+
+    public static LinearLayout getmSizeText() {
+        return mSizeText;
+    }
+
+    public static void setmSizeText(LinearLayout mSizeText) {
+        ViewerMainFragment.mSizeText = mSizeText;
+    }
+
+    public static int getmCurrentAxis() {
+        return mCurrentAxis;
+    }
+
+    public static void setmCurrentAxis(int mCurrentAxis) {
+        ViewerMainFragment.mCurrentAxis = mCurrentAxis;
+    }
+
+    public static PopupWindow getmActionModePopupWindow() {
+        return mActionModePopupWindow;
+    }
+
+    public static void setmActionModePopupWindow(PopupWindow mActionModePopupWindow) {
+        ViewerMainFragment.mActionModePopupWindow = mActionModePopupWindow;
+    }
+
+    public static PopupWindow getmCurrentActionPopupWindow() {
+        return mCurrentActionPopupWindow;
+    }
+
+    public static void setmCurrentActionPopupWindow(PopupWindow mCurrentActionPopupWindow) {
+        ViewerMainFragment.mCurrentActionPopupWindow = mCurrentActionPopupWindow;
     }
 
     @Override
@@ -152,7 +384,7 @@ public class ViewerMainFragment extends Fragment {
         //Retain instance to keep the Fragment from destroying itself
         setRetainInstance(true);
 
-        mSlicingHandler = new SlicingHandler(getActivity());
+        setmSlicingHandler(new SlicingHandler(getActivity()));
     }
 
 
@@ -160,7 +392,7 @@ public class ViewerMainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //Reference to View
-        mRootView = null;
+        setmRootView(null);
 
         //If is not new
         if (savedInstanceState == null) {
@@ -169,14 +401,14 @@ public class ViewerMainFragment extends Fragment {
             setHasOptionsMenu(true);
 
             //Inflate the fragment
-            mRootView = inflater.inflate(R.layout.print_panel_main,
-                    container, false);
+            setmRootView(inflater.inflate(R.layout.print_panel_main,
+                    container, false));
 
-            mContext = getActivity();
+            setmContext(getActivity());
 
 
             //Register receiver
-            mContext.registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+            getmContext().registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 
             initUIElements();
 
@@ -184,43 +416,43 @@ public class ViewerMainFragment extends Fragment {
             getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
             //Init slicing elements
-            mSidePanelHandler = new SidePanelHandler(mSlicingHandler, getActivity(), mRootView);
-            mCurrentPlate = new int[]{WitboxFaces.WITBOX_LONG, WitboxFaces.WITBOX_WITDH, WitboxFaces.WITBOX_HEIGHT};
+            setmSidePanelHandler(new SidePanelHandler(getmSlicingHandler(), getActivity(), getmRootView()));
+            setmCurrentPlate(new int[]{WitboxFaces.WITBOX_LONG, WitboxFaces.WITBOX_WITDH, WitboxFaces.WITBOX_HEIGHT});
 
-            mSurface = new ViewerSurfaceView(mContext, mDataList, NORMAL, DONT_SNAPSHOT, mSlicingHandler);
+            setmSurface(new ViewerSurfaceView(getmContext(), getmDataList(), NORMAL, DONT_SNAPSHOT, getmSlicingHandler()));
             draw();
 
             //Hide the action bar when editing the scale of the model
-            mRootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            getmRootView().getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
 
                     Rect r = new Rect();
-                    mRootView.getWindowVisibleDisplayFrame(r);
+                    getmRootView().getWindowVisibleDisplayFrame(r);
 
-                    if (mSurface.getEditionMode() == ViewerSurfaceView.SCALED_EDITION_MODE){
+                    if (getmSurface().getEditionMode() == ViewerSurfaceView.SCALED_EDITION_MODE){
 
                         int[] location = new int[2];
-                        int heightDiff = mRootView.getRootView().getHeight() - (r.bottom - r.top);
+                        int heightDiff = getmRootView().getRootView().getHeight() - (r.bottom - r.top);
 
                         if (heightDiff > 100) { // if more than 100 pixels, its probably a keyboard...
 
                             if (!isKeyboardShown) {
                                 isKeyboardShown = true;
-                                mActionModePopupWindow.getContentView().getLocationInWindow(location);
+                                getmActionModePopupWindow().getContentView().getLocationInWindow(location);
 
                                 if (Build.VERSION.SDK_INT >= 19)
-                                    mActionModePopupWindow.update(location[0], location[1] - MENU_HIDE_OFFSET_SMALL);
-                                else  mActionModePopupWindow.update(location[0], location[1] + MENU_HIDE_OFFSET_BIG);
+                                    getmActionModePopupWindow().update(location[0], location[1] - MENU_HIDE_OFFSET_SMALL);
+                                else  getmActionModePopupWindow().update(location[0], location[1] + MENU_HIDE_OFFSET_BIG);
                             }
                         } else {
                             if (isKeyboardShown) {
                                 isKeyboardShown = false;
-                                mActionModePopupWindow.getContentView().getLocationInWindow(location);
+                                getmActionModePopupWindow().getContentView().getLocationInWindow(location);
 
                                 if (Build.VERSION.SDK_INT >= 19)
-                                    mActionModePopupWindow.update(location[0], location[1] + MENU_HIDE_OFFSET_SMALL);
-                                else  mActionModePopupWindow.update(location[0], location[1] - MENU_HIDE_OFFSET_BIG);
+                                    getmActionModePopupWindow().update(location[0], location[1] + MENU_HIDE_OFFSET_SMALL);
+                                else  getmActionModePopupWindow().update(location[0], location[1] - MENU_HIDE_OFFSET_BIG);
 
                             }
 
@@ -231,7 +463,7 @@ public class ViewerMainFragment extends Fragment {
             });
         }
 
-        return mRootView;
+        return getmRootView();
 
     }
 
@@ -240,12 +472,12 @@ public class ViewerMainFragment extends Fragment {
 
         //Crashes on printview
         try {
-            mDataList.remove(mDataList.size() - 1);
-            mSurface.requestRender();
+            getmDataList().remove(getmDataList().size() - 1);
+            getmSurface().requestRender();
 
             mCurrentViewMode = NORMAL;
-            mSurface.configViewMode(mCurrentViewMode);
-            mFile = new File(mSlicingHandler.getLastReference());
+            getmSurface().configViewMode(mCurrentViewMode);
+            setmFile(new File(getmSlicingHandler().getLastReference()));
 
         } catch (Exception e) {
 
@@ -274,17 +506,17 @@ public class ViewerMainFragment extends Fragment {
         });*/
 
         //Set elements to handle the model
-        mSeekBar = (SeekBar) mRootView.findViewById(R.id.barLayer);
+        setmSeekBar((SeekBar) getmRootView().findViewById(R.id.barLayer));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
-            mSeekBar.getThumb().mutate().setAlpha(0);
-        mSeekBar.setVisibility(View.INVISIBLE);
+            getmSeekBar().getThumb().mutate().setAlpha(0);
+        getmSeekBar().setVisibility(View.INVISIBLE);
 
         //Undo button bar
 
-        mLayout = (FrameLayout) mRootView.findViewById(R.id.viewer_container_framelayout);
+        setmLayout((FrameLayout) getmRootView().findViewById(R.id.viewer_container_framelayout));
 
-        mVisibilityModeButton = (ImageButton) mRootView.findViewById(R.id.visibility_button);
-        mVisibilityModeButton.setOnClickListener(new OnClickListener() {
+        setmVisibilityModeButton((ImageButton) getmRootView().findViewById(R.id.visibility_button));
+        getmVisibilityModeButton().setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -293,7 +525,7 @@ public class ViewerMainFragment extends Fragment {
             }
         });
 
-        mSeekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+        getmSeekBar().setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
@@ -305,8 +537,8 @@ public class ViewerMainFragment extends Fragment {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                mDataList.get(0).setActualLayer(progress);
-                mSurface.requestRender();
+                getmDataList().get(0).setActualLayer(progress);
+                getmSurface().requestRender();
             }
         });
 
@@ -314,18 +546,18 @@ public class ViewerMainFragment extends Fragment {
         /*****************************
          * EXTRA
          *****************************/
-        mProgress = (ProgressBar) mRootView.findViewById(R.id.progress_bar);
-        mProgress.setVisibility(View.GONE);
-        mSizeText = (LinearLayout) mRootView.findViewById(R.id.axis_info_layout);
-        mActionImage = (ImageView) mRootView.findViewById(R.id.print_panel_bar_action_image);
+        setmProgress((ProgressBar) getmRootView().findViewById(R.id.progress_bar));
+        getmProgress().setVisibility(View.GONE);
+        setmSizeText((LinearLayout) getmRootView().findViewById(R.id.axis_info_layout));
+        setmActionImage((ImageView) getmRootView().findViewById(R.id.print_panel_bar_action_image));
 
 
-        mRotationSlider = (CustomEditableSlider) mRootView.findViewById(R.id.print_panel_slider);
-        mRotationSlider.setValue(12);
-        mRotationSlider.setShownValue(0);
-        mRotationSlider.setMax(24);
-        mRotationSlider.setShowNumberIndicator(true);
-        mRotationSlider.setOnTouchListener(new View.OnTouchListener() {
+        setmRotationSlider((CustomEditableSlider) getmRootView().findViewById(R.id.print_panel_slider));
+        getmRotationSlider().setValue(12);
+        getmRotationSlider().setShownValue(0);
+        getmRotationSlider().setMax(24);
+        getmRotationSlider().setShowNumberIndicator(true);
+        getmRotationSlider().setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
 
@@ -337,8 +569,8 @@ public class ViewerMainFragment extends Fragment {
 
                     case MotionEvent.ACTION_UP:
 
-                        if (mSurface.getEditionMode() == ViewerSurfaceView.ROTATION_EDITION_MODE)
-                            mSurface.refreshRotatedObject();
+                        if (getmSurface().getEditionMode() == ViewerSurfaceView.ROTATION_EDITION_MODE)
+                            getmSurface().refreshRotatedObject();
 
                         break;
                 }
@@ -347,7 +579,7 @@ public class ViewerMainFragment extends Fragment {
                 return false;
             }
         });
-        mRotationSlider.setOnValueChangedListener(new CustomEditableSlider.OnValueChangedListener() {
+        getmRotationSlider().setOnValueChangedListener(new CustomEditableSlider.OnValueChangedListener() {
 
             boolean lock = false;
 
@@ -358,23 +590,23 @@ public class ViewerMainFragment extends Fragment {
                 //Calculation on a 12 point seekbar
                 float newAngle = (i - 12) * POSITIVE_ANGLE;
 
-                mRotationSlider.setShownValue((int)newAngle);
+                getmRotationSlider().setShownValue((int)newAngle);
 
                 try {
 
 
                     if (!lock) {
 
-                        switch (mCurrentAxis) {
+                        switch (getmCurrentAxis()) {
 
                             case 0:
-                                mSurface.rotateAngleAxisX(newAngle);
+                                getmSurface().rotateAngleAxisX(newAngle);
                                 break;
                             case 1:
-                                mSurface.rotateAngleAxisY(newAngle);
+                                getmSurface().rotateAngleAxisY(newAngle);
                                 break;
                             case 2:
-                                mSurface.rotateAngleAxisZ(newAngle);
+                                getmSurface().rotateAngleAxisZ(newAngle);
                                 break;
                             default:
                                 return;
@@ -383,7 +615,7 @@ public class ViewerMainFragment extends Fragment {
 
                     }
 
-                    mSurface.requestRender();
+                    getmSurface().requestRender();
 
 
                 } catch (ArrayIndexOutOfBoundsException e) {
@@ -395,41 +627,41 @@ public class ViewerMainFragment extends Fragment {
             }
         });
 
-        mStatusBottomBar = (LinearLayout) mRootView.findViewById(R.id.model_status_bottom_bar);
-        mRotationLayout = (LinearLayout) mRootView.findViewById(R.id.model_button_rotate_bar_linearlayout);
-        mScaleLayout  = (LinearLayout) mRootView.findViewById(R.id.model_button_scale_bar_linearlayout);
+        setmStatusBottomBar((LinearLayout) getmRootView().findViewById(R.id.model_status_bottom_bar));
+        setmRotationLayout((LinearLayout) getmRootView().findViewById(R.id.model_button_rotate_bar_linearlayout));
+        setmScaleLayout((LinearLayout) getmRootView().findViewById(R.id.model_button_scale_bar_linearlayout));
 
-        mTextWatcherX = new ScaleChangeListener(0);
-        mTextWatcherY = new ScaleChangeListener(1);
-        mTextWatcherZ = new ScaleChangeListener(2);
+        setmTextWatcherX(new ScaleChangeListener(0));
+        setmTextWatcherY(new ScaleChangeListener(1));
+        setmTextWatcherZ(new ScaleChangeListener(2));
 
-        mScaleEditX = (EditText) mScaleLayout.findViewById(R.id.scale_bar_x_edittext);
-        mScaleEditY = (EditText) mScaleLayout.findViewById(R.id.scale_bar_y_edittext);
-        mScaleEditZ = (EditText) mScaleLayout.findViewById(R.id.scale_bar_z_edittext);
-        mUniformScale = (ImageButton) mScaleLayout.findViewById(R.id.scale_uniform_button);
-        mUniformScale.setOnClickListener(new OnClickListener() {
+        setmScaleEditX((EditText) getmScaleLayout().findViewById(R.id.scale_bar_x_edittext));
+        setmScaleEditY((EditText) getmScaleLayout().findViewById(R.id.scale_bar_y_edittext));
+        setmScaleEditZ((EditText) getmScaleLayout().findViewById(R.id.scale_bar_z_edittext));
+        setmUniformScale((ImageButton) getmScaleLayout().findViewById(R.id.scale_uniform_button));
+        getmUniformScale().setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (mUniformScale.isSelected()){
-                    mUniformScale.setSelected(false);
+                if (getmUniformScale().isSelected()){
+                    getmUniformScale().setSelected(false);
                 } else {
-                    mUniformScale.setSelected(true);
+                    getmUniformScale().setSelected(true);
                 }
 
 
             }
         });
-        mUniformScale.setSelected(true);
+        getmUniformScale().setSelected(true);
 
-        mScaleEditX.addTextChangedListener(mTextWatcherX);
-        mScaleEditY.addTextChangedListener(mTextWatcherY);
-        mScaleEditZ.addTextChangedListener(mTextWatcherZ);
+        getmScaleEditX().addTextChangedListener(getmTextWatcherX());
+        getmScaleEditY().addTextChangedListener(getmTextWatcherY());
+        getmScaleEditZ().addTextChangedListener(getmTextWatcherZ());
 
-        mStatusBottomBar.setVisibility(View.VISIBLE);
-        mBottomBar = (FrameLayout) mRootView.findViewById(R.id.bottom_bar);
-        mBottomBar.setVisibility(View.INVISIBLE);
-        mCurrentAxis = -1;
+        getmStatusBottomBar().setVisibility(View.VISIBLE);
+        setmBottomBar((FrameLayout) getmRootView().findViewById(R.id.bottom_bar));
+        getmBottomBar().setVisibility(View.INVISIBLE);
+        setmCurrentAxis(-1);
 
     }
 
@@ -440,31 +672,31 @@ public class ViewerMainFragment extends Fragment {
      */
     public static void changeCurrentAxis(int currentAxis) {
 
-        mCurrentAxis = currentAxis;
+        setmCurrentAxis(currentAxis);
 
         float currentAngle = 12;
 
-        switch (mCurrentAxis) {
+        switch (getmCurrentAxis()) {
 
             case 0:
-                mRotationSlider.setBackgroundColor(Color.GREEN);
+                getmRotationSlider().setBackgroundColor(Color.GREEN);
                 break;
 
             case 1:
-                mRotationSlider.setBackgroundColor(Color.RED);
+                getmRotationSlider().setBackgroundColor(Color.RED);
                 break;
             case 2:
-                mRotationSlider.setBackgroundColor(Color.BLUE);
+                getmRotationSlider().setBackgroundColor(Color.BLUE);
                 break;
             default:
-                mRotationSlider.setBackgroundColor(Color.TRANSPARENT);
+                getmRotationSlider().setBackgroundColor(Color.TRANSPARENT);
                 break;
 
         }
 
-        mSurface.setRendererAxis(mCurrentAxis);
+        getmSurface().setRendererAxis(getmCurrentAxis());
 
-        mRotationSlider.setValue((int) currentAngle);
+        getmRotationSlider().setValue((int) currentAngle);
 
     }
 
@@ -474,15 +706,15 @@ public class ViewerMainFragment extends Fragment {
      */
 
     public static void initSeekBar(int max) {
-        mSeekBar.setMax(max);
-        mSeekBar.setProgress(max);
+        getmSeekBar().setMax(max);
+        getmSeekBar().setProgress(max);
     }
 
     public static void configureProgressState(int v) {
-        if (v == View.GONE) mSurface.requestRender();
-        else if (v == View.VISIBLE) mProgress.bringToFront();
+        if (v == View.GONE) getmSurface().requestRender();
+        else if (v == View.VISIBLE) getmProgress().bringToFront();
 
-        mProgress.setVisibility(v);
+        getmProgress().setVisibility(v);
     }
 
 
@@ -538,9 +770,9 @@ public class ViewerMainFragment extends Fragment {
     public void optionRestoreView() {
 
 
-        if (mDataList.size() > 0) {
-            String pathStl = mDataList.get(0).getPathFile();
-            mDataList.clear();
+        if (getmDataList().size() > 0) {
+            String pathStl = getmDataList().get(0).getPathFile();
+            getmDataList().clear();
 
             openFile(pathStl);
         }
@@ -556,15 +788,15 @@ public class ViewerMainFragment extends Fragment {
         //Delete slicing reference
         //DatabaseController.handlePreference("Slicing", "Last", null, false);
 
-        mDataList.clear();
-        mFile = null;
+        getmDataList().clear();
+        setmFile(null);
         
-        if (mSlicingHandler!=null){
+        if (getmSlicingHandler() !=null){
 
-            mSlicingHandler.setOriginalProject(null);
-            mSlicingHandler.setLastReference(null);
-            mSeekBar.setVisibility(View.INVISIBLE);
-            mSurface.requestRender();
+            getmSlicingHandler().setOriginalProject(null);
+            getmSlicingHandler().setLastReference(null);
+            getmSeekBar().setVisibility(View.INVISIBLE);
+            getmSurface().requestRender();
             showProgressBar(0,0);
         }
 
@@ -580,8 +812,8 @@ public class ViewerMainFragment extends Fragment {
 
         if (LibraryController.hasExtension(0, filePath)) {
 
-            if (!StlFile.checkFileSize(new File(filePath), mContext)) {
-                new MaterialDialog.Builder(mContext)
+            if (!StlFile.checkFileSize(new File(filePath), getmContext())) {
+                new MaterialDialog.Builder(getmContext())
                         .title(R.string.warning)
                         .content(R.string.viewer_file_size)
                         .negativeText(R.string.cancel)
@@ -603,7 +835,7 @@ public class ViewerMainFragment extends Fragment {
             }
         } else if (LibraryController.hasExtension(1, filePath)) {
 
-            new MaterialDialog.Builder(mContext)
+            new MaterialDialog.Builder(getmContext())
                     .title(R.string.warning)
                     .content(R.string.viewer_open_gcode_dialog)
                     .negativeText(R.string.cancel)
@@ -627,7 +859,7 @@ public class ViewerMainFragment extends Fragment {
     //Select the last object added
     public static void doPress(){
 
-        mSurface.doPress(mDataList.size() - 1);
+        getmSurface().doPress(getmDataList().size() - 1);
 
     }
 
@@ -639,35 +871,35 @@ public class ViewerMainFragment extends Fragment {
 
             data = new DataStorage();
 
-            mVisibilityModeButton.setVisibility(View.VISIBLE);
-            mFile = new File(filePath);
-            StlFile.openStlFile(mContext, mFile, data, DONT_SNAPSHOT);
+            getmVisibilityModeButton().setVisibility(View.VISIBLE);
+            setmFile(new File(filePath));
+            StlFile.openStlFile(getmContext(), getmFile(), data, DONT_SNAPSHOT);
             mCurrentViewMode = NORMAL;
 
         } else if (LibraryController.hasExtension(1, filePath)) {
 
             data = new DataStorage();
             if (!filePath.contains("/temp")) {
-                mVisibilityModeButton.setVisibility(View.GONE);
+                getmVisibilityModeButton().setVisibility(View.GONE);
                 optionClean();
             }
-            mFile = new File(filePath);
-            GcodeFile.openGcodeFile(mContext, mFile, data, DONT_SNAPSHOT);
+            setmFile(new File(filePath));
+            GcodeFile.openGcodeFile(getmContext(), getmFile(), data, DONT_SNAPSHOT);
             mCurrentViewMode = LAYER;
 
         }
 
-        mDataList.add(data);
+        getmDataList().add(data);
 
 
 
         //Adding original project //TODO elsewhere?
-        if (mSlicingHandler != null)
-            if (mSlicingHandler.getOriginalProject() == null){
-                mSlicingHandler.setOriginalProject(mFile.getParentFile().getParent());
+        if (getmSlicingHandler() != null)
+            if (getmSlicingHandler().getOriginalProject() == null){
+                getmSlicingHandler().setOriginalProject(getmFile().getParentFile().getParent());
             } else {
-                if (!mFile.getAbsolutePath().contains("/temp")){
-                    mSlicingHandler.setOriginalProject(mFile.getParentFile().getParent());
+                if (!getmFile().getAbsolutePath().contains("/temp")){
+                    getmSlicingHandler().setOriginalProject(getmFile().getParentFile().getParent());
                 }
             }
 
@@ -693,8 +925,8 @@ public class ViewerMainFragment extends Fragment {
         }
         //Handle TRANSPARENT, NORMAL and OVERHANG modes
         else {
-            if (mFile != null) {
-                if (!mFile.getPath().endsWith(".stl") && !mFile.getPath().endsWith(".STL")) {
+            if (getmFile() != null) {
+                if (!getmFile().getPath().endsWith(".stl") && !getmFile().getPath().endsWith(".STL")) {
 
 
                     if (openStlFile()) {
@@ -706,7 +938,7 @@ public class ViewerMainFragment extends Fragment {
                     ;
                 } else {
 
-                    mSurface.configViewMode(state);
+                    getmSurface().configViewMode(state);
                     mCurrentViewMode = state;
                 }
 
@@ -724,9 +956,9 @@ public class ViewerMainFragment extends Fragment {
 
         String pathStl;
 
-        if (mSlicingHandler.getLastReference() != null) {
+        if (getmSlicingHandler().getLastReference() != null) {
 
-            pathStl = mSlicingHandler.getLastReference();
+            pathStl = getmSlicingHandler().getLastReference();
             openFile(pathStl);
 
             return true;
@@ -735,7 +967,7 @@ public class ViewerMainFragment extends Fragment {
 
             //Here's the new stuff!
             pathStl = //LibraryController.getParentFolder().getAbsolutePath() + "/Files/" + name + "/_stl/";
-                    mFile.getParentFile().getParent() + "/_stl/";
+                    getmFile().getParentFile().getParent() + "/_stl/";
             File f = new File(pathStl);
 
             //Only when it's a project
@@ -760,30 +992,30 @@ public class ViewerMainFragment extends Fragment {
         //We have to do this here because user can cancel the opening of the file and the Print Panel would appear empty if we clear the data list.
 
         String filePath = "";
-        if (mFile != null) filePath = mFile.getAbsolutePath();
+        if (getmFile() != null) filePath = getmFile().getAbsolutePath();
 
         if (LibraryController.hasExtension(0, filePath)) {
-            if (mDataList.size() > 1) {
-                if (LibraryController.hasExtension(1, mDataList.get(mDataList.size() - 2).getPathFile())) {
-                    mDataList.remove(mDataList.size() - 2);
+            if (getmDataList().size() > 1) {
+                if (LibraryController.hasExtension(1, getmDataList().get(getmDataList().size() - 2).getPathFile())) {
+                    getmDataList().remove(getmDataList().size() - 2);
                 }
             }
-            Geometry.relocateIfOverlaps(mDataList);
-            mSeekBar.setVisibility(View.INVISIBLE);
+            Geometry.relocateIfOverlaps(getmDataList());
+            getmSeekBar().setVisibility(View.INVISIBLE);
 
         } else if (LibraryController.hasExtension(1, filePath)) {
-            if (mDataList.size() > 1)
-                while (mDataList.size() > 1) {
-                    mDataList.remove(0);
+            if (getmDataList().size() > 1)
+                while (getmDataList().size() > 1) {
+                    getmDataList().remove(0);
                 }
-            mSeekBar.setVisibility(View.VISIBLE);
+            getmSeekBar().setVisibility(View.VISIBLE);
         }
 
         //Add the view
-        mLayout.removeAllViews();
-        mLayout.addView(mSurface, 0);
-        mLayout.addView(mSeekBar, 1);
-        mLayout.addView(mSizeText, 2);
+        getmLayout().removeAllViews();
+        getmLayout().addView(getmSurface(), 0);
+        getmLayout().addView(getmSeekBar(), 1);
+        getmLayout().addView(getmSizeText(), 2);
 
 //      mLayout.addView(mUndoButtonBar, 3);
 //      mLayout.addView(mEditionLayout, 2);
@@ -793,7 +1025,7 @@ public class ViewerMainFragment extends Fragment {
      * ********************** SAVE FILE *******************************
      */
     private void saveNewProject() {
-        View createProjectDialog = LayoutInflater.from(mContext).inflate(R.layout.dialog_save_model, null);
+        View createProjectDialog = LayoutInflater.from(getmContext()).inflate(R.layout.dialog_save_model, null);
         final EditText proyectNameText = (EditText) createProjectDialog.findViewById(R.id.model_name_textview);
 
         final RadioGroup radioGroup = (RadioGroup) createProjectDialog.findViewById(R.id.save_mode_radiogroup);
@@ -817,8 +1049,8 @@ public class ViewerMainFragment extends Fragment {
 
         String dialogTitle;
 
-        if (mFile != null)
-            dialogTitle = getString(R.string.save) + " - " + mFile.getName();
+        if (getmFile() != null)
+            dialogTitle = getString(R.string.save) + " - " + getmFile().getName();
         else
             dialogTitle = getString(R.string.save);
 
@@ -840,25 +1072,25 @@ public class ViewerMainFragment extends Fragment {
 
                             case R.id.save_model_stl_checkbox:
 
-                                if (mFile != null) {
-                                    if (LibraryController.hasExtension(0, mFile.getName())) {
+                                if (getmFile() != null) {
+                                    if (LibraryController.hasExtension(0, getmFile().getName())) {
                                         if (StlFile.checkIfNameExists(proyectNameText.getText().toString()))
-                                            proyectNameText.setError(mContext.getString(R.string.proyect_name_not_available));
+                                            proyectNameText.setError(getmContext().getString(R.string.proyect_name_not_available));
                                         else {
-                                            if (StlFile.saveModel(mDataList, proyectNameText.getText().toString(), null))
+                                            if (StlFile.saveModel(getmDataList(), proyectNameText.getText().toString(), null))
                                                 dialog.dismiss();
                                             else {
-                                                Toast.makeText(mContext, R.string.error_saving_invalid_model, Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getmContext(), R.string.error_saving_invalid_model, Toast.LENGTH_SHORT).show();
                                                 dialog.dismiss();
                                             }
                                         }
                                     } else {
-                                        Toast.makeText(mContext, R.string.devices_toast_no_stl, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getmContext(), R.string.devices_toast_no_stl, Toast.LENGTH_SHORT).show();
                                         dialog.dismiss();
                                     }
                                 } else {
 
-                                    Toast.makeText(mContext, R.string.error_saving_invalid_model, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getmContext(), R.string.error_saving_invalid_model, Toast.LENGTH_SHORT).show();
                                     dialog.dismiss();
                                 }
 
@@ -873,7 +1105,7 @@ public class ViewerMainFragment extends Fragment {
                                 if (fileFrom.exists()) {
 
                                     //Get original project
-                                    final File actualFile = new File(mSlicingHandler.getOriginalProject());
+                                    final File actualFile = new File(getmSlicingHandler().getOriginalProject());
 
                                     //Save gcode
                                     File fileTo = new File(actualFile + "/_gcode/" + proyectNameText.getText().toString().replace(" ", "_") + ".gcode");
@@ -886,7 +1118,7 @@ public class ViewerMainFragment extends Fragment {
                                         e.printStackTrace();
                                     }
 
-                                    if (mFile.getName().equals(fileFrom.getName()))
+                                    if (getmFile().getName().equals(fileFrom.getName()))
                                         openFile(fileTo.getAbsolutePath());
 
                                     //if (fileFrom.delete()) {}
@@ -897,7 +1129,7 @@ public class ViewerMainFragment extends Fragment {
                                  */
                                 Intent intent = new Intent("notify");
                                 intent.putExtra("message", "Files");
-                                LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
+                                LocalBroadcastManager.getInstance(getmContext()).sendBroadcast(intent);
 
                         }else{
                             Toast.makeText(getActivity(), R.string.viewer_slice_wait, Toast.LENGTH_SHORT).show();
@@ -958,13 +1190,13 @@ public class ViewerMainFragment extends Fragment {
     //with the video grid view
     public void setSurfaceVisibility(int i) {
 
-        if (mSurface != null) {
+        if (getmSurface() != null) {
             switch (i) {
                 case 0:
-                    mSurface.setVisibility(View.GONE);
+                    getmSurface().setVisibility(View.GONE);
                     break;
                 case 1:
-                    mSurface.setVisibility(View.VISIBLE);
+                    getmSurface().setVisibility(View.VISIBLE);
                     break;
             }
         }
@@ -984,12 +1216,12 @@ public class ViewerMainFragment extends Fragment {
 
         hideCurrentActionPopUpWindow();
 
-        mSizeText.setVisibility(View.VISIBLE);
+        getmSizeText().setVisibility(View.VISIBLE);
 
-        if (mActionModePopupWindow == null) {
+        if (getmActionModePopupWindow() == null) {
 
             //Get the content view of the pop up window
-            final LinearLayout popupLayout = (LinearLayout) ((Activity) mContext).getLayoutInflater()
+            final LinearLayout popupLayout = (LinearLayout) ((Activity) getmContext()).getLayoutInflater()
                     .inflate(R.layout.item_edit_popup_menu, null);
             popupLayout.measure(0, 0);
 
@@ -1011,17 +1243,17 @@ public class ViewerMainFragment extends Fragment {
 
             //Show the pop up window in the correct position
             int[] viewerContainerCoordinates = new int[2];
-            mLayout.getLocationOnScreen(viewerContainerCoordinates);
-            int popupLayoutPadding = (int) mContext.getResources().getDimensionPixelSize(R.dimen.content_padding_normal);
+            getmLayout().getLocationOnScreen(viewerContainerCoordinates);
+            int popupLayoutPadding = (int) getmContext().getResources().getDimensionPixelSize(R.dimen.content_padding_normal);
             int popupLayoutWidth = popupLayout.getMeasuredWidth();
             int popupLayoutHeight = popupLayout.getMeasuredHeight();
-            final int popupLayoutX = viewerContainerCoordinates[0] + mLayout.getWidth() - popupLayoutWidth;
+            final int popupLayoutX = viewerContainerCoordinates[0] + getmLayout().getWidth() - popupLayoutWidth;
             final int popupLayoutY = viewerContainerCoordinates[1] + imageButtonHeight + popupLayoutPadding;
 
-            mActionModePopupWindow = (new CustomPopupWindow(popupLayout, popupLayoutWidth,
-                    popupLayoutHeight, R.style.SlideRightAnimation).getPopupWindow());
+            setmActionModePopupWindow((new CustomPopupWindow(popupLayout, popupLayoutWidth,
+                    popupLayoutHeight, R.style.SlideRightAnimation).getPopupWindow()));
 
-            mActionModePopupWindow.showAtLocation(mSurface, Gravity.NO_GRAVITY,
+            getmActionModePopupWindow().showAtLocation(getmSurface(), Gravity.NO_GRAVITY,
                     popupLayoutX, popupLayoutY);
 
         }
@@ -1031,20 +1263,20 @@ public class ViewerMainFragment extends Fragment {
      * Hide the action mode pop up window
      */
     public static void hideActionModePopUpWindow() {
-        if (mActionModePopupWindow != null) {
-            mActionModePopupWindow.dismiss();
-            mSurface.exitEditionMode();
-            mRotationLayout.setVisibility(View.GONE);
-            mScaleLayout.setVisibility(View.GONE);
-            mStatusBottomBar.setVisibility(View.VISIBLE);
-            mBottomBar.setVisibility(View.INVISIBLE);
-            mActionModePopupWindow = null;
-            mSurface.setRendererAxis(-1);
+        if (getmActionModePopupWindow() != null) {
+            getmActionModePopupWindow().dismiss();
+            getmSurface().exitEditionMode();
+            getmRotationLayout().setVisibility(View.GONE);
+            getmScaleLayout().setVisibility(View.GONE);
+            getmStatusBottomBar().setVisibility(View.VISIBLE);
+            getmBottomBar().setVisibility(View.INVISIBLE);
+            setmActionModePopupWindow(null);
+            getmSurface().setRendererAxis(-1);
         }
 
         //Hide size text
-        if (mSizeText != null)
-            if (mSizeText.getVisibility() == View.VISIBLE) mSizeText.setVisibility(View.INVISIBLE);
+        if (getmSizeText() != null)
+            if (getmSizeText().getVisibility() == View.VISIBLE) getmSizeText().setVisibility(View.INVISIBLE);
 
         //hideCurrentActionPopUpWindow();
     }
@@ -1053,17 +1285,17 @@ public class ViewerMainFragment extends Fragment {
      * Hide the current action pop up window if it is showing
      */
     public static void hideCurrentActionPopUpWindow() {
-        if (mCurrentActionPopupWindow != null) {
-            mCurrentActionPopupWindow.dismiss();
-            mCurrentActionPopupWindow = null;
+        if (getmCurrentActionPopupWindow() != null) {
+            getmCurrentActionPopupWindow().dismiss();
+            setmCurrentActionPopupWindow(null);
         }
         hideSoftKeyboard();
     }
 
     public static void hideSoftKeyboard() {
         try{
-            InputMethodManager inputMethodManager = (InputMethodManager)  mContext.getSystemService(Activity.INPUT_METHOD_SERVICE);
-            inputMethodManager.hideSoftInputFromWindow(((Activity)mContext).getCurrentFocus().getWindowToken(), 0);
+            InputMethodManager inputMethodManager = (InputMethodManager)  getmContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(((Activity) getmContext()).getCurrentFocus().getWindowToken(), 0);
         } catch (NullPointerException e){
 
         }
@@ -1077,36 +1309,36 @@ public class ViewerMainFragment extends Fragment {
      */
     public static void onActionItemSelected(final ImageButton item) {
 
-        mStatusBottomBar.setVisibility(View.VISIBLE);
-        mSurface.setRendererAxis(-1);
-        mRotationLayout.setVisibility(View.GONE);
-        mScaleLayout.setVisibility(View.GONE);
-        mBottomBar.setVisibility(View.INVISIBLE);
-        mSizeText.setVisibility(View.VISIBLE);
+        getmStatusBottomBar().setVisibility(View.VISIBLE);
+        getmSurface().setRendererAxis(-1);
+        getmRotationLayout().setVisibility(View.GONE);
+        getmScaleLayout().setVisibility(View.GONE);
+        getmBottomBar().setVisibility(View.INVISIBLE);
+        getmSizeText().setVisibility(View.VISIBLE);
 
         selectActionButton(item.getId());
 
         switch (item.getId()) {
             case R.id.move_item_button:
                 hideCurrentActionPopUpWindow();
-                mSurface.setEditionMode(ViewerSurfaceView.MOVE_EDITION_MODE);
+                getmSurface().setEditionMode(ViewerSurfaceView.MOVE_EDITION_MODE);
                 break;
             case R.id.rotate_item_button:
 
-                if (mCurrentActionPopupWindow == null) {
-                    final String[] actionButtonsValues = mContext.getResources().getStringArray(R.array.rotate_model_values);
-                    final TypedArray actionButtonsIcons = mContext.getResources().obtainTypedArray(R.array.rotate_model_icons);
+                if (getmCurrentActionPopupWindow() == null) {
+                    final String[] actionButtonsValues = getmContext().getResources().getStringArray(R.array.rotate_model_values);
+                    final TypedArray actionButtonsIcons = getmContext().getResources().obtainTypedArray(R.array.rotate_model_icons);
                     showHorizontalMenuPopUpWindow(item, actionButtonsValues, actionButtonsIcons,
                             null, new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                     changeCurrentAxis(Integer.parseInt(actionButtonsValues[position]));
-                                    mBottomBar.setVisibility(View.VISIBLE);
-                                    mRotationLayout.setVisibility(View.VISIBLE);
-                                    mSurface.setEditionMode(ViewerSurfaceView.ROTATION_EDITION_MODE);
+                                    getmBottomBar().setVisibility(View.VISIBLE);
+                                    getmRotationLayout().setVisibility(View.VISIBLE);
+                                    getmSurface().setEditionMode(ViewerSurfaceView.ROTATION_EDITION_MODE);
                                     hideCurrentActionPopUpWindow();
                                     item.setImageResource(actionButtonsIcons.getResourceId(position, -1));
-                                    mActionImage.setImageDrawable(mContext.getResources().getDrawable(actionButtonsIcons.getResourceId(position, -1)));
+                                    getmActionImage().setImageDrawable(getmContext().getResources().getDrawable(actionButtonsIcons.getResourceId(position, -1)));
                                 }
                             });
                 } else {
@@ -1115,11 +1347,11 @@ public class ViewerMainFragment extends Fragment {
                 break;
             case R.id.scale_item_button:
                 hideCurrentActionPopUpWindow();
-                mBottomBar.setVisibility(View.VISIBLE);
-                mScaleLayout.setVisibility(View.VISIBLE);
-                mSurface.setEditionMode(ViewerSurfaceView.SCALED_EDITION_MODE);
-                mActionImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_action_scale));
-                displayModelSize(mSurface.getObjectPresed());
+                getmBottomBar().setVisibility(View.VISIBLE);
+                getmScaleLayout().setVisibility(View.VISIBLE);
+                getmSurface().setEditionMode(ViewerSurfaceView.SCALED_EDITION_MODE);
+                getmActionImage().setImageDrawable(getmContext().getResources().getDrawable(R.drawable.ic_action_scale));
+                displayModelSize(getmSurface().getObjectPresed());
                 break;
                 /*case R.id.mirror:
                     mSurface.setEditionMode(ViewerSurfaceView.MIRROR_EDITION_MODE);
@@ -1133,7 +1365,7 @@ public class ViewerMainFragment extends Fragment {
                 break;
             case R.id.delete_item_button:
                 hideCurrentActionPopUpWindow();
-                mSurface.deleteObject();
+                getmSurface().deleteObject();
                 hideActionModePopUpWindow();
                 break;
         }
@@ -1148,9 +1380,9 @@ public class ViewerMainFragment extends Fragment {
      */
     public static void selectActionButton(int selectedId) {
 
-        if (mActionModePopupWindow != null) {
+        if (getmActionModePopupWindow() != null) {
             //Get the content view of the pop up window
-            final LinearLayout popupLayout = (LinearLayout) mActionModePopupWindow.getContentView();
+            final LinearLayout popupLayout = (LinearLayout) getmActionModePopupWindow().getContentView();
 
             //Set the behavior of the action buttons
             for (int i = 0; i < popupLayout.getChildCount(); i++) {
@@ -1158,9 +1390,9 @@ public class ViewerMainFragment extends Fragment {
                 if (v instanceof ImageButton) {
                     ImageButton ib = (ImageButton) v;
                     if (ib.getId() == selectedId)
-                        ib.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.oval_background_green));
+                        ib.setBackgroundDrawable(getmContext().getResources().getDrawable(R.drawable.oval_background_green));
                     else
-                        ib.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.action_button_selector_dark));
+                        ib.setBackgroundDrawable(getmContext().getResources().getDrawable(R.drawable.action_button_selector_dark));
                 }
             }
         }
@@ -1176,10 +1408,10 @@ public class ViewerMainFragment extends Fragment {
 
 
         //Show a menu with the visibility options
-        if (mCurrentActionPopupWindow == null) {
-            final String[] actionButtonsValues = mContext.getResources().getStringArray(R.array.models_visibility_values);
-            final TypedArray actionButtonsIcons = mContext.getResources().obtainTypedArray(R.array.models_visibility_icons);
-            showHorizontalMenuPopUpWindow(mVisibilityModeButton, actionButtonsValues, actionButtonsIcons,
+        if (getmCurrentActionPopupWindow() == null) {
+            final String[] actionButtonsValues = getmContext().getResources().getStringArray(R.array.models_visibility_values);
+            final TypedArray actionButtonsIcons = getmContext().getResources().obtainTypedArray(R.array.models_visibility_icons);
+            showHorizontalMenuPopUpWindow(getmVisibilityModeButton(), actionButtonsValues, actionButtonsIcons,
                     Integer.toString(mCurrentViewMode), new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -1203,8 +1435,8 @@ public class ViewerMainFragment extends Fragment {
                                                      String selectedOption,
                                                      AdapterView.OnItemClickListener onItemClickListener) {
 
-        HorizontalListView landscapeList = new HorizontalListView(mContext, null);
-        ListIconPopupWindowAdapter listAdapter = new ListIconPopupWindowAdapter(mContext, actionButtonsValues, actionButtonsIcons, selectedOption);
+        HorizontalListView landscapeList = new HorizontalListView(getmContext(), null);
+        ListIconPopupWindowAdapter listAdapter = new ListIconPopupWindowAdapter(getmContext(), actionButtonsValues, actionButtonsIcons, selectedOption);
         landscapeList.setOnItemClickListener(onItemClickListener);
         landscapeList.setAdapter(listAdapter);
 
@@ -1224,14 +1456,14 @@ public class ViewerMainFragment extends Fragment {
         //Show the pop up window in the correct position
         int[] actionButtonCoordinates = new int[2];
         currentView.getLocationOnScreen(actionButtonCoordinates);
-        int popupLayoutPadding = (int) mContext.getResources().getDimensionPixelSize(R.dimen.content_padding_normal);
+        int popupLayoutPadding = (int) getmContext().getResources().getDimensionPixelSize(R.dimen.content_padding_normal);
         final int popupLayoutX = actionButtonCoordinates[0] - popupLayoutWidth - popupLayoutPadding / 2;
         final int popupLayoutY = actionButtonCoordinates[1];
 
-        mCurrentActionPopupWindow = (new CustomPopupWindow(landscapeList, popupLayoutWidth,
-                popupLayoutHeight + popupLayoutPadding, R.style.SlideRightAnimation).getPopupWindow());
+        setmCurrentActionPopupWindow((new CustomPopupWindow(landscapeList, popupLayoutWidth,
+                popupLayoutHeight + popupLayoutPadding, R.style.SlideRightAnimation).getPopupWindow()));
 
-        mCurrentActionPopupWindow.showAtLocation(mSurface, Gravity.NO_GRAVITY, popupLayoutX, popupLayoutY);
+        getmCurrentActionPopupWindow().showAtLocation(getmSurface(), Gravity.NO_GRAVITY, popupLayoutX, popupLayoutY);
     }
 
     /**
@@ -1239,7 +1471,7 @@ public class ViewerMainFragment extends Fragment {
      */
 
     public static void showMultiplyDialog() {
-        View multiplyModelDialog = LayoutInflater.from(mContext).inflate(R.layout.dialog_multiply_model, null);
+        View multiplyModelDialog = LayoutInflater.from(getmContext()).inflate(R.layout.dialog_multiply_model, null);
         final NumberPicker numPicker = (NumberPicker) multiplyModelDialog.findViewById(R.id.number_copies_numberpicker);
         numPicker.setMaxValue(10);
         numPicker.setMinValue(0);
@@ -1252,15 +1484,15 @@ public class ViewerMainFragment extends Fragment {
                     Field selectorWheelPaintField = numPicker.getClass()
                             .getDeclaredField("mSelectorWheelPaint");
                     selectorWheelPaintField.setAccessible(true);
-                    ((Paint) selectorWheelPaintField.get(numPicker)).setColor(mContext.getResources().getColor(R.color.theme_primary_dark));
-                    ((EditText) child).setTextColor(mContext.getResources().getColor(R.color.theme_primary_dark));
+                    ((Paint) selectorWheelPaintField.get(numPicker)).setColor(getmContext().getResources().getColor(R.color.theme_primary_dark));
+                    ((EditText) child).setTextColor(getmContext().getResources().getColor(R.color.theme_primary_dark));
 
                     Field[] pickerFields = NumberPicker.class.getDeclaredFields();
                     for (Field pf : pickerFields) {
                         if (pf.getName().equals("mSelectionDivider")) {
                             pf.setAccessible(true);
                             try {
-                                pf.set(numPicker, mContext.getResources().getDrawable(R.drawable.separation_line_horizontal));
+                                pf.set(numPicker, getmContext().getResources().getDrawable(R.drawable.separation_line_horizontal));
                             } catch (IllegalArgumentException e) {
                                 e.printStackTrace();
                             } catch (Resources.NotFoundException e) {
@@ -1285,7 +1517,7 @@ public class ViewerMainFragment extends Fragment {
 
         //Remove soft-input from number picker
         numPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
-        final MaterialDialog.Builder createFolderDialog = new MaterialDialog.Builder(mContext);
+        final MaterialDialog.Builder createFolderDialog = new MaterialDialog.Builder(getmContext());
         createFolderDialog.title(R.string.viewer_menu_multiply_title)
                 .customView(multiplyModelDialog, true)
                 .positiveColorRes(R.color.theme_accent_1)
@@ -1304,21 +1536,21 @@ public class ViewerMainFragment extends Fragment {
     }
 
     private static void drawCopies(int numCopies) {
-        int model = mSurface.getObjectPresed();
+        int model = getmSurface().getObjectPresed();
         int num = 0;
 
         while (num < numCopies) {
             final DataStorage newData = new DataStorage();
-            newData.copyData(mDataList.get(model));
-            mDataList.add(newData);
+            newData.copyData(getmDataList().get(model));
+            getmDataList().add(newData);
 
             /**
              * Check if the piece is out of the plate and stop multiplying
              */
-            if (!Geometry.relocateIfOverlaps(mDataList)) {
+            if (!Geometry.relocateIfOverlaps(getmDataList())) {
 
-                Toast.makeText(mContext, R.string.viewer_multiply_error, Toast.LENGTH_LONG).show();
-                mDataList.remove(newData);
+                Toast.makeText(getmContext(), R.string.viewer_multiply_error, Toast.LENGTH_LONG).show();
+                getmDataList().remove(newData);
                 break;
 
             }
@@ -1341,15 +1573,15 @@ public class ViewerMainFragment extends Fragment {
     public static void showProgressBar(int status, int i) {
 
 
-        if (mRootView!=null){
+        if (getmRootView() !=null){
 
 
-            ProgressBar pb = (ProgressBar) mRootView.findViewById(R.id.progress_slice);
-            TextView tv = (TextView) mRootView.findViewById(R.id.viewer_text_progress_slice);
-            TextView tve = (TextView) mRootView.findViewById(R.id.viewer_text_estimated_time);
-            TextView tve_title = (TextView) mRootView.findViewById(R.id.viewer_estimated_time_textview);
+            ProgressBar pb = (ProgressBar) getmRootView().findViewById(R.id.progress_slice);
+            TextView tv = (TextView) getmRootView().findViewById(R.id.viewer_text_progress_slice);
+            TextView tve = (TextView) getmRootView().findViewById(R.id.viewer_text_estimated_time);
+            TextView tve_title = (TextView) getmRootView().findViewById(R.id.viewer_estimated_time_textview);
 
-            if ( mSlicingHandler.getLastReference()!= null) {
+            if ( getmSlicingHandler().getLastReference()!= null) {
 
                 tve_title.setVisibility(View.VISIBLE);
                 pb.setVisibility(View.VISIBLE);
@@ -1364,7 +1596,7 @@ public class ViewerMainFragment extends Fragment {
                 tve_title.setVisibility(View.INVISIBLE);
                 tv.setText(null);
                 tve.setText(null);
-                mRootView.invalidate();
+                getmRootView().invalidate();
 
 
 
@@ -1381,7 +1613,7 @@ public class ViewerMainFragment extends Fragment {
     public static void displayModelSize(int position) {
         try {
             //TODO RANDOM CRASH ArrayIndexOutOfBoundsException
-            DataStorage data = mDataList.get(position);
+            DataStorage data = getmDataList().get(position);
 
             //Set point instead of comma
             DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.ENGLISH);
@@ -1400,26 +1632,26 @@ public class ViewerMainFragment extends Fragment {
             //mSizeText.setText(String.format(mContext.getResources().getString(R.string.viewer_axis_info), Double.parseDouble(width), Double.parseDouble(depth), Double.parseDouble(height)));
 
             //Log.i("Scale","Vamos a petar " + width);
-            ((TextView) mSizeText.findViewById(R.id.print_panel_x_size)).setText(width);
-            ((TextView) mSizeText.findViewById(R.id.print_panel_y_size)).setText(depth);
-            ((TextView) mSizeText.findViewById(R.id.print_panel_z_size)).setText(height);
+            ((TextView) getmSizeText().findViewById(R.id.print_panel_x_size)).setText(width);
+            ((TextView) getmSizeText().findViewById(R.id.print_panel_y_size)).setText(depth);
+            ((TextView) getmSizeText().findViewById(R.id.print_panel_z_size)).setText(height);
 
-            if (mScaleLayout.getVisibility() == View.VISIBLE){
+            if (getmScaleLayout().getVisibility() == View.VISIBLE){
 
-                mScaleEditX.removeTextChangedListener(mTextWatcherX);
-                mScaleEditY.removeTextChangedListener(mTextWatcherY);
-                mScaleEditZ.removeTextChangedListener(mTextWatcherZ);
+                getmScaleEditX().removeTextChangedListener(getmTextWatcherX());
+                getmScaleEditY().removeTextChangedListener(getmTextWatcherY());
+                getmScaleEditZ().removeTextChangedListener(getmTextWatcherZ());
 
-                mScaleEditX.setText(width);
-                mScaleEditX.setSelection(mScaleEditX.getText().length());
-                mScaleEditY.setText(depth);
-                mScaleEditY.setSelection(mScaleEditY.getText().length());
-                mScaleEditZ.setText(height);
-                mScaleEditZ.setSelection(mScaleEditZ.getText().length());
+                getmScaleEditX().setText(width);
+                getmScaleEditX().setSelection(getmScaleEditX().getText().length());
+                getmScaleEditY().setText(depth);
+                getmScaleEditY().setSelection(getmScaleEditY().getText().length());
+                getmScaleEditZ().setText(height);
+                getmScaleEditZ().setSelection(getmScaleEditZ().getText().length());
 
-                mScaleEditX.addTextChangedListener(mTextWatcherX);
-                mScaleEditY.addTextChangedListener(mTextWatcherY);
-                mScaleEditZ.addTextChangedListener(mTextWatcherZ);
+                getmScaleEditX().addTextChangedListener(getmTextWatcherX());
+                getmScaleEditY().addTextChangedListener(getmTextWatcherY());
+                getmScaleEditZ().addTextChangedListener(getmTextWatcherZ());
             }
 
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -1447,10 +1679,10 @@ public class ViewerMainFragment extends Fragment {
     public void notifyAdapter() {
 
         try {
-            if (mSidePanelHandler.profileAdapter != null)
-                mSidePanelHandler.profileAdapter.notifyDataSetChanged();
+            if (getmSidePanelHandler().profileAdapter != null)
+                getmSidePanelHandler().profileAdapter.notifyDataSetChanged();
 
-            mSidePanelHandler.reloadProfileAdapter();
+            getmSidePanelHandler().reloadProfileAdapter();
 
         } catch (NullPointerException e) {
 
@@ -1473,27 +1705,27 @@ public class ViewerMainFragment extends Fragment {
      */
 
     public static File getFile() {
-        return mFile;
+        return getmFile();
     }
 
     public static int[] getCurrentPlate() {
-        return mCurrentPlate;
+        return getmCurrentPlate();
     }
 
     public static void changePlate(String resource) throws NullPointerException {
 
-        JSONObject profile = ModelProfile.retrieveProfile(mContext, resource, ModelProfile.TYPE_P);
+        JSONObject profile = ModelProfile.retrieveProfile(getmContext(), resource, ModelProfile.TYPE_P);
 
         try {
             JSONObject volume = profile.getJSONObject("volume");
-            mCurrentPlate = new int[]{volume.getInt("width") / 2, volume.getInt("depth") / 2, volume.getInt("height")};
+            setmCurrentPlate(new int[]{volume.getInt("width") / 2, volume.getInt("depth") / 2, volume.getInt("height")});
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        mSurface.changePlate(mCurrentPlate);
-        mSurface.requestRender();
+        getmSurface().changePlate(getmCurrentPlate());
+        getmSurface().requestRender();
     }
 
     public static void setSlicingPosition(float x, float y) {
@@ -1503,10 +1735,10 @@ public class ViewerMainFragment extends Fragment {
 
             //mPreviousOffset = new Geometry.Point(x,y,0);
 
-            position.put("x", (int) x + mCurrentPlate[0]);
-            position.put("y", (int) y + mCurrentPlate[1]);
+            position.put("x", (int) x + getmCurrentPlate()[0]);
+            position.put("y", (int) y + getmCurrentPlate()[1]);
 
-            mSlicingHandler.setExtras("position", position);
+            getmSlicingHandler().setExtras("position", position);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1549,9 +1781,9 @@ public class ViewerMainFragment extends Fragment {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
 
-            mScaleEditX.setError(null);
-            mScaleEditY.setError(null);
-            mScaleEditZ.setError(null);
+            getmScaleEditX().setError(null);
+            getmScaleEditY().setError(null);
+            getmScaleEditZ().setError(null);
 
         }
 
@@ -1578,15 +1810,15 @@ public class ViewerMainFragment extends Fragment {
                 switch (mAxis){
 
                     case 0:
-                        mSurface.doScale(Float.parseFloat(editable.toString()), 0, 0, mUniformScale.isSelected());
+                        getmSurface().doScale(Float.parseFloat(editable.toString()), 0, 0, getmUniformScale().isSelected());
                         break;
 
                     case 1:
-                        mSurface.doScale(0, Float.parseFloat(editable.toString()), 0, mUniformScale.isSelected());
+                        getmSurface().doScale(0, Float.parseFloat(editable.toString()), 0, getmUniformScale().isSelected());
                         break;
 
                     case 2:
-                        mSurface.doScale(0, 0, Float.parseFloat(editable.toString()), mUniformScale.isSelected());
+                        getmSurface().doScale(0, 0, Float.parseFloat(editable.toString()), getmUniformScale().isSelected());
                         break;
 
                 }

@@ -16,7 +16,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
@@ -33,6 +32,10 @@ import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.lang.reflect.UndeclaredThrowableException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by alberto-baeza on 1/21/15.
@@ -54,6 +57,50 @@ public class MainActivity extends ActionBarActivity {
     private ListView mDrawerList;
     private HistoryDrawerAdapter mDrawerAdapter;
     private static ActionBarDrawerToggle mDrawerToggle;
+    private static FragmentTransaction mFragmentTransaction;
+
+    Logger logger = Logger.getLogger(MainActivity.class.getName());
+
+
+    public static Fragment getmCurrent() {
+        return mCurrent;
+    }
+
+    public static void setmCurrent(Fragment mCurrent) {
+        MainActivity.mCurrent = mCurrent;
+    }
+
+    public static FragmentManager getmManager() {
+        return mManager;
+    }
+
+    public static void setmManager(FragmentManager mManager) {
+        MainActivity.mManager = mManager;
+    }
+
+    public static TabHost getmTabHost() {
+        return mTabHost;
+    }
+
+    public static void setmTabHost(TabHost mTabHost) {
+        MainActivity.mTabHost = mTabHost;
+    }
+
+    public static DrawerLayout getmDrawerLayout() {
+        return mDrawerLayout;
+    }
+
+    public static void setmDrawerLayout(DrawerLayout mDrawerLayout) {
+        MainActivity.mDrawerLayout = mDrawerLayout;
+    }
+
+    public static ActionBarDrawerToggle getmDrawerToggle() {
+        return mDrawerToggle;
+    }
+
+    public static void setmDrawerToggle(ActionBarDrawerToggle mDrawerToggle) {
+        MainActivity.mDrawerToggle = mDrawerToggle;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,13 +118,13 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
-        mTabHost = (TabHost) findViewById(R.id.tabHost);
+        setmTabHost((TabHost) findViewById(R.id.tabHost));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
         //Initialize variables
-        mManager = getFragmentManager();
+        setmManager(getFragmentManager());
 
         //Initialize fragments
         mLibraryFragment = (LibraryFragment) getFragmentManager().findFragmentByTag(ListContent.ID_LIBRARY);
@@ -95,10 +142,11 @@ public class MainActivity extends ActionBarActivity {
         filter.addAction(Intent.ACTION_LOCALE_CHANGED);
 
 
-        mManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+        getmManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
             @Override
             public void onBackStackChanged() {
-
+                /*invalid operation in this method*/
+                throw new UnsupportedOperationException("Invalid operation.");
             }
         });
 
@@ -111,19 +159,19 @@ public class MainActivity extends ActionBarActivity {
 
     public static void performClick(int i){
 
-        mTabHost.setCurrentTab(i);
+        getmTabHost().setCurrentTab(i);
 
     }
 
     //Initialize history drawer
     public void initDrawer(){
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, Gravity.START);
+        setmDrawerLayout((DrawerLayout) findViewById(R.id.drawer_layout));
+        getmDrawerLayout().setDrawerShadow(R.drawable.drawer_shadow, Gravity.START);
 
-        mDrawerToggle = new ActionBarDrawerToggle(
+        setmDrawerToggle(new ActionBarDrawerToggle(
                 this,                   /* host Activity */
-                mDrawerLayout,                /* DrawerLayout object */
+                getmDrawerLayout(),                /* DrawerLayout object */
                 R.string.add,            /* "open drawer" description */
                 R.string.cancel         /* "close drawer" description */
         ) {
@@ -142,18 +190,18 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
-
-
-                if (slideOffset == 1.0){
+                //offset in 0.01
+                double epsilon = 0.1;
+                if (Math.abs(1.0 - slideOffset) < epsilon){
                     mDrawerAdapter.notifyDataSetChanged();
                 }
                 super.onDrawerSlide(drawerView, slideOffset);
             }
-        };
+        });
 
         // Set the drawer toggle as the DrawerListener
-        mDrawerToggle.setDrawerIndicatorEnabled(true);
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        getmDrawerToggle().setDrawerIndicatorEnabled(true);
+        getmDrawerLayout().setDrawerListener(getmDrawerToggle());
 
 
 
@@ -172,7 +220,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                mDrawerLayout.closeDrawers();
+                getmDrawerLayout().closeDrawers();
                 requestOpenFile(LibraryController.getHistoryList().get(i - 1).path);
 
             }
@@ -201,50 +249,49 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        mDrawerToggle.syncState();
+        getmDrawerToggle().syncState();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
 
         super.onConfigurationChanged(newConfig);
-        mDrawerToggle.onConfigurationChanged(newConfig);
+        getmDrawerToggle().onConfigurationChanged(newConfig);
     }
 
 
     public void setTabHost() {
 
-        mTabHost.setup();
+        getmTabHost().setup();
 
         //Models tab
-        TabHost.TabSpec spec = mTabHost.newTabSpec("Library");
+        TabHost.TabSpec spec = getmTabHost().newTabSpec("Library");
         spec.setIndicator(getTabIndicator(getResources().getString(R.string.fragment_models)));
         spec.setContent(R.id.maintab1);
-        mTabHost.addTab(spec);
+        getmTabHost().addTab(spec);
 
         //Print panel tab
-        spec = mTabHost.newTabSpec("Panel");
+        spec = getmTabHost().newTabSpec("Panel");
         spec.setIndicator(getTabIndicator(getResources().getString(R.string.fragment_print)));
         spec.setContent(R.id.maintab2);
-        mTabHost.addTab(spec);
+        getmTabHost().addTab(spec);
 
 
-        mTabHost.setCurrentTab(0);
+        getmTabHost().setCurrentTab(0);
         onItemSelected(0);
 
 
-        mTabHost.getTabWidget().setDividerDrawable(new ColorDrawable(getResources().getColor(R.color.transparent)));
+        getmTabHost().getTabWidget().setDividerDrawable(new ColorDrawable(getResources().getColor(R.color.transparent)));
 
-        mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+        getmTabHost().setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabId) {
 
-                View currentView = mTabHost.getCurrentView();
+                View currentView = getmTabHost().getCurrentView();
                 AnimationHelper.inFromRightAnimation(currentView);
 
-                onItemSelected(mTabHost.getCurrentTab());
+                onItemSelected(getmTabHost().getCurrentTab());
 
-                //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
             }
         });
@@ -256,7 +303,7 @@ public class MainActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Pass the event to ActionBarDrawerToggle, if it returns
         // true, then it has handled the app icon touch event
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
+        if (getmDrawerToggle().onOptionsItemSelected(item)) {
             return true;
         }
         // Handle your other action bar items...
@@ -286,50 +333,36 @@ public class MainActivity extends ActionBarActivity {
         }
 
         //start transaction
-        FragmentTransaction fragmentTransaction = mManager.beginTransaction();
+        FragmentTransaction fragmentTransaction = getmManager().beginTransaction();
 
 
         //Pop backstack to avoid having bad references when coming from a Detail view
-        mManager.popBackStack();
+        getmManager().popBackStack();
 
         //If there is a fragment being shown, hide it to show the new one
-        if (mCurrent != null) {
+        if (getmCurrent() != null) {
             try {
-                fragmentTransaction.hide(mCurrent);
+                fragmentTransaction.hide(getmCurrent());
             } catch (NullPointerException e) {
-                e.printStackTrace();
+                String msg = "unexpected nullpointer error";
+                logger.log(Level.SEVERE, msg, e);
             }
         }
 
         //Select fragment
         switch (id) {
-
-            case 0: {
-                closePrintView();
-                //Check if we already created the Fragment to avoid having multiple instances
-                if (getFragmentManager().findFragmentByTag(ListContent.ID_LIBRARY) == null) {
-                    mLibraryFragment = new LibraryFragment();
-                    fragmentTransaction.add(R.id.maintab1, mLibraryFragment, ListContent.ID_LIBRARY);
-                }
-                mCurrent = mLibraryFragment;
-            }
-
-            break;
-            case 1: {
-                closePrintView();
-                closeDetailView();
-                //Check if we already created the Fragment to avoid having multiple instances
-                if (getFragmentManager().findFragmentByTag(ListContent.ID_VIEWER) == null) {
-                    mViewerFragment = new ViewerMainFragment();
-                    fragmentTransaction.add(R.id.maintab2, mViewerFragment, ListContent.ID_VIEWER);
-                }
-                mCurrent = mViewerFragment;
-            }
-            break;
+            //Check if we already created the Fragment to avoid having multiple instances
+            case 0: libFrag(fragmentTransaction);
+                break;
+            //Check if we already created the Fragment to avoid having multiple instances
+            case 1: viewFrag(fragmentTransaction);
+                break;
+            //by default it close the view if no other messages
+            default : throw new UnsupportedOperationException("no id found error");
         }
 
         if (mViewerFragment != null) {
-            if (mCurrent != mViewerFragment) {
+            if (getmCurrent() != mViewerFragment) {
                 //Make the surface invisible to avoid frame overlapping
                 mViewerFragment.setSurfaceVisibility(0);
             } else {
@@ -339,17 +372,36 @@ public class MainActivity extends ActionBarActivity {
         }
 
         //Show current fragment
-        if (mCurrent != null) {
-            fragmentTransaction.show(mCurrent).commit();
-            mDrawerToggle.setDrawerIndicatorEnabled(true);
+        if (getmCurrent() != null) {
+            fragmentTransaction.show(getmCurrent()).commit();
+            getmDrawerToggle().setDrawerIndicatorEnabled(true);
         }
 
 
     }
+    private void libFrag(FragmentTransaction fragmentTransaction){
+        closePrintView();
+        if (getFragmentManager().findFragmentByTag(ListContent.ID_LIBRARY) == null) {
+            mLibraryFragment = new LibraryFragment();
+            fragmentTransaction.add(R.id.maintab1, mLibraryFragment, ListContent.ID_LIBRARY);
+        }
+        setmCurrent(mLibraryFragment);
+    }
+
+    private void viewFrag(FragmentTransaction fragmentTransaction){
+        closePrintView();
+        closeDetailView();
+
+        if (getFragmentManager().findFragmentByTag(ListContent.ID_VIEWER) == null) {
+            mViewerFragment = new ViewerMainFragment();
+            fragmentTransaction.add(R.id.maintab2, mViewerFragment, ListContent.ID_VIEWER);
+        }
+        setmCurrent(mViewerFragment);
+    }
 
     public static void refreshDevicesCount(){
 
-        mCurrent.setMenuVisibility(false);
+        getmCurrent().setMenuVisibility(false);
 
 
 
@@ -359,15 +411,16 @@ public class MainActivity extends ActionBarActivity {
 
     private static void closePrintView(){
         //Refresh printview fragment if exists
-        Fragment fragment = mManager.findFragmentByTag(ListContent.ID_PRINTVIEW);
 
-        if (mCurrent!=null) mCurrent.setMenuVisibility(true);
+        if (getmCurrent() !=null)
+            getmCurrent().setMenuVisibility(true);
     }
 
     public static void closeDetailView(){
         //Refresh printview fragment if exists
-        Fragment fragment = mManager.findFragmentByTag(ListContent.ID_DETAIL);
-        if (fragment != null) ((DetailViewFragment) fragment).removeRightPanel();
+        Fragment fragment = getmManager().findFragmentByTag(ListContent.ID_DETAIL);
+        if (fragment != null)
+            ((DetailViewFragment) fragment).removeRightPanel();
     }
 
     /**
@@ -377,20 +430,19 @@ public class MainActivity extends ActionBarActivity {
     public void onBackPressed() {
 
         //Update the actionbar to show the up carat/affordance
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
 
-        if (mCurrent != null) {
-            Fragment fragment = mManager.findFragmentByTag(ListContent.ID_SETTINGS);
+        if (getmCurrent() != null) {
+            Fragment fragment = getmManager().findFragmentByTag(ListContent.ID_SETTINGS);
 
-            if ((fragment != null) ){
+            if (fragment != null){
 
                 closePrintView();
 
-                if (mManager.popBackStackImmediate()){
+                if (getmManager().popBackStackImmediate()){
 
-                    mDrawerToggle.setDrawerIndicatorEnabled(true);
-                    mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+                    getmDrawerToggle().setDrawerIndicatorEnabled(true);
+                    getmDrawerLayout().setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
 
                     //Basically refresh printer count if all were deleted in Settings mode
 
@@ -421,7 +473,9 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void run() {
 
-                if (path!=null) ViewerMainFragment.openFileDialog(path);
+                if (path!=null) {
+                    ViewerMainFragment.openFileDialog(path);
+                }
             }
         });
 
@@ -437,21 +491,18 @@ public class MainActivity extends ActionBarActivity {
             String message = intent.getStringExtra("message");
 
             if (message!=null)
-                if (message.equals("Devices")){
+                if ("Devices".equals(message)){
 
 
                     //Refresh printview fragment if exists
-                    Fragment fragment = mManager.findFragmentByTag(ListContent.ID_PRINTVIEW);
+                    throw new UnsupportedOperationException("no device error");
 
-                } else if (message.equals("Profile")){
-
-                    if (mViewerFragment!=null) {
+                } else if ("Profile".equals(message)&&mViewerFragment!=null){
                         mViewerFragment.notifyAdapter();
-                    }
 
-                } else if (message.equals("Files")){
 
-                    if (mLibraryFragment!=null) mLibraryFragment.refreshFiles();
+                } else if ("Files".equals(message)&&mLibraryFragment != null) {
+                        mLibraryFragment.refreshFiles();
 
                 }
 
@@ -461,14 +512,7 @@ public class MainActivity extends ActionBarActivity {
     /*
 Close app on locale change
  */
-    private BroadcastReceiver mLocaleChange = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            finish();
-            System.exit(0);
 
-        }
-    };
 
     @Override
     protected void onDestroy() {

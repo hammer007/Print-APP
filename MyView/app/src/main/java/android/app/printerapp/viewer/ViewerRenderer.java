@@ -1,3 +1,5 @@
+
+
 package android.app.printerapp.viewer;
 
 import android.app.printerapp.library.LibraryModelCreation;
@@ -23,13 +25,12 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class ViewerRenderer implements GLSurfaceView.Renderer  {
 	Context mContext;
-	private static String TAG = "ViewerRenderer";
 	
-	public static float Z_NEAR =1f;
-	public static float Z_FAR = 3000f;
-	
-	private static float OFFSET_HEIGHT = 2f;
-	private static float OFFSET_BIG_HEIGHT = 5f;
+	private static final float Z_NEAR =1f;
+	private static final float Z_FAR = 3000f;
+
+	private static final float OFFSET_HEIGHT = 2f;
+	private static final float OFFSET_BIG_HEIGHT = 5f;
 
     private static final float ANGLE_X = 0f;
     private static final float ANGLE_Y = -5f;
@@ -42,18 +43,18 @@ public class ViewerRenderer implements GLSurfaceView.Renderer  {
 	private static int mWidth;
 	private static int mHeight;
 	
-	public static float mCameraX = 0f;
-	public static float mCameraY = 0f;
-	public static float mCameraZ = 0f;
+	private static float mCameraX = 0f;
+	private static float mCameraY = 0f;
+	private static float mCameraZ = 0f;
 	
-	public static float mCenterX = 0f;
-	public static float mCenterY = 0f;
-	public static float mCenterZ = 0f;
+	private static final float mCenterX = 0f;
+	private static final float mCenterY = 0f;
+	private static final float mCenterZ = 0f;
 	
-	public static float mSceneAngleX = 0f;
-	public static float mSceneAngleY = 0f;
-    public static float mCurrentSceneAngleX = 0f;
-    public static float mCurrentSceneAngleY = 0f;
+	private static float mSceneAngleX = 0f;
+	private static float mSceneAngleY = 0f;
+    private static float mCurrentSceneAngleX = 0f;
+    private static float mCurrentSceneAngleY = 0f;
 
 	public static final int DOWN=0;
 	public static final int RIGHT=1;
@@ -62,13 +63,13 @@ public class ViewerRenderer implements GLSurfaceView.Renderer  {
     public static final int FRONT=4;
     public static final int TOP=5;
 	
-	public static final float LIGHT_X=0;
-	public static final float LIGHT_Y=0;
-	public static final float LIGHT_Z=2000;
+	private static final float LIGHT_X=0;
+	private static final float LIGHT_Y=0;
+	private static final float LIGHT_Z=2000;
 
 	private int mState;
 
-	private List<StlObject> mStlObjectList = new ArrayList<StlObject>();
+	private List<StlObject> mStlObjectList = new ArrayList<>();
 	private GcodeObject mGcodeObject;
 	private WitboxPlate mWitboxFaceDown;
 	private WitboxFaces mWitboxFaceRight;
@@ -93,21 +94,21 @@ public class ViewerRenderer implements GLSurfaceView.Renderer  {
 	private final float[] mViewMatrix = new float[16];
 	private final float[] mRotationMatrix = new float[16];
 	private final float[] mTemporaryMatrix = new float [16];
-    private final static float[] invertedMVPMatrix = new float[16];
+    private static final float[] invertedMVPMatrix = new float[16];
     
-	float[] mMVMatrix = new float[16];
-	float[] mMVPMatrix = new float[16];	
-	float[] mMVPObjectMatrix = new float[16];	
-	float[] mMVObjectMatrix = new float[16];	
-	float[] mTransInvMVMatrix = new float[16];	
-	float[] mObjectModel = new float [16];
-	float[] mTemporaryModel = new float[16];
+	private float[] mMVMatrix = new float[16];
+	private float[] mMVPMatrix = new float[16];
+	private float[] mMVPObjectMatrix = new float[16];
+	private float[] mMVObjectMatrix = new float[16];
+	private float[] mTransInvMVMatrix = new float[16];
+	private float[] mObjectModel = new float [16];
+	private float[] mTemporaryModel = new float[16];
 	
     //Light	
-	float[] mLightPosInModelSpace = new float[] {0.0f, 0.0f, 0.0f, 1.0f};
-	float[] mLightPosInEyeSpace = new float[4];
-	float[] mLightPosInWorldSpace = new float[4];
-	float[] mLightModelMatrix = new float[16];	
+	private float[] mLightPosInModelSpace = new float[] {0.0f, 0.0f, 0.0f, 1.0f};
+	private float[] mLightPosInEyeSpace = new float[4];
+	private float[] mLightPosInWorldSpace = new float[4];
+	private float[] mLightModelMatrix = new float[16];
 			
 	private int mMode = 0;
 		
@@ -115,8 +116,8 @@ public class ViewerRenderer implements GLSurfaceView.Renderer  {
 	private int mObjectPressed=-1;
 	
 	//Variables for object edition
-	float mDx = POSITION_DEFAULT_X;
-	float mDy = POSITION_DEFAULT_Y;
+	private float mDx = POSITION_DEFAULT_X;
+	private float mDy = POSITION_DEFAULT_Y;
 	float mDz;
 
 	private float mScaleFactorX=1.0f;
@@ -125,17 +126,17 @@ public class ViewerRenderer implements GLSurfaceView.Renderer  {
 	
 	private Vector mVector = new Vector (1,0,0); //default
 	
-	public final static int INSIDE_NOT_TOUCHED = 0;
-	public final static int OUT_NOT_TOUCHED = 1;
-	public final static int INSIDE_TOUCHED = 2;
-	public final static int OUT_TOUCHED = 3;
+	private final static int INSIDE_NOT_TOUCHED = 0;
+	private final static int OUT_NOT_TOUCHED = 1;
+	private final static int INSIDE_TOUCHED = 2;
+	private final static int OUT_TOUCHED = 3;
 
     private Circles mCircle;
     private int[] mPlate;
 
     private int mAxis = -1;
 			
-	public ViewerRenderer (List<DataStorage> dataList, Context context, int state, int mode) {	
+	public ViewerRenderer (List<DataStorage> dataList, Context context, int state, int mode) {
 		this.mDataList = dataList;
 		this.mContext = context;
 		this.mState = state;
@@ -143,8 +144,40 @@ public class ViewerRenderer implements GLSurfaceView.Renderer  {
 		this.mMode = mode;
         this.mPlate = ViewerMainFragment.getCurrentPlate();
 	}
-	
-	public void showBackWitboxFace (boolean draw) {
+
+    private static float getmSceneAngleX() {
+        return mSceneAngleX;
+    }
+
+    private static void setmSceneAngleX(float mSceneAngleX) {
+        ViewerRenderer.mSceneAngleX = mSceneAngleX;
+    }
+
+    private static float getmSceneAngleY() {
+        return mSceneAngleY;
+    }
+
+    private static void setmSceneAngleY(float mSceneAngleY) {
+        ViewerRenderer.mSceneAngleY = mSceneAngleY;
+    }
+
+    private static float getmCurrentSceneAngleX() {
+        return mCurrentSceneAngleX;
+    }
+
+    private static void setmCurrentSceneAngleX(float mCurrentSceneAngleX) {
+        ViewerRenderer.mCurrentSceneAngleX = mCurrentSceneAngleX;
+    }
+
+    public static float getmCurrentSceneAngleY() {
+        return mCurrentSceneAngleY;
+    }
+
+    public static void setmCurrentSceneAngleY(float mCurrentSceneAngleY) {
+        ViewerRenderer.mCurrentSceneAngleY = mCurrentSceneAngleY;
+    }
+
+    private void showBackWitboxFace (boolean draw) {
 		mShowBackWitboxFace = draw;
 	}
 	
@@ -217,7 +250,7 @@ public class ViewerRenderer implements GLSurfaceView.Renderer  {
 	}
 	
 	private boolean isStl() {
-		if (mDataList.size()>0)
+		if (mDataList.isEmpty())
 			if (mDataList.get(0).getPathFile().endsWith(".stl") || mDataList.get(0).getPathFile().endsWith(".STL")) return true;
 		
 		return false;
@@ -389,9 +422,8 @@ public class ViewerRenderer implements GLSurfaceView.Renderer  {
         //Get the object's rotation matrix
 		float [] rotateObjectMatrix = data.getRotationMatrix();
 
-        Point center = data.getLastCenter();
 
-        float[] mTemporaryMatrix = new float[16];
+        //float[] mTemporaryMatrix = new float[16];
         float[] mFinalMatrix = new float[16];
 
         //Set a new identity matrix
@@ -486,7 +518,7 @@ public class ViewerRenderer implements GLSurfaceView.Renderer  {
 
                 } catch (ArrayIndexOutOfBoundsException e ){
 
-                    e.printStackTrace();
+                    throw new ArrayIndexOutOfBoundsException("unexpected index out of bounds exception!");
                 }
 
 
@@ -566,6 +598,7 @@ public class ViewerRenderer implements GLSurfaceView.Renderer  {
 		  case OUT_TOUCHED: 
 			  stl.setColor(StlObject.colorObjectOutTouched);
 			  break;
+              default: stl.setColor(StlObject.colorNormal);
 		  }
 	  }
 
@@ -596,7 +629,7 @@ public class ViewerRenderer implements GLSurfaceView.Renderer  {
 
         } catch (NullPointerException e){
 
-           e.printStackTrace();
+           throw new NullPointerException("unexpected null pointer exception!");
         }
 
 
@@ -606,18 +639,17 @@ public class ViewerRenderer implements GLSurfaceView.Renderer  {
 	public void onSurfaceCreated(GL10 unused, EGLConfig config) {
 
 		// Set the background frame color
-		//GLES20.glClearColor( 0.9f, 0.9f, 0.9f, 1.0f);
         GLES20.glClearColor( 0.149f, 0.196f, 0.22f, 1.0f);
 
 		// Draw background color
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 
 		Matrix.setIdentityM(mModelMatrix, 0);
-        mCurrentSceneAngleX = 0f;
-        mCurrentSceneAngleY = 0f;
+        setmCurrentSceneAngleX(0f);
+        setmCurrentSceneAngleY(0f);
 			
-        mSceneAngleX = ANGLE_X;
-        mSceneAngleY = ANGLE_Y;
+        setmSceneAngleX(ANGLE_X);
+        setmSceneAngleY(ANGLE_Y);
         
         if (mDataList.size()>0)
 			if (isStl()) {
@@ -706,8 +738,8 @@ public class ViewerRenderer implements GLSurfaceView.Renderer  {
             mDx = - data.getLastCenter().x;
             mDy = - data.getLastCenter().y;
 
-            mSceneAngleX = -40f;
-            mSceneAngleY = 0f;
+            setmSceneAngleX(-40f);
+            setmSceneAngleY(0f);
 
         } else {
 
@@ -773,12 +805,12 @@ public class ViewerRenderer implements GLSurfaceView.Renderer  {
         Matrix.translateM(mRotationMatrix, 0, 0.0f, 0.0f, 0.0f);
 
         //Rotation x
-        Matrix.rotateM(mRotationMatrix, 0, mSceneAngleX, 0.0f, 0.0f, 1.0f);
+        Matrix.rotateM(mRotationMatrix, 0, getmSceneAngleX(), 0.0f, 0.0f, 1.0f);
 
-        mCurrentSceneAngleX +=mSceneAngleX;
+        setmCurrentSceneAngleX(getmCurrentSceneAngleX() + getmSceneAngleX());
 
         //Reset angle, we store the rotation in the matrix
-        mSceneAngleX=0;
+        setmSceneAngleX(0);
 
         //Multiply the current rotation by the accumulated rotation, and then set the accumulated rotation to the result.
         Matrix.multiplyMM(mTemporaryMatrix, 0, mModelMatrix, 0, mRotationMatrix, 0);
@@ -796,19 +828,19 @@ public class ViewerRenderer implements GLSurfaceView.Renderer  {
         Matrix.translateM(mRotationMatrix, 0, 0.0f, 0.0f, 0.0f);
 
         //RotationY
-        Matrix.rotateM(mRotationMatrix, 0, mSceneAngleY, 1.0f, 0.0f, 0.0f);
+        Matrix.rotateM(mRotationMatrix, 0, getmSceneAngleY(), 1.0f, 0.0f, 0.0f);
 
-        mCurrentSceneAngleY +=mSceneAngleY;
+        setmCurrentSceneAngleY(getmCurrentSceneAngleY() + getmSceneAngleY());
 
-        mSceneAngleY=0;
-
-        //Transport to degrees
-        if (mCurrentSceneAngleX > 180) mCurrentSceneAngleX-=360;
-        else if (mCurrentSceneAngleX < -180) mCurrentSceneAngleX+=360;
+        setmSceneAngleY(0);
 
         //Transport to degrees
-        if (mCurrentSceneAngleY > 180) mCurrentSceneAngleY-=360;
-        else if (mCurrentSceneAngleY < -180) mCurrentSceneAngleY+=360;
+        if (getmCurrentSceneAngleX() > 180) setmCurrentSceneAngleX(getmCurrentSceneAngleX() - 360);
+        else if (getmCurrentSceneAngleX() < -180) setmCurrentSceneAngleX(getmCurrentSceneAngleX() + 360);
+
+        //Transport to degrees
+        if (getmCurrentSceneAngleY() > 180) setmCurrentSceneAngleY(getmCurrentSceneAngleY() - 360);
+        else if (getmCurrentSceneAngleY() < -180) setmCurrentSceneAngleY(getmCurrentSceneAngleY() + 360);
 
         //Multiply the current rotation by the accumulated rotation, and then set the accumulated rotation to the result.
         Matrix.multiplyMM(mTemporaryMatrix, 0, mRotationMatrix, 0, mModelMatrix, 0);
@@ -954,11 +986,11 @@ public class ViewerRenderer implements GLSurfaceView.Renderer  {
 	
 
 	public void setSceneAngleX (float x) {
-		mSceneAngleX += x;	
+		setmSceneAngleX(getmSceneAngleX() + x);
 	}
 	
 	public void setSceneAngleY (float y) {
-		mSceneAngleY += y;
+		setmSceneAngleY(getmSceneAngleY() + y);
 	}
 
 	public void setCameraPosY (float y) {
@@ -1075,39 +1107,42 @@ public class ViewerRenderer implements GLSurfaceView.Renderer  {
         if (rotation){
 
             //Rotate X axis
-            if ((int)mCurrentSceneAngleX < ANGLE_X) {
+            if ((int) getmCurrentSceneAngleX() < ANGLE_X) {
 
                 //Slow rotation when approaching the final value
-                if ((int)mCurrentSceneAngleX > (ANGLE_X -10f)) mSceneAngleX = CAMERA_MIN_ROTATION_DISTANCE;
-                else mSceneAngleX = CAMERA_MAX_ROTATION_DISTANCE;
+                if ((int) getmCurrentSceneAngleX() > (ANGLE_X -10f)) setmSceneAngleX(CAMERA_MIN_ROTATION_DISTANCE);
+                else setmSceneAngleX(CAMERA_MAX_ROTATION_DISTANCE);
             }
-            else if ((int)mCurrentSceneAngleX > ANGLE_X){
+            else if ((int) getmCurrentSceneAngleX() > ANGLE_X){
 
                 //Slow rotation when approaching the final value
-                if ((int)mCurrentSceneAngleX < (ANGLE_X + 10f)) mSceneAngleX = -CAMERA_MIN_ROTATION_DISTANCE;
-                else mSceneAngleX = -CAMERA_MAX_ROTATION_DISTANCE;
+                if ((int) getmCurrentSceneAngleX() < (ANGLE_X + 10f)) setmSceneAngleX(-CAMERA_MIN_ROTATION_DISTANCE);
+                else setmSceneAngleX(-CAMERA_MAX_ROTATION_DISTANCE);
             }
 
             //Rotate Y axis
-            if ((int)mCurrentSceneAngleY < ANGLE_Y) {
+            if ((int) getmCurrentSceneAngleY() < ANGLE_Y) {
 
                 //Slow rotation when approaching the final value
-                if ((int)mCurrentSceneAngleY > (ANGLE_Y -10f)) mSceneAngleY = CAMERA_MIN_ROTATION_DISTANCE;
-                else mSceneAngleY = CAMERA_MAX_ROTATION_DISTANCE;
+                if ((int) getmCurrentSceneAngleY() > (ANGLE_Y -10f)) setmSceneAngleY(CAMERA_MIN_ROTATION_DISTANCE);
+                else setmSceneAngleY(CAMERA_MAX_ROTATION_DISTANCE);
             }
-            else if ((int)mCurrentSceneAngleY > ANGLE_Y) {
+            else if ((int) getmCurrentSceneAngleY() > ANGLE_Y) {
 
                 //Slow rotation when approaching the final value
-                if ((int)mCurrentSceneAngleY < (ANGLE_Y + 10f)) mSceneAngleY = -CAMERA_MIN_ROTATION_DISTANCE;
-                else mSceneAngleY = -CAMERA_MAX_ROTATION_DISTANCE;
+                if ((int) getmCurrentSceneAngleY() < (ANGLE_Y + 10f)) setmSceneAngleY(-CAMERA_MIN_ROTATION_DISTANCE);
+                else setmSceneAngleY(-CAMERA_MAX_ROTATION_DISTANCE);
             }
 
         }
 
 
         //Return true when we get the final values
-        if (((((int)mCameraZ == CAMERA_DEFAULT_Z) && ((int)mCameraY == CAMERA_DEFAULT_Y) && ((int)mCameraX == CAMERA_DEFAULT_X)) || (zoom))
-                && (((int) mCurrentSceneAngleX == ANGLE_X) && ((int) mCurrentSceneAngleY == ANGLE_Y)|| (!rotation))
+        if (((((int)mCameraZ == (int)CAMERA_DEFAULT_Z)
+                && ((int)mCameraY == (int)CAMERA_DEFAULT_Y)
+                && ((int)mCameraX == (int)CAMERA_DEFAULT_X))
+                || (zoom))
+                && (((int) getmCurrentSceneAngleX() == (int)ANGLE_X) && ((int) getmCurrentSceneAngleY() == (int)ANGLE_Y)|| (!rotation))
                 && ((int) mDx== (int)(POSITION_DEFAULT_X - dx)) && ((int) mDy == (int)(dyx - dy))) return true;
         else {
 

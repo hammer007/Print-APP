@@ -22,8 +22,8 @@ import java.util.ArrayList;
  */
 public class LibraryController {
 
-	private static ArrayList<File> mFileList = new ArrayList<File>();
-    private static ArrayList<ListContent.DrawerListItem> mHistoryList = new ArrayList<ListContent.DrawerListItem>();
+	private static ArrayList<File> mFileList = new ArrayList<>();
+    private static ArrayList<ListContent.DrawerListItem> mHistoryList = new ArrayList<>();
 	private static File mCurrentPath;
 
     public static final String TAB_ALL = "all";

@@ -6,6 +6,7 @@ import android.app.printerapp.model.ModelFile;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -152,7 +153,6 @@ public class LibraryAdapter extends ArrayAdapter<File> implements Filterable {
 
         //Hide overflow button in printer tab
         if ((mListInSelectionMode) || (mContext.getCurrentTab().equals(LibraryController.TAB_PRINTER))){
-
             overflowButton.setVisibility(View.GONE);
 
         } else overflowButton.setVisibility(View.VISIBLE);
