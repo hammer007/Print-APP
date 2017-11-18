@@ -1,5 +1,6 @@
 package g5.printbook.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -16,7 +17,10 @@ import org.apache.http.message.BasicNameValuePair;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import g5.printbook.MainActivity;
 import g5.printbook.R;
 import g5.printbook.database.Config;
 import g5.printbook.database.Insert;
@@ -35,22 +39,51 @@ public class Signup extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final int success = 1;
+        //final int success = 1;
         setContentView(R.layout.sign_up);
         initialize();
 
         signUpbutton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if(false){ int x = 0;} //TextUtils.isEmpty(edit_password.getText().toString())) edit_password.setError( "Password is Required!" );
+            @Override
+            public void onClick(View arg0) {
+                // TODO Auto-generated method stub
+                if(edit_first_name.getText().toString().length()==0){
+                    edit_first_name.setError("First name not entered");
+                    edit_first_name.requestFocus();
+                }
+                if(edit_last_name.getText().toString().length()==0){
+                    edit_last_name.setError("Last name not entered");
+                    edit_last_name.requestFocus();
+                }
+                if(edit_user_name.getText().toString().length()==0){
+                    edit_user_name.setError("Username is Required");
+                    edit_user_name.requestFocus();
+                }
+                if(edit_email_address.getText().toString().length()==0){
+                    edit_email_address.setError("Email Address is Required");
+                    edit_email_address.requestFocus();
+                }
+                if(edit_password.getText().toString().length()==0){
+                    edit_password.setError("Password not entered");
+                    edit_password.requestFocus();
+                }
+                if(edit_retype_password.getText().toString().length()==0){
+                    edit_retype_password.setError("Please confirm password");
+                    edit_retype_password.requestFocus();
+                }
+
+                if(edit_password.getText().toString().length()>=8 && (isValidPassword(edit_password.getText().toString())) && (edit_password.getText().toString().equals(edit_retype_password.getText().toString()))){
+                    Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
+                    insert_to_sign_up();
+                }
+
                 else {
-                    if(success == 1) {
-                         insert_to_sign_up();
-                          }
-                    else Toast.makeText(getApplicationContext(), "SOME PROBLEM WITH PROJECT CREATION, PROJECT TABLE REJECTING", Toast.LENGTH_LONG);
-                    //success = -1;
+                    edit_password.setError("Password is Not Valid");
+                    edit_password.requestFocus();
                 }
 
             }
+
         });
     }
 
@@ -62,6 +95,18 @@ public class Signup extends AppCompatActivity {
         edit_password = (EditText)findViewById(R.id.create_new_password);
         edit_retype_password = (EditText)findViewById(R.id.new_retype_password);
         signUpbutton = findViewById(R.id.sign_up_button);
+    }
+    public static boolean isValidPassword(final String password) {
+
+        Pattern pattern;
+        Matcher matcher;
+//      final String PASSWORD_PATTERN = "[a-zA-Z0-9\\!\\@\\#\\$]{8,24}";
+        final String PASSWORD_PATTERN = "[a-z0-9]{8,24}";
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+
+        return matcher.matches();
+
     }
 
     private int insert_to_sign_up(){
@@ -83,6 +128,12 @@ public class Signup extends AppCompatActivity {
             e.printStackTrace();
         }
         Log.d(TAG, "signup signup" + params);
+        successful_login();
         return success;
+
+    }
+    private void successful_login() {
+        Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
     }
 }
