@@ -1,20 +1,25 @@
 package g5.printbook;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.nfc.Tag;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
@@ -51,12 +56,14 @@ import javax.net.ssl.HttpsURLConnection;
 
 import g5.printbook.database.Config;
 
+import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
 
 public class NewProjectMandatoryFragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
     private Button magic_upload_button, create_printjob_continue, create_printjob_save;
+    private static final int PERMISSION_REQUEST_CODE = 1;
     private ImageView imageView;
     EditText slm_id;
     TextView jobType_Text, users_Text;
@@ -387,22 +394,77 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
 
             Uri uri = data.getData();
 
             try {
+                if (Build.VERSION.SDK_INT >= 23)
+                {
+                    if (checkPermission())
+                    {
+                        bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
 
-                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
+                        imageView.setImageBitmap(bitmap);
+                    } else {
+                        int x = requestPermission();
+                        if (x == 1){
+                        bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
 
-                imageView.setImageBitmap(bitmap);
+                        imageView.setImageBitmap(bitmap);}
+                    }
+                }
+                else
+                {
 
+                    bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
+
+                    imageView.setImageBitmap(bitmap);
+                }
+
+
+
+                Log.d("empty", " " + data);
             } catch (IOException e) {
 
                 e.printStackTrace();
             }
         }
 
+    }
+
+    private boolean checkPermission() {
+        int result = ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (result == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private int requestPermission() {
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            Log.d("fail", "Write External Storage permission allows us to do store images. Please allow this permission in App Settings");
+        return 1;
+        } else {
+            Log.d("true", "Write External Storage permission allows us to do store images. Please allow this permission in App Settings");
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+            return 1;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d("value", "Permission Granted, Now you can use local drive .");
+                } else {
+                    Log.d("value", "Permission Denied, You cannot use local drive .");
+                }
+                break;
+        }
     }
 }
