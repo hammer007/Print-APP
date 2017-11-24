@@ -20,9 +20,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.util.Log;
-/**
- * Created by Geek on 10/21/2017.
- */
 
 public class JSONParser {
     static InputStream is = null;

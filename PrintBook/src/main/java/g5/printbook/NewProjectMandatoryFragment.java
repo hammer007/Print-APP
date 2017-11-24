@@ -35,12 +35,23 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -48,20 +59,26 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import javax.net.ssl.HttpsURLConnection;
 
 import g5.printbook.database.Config;
+import g5.printbook.database.Insert;
+import g5.printbook.database.Search;
+import g5.printbook.database.SearchUser;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
 
 public class NewProjectMandatoryFragment extends Fragment implements AdapterView.OnItemSelectedListener{
-
+    Insert insert;
+    String returned[] = new String[3];
     private Button magic_upload_button, create_printjob_continue, create_printjob_save;
     private static final int PERMISSION_REQUEST_CODE = 1;
     private ImageView imageView;
@@ -77,6 +94,8 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
     boolean check = true;
     View focusView = null;
     String SLM_FOUND = "";
+    SearchUser search;
+
     public NewProjectMandatoryFragment() {
         // Required empty public constructor
     }
@@ -134,6 +153,7 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
                         Toast.makeText(view.getContext(), "PROBLEM IN UPLOADING", Toast.LENGTH_LONG).show();
                     }
                     else {
+                        insert_to_access_table();
                         NewPrintJobFragment fragment = new NewPrintJobFragment();
                         FragmentManager fragmentManager = getFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -172,6 +192,23 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
             }
         });
         return view;
+    }
+
+    private int insert_to_access_table() {
+        int success = -1;
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        //AUTO INCREMENT params.add(new BasicNameValuePair(config.PRINTING_printing_id, 2 + ""));
+        params.add(new BasicNameValuePair("slm_id", slm_id.getText().toString()));
+        params.add(new BasicNameValuePair("username", usersSpinner.getSelectedItem().toString()));
+        insert = new Insert(params, config.TAG_INSERT_ACCESS);
+        try {
+            success = insert.execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return success;
     }
 
     @Override
@@ -382,11 +419,30 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         jobTypeSpinner.setAdapter(adapter);
 
+
+
+        List <NameValuePair> params = new ArrayList <NameValuePair>();
+        params.add(new BasicNameValuePair("user", "user"));
+        search = new SearchUser(params, config.url_get_users);
+        try {
+
+            returned = search.execute().get();
+            Log.d("Users fetched ", returned + "");
+
+        }
+
+        catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
         usersSpinner = (Spinner) view.findViewById(R.id.users_editText);
-        ArrayAdapter<CharSequence> usersAdapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.users_string, android.R.layout.simple_spinner_item);
+        ArrayAdapter<String> usersAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item, returned);
+        //ArrayAdapter<CharSequence> usersAdapter = ArrayAdapter.createFromResource(getContext(),
+        //      R.array.users_string, android.R.layout.simple_spinner_item);
         usersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         usersSpinner.setAdapter(usersAdapter);
+
 
         jobType_Text = (TextView)view.findViewById(R.id.jobType_textView);
         users_Text = (TextView)view.findViewById(R.id.users_TextView);

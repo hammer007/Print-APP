@@ -10,9 +10,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Geek on 11/13/2017.
- */
 public class Search extends AsyncTask<String, String, String[]> {
     String returned [] = new String[19];
     JSONParser jsonParser = new JSONParser();
