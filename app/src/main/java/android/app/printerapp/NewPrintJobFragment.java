@@ -418,9 +418,9 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         shieldingSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         shieldingSpinner.setAdapter(shieldingSpinnerAdapter);
 
-        preprinting_expand_button = (Button)view.findViewById(R.id.searched_result_preprinting_expand_button);
-        projectID_editText = (EditText)view.findViewById(R.id.searched_result_projectID_editText);
-        partnumber_editText = (EditText)view.findViewById(R.id.searched_result_partnumber_editText);
+        preprinting_expand_button = (Button)view.findViewById(R.id.preprinting_expand_button);
+        projectID_editText = (EditText)view.findViewById(R.id.projectID_editText);
+        partnumber_editText = (EditText)view.findViewById(R.id.partnumber_editText);
         buildId_editText = (EditText)view.findViewById(R.id.buildId_editText);
         buildId_textView = (TextView) view.findViewById(R.id.buildId_textView);
         numberofparts_editText =  (EditText)view.findViewById(R.id.numberofparts_editText);
@@ -577,7 +577,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
     }
 
     private void hide_preprining(){
-        //projectID_editText.setVisibility(View.GONE);
+        projectID_editText.setVisibility(View.GONE);
         partnumber_editText.setVisibility(View.GONE);
         buildId_textView.setVisibility(View.GONE);
         buildId_editText.setVisibility(View.GONE);
@@ -585,7 +585,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         printingparameters_editText.setVisibility(View.GONE);
         comment_editText.setVisibility(View.GONE);
         preprintingSave_Button.setVisibility(View.GONE);
-        //projectID_Text.setVisibility(View.GONE);
+        projectID_Text.setVisibility(View.GONE);
         partnumber_Text.setVisibility(View.GONE);
         numberofparts_Text.setVisibility(View.GONE);
         printingparameters_Text.setVisibility(View.GONE);
@@ -593,7 +593,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         preprinting_expand_button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.expand, 0);
     }
     private void show_preprining(){
-       // projectID_editText.setVisibility(View.VISIBLE);
+        projectID_editText.setVisibility(View.VISIBLE);
         partnumber_editText.setVisibility(View.VISIBLE);
         buildId_textView.setVisibility(View.VISIBLE);
         buildId_editText.setVisibility(View.VISIBLE);
@@ -602,7 +602,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         comment_editText.setVisibility(View.VISIBLE);
         preprintingSave_Button.setVisibility(View.VISIBLE);
         preprinting_expand_button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.shrink, 0);
-       // projectID_Text.setVisibility(View.VISIBLE);
+        projectID_Text.setVisibility(View.VISIBLE);
         partnumber_Text.setVisibility(View.VISIBLE);
         numberofparts_Text.setVisibility(View.VISIBLE);
         printingparameters_Text.setVisibility(View.VISIBLE);
