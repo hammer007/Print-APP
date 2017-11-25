@@ -140,6 +140,8 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
                     slm_id.setError(getString(R.string.error_field_required));
                     focusView = slm_id;
                     focusView.requestFocus();
+                }else if(imageView.getDrawable() == null){
+                    Toast.makeText(getContext(), "UPLOAD MAGIC FILE ",Toast.LENGTH_LONG).show();
                 }else {
                     String uploaded = ImageUploadToServerFunction();
                     String success_message = "SLM ALREADY EXISTS";
@@ -160,7 +162,6 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
                         fragmentTransaction.commit();
                     }
                 }
-                Toast.makeText(getContext(), "Image selected : " + imageView.isSelected(),Toast.LENGTH_LONG).show();
 
             }
         });
@@ -172,6 +173,8 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
                     slm_id.setError(getString(R.string.error_field_required));
                     focusView = slm_id;
                     focusView.requestFocus();
+                }else if(imageView.getDrawable() == null){
+                    Toast.makeText(getContext(), "UPLOAD MAGIC FILE ",Toast.LENGTH_LONG).show();
                 }else {
                     String uploaded = ImageUploadToServerFunction();
                     String success_message = "SLM ALREADY EXISTS";
