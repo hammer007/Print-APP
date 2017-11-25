@@ -1,6 +1,9 @@
 package android.app.printerapp.login;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -73,8 +76,14 @@ public class Signup extends AppCompatActivity {
                 }
 
                 if(edit_password.getText().toString().length()>=8 && (isValidPassword(edit_password.getText().toString())) && (edit_password.getText().toString().equals(edit_retype_password.getText().toString()))){
-                    Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
-                    insert_to_sign_up();
+                    if(isNetworkAvailable()){
+                        int success = insert_to_sign_up();
+                        if(success == 1){
+                            Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
+                        }
+                        else Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+                    }else Toast.makeText(getApplicationContext(), "CONNECT TO INTERNET", Toast.LENGTH_LONG).show();
+
                 }
 
                 else {
@@ -86,7 +95,12 @@ public class Signup extends AppCompatActivity {
 
         });
     }
-
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
     private void initialize() {
         edit_first_name =(EditText)findViewById(R.id.your_first_name);
         edit_last_name =(EditText)findViewById(R.id.your_last_name);
