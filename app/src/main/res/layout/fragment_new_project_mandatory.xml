@@ -1,0 +1,145 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="android.app.printerapp.NewProjectMandatoryFragment">
+
+    <RelativeLayout
+        android:id="@+id/mandatoryFragment_RelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/SLM_ID_TEXT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="SLM ID:" />
+
+        <EditText
+            android:id="@+id/SLM_ID_EDITTEXT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@+id/SLM_ID_TEXT"
+            android:layout_toEndOf="@+id/SLM_ID_TEXT"
+            android:layout_toRightOf="@+id/SLM_ID_TEXT"
+            android:ems="10"
+            android:inputType="text"/>
+
+        <TextView
+            android:id="@+id/jobType_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/SLM_ID_TEXT"
+            android:layout_marginTop="28dp"
+            android:text="Job Type:"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+        <Spinner
+            android:id="@+id/jobType_editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/jobType_textView"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_toEndOf="@+id/jobType_textView"
+            android:layout_toRightOf="@+id/jobType_textView"
+            android:ems="10"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/users_TextView"
+            android:text="Users:"
+            android:layout_below="@id/jobType_textView"
+            android:layout_marginTop="28sp"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <!-- TODO: Create Users dropdown menu -->
+
+        <Spinner
+            android:id="@+id/users_editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/users_TextView"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/users_TextView"
+            android:layout_marginLeft="29dp"
+            android:ems="10"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/upload_magic_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mandatoryFragment_RelativeLayout">
+
+        <Button
+            android:id="@+id/magic_upload_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="105dp"
+            android:layout_marginStart="105dp"
+            android:layout_weight="0"
+            android:drawableRight="@drawable/upload"
+            android:ems="42"
+            android:text="Upload Magic File"></Button>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/create_printjob_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/mandatoryFragment_RelativeLayout"
+        android:layout_alignStart="@+id/mandatoryFragment_RelativeLayout"
+        android:layout_below="@+id/upload_magic_layout"
+        android:layout_gravity="left"
+        android:layout_marginLeft="246dp"
+        android:layout_marginStart="246dp"
+        android:layout_marginTop="48dp"
+        android:layout_weight="0"
+        android:text="Save"></Button>
+
+    <Button
+        android:id="@+id/create_printjob_continue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/create_printjob_save"
+        android:layout_alignBottom="@+id/create_printjob_save"
+        android:layout_gravity="right"
+        android:layout_marginLeft="92dp"
+        android:layout_marginStart="92dp"
+        android:layout_toEndOf="@+id/create_printjob_save"
+        android:layout_toRightOf="@+id/create_printjob_save"
+        android:layout_weight="0"
+        android:text="Continue"></Button>
+    <ImageView
+        android:id="@+id/magic_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/create_printjob_continue"
+        android:layout_weight="1"
+        android:contentDescription="IMAGE MAGIC FILE"
+        android:foregroundGravity="center">
+    </ImageView>
+</RelativeLayout>

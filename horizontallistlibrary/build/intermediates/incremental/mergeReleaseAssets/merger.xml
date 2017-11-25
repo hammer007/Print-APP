@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="D:\Chalmers\SoftwareEngineering\2017Group5\2017Group5\horizontallistlibrary\src\main\assets"/><source path="D:\Chalmers\SoftwareEngineering\2017Group5\2017Group5\horizontallistlibrary\build\generated\assets\shaders\release"/></dataSet><dataSet config="release"><source path="D:\Chalmers\SoftwareEngineering\2017Group5\2017Group5\horizontallistlibrary\src\release\assets"/></dataSet></merger>
