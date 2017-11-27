@@ -37,6 +37,7 @@ public class MainFragment extends Fragment {
 
     private void callMain(){
         Intent mainIntent = new Intent().setClass(getActivity(), MainActivity.class);
+        mainIntent.putExtra("path","path");
         startActivity(mainIntent);
     }
 

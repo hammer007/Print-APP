@@ -41,10 +41,28 @@ public class Config {
     public static final String POSTPRINTING_blasting_type = "blasting_type" ;
     public static final String POSTPRINTING_blasting_comment = "blasting_comment" ;
     public static final String POSTPRINTING_stress_id = "stress_id";
+    public static final String POSTPRINTING_stress_temprature = "temprature";
+    public static final String POSTPRINTING_stress_time = "time";
+    public static final String POSTPRINTING_stress_shielding_gas = "shielding_gas";
+    public static final String POSTPRINTING_stress_comment = "comment";
     public static final String POSTPRINTING_hardening_id = "hardening_id";
+    public static final String POSTPRINTING_hardening_temperature = "temperature";
+    public static final String POSTPRINTING_hardening_time = "time";
+    public static final String POSTPRINTING_hardening_comment = "comment";
     public static final String POSTPRINTING_tempering_id = "tempering_id";
+    public static final String POSTPRINTING_tempering_temperature = "temperature";
+    public static final String POSTPRINTING_tempering_time = "time";
+    public static final String POSTPRINTING_tempering_cycles = "cycles";
+    public static final String POSTPRINTING_tempering_comment = "comment";
     public static final String POSTPRINTING_solution_id = "solution_id";
+    public static final String POSTPRINTING_solution_temperature = "temperature";
+    public static final String POSTPRINTING_solution_time = "time";
+    public static final String POSTPRINTING_solution_comment = "comment";
     public static final String POSTPRINTING_aging_id = "aging_id";
+    public static final String POSTPRINTING_aging_temperature = "temperature";
+    public static final String POSTPRINTING_aging_time = "time";
+    public static final String POSTPRINTING_aging_comment = "comment";
+    public static final String POSTPRINTING_aging_cycles = "cycles";
     public static final String PROJECT_number = "project_number";
     public static final String PROJECT_name = "project_name";
     public static final String PROJECT_slm_id = "slm_id";
@@ -60,6 +78,11 @@ public class Config {
     public static final String TAG_INSERT_PREPRINTING = "insert_pre_printing";
     public static final String TAG_INSERT_PRINTING = "insert_printing";
     public static final String TAG_INSERT_POSTPRINTING = "insert_post_printing";
+    public static final String TAG_INSERT_POSTPRINTING_STRESS = "insert_stress";
+    public static final String TAG_INSERT_POSTPRINTING_HARDINING = "insert_hardning";
+    public static final String TAG_INSERT_POSTPRINTING_SOLUTION = "insert_solution";
+    public static final String TAG_INSERT_POSTPRINTING_TEMPERING = "insert_termpering";
+    public static final String TAG_INSERT_POSTPRINTING_AGING = "insert_aging";
     public static final String TAG_CREATE_PROJECT = "create_project";
     public static final String TAG_CREATE_NOTHING = "nothing";
     public static final String TAG_SUCCESS = "success";
@@ -74,5 +97,14 @@ public class Config {
     public static final String url_insert_sign_up = "https://group5sep.000webhostapp.com/insert_sign_up.php";
     public static final String url_get_users = "https://group5sep.000webhostapp.com/users.php";
     public static final String url_insert_access = "https://group5sep.000webhostapp.com/insert_access_table.php";
-
+    public static final String url_insert_post_stress = "https://group5sep.000webhostapp.com/insert_stress_relieving.php";
+    public static final String url_insert_post_hardning = "https://group5sep.000webhostapp.com/insert_hardening.php";
+    public static final String url_insert_post_tempering = "https://group5sep.000webhostapp.com/insert_tempering.php";
+    public static final String url_insert_post_aging = "https://group5sep.000webhostapp.com/insert_aging_treatment.php";
+    public static final String url_insert_post_solution = "https://group5sep.000webhostapp.com/insert_solution_treatment.php";
+    public static final String url_get_ids = "https://group5sep.000webhostapp.com/postpringint_get_ids.php";
+    public static final String url_get_hardening_ids = "https://group5sep.000webhostapp.com/postpringint_get_hardening_ids.php";
+    public static final String url_get_tempering_ids = "https://group5sep.000webhostapp.com/postpringint_get_tempering_ids.php";
+    public static final String url_get_solution_ids = "https://group5sep.000webhostapp.com/postpringint_get_solution_ids.php";
+    public static final String url_get_aging_ids = "https://group5sep.000webhostapp.com/postpringint_get_aging_ids.php";
 }

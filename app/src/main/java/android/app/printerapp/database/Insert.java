@@ -31,6 +31,11 @@ public class Insert extends AsyncTask<String, String, Integer> {
         else if (do_what == config.TAG_INSERT_PRINTING) success = insertToDB(config.url_insert_printing);
         else if (do_what == config.TAG_INSERT_SIGNUP) success = insertToDB(config.url_insert_sign_up);
         else if (do_what == config.TAG_INSERT_POSTPRINTING) success = insertToDB(config.url_insert_post_printing);
+        else if (do_what == config.TAG_INSERT_POSTPRINTING_STRESS) success = insertToDB(config.url_insert_post_stress);
+        else if (do_what == config.TAG_INSERT_POSTPRINTING_HARDINING) success = insertToDB(config.url_insert_post_hardning);
+        else if (do_what == config.TAG_INSERT_POSTPRINTING_AGING) success = insertToDB(config.url_insert_post_aging);
+        else if (do_what == config.TAG_INSERT_POSTPRINTING_SOLUTION) success = insertToDB(config.url_insert_post_solution);
+        else if (do_what == config.TAG_INSERT_POSTPRINTING_TEMPERING) success = insertToDB(config.url_insert_post_tempering);
         return success;
     }
 

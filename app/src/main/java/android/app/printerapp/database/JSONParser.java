@@ -70,14 +70,15 @@ public class JSONParser {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        Log.e("FIRST RETURNED", is + "");
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    is, "iso-8859-1"), 8);
+                    is, "iso-8859-1"), 80);
             StringBuilder sb = new StringBuilder();
             String line = null;
             while ((line = reader.readLine()) != null) {
                 sb.append(line + "\n");
+                Log.e("WHILE LOOP", line + "");
             }
             is.close();
             System.out.print("sb:" +sb );

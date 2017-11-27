@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.app.printerapp.database.Insert;
 import android.app.printerapp.database.SearchUser;
+import android.app.printerapp.login.MainActivityNew;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -185,7 +186,7 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
                     }
                     else {
                         insert_to_access_table();
-                        Intent intent = new Intent(getContext(), MainActivity.class);
+                        Intent intent = new Intent(getContext(), MainActivityNew.class);
                         startActivity(intent);
                     }
                 }

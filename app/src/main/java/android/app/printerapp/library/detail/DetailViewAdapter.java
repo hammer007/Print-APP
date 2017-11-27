@@ -5,6 +5,7 @@ import android.app.printerapp.R;
 import android.app.printerapp.library.LibraryController;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -83,6 +84,7 @@ public class DetailViewAdapter extends ArrayAdapter<File> {
             @Override
             public void onClick(View v) {
                 MainActivity.requestOpenFile(f.getAbsolutePath());
+                Log.d("Path", f.getAbsolutePath() + "");
             }
         });
 

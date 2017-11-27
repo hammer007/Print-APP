@@ -3,6 +3,9 @@ package android.app.printerapp.login;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.printerapp.MainActivity;
+import android.app.printerapp.NewPrintJobFragment;
+import android.app.printerapp.database.Postprint_getIDs;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -36,6 +39,7 @@ import android.widget.TextView;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -69,6 +73,16 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+        Button test_3d = (Button)findViewById(R.id.test_3d);
+        test_3d.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mainIntent = new Intent().setClass(Login.this, MainActivity.class);
+                mainIntent.putExtra("path","/storage/emulated/0/PrintManager/Files/Kcs_clamp_left/_stl/Kcs_clamp_left.stl");
+                startActivity(mainIntent);
+                //MainActivity.requestOpenFile("/storage/emulated/0/PrintManager/Files/Kcs_clamp_left/_stl/Kcs_clamp_left.stl");
+            }
+        });
         usernameText = (AutoCompleteTextView) findViewById(R.id.username);
         passwordText = (EditText) findViewById(R.id.password);
         passwordText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -149,10 +163,12 @@ public class Login extends AppCompatActivity {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             if(isNetworkAvailable()) {
+                Log.d("Internet found? ", "true");
                 showProgress(true);
                 mAuthTask = new UserLoginTask(username, password);
                 mAuthTask.execute((Void) null);
             }else{
+                Log.d("Internet found? ", "false");
                 Toast.makeText(this,"CONNECT TO INTERNET", Toast.LENGTH_LONG).show();
             }
         }

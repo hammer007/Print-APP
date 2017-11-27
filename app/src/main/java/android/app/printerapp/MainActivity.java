@@ -24,6 +24,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -105,6 +106,12 @@ public class MainActivity extends ActionBarActivity {
     
         //Set tab host for the view
         setTabHost();
+        String s = getIntent().getStringExtra("path");
+        Log.d("first am here","path : " + s );
+        if(!s.equals("path")){
+            Log.d("am here",s);
+            requestOpenFile(s);
+        }
 
     }
 
@@ -452,5 +459,12 @@ Close app on locale change
 
         super.onPause();
 
+    }
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if(intent.getStringExtra("path").equals("requestOpenFile")){
+            requestOpenFile("/storage/emulated/0/PrintManager/Files/Kcs_clamp_left/_stl/Kcs_clamp_left.stl");
+        }
     }
 }

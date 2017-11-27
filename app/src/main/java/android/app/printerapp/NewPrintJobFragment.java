@@ -3,6 +3,10 @@ package android.app.printerapp;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.app.printerapp.database.CheckRandom;
+import android.app.printerapp.database.Postprint_getIDs;
+import android.app.printerapp.database.SearchUser;
+import android.app.printerapp.login.MainActivityNew;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,6 +29,8 @@ import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,6 +49,8 @@ import static android.content.ContentValues.TAG;
  * A simple {@link Fragment} subclass.
  */
 public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+    int stress_ids [];
+    String returned = "";
     Calendar myCalendar = Calendar.getInstance();
     Config config;
     Insert insert;
@@ -53,7 +61,10 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
     EditText typeofmachine_editText, powerweight_editText, powerweightatEnd_editText, powderwaste_editText, material_editText;
     EditText buildplatform_editText, printTune_editText, powderused_editText, reused_times_editText, agingNumberofCycles_editText;
     EditText numberofLayers_editText, dpcFactor_editText, minExposureTime_editText, printingComments_editText, hardeningComment_editText;
-    EditText postID_editText, urlphoto_editText, WEDMcomments_editText, blastingType_editText, blastingTime_editText, hardeningTime_editText;
+    EditText WEDMcomments_editText;
+    EditText blastingType_editText;
+    EditText blastingTime_editText;
+    EditText hardeningTime_editText;
     EditText blastingComment_editText, stressTemp_editText, stressTime_editText, stressComment_editText, hardeningTemp_editText;
     EditText temperingTemp_editText, temperingTime_editText, temperingNumberofCycles_editText, temperingComment_editText, solutionTreatmentTemp_editText;
     EditText solutionTreatmentTime_editText, solutionTreatmentComment_editText, agingTemp_editText, agingTime_editText;
@@ -61,12 +72,19 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
     TextView temperingTemp_Text, temperingTime_Text, temperingNumberofCycles_Text, temperingComment_Text, solutionTreatment_Text;
     TextView stressComment_Text, hardening_Text, hardeningTemp_Text, hardeningTime_Text, hardeningComment_Text, tempering_Text, agingNumberofCycles_Text;
     TextView blastingComment_Text, heatTreatment_Text, stressRelieving_Text, stressTemp_Text, stressTime_Text, stressShieldingGas_Text;
-    TextView postID_Text, urlphoto_Text, supportremoval_Text, WEDM_Text, WEDMcomments_Text, blasting_Text, blastingType_Text, blastingTime_Text;
+    TextView supportremoval_Text;
+    TextView WEDM_Text;
+    TextView WEDMcomments_Text;
+    TextView blasting_Text;
+    TextView blastingType_Text;
+    TextView blastingTime_Text;
     TextView projectID_Text, partnumber_Text, numberofparts_Text, printingparameters_Text, comment_Text, if_textView, solutionTreatmentTemp_Text;
     TextView slmid_Text, starttime_Text, endtime_Text, date_Text, operator_Text, typeofmachine_Text, powerweight_Text;
     TextView powerweightatEnd_Text, powderwaste_Text,material_Text, buildplatform_Text, printTune_Text, powderCondition_Text, numberofLayers_Text;
     TextView dpcFactor_Text, minExposureTime_Text, printingComments_Text, buildId_textView, powderused_textView;
     Spinner spinner, supportremovalSpinner, WEDMSpinner, blastingSpinner, shieldingSpinner;
+    TextView projectAcronym_textView, projectAcronym_Edittext;
+    Button upload_stl,upload_cad,upload_snapshot;
     boolean expanded_preprinting = false, expanded_printing = false, expanded_posprinting = false;
 
     public NewPrintJobFragment() {
@@ -110,7 +128,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
                 else if(success_pre_printing != 1) Toast.makeText(getContext(), "Insertion to Pre printing was Successful", Toast.LENGTH_LONG).show();
                 else if(success_printing != 1) Toast.makeText(getContext(), "Insertion to Printing was Successful", Toast.LENGTH_LONG).show();
 
-                Intent intent = new Intent(getContext(), MainActivity.class);
+                Intent intent = new Intent(getContext(), MainActivityNew.class);
                 startActivity(intent);
             }
         });
@@ -244,10 +262,37 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
 
     }
 
+    private int get_post_ids(String url, String name) {
+        int random = (int)(Math.random()*1000);
+        List <NameValuePair> params = new ArrayList <NameValuePair>();
+        params.add(new BasicNameValuePair("ids", "ids"));
+        Postprint_getIDs search = new Postprint_getIDs(params, url);
+        try {
+            JSONArray jarray = search.execute().get();
+            stress_ids = new int[jarray.length()];
+            Log.d("length", jarray.length() + "");
+            for (int i = 0; i < jarray.length(); i++) {
+                JSONObject jsonObject = jarray.getJSONObject(i);
+                stress_ids[i] =(int)jsonObject.getInt(name);
+            }
+            CheckRandom checkRandom = new CheckRandom();
+            random = checkRandom.check_random(stress_ids,random);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return random;
+    }
     private int insert_to_postprinting() {
         String blastingTime = blastingTime_editText.getText().toString();
         if(TextUtils.isEmpty(blastingTime)) blastingTime = "null";
         int success = -1;
+        int stress = insert_stress_releving();
+        int hard = insert_hardening();
+        int temp = insert_tempring();
+        int solution = insert_solution();
+        int aging = insert_aging();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         //AUTO INCREMENT params.add(new BasicNameValuePair(config.PRINTING_printing_id, 2 + ""));
         params.add(new BasicNameValuePair(config.POSTPRINTING_slm_id, slmid_editText.getText().toString()));
@@ -258,9 +303,15 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         params.add(new BasicNameValuePair(config.POSTPRINTING_blasting_time, blastingTime));
         params.add(new BasicNameValuePair(config.POSTPRINTING_blasting_type, blastingType_editText.getText().toString()));
         params.add(new BasicNameValuePair(config.POSTPRINTING_blasting_comment, blastingComment_editText.getText().toString()));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_aging_id, aging +""));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_solution_id, solution +""));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_tempering_id, temp +""));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_hardening_id, hard +""));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_stress_id, stress +""));
         insert = new Insert(params, config.TAG_INSERT_POSTPRINTING);
         try {
             success = insert.execute().get();
+            returned = returned + " BASIC : " + success;
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -268,6 +319,124 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         }
         return success;
     }
+
+    private int insert_aging() {
+        String temp = agingTemp_editText.getText().toString();
+        String time = agingTime_editText.getText().toString();
+        String cycles = agingNumberofCycles_editText.getText().toString();
+        if(TextUtils.isEmpty(temp)) temp = "null";
+        if(TextUtils.isEmpty(time)) time = "null";
+        if(TextUtils.isEmpty(cycles)) cycles = "null";
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        int aging_ids = get_post_ids(config.url_get_aging_ids, "ids");
+        params.add(new BasicNameValuePair(config.POSTPRINTING_aging_id, aging_ids + ""));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_aging_temperature, temp));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_aging_time, time));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_aging_cycles, cycles));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_aging_comment, agingComment_editText.getText().toString()));
+        insert = new Insert(params, config.TAG_INSERT_POSTPRINTING_AGING);
+        try {
+            insert.execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return aging_ids;
+    }
+
+    private int insert_solution() {
+        String temp = solutionTreatmentTemp_editText.getText().toString();
+        String time = solutionTreatmentTemp_editText.getText().toString();
+        if(TextUtils.isEmpty(temp)) temp = "null";
+        if(TextUtils.isEmpty(time)) time = "null";
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        int solution_ids = get_post_ids(config.url_get_solution_ids, "ids");
+        params.add(new BasicNameValuePair(config.POSTPRINTING_solution_id, solution_ids + ""));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_solution_temperature, temp));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_solution_time, time));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_solution_comment, solutionTreatmentComment_editText.getText().toString()));
+        insert = new Insert(params, config.TAG_INSERT_POSTPRINTING_SOLUTION);
+        try {
+            insert.execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return solution_ids;
+    }
+
+    private int insert_tempring() {
+        String temp = temperingTemp_editText.getText().toString();
+        String time = temperingTime_editText.getText().toString();
+        String cycles = temperingNumberofCycles_editText.getText().toString();
+        if(TextUtils.isEmpty(temp)) temp = "null";
+        if(TextUtils.isEmpty(time)) time = "null";
+        if(TextUtils.isEmpty(cycles)) cycles = "null";
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        int tempering_ids = get_post_ids(config.url_get_tempering_ids, "ids");
+        params.add(new BasicNameValuePair(config.POSTPRINTING_tempering_id, tempering_ids + ""));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_tempering_temperature, temp));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_tempering_time, time));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_tempering_cycles, cycles));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_tempering_comment, temperingComment_editText.getText().toString()));
+        insert = new Insert(params, config.TAG_INSERT_POSTPRINTING_TEMPERING);
+        try {
+            insert.execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return tempering_ids;
+    }
+
+    private int insert_hardening() {
+        String temp = hardeningTemp_editText.getText().toString();
+        String time = hardeningTime_editText.getText().toString();
+        if(TextUtils.isEmpty(temp)) temp = "null";
+        if(TextUtils.isEmpty(time)) time = "null";
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        int hardening_ids = get_post_ids(config.url_get_hardening_ids, "ids");
+        params.add(new BasicNameValuePair(config.POSTPRINTING_hardening_id, hardening_ids + ""));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_hardening_temperature, temp));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_hardening_time, time));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_hardening_comment, hardeningComment_editText.getText().toString()));
+        insert = new Insert(params, config.TAG_INSERT_POSTPRINTING_HARDINING);
+        try {
+            insert.execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return hardening_ids;
+    }
+
+    private int insert_stress_releving() {
+        String temp = stressTemp_editText.getText().toString();
+        String time = stressTime_editText.getText().toString();
+        if(TextUtils.isEmpty(temp)) temp = "null";
+        if(TextUtils.isEmpty(time)) time = "null";
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        int stress_ids = get_post_ids(config.url_get_ids, "ids");
+        params.add(new BasicNameValuePair(config.POSTPRINTING_stress_id, stress_ids + ""));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_stress_temprature, temp));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_stress_time, time));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_stress_shielding_gas, shieldingSpinner.getSelectedItem().toString()));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_stress_comment, stressComment_editText.getText().toString()));
+        insert = new Insert(params, config.TAG_INSERT_POSTPRINTING_STRESS);
+        try {
+            insert.execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return stress_ids;
+    }
+
     private int insert_to_printing() {
         String starttime = starttime_editText.getText().toString();
         String endtime = endtime_editText.getText().toString();
@@ -346,7 +515,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         if(projectId.isEmpty()) projectId = "null";
         params.add(new BasicNameValuePair(config.PROJECT_number, projectId));
         params.add(new BasicNameValuePair(config.PROJECT_slm_id, slm_id_project));
-        params.add(new BasicNameValuePair(config.PROJECT_name, "dummy value"));
+        params.add(new BasicNameValuePair(config.PROJECT_name, projectAcronym_Edittext.getText().toString()));
         insert = new Insert(params, config.TAG_CREATE_PROJECT);
         try {
             success = insert.execute().get();
@@ -420,6 +589,8 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
 
         preprinting_expand_button = (Button)view.findViewById(R.id.preprinting_expand_button);
         projectID_editText = (EditText)view.findViewById(R.id.projectID_editText);
+        projectAcronym_textView = (TextView)view.findViewById(R.id.projectAcronym_textView);
+        projectAcronym_Edittext = (EditText)view.findViewById(R.id.projectAcronym_Edittext);
         partnumber_editText = (EditText)view.findViewById(R.id.partnumber_editText);
         buildId_editText = (EditText)view.findViewById(R.id.buildId_editText);
         buildId_textView = (TextView) view.findViewById(R.id.buildId_textView);
@@ -480,10 +651,6 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
 
         //------ Post-Printing Fields ------//
         posprinting_expand_button = (Button)view.findViewById(R.id.posprinting_expand_button);
-        postID_Text = (TextView)view.findViewById(R.id.postID_textView);
-        postID_editText = (EditText)view.findViewById(R.id.postID_editText);
-        urlphoto_Text = (TextView)view.findViewById(R.id.urlphoto_textView);
-        urlphoto_editText = (EditText)view.findViewById(R.id.urlphoto_editText);
         supportremoval_Text = (TextView)view.findViewById(R.id.supportRemoval_textView);
         WEDM_Text = (TextView)view.findViewById(R.id.WEDM_textView);
         WEDMcomments_Text = (TextView)view.findViewById(R.id.WEDMcomments_textView);
@@ -538,6 +705,10 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         agingComment_editText = (EditText)view.findViewById(R.id.agingComment_editText);
         postprintingSave_Button = (Button)view.findViewById(R.id.postprintingSave_Button);
 
+        upload_stl = (Button)view.findViewById(R.id.upload_stl);
+        upload_cad = (Button)view.findViewById(R.id.upload_cad);
+        upload_snapshot = (Button)view.findViewById(R.id.upload_postprinting);
+
         hide_preprining();
         hide_prining();
         hide_posprinting();
@@ -577,6 +748,8 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
     }
 
     private void hide_preprining(){
+        projectAcronym_Edittext.setVisibility(View.GONE);
+        projectAcronym_textView.setVisibility(View.GONE);
         projectID_editText.setVisibility(View.GONE);
         partnumber_editText.setVisibility(View.GONE);
         buildId_textView.setVisibility(View.GONE);
@@ -593,6 +766,8 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         preprinting_expand_button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.expand, 0);
     }
     private void show_preprining(){
+        projectAcronym_Edittext.setVisibility(View.VISIBLE);
+        projectAcronym_textView.setVisibility(View.VISIBLE);
         projectID_editText.setVisibility(View.VISIBLE);
         partnumber_editText.setVisibility(View.VISIBLE);
         buildId_textView.setVisibility(View.VISIBLE);
@@ -600,7 +775,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         numberofparts_editText.setVisibility(View.VISIBLE);
         printingparameters_editText.setVisibility(View.VISIBLE);
         comment_editText.setVisibility(View.VISIBLE);
-        preprintingSave_Button.setVisibility(View.VISIBLE);
+        preprintingSave_Button.setVisibility(View.GONE);
         preprinting_expand_button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.shrink, 0);
         projectID_Text.setVisibility(View.VISIBLE);
         partnumber_Text.setVisibility(View.VISIBLE);
@@ -671,7 +846,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         dpcFactor_editText.setVisibility(View.VISIBLE);
         minExposureTime_editText.setVisibility(View.VISIBLE);
         printingComments_editText.setVisibility(View.VISIBLE);
-        printingSave_Button.setVisibility(View.VISIBLE);
+        printingSave_Button.setVisibility(View.GONE);
         spinner.setVisibility(View.VISIBLE);
         slmid_Text.setVisibility(View.VISIBLE);
         starttime_Text.setVisibility(View.VISIBLE);
@@ -693,12 +868,6 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         printing_expand_button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.shrink, 0);
     }
     private void hide_posprinting(){
-
-        postID_Text.setVisibility(View.GONE);
-        postID_editText.setVisibility(View.GONE);
-        //TODO: add Project ID here ----
-        urlphoto_Text.setVisibility(View.GONE);
-        urlphoto_editText.setVisibility(View.GONE);
         supportremoval_Text.setVisibility(View.GONE);
         supportremovalSpinner.setVisibility(View.GONE);
         WEDM_Text.setVisibility(View.GONE);
@@ -761,12 +930,6 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
 
     }
     private void show_posprinting(){
-
-        postID_Text.setVisibility(View.VISIBLE);
-        postID_editText.setVisibility(View.VISIBLE);
-        //TODO: add Project ID here ----
-        urlphoto_Text.setVisibility(View.VISIBLE);
-        urlphoto_editText.setVisibility(View.VISIBLE);
         supportremoval_Text.setVisibility(View.VISIBLE);
         supportremovalSpinner.setVisibility(View.VISIBLE);
         WEDM_Text.setVisibility(View.VISIBLE);
@@ -823,7 +986,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         agingNumberofCycles_editText.setVisibility(View.VISIBLE);
         agingComment_Text.setVisibility(View.VISIBLE);
         agingComment_editText.setVisibility(View.VISIBLE);
-        postprintingSave_Button.setVisibility(View.VISIBLE);
+        postprintingSave_Button.setVisibility(View.GONE);
 
         posprinting_expand_button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.shrink, 0);
 

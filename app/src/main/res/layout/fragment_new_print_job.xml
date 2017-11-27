@@ -56,12 +56,33 @@
                 android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/projectAcronym_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/partnumber_textView"
+                android:layout_alignParentStart="true"
+                android:text="Project Acronym:"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+            <EditText
+                android:id="@+id/projectAcronym_Edittext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/projectID_editText"
+                android:layout_toEndOf="@+id/projectAcronym_textView"
+                android:layout_toRightOf="@+id/projectAcronym_textView"
+                android:ems="10"
+                android:inputType="text" />
+
+            <TextView
                 android:id="@+id/partnumber_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/projectID_textView"
+                android:layout_below="@+id/projectAcronym_Edittext"
                 android:layout_marginTop="20dp"
                 android:text="Part Number:"
                 android:textSize="18sp"
@@ -73,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_below="@+id/projectID_editText"
+                android:layout_below="@+id/projectAcronym_Edittext"
                 android:layout_toEndOf="@+id/partnumber_textView"
                 android:layout_toRightOf="@+id/partnumber_textView"
                 android:ems="10"
@@ -694,57 +715,12 @@
                 android:background="@color/colorPrimaryGreen"
                 android:drawableRight="@drawable/expand"/>
 
-            <TextView
-                android:id="@+id/postID_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/posprinting_expand_button"
-                android:layout_marginTop="20dp"
-                android:text="Post ID:"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
-
-            <EditText
-                android:id="@+id/postID_editText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/postID_textView"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_toEndOf="@+id/postID_textView"
-                android:layout_toRightOf="@+id/postID_textView"
-                android:ems="10"
-                android:inputType="text"/>
-
-            <!-- TODO: Add the Project ID field -->
-
-            <TextView
-                android:id="@+id/urlphoto_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/postID_textView"
-                android:layout_marginTop="20dp"
-                android:text="URL Photo:"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
-
-            <EditText
-                android:id="@+id/urlphoto_editText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/urlphoto_textView"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_toEndOf="@+id/urlphoto_textView"
-                android:layout_toRightOf="@+id/urlphoto_textView"
-                android:ems="10"
-                android:inputType="text"/>
 
             <TextView
                 android:id="@+id/supportRemoval_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/urlphoto_textView"
+                android:layout_below="@+id/posprinting_expand_button"
                 android:layout_marginTop="20dp"
                 android:text="Support Removal:"
                 android:textSize="18sp"
@@ -1347,12 +1323,53 @@
                 android:text="Save" />
 
         </RelativeLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/posprinting_relativeLayout"
+            android:id="@+id/uploadfiles_insert">
+            <Button
+                android:id="@+id/upload_stl"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableTop="@mipmap/ic_file_upload_black_48dp"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:background="@drawable/shadow"
+                android:layout_weight="1.0"
+                android:textSize="18sp"
+                android:text="Upload your STL model"
+                tools:text="Upload your STL model" />
+
+            <Button
+                android:id="@+id/upload_cad"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableTop="@mipmap/ic_file_upload_black_48dp"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:background="@drawable/shadow"
+                android:layout_weight="1.0"
+                android:textSize="18sp"
+                android:text="Upload your CAD file"
+                tools:text="Upload your CAD file" />
+            <Button
+                android:id="@+id/upload_postprinting"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableTop="@mipmap/ic_file_upload_black_48dp"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:background="@drawable/shadow"
+                android:layout_weight="1.0"
+                android:textSize="18sp"
+                android:text="Upload your Snapshot of printjob"
+                tools:text="Upload your Snapshot" />
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/submit_Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/posprinting_relativeLayout"
+            android:layout_below="@+id/uploadfiles_insert"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
