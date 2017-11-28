@@ -131,9 +131,13 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
                 else if(success_postprinting != 1) Toast.makeText(getContext(), "Insertion to Post printing was Successful", Toast.LENGTH_LONG).show();
                 else if(success_pre_printing != 1) Toast.makeText(getContext(), "Insertion to Pre printing was Successful", Toast.LENGTH_LONG).show();
                 else if(success_printing != 1) Toast.makeText(getContext(), "Insertion to Printing was Successful", Toast.LENGTH_LONG).show();
-                int stl_uploaded = upload_stl();
-                if(stl_uploaded == 1) Toast.makeText(getContext(), "Uploading STL was Successful", Toast.LENGTH_LONG).show();
-                else Toast.makeText(getContext(), "ERROR Uploading STL",Toast.LENGTH_LONG).show();
+                if(!stlpath.isEmpty()) {
+                    int stl_uploaded = upload_stl();
+                    if (stl_uploaded == 1)
+                        Toast.makeText(getContext(), "Uploading STL was Successful", Toast.LENGTH_LONG).show();
+                    else
+                        Toast.makeText(getContext(), "ERROR Uploading STL", Toast.LENGTH_LONG).show();
+                }
                 Intent intent = new Intent(getContext(), MainActivityNew.class);
                 startActivity(intent);
             }
