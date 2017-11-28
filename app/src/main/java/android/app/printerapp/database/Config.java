@@ -41,7 +41,7 @@ public class Config {
     public static final String POSTPRINTING_blasting_type = "blasting_type" ;
     public static final String POSTPRINTING_blasting_comment = "blasting_comment" ;
     public static final String POSTPRINTING_stress_id = "stress_id";
-    public static final String POSTPRINTING_stress_temprature = "temprature";
+    public static final String POSTPRINTING_stress_temprature = "temperature";
     public static final String POSTPRINTING_stress_time = "time";
     public static final String POSTPRINTING_stress_shielding_gas = "shielding_gas";
     public static final String POSTPRINTING_stress_comment = "comment";

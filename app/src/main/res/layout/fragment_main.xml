@@ -68,8 +68,7 @@
             android:textSize="18sp"
             android:background="@drawable/shadow"
             android:backgroundTint="@color/colorPrimaryDark"
-            android:text="Create Material"
-            tools:text="Create Material" />
+            android:text="Create Material" />
 
     </LinearLayout>
 

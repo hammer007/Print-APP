@@ -4,10 +4,12 @@ package android.app.printerapp;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.app.printerapp.database.CheckRandom;
+import android.app.printerapp.database.PathUtil;
 import android.app.printerapp.database.Postprint_getIDs;
-import android.app.printerapp.database.SearchUser;
+import android.app.printerapp.database.UploadFilesAsync;
 import android.app.printerapp.login.MainActivityNew;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -32,16 +34,16 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 import android.app.printerapp.database.Insert;
 import android.app.printerapp.database.Config;
 
+import static android.app.Activity.RESULT_OK;
 import static android.content.ContentValues.TAG;
 
 
@@ -49,6 +51,8 @@ import static android.content.ContentValues.TAG;
  * A simple {@link Fragment} subclass.
  */
 public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+    String stlpath = "";
+    int success_stl = -1;
     int stress_ids [];
     String returned = "";
     Calendar myCalendar = Calendar.getInstance();
@@ -127,7 +131,9 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
                 else if(success_postprinting != 1) Toast.makeText(getContext(), "Insertion to Post printing was Successful", Toast.LENGTH_LONG).show();
                 else if(success_pre_printing != 1) Toast.makeText(getContext(), "Insertion to Pre printing was Successful", Toast.LENGTH_LONG).show();
                 else if(success_printing != 1) Toast.makeText(getContext(), "Insertion to Printing was Successful", Toast.LENGTH_LONG).show();
-
+                int stl_uploaded = upload_stl();
+                if(stl_uploaded == 1) Toast.makeText(getContext(), "Uploading STL was Successful", Toast.LENGTH_LONG).show();
+                else Toast.makeText(getContext(), "ERROR Uploading STL",Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getContext(), MainActivityNew.class);
                 startActivity(intent);
             }
@@ -257,9 +263,25 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
                 }
             }
         });
-
+        upload_stl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showFileChooser();
+            }
+        });
         return view;
 
+    }
+
+    private int upload_stl() {
+        UploadFilesAsync uploadFilesAsync = new UploadFilesAsync(stlpath, slm_id);
+        try {success_stl = uploadFilesAsync.execute(stlpath).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return success_stl;
     }
 
     private int get_post_ids(String url, String name) {
@@ -990,5 +1012,48 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
 
         posprinting_expand_button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.shrink, 0);
 
+    }
+    private static final int FILE_SELECT_CODE = 0;
+
+    private void showFileChooser() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("*/*");
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+        try {
+            startActivityForResult(
+                    Intent.createChooser(intent, "Select a File to Upload"),
+                    FILE_SELECT_CODE);
+        } catch (android.content.ActivityNotFoundException ex) {
+            // Potentially direct the user to the Market with a Dialog
+            Toast.makeText(getContext(), "Please install a File Manager.",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case FILE_SELECT_CODE:
+                if (resultCode == RESULT_OK) {
+                    // Get the Uri of the selected file
+                    Uri uri = data.getData();
+                    Log.d("TAG", "File Uri: " + uri.toString());
+                    // Get the path
+                    try {
+                        stlpath= PathUtil.getPath(getContext(),uri);
+                    } catch (URISyntaxException e) {
+                        e.printStackTrace();
+                    }
+                    Log.d("TAG", "File Path: " + stlpath);
+                    if(!stlpath.isEmpty()){
+
+                    }
+                    // Get the file instance
+                    // File file = new File(path);
+                    // Initiate the upload
+                }
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

@@ -13,7 +13,7 @@ import android.widget.Button;
  * A simple {@link Fragment} subclass.
  */
 public class MainFragment extends Fragment {
-    Button _3d;
+    Button _3d,createMaterial_button;
     View view;
     public MainFragment() {
         // Required empty public constructor
@@ -26,10 +26,18 @@ public class MainFragment extends Fragment {
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_main, container, false);
         _3d = (Button)view.findViewById(R.id.visualize_button);
+        createMaterial_button = (Button)view.findViewById(R.id.createMaterial_button);
         _3d.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 callMain();
+            }
+        });
+        createMaterial_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mainIntent = new Intent().setClass(getActivity(), CreatematerialFragment.class);
+                startActivity(mainIntent);
             }
         });
         return view;

@@ -4,34 +4,26 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.printerapp.MainActivity;
-import android.app.printerapp.NewPrintJobFragment;
-import android.app.printerapp.database.Postprint_getIDs;
+import android.app.printerapp.database.PathUtil;
+import android.app.printerapp.database.UploadFilesAsync;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
 
-import android.content.CursorLoader;
-import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,20 +31,20 @@ import android.widget.TextView;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
-import android.app.printerapp.login.MainActivityNew;
 import android.app.printerapp.R;
 import android.app.printerapp.database.Config;
 import android.app.printerapp.database.JSONParser;
 import android.widget.Toast;
-
-import static android.Manifest.permission.READ_CONTACTS;
 
 public class Login extends AppCompatActivity {
     int success = -1;
@@ -116,7 +108,6 @@ public class Login extends AppCompatActivity {
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
-
     private void gotoSignupPage() {
         Intent i = new Intent(this , Signup.class);
         startActivity(i);
