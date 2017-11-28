@@ -5,6 +5,7 @@ import android.app.printerapp.MainFragment;
 import android.app.printerapp.NewProjectMandatoryFragment;
 import android.app.printerapp.R;
 import android.app.printerapp.SearchFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -115,10 +116,20 @@ public class MainActivityNew extends AppCompatActivity
                     getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment);
             fragmentTransaction.commit();
+
+        } else if (id == R.id.nav_logout){
+
+            logout();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void logout() {
+
+        Intent intent = new Intent().setClass(this, Login.class);
+        startActivity(intent);
     }
 }

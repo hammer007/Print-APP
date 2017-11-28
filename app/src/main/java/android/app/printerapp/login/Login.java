@@ -47,6 +47,14 @@ import android.app.printerapp.database.JSONParser;
 import android.widget.Toast;
 
 public class Login extends AppCompatActivity {
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent().setClass(this, Login.class);
+        startActivity(intent);
+    }
+
     int success = -1;
     Config config;
     JSONParser jsonParser = new JSONParser();
