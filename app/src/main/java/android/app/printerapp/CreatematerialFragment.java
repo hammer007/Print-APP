@@ -30,7 +30,7 @@ public class  CreatematerialFragment extends AppCompatActivity {
     Uri uri;
 
     // Server URL.
-    public static final String PDF_UPLOAD_HTTP_URL = "https://android-examples.000webhostapp.com/server_upload_pdf.php";
+    public static final String PDF_UPLOAD_HTTP_URL = "https://group5sep.000webhostapp.com/server_upload_pdf.php";
 
     // Pdf upload request code.
     public int PDF_REQ_CODE = 1;
