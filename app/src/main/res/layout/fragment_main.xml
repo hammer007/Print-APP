@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/fragmentMain_LinearLayout"
     tools:context="android.app.printerapp.MainFragment">
 
     <LinearLayout
@@ -27,17 +28,17 @@
             tools:text="Visualize your 3D model" />
 
         <Button
-            android:id="@+id/upload_button"
+            android:id="@+id/newPrintJob_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:drawableTop="@mipmap/ic_file_upload_black_48dp"
+            android:drawableTop="@drawable/ic_library_books_black_48dp"
             android:paddingTop="50dp"
             android:backgroundTint="@color/colorPrimaryDark"
             android:background="@drawable/shadow"
             android:layout_weight="1.0"
             android:textSize="18sp"
-            android:text="Upload your STL model"
-            tools:text="Upload your STL model" />
+            android:text="New Print Job"
+            tools:text="New Print Job" />
 
     </LinearLayout>
 
@@ -48,27 +49,29 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/fecth_button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="50dp"
-            android:layout_weight="1.0"
-            android:background="@drawable/shadow"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:textSize="18sp"
-            android:text="Fetch your STL model"
-            tools:text="Fetch your STL model" />
-
-        <Button
             android:id="@+id/createMaterial_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingTop="50dp"
             android:layout_weight="1.0"
-            android:textSize="18sp"
+            android:drawableTop="@drawable/ic_create_black_48dp"
             android:background="@drawable/shadow"
             android:backgroundTint="@color/colorPrimaryDark"
-            android:text="Create Material" />
+            android:textSize="18sp"
+            android:text="Create Material"
+            tools:text="Create Material" />
+
+        <Button
+            android:id="@+id/search2_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="50dp"
+            android:layout_weight="1.0"
+            android:textSize="18sp"
+            android:drawableTop="@drawable/ic_search_black_48dp"
+            android:background="@drawable/shadow"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:text="Search" />
 
     </LinearLayout>
 

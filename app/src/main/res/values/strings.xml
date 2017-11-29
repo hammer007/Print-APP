@@ -249,7 +249,7 @@
     </string-array>
 
     <!-- Strings related to login -->
-    <string name="prompt_username">username</string>
+    <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
     <string name="action_login">Login</string>
     <string name="action_signup">Sign up</string>

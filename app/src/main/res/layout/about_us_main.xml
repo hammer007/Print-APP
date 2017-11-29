@@ -20,6 +20,7 @@
                 android:id="@+id/swereaView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="50sp"
                 app:srcCompat="@drawable/swereaivf_logo" />
 
 
@@ -33,7 +34,7 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="25dp" />
+                android:layout_height="50dp" />
 
             <TextView
                 android:id="@+id/textView"
@@ -47,22 +48,23 @@
 
             <TextView
                 android:id="@+id/textView1"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="71sp"
                 android:gravity="end"
-                android:text="* Abel Asefa (abelandk@gmail.com)"
+                android:text="Abel Asefa (abelandk@gmail.com)"
                 android:textSize="17sp"
                 android:textStyle="bold|italic"
-                android:layout_marginBottom="5sp"/>
+                android:layout_marginBottom="5sp"
+                android:layout_gravity="center_horizontal"/>
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="end"
-                android:text="* Jobaer Ahmed (ahmedjobaer2@gmail.com) "
+                android:text="Jobaer Ahmed (ahmedjobaer2@gmail.com) "
                 android:textSize="17sp"
+                android:layout_gravity="center_horizontal"
                 android:textStyle="bold|italic"
                 android:layout_marginBottom="5sp"/>
 
@@ -71,7 +73,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="end"
-                android:text="* Lídia Nyman (lidia.rpo@gmail.com)"
+                android:layout_gravity="center_horizontal"
+                android:text="Lídia Nyman (lidia.rpo@gmail.com)"
                 android:textSize="17sp"
                 android:textStyle="bold|italic"
                 tools:ignore="RtlHardcoded,RtlSymmetry"
@@ -82,8 +85,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="end"
-                android:text="* Maoyi Huang"
+                android:text="Maoyi Huang (edward.HMY@gmail.com)"
                 android:textSize="17sp"
+                android:layout_gravity="center_horizontal"
                 android:textStyle="bold|italic"
                 android:layout_marginBottom="5sp"/>
 
@@ -92,8 +96,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="end"
-                android:text="* Nandha Gopal(nandhujit@gmail.com)"
+                android:text="Nandha Gopal(nandhujit@gmail.com)"
                 android:textSize="17sp"
+                android:layout_gravity="center_horizontal"
                 android:textStyle="bold|italic"
                 android:layout_marginBottom="50sp"/>
 
