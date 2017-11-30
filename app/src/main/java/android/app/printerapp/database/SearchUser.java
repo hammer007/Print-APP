@@ -15,7 +15,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchUser extends  AsyncTask<String, String, String[]>{
+public class SearchUser extends  AsyncTask<String, String, JSONArray>{
     String returned [] = new String[3];
     JSONParser jsonParser = new JSONParser();
     String url;
@@ -27,7 +27,8 @@ public class SearchUser extends  AsyncTask<String, String, String[]>{
     }
 
     @Override
-    protected String[] doInBackground(String... strings) {
+    protected JSONArray doInBackground(String... strings) {
+        JSONArray productObj = null;
         JSONObject json = jsonParser.makeHttpRequest(
                 url, "GET", params);
         Log.d("SEARCH VALUE", "" +json);
@@ -38,20 +39,20 @@ public class SearchUser extends  AsyncTask<String, String, String[]>{
             e.printStackTrace();
         }
         if (success == 1) {
-            JSONArray productObj = null;
             try {
                 productObj = json
                         .getJSONArray("users");
-                returned[0] = "101";
-                returned = gather_returned_files(productObj);
+                //returned[0] = "101";
+                //returned = gather_returned_files(productObj);
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }else{
-            returned[0] = "-101";
+            //returned[0] = "-101";
         }
-        return returned;
+        //return returned;
+        return productObj;
     }
     private String [] gather_returned_files(JSONArray productObj) {
         JSONObject product = null;
@@ -68,8 +69,4 @@ public class SearchUser extends  AsyncTask<String, String, String[]>{
         return returned;
     }
 
-    @Override
-    protected void onPostExecute(String[] strings) {
-        super.onPostExecute(strings);
-    }
 }

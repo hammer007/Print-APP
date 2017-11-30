@@ -59,36 +59,26 @@
             android:ems="10"
             android:background="@android:drawable/btn_dropdown"
             android:spinnerMode="dropdown"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/users_TextView"
-            android:text="Users:"
-            android:layout_below="@id/jobType_textView"
-            android:layout_marginTop="28sp"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
-
-        <Spinner
-            android:id="@+id/users_editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/users_TextView"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_toRightOf="@+id/users_TextView"
-            android:layout_marginLeft="29dp"
-            android:ems="10"
-            android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown"/>
 
     </RelativeLayout>
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView_users"
+        android:layout_below="@+id/mandatoryFragment_RelativeLayout">
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/linearlayout_users"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+    </HorizontalScrollView>
     <RelativeLayout
         android:id="@+id/upload_magic_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/mandatoryFragment_RelativeLayout">
+        android:layout_below="@+id/scrollView_users">
 
         <Button
             android:id="@+id/magic_upload_button"

@@ -32,8 +32,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -75,15 +79,20 @@ import static android.app.Activity.RESULT_OK;
 
 
 public class NewProjectMandatoryFragment extends Fragment implements AdapterView.OnItemSelectedListener{
+    int chkId = 1000;
+    ArrayList<String> selectedStrings = new ArrayList<String>();
+    LinearLayout linearLayout;
+    CheckBox[] checkBox;
     Insert insert;
-    String returned[] = new String[3];
+    JSONArray returned;
     SearchUser search;
+    String[] user_names ;
     private Button magic_upload_button, create_printjob_continue, create_printjob_save;
     private static final int PERMISSION_REQUEST_CODE = 1;
     private ImageView imageView;
     EditText slm_id;
-    TextView jobType_Text, users_Text;
-    Spinner jobTypeSpinner, usersSpinner;
+    TextView jobType_Text;
+    Spinner jobTypeSpinner;
     Bitmap bitmap;
     View view;
     private String submitted_slmId;
@@ -117,11 +126,11 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_new_project_mandatory, container, false);
+        linearLayout = (LinearLayout)view.findViewById(R.id.linearlayout_users);
 
         initialize();
 
         jobTypeSpinner.setOnItemSelectedListener(this);
-        usersSpinner.setOnItemSelectedListener(this);
 
 
         magic_upload_button.setOnClickListener(new View.OnClickListener() {
@@ -192,6 +201,23 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
                 }
             }
         });
+        int users_length = show_users();
+        Log.d("Lengthagain",users_length + "");
+        for(int i=0; i <users_length; i++){
+            final int finalI = i;
+            checkBox[finalI].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        selectedStrings.add(checkBox[finalI].getText().toString());
+                    }else{
+                        selectedStrings.remove(checkBox[finalI].getText().toString());
+                    }
+
+                }
+            });
+        }
         return view;
     }
 
@@ -200,12 +226,12 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
 
         switch (position) {
 
-            case 0: usersSpinner.setVisibility(View.GONE);
-                users_Text.setVisibility(View.GONE);
+            case 0:
+                linearLayout.setVisibility(View.GONE);
                 break;
 
-            case 1: usersSpinner.setVisibility(View.VISIBLE);
-                users_Text.setVisibility(View.VISIBLE);
+            case 1:
+                linearLayout.setVisibility(View.VISIBLE);
                 break;
 
 
@@ -399,28 +425,13 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
 
         jobTypeSpinner = (Spinner) view.findViewById(R.id.jobType_editText);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.jobType_string, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.jobType_string, R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
         jobTypeSpinner.setAdapter(adapter);
 
-        List <NameValuePair> params = new ArrayList <NameValuePair>();
-               params.add(new BasicNameValuePair("user", "user"));
-                search = new SearchUser(params, config.url_get_users);
-                try {
-                    returned = search.execute().get();
-                    Log.d("Users fetched ", returned + "");
-                   }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
 
-        usersSpinner = (Spinner) view.findViewById(R.id.users_editText);
-        ArrayAdapter<String> usersAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item, returned);
-        usersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        usersSpinner.setAdapter(usersAdapter);
 
         jobType_Text = (TextView)view.findViewById(R.id.jobType_textView);
-        users_Text = (TextView)view.findViewById(R.id.users_TextView);
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -502,16 +513,47 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
         int success = -1;
         List<NameValuePair> params = new ArrayList<NameValuePair>();
                 //AUTO INCREMENT params.add(new BasicNameValuePair(config.PRINTING_printing_id, 2 + ""));
-                params.add(new BasicNameValuePair("slm_id", slm_id.getText().toString()));
-                params.add(new BasicNameValuePair("username", usersSpinner.getSelectedItem().toString()));
-                insert = new Insert(params, config.TAG_INSERT_ACCESS);
-                try {
+                Log.d("Lengthx", selectedStrings.size() + "");
+                for(int i=0; i<selectedStrings.size();i++) {
+                    String username = (selectedStrings.get(i)).toString().split("\\[", 2)[0];
+                    Log.d("values", username + "");
+                    params.add(new BasicNameValuePair("slm_id", slm_id.getText().toString()));
+                    params.add(new BasicNameValuePair("username", username));
+                    insert = new Insert(params, config.TAG_INSERT_ACCESS);
+                    try {
                         success = insert.execute().get();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     } catch (ExecutionException e) {
                         e.printStackTrace();
                     }
+                }
                 return success;
+    }
+
+    private int show_users(){
+        List <NameValuePair> params = new ArrayList <NameValuePair>();
+        params.add(new BasicNameValuePair("user", "user"));
+        search = new SearchUser(params, config.url_get_users);
+        try {
+            returned = search.execute().get();
+            checkBox = new CheckBox[returned.length()];
+            Log.d("Users fetched ", returned + "");
+            user_names = new String[returned.length()];
+            Log.d("length", returned.length() + "");
+            for (int i = 0; i < returned.length(); i++) {
+                JSONObject jsonObject = returned.getJSONObject(i);
+                user_names[i] =jsonObject.getString("user_name") + "[ " + jsonObject.getString("first_name")+ "  " + jsonObject.getString("last_name") + " ]";
+                Log.d("Users fetched ", user_names[i] + "");
+                checkBox[i] = new CheckBox(this.getContext());
+                checkBox[i].setId(++chkId);
+                checkBox[i].setText(user_names[i]);
+                linearLayout.addView(checkBox[i]);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return returned.length();
     }
 }

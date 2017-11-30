@@ -51,7 +51,10 @@ import static android.content.ContentValues.TAG;
  * A simple {@link Fragment} subclass.
  */
 public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+    private static final int STL_SELECT_CODE = 0;
+    private static final int CAD_SELECT_CODE = 1;
     String stlpath = "";
+    String cadpath = "";
     int success_stl = -1;
     int stress_ids [];
     String returned = "";
@@ -132,11 +135,18 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
                 else if(success_pre_printing != 1) Toast.makeText(getContext(), "Insertion to Pre printing was Successful", Toast.LENGTH_LONG).show();
                 else if(success_printing != 1) Toast.makeText(getContext(), "Insertion to Printing was Successful", Toast.LENGTH_LONG).show();
                 if(!stlpath.isEmpty()) {
-                    int stl_uploaded = upload_stl();
+                    int stl_uploaded = upload_stl(".stl", stlpath,config.url_upload_stl);
                     if (stl_uploaded == 1)
                         Toast.makeText(getContext(), "Uploading STL was Successful", Toast.LENGTH_LONG).show();
                     else
                         Toast.makeText(getContext(), "ERROR Uploading STL", Toast.LENGTH_LONG).show();
+                }
+                if(!cadpath.isEmpty()) {
+                    int stl_uploaded = upload_stl(".cad", cadpath,config.url_upload_cad);
+                    if (stl_uploaded == 1)
+                        Toast.makeText(getContext(), "Uploading CAD was Successful", Toast.LENGTH_LONG).show();
+                    else
+                        Toast.makeText(getContext(), "ERROR Uploading CAD", Toast.LENGTH_LONG).show();
                 }
                 Intent intent = new Intent(getContext(), MainActivityNew.class);
                 startActivity(intent);
@@ -270,22 +280,29 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         upload_stl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showFileChooser();
+                showStlFileChooser();
+            }
+        });
+        upload_cad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showcadFileChooser();
             }
         });
         return view;
 
     }
 
-    private int upload_stl() {
-        UploadFilesAsync uploadFilesAsync = new UploadFilesAsync(stlpath, slm_id);
-        try {success_stl = uploadFilesAsync.execute(stlpath).get();
+    private int upload_stl(String filetype, String path, String url) {
+        int success_upload = -1;
+        UploadFilesAsync uploadFilesAsync = new UploadFilesAsync(path, slm_id,filetype,url);
+        try {success_upload = uploadFilesAsync.execute(path).get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        return success_stl;
+        return success_upload;
     }
 
     private int get_post_ids(String url, String name) {
@@ -1017,9 +1034,8 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         posprinting_expand_button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.shrink, 0);
 
     }
-    private static final int FILE_SELECT_CODE = 0;
 
-    private void showFileChooser() {
+    private void showStlFileChooser() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("*/*");
         intent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -1027,7 +1043,22 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         try {
             startActivityForResult(
                     Intent.createChooser(intent, "Select a File to Upload"),
-                    FILE_SELECT_CODE);
+                    STL_SELECT_CODE);
+        } catch (android.content.ActivityNotFoundException ex) {
+            // Potentially direct the user to the Market with a Dialog
+            Toast.makeText(getContext(), "Please install a File Manager.",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void showcadFileChooser() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("*/*");
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+        try {
+            startActivityForResult(
+                    Intent.createChooser(intent, "Select a File to Upload"),
+                    CAD_SELECT_CODE);
         } catch (android.content.ActivityNotFoundException ex) {
             // Potentially direct the user to the Market with a Dialog
             Toast.makeText(getContext(), "Please install a File Manager.",
@@ -1037,26 +1068,32 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
-            case FILE_SELECT_CODE:
+            case STL_SELECT_CODE:
+                if (resultCode == RESULT_OK) {
+                    Uri uri = data.getData();
+                    try {
+                        stlpath= PathUtil.getPath(getContext(),uri);
+                    } catch (URISyntaxException e) {
+                        e.printStackTrace();
+                    }
+                }
+                break;
+            case CAD_SELECT_CODE:
                 if (resultCode == RESULT_OK) {
                     // Get the Uri of the selected file
                     Uri uri = data.getData();
                     Log.d("TAG", "File Uri: " + uri.toString());
                     // Get the path
                     try {
-                        stlpath= PathUtil.getPath(getContext(),uri);
+                        cadpath= PathUtil.getPath(getContext(),uri);
                     } catch (URISyntaxException e) {
                         e.printStackTrace();
                     }
-                    Log.d("TAG", "File Path: " + stlpath);
-                    if(!stlpath.isEmpty()){
-
-                    }
+                    Log.d("TAG", "File Path: " + cadpath);
                     // Get the file instance
                     // File file = new File(path);
                     // Initiate the upload
                 }
-                break;
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

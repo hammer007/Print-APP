@@ -16,10 +16,14 @@ import java.net.URL;
 public class UploadFilesAsync extends AsyncTask<String, Void, Integer> {
     String sourceFileUri;
     String file_name;
+    String ending = "";
+    String upLoadServerUri ;
 
-    public UploadFilesAsync(String path, String name_file){
+    public UploadFilesAsync(String path, String name_file, String filetype, String url){
         sourceFileUri = path;
         file_name = name_file;
+        ending = filetype;
+        upLoadServerUri = url;
     }
     public UploadFilesAsync(){
 
@@ -42,7 +46,6 @@ public class UploadFilesAsync extends AsyncTask<String, Void, Integer> {
             if (sourceFile.isFile()) {
 
                 try {
-                    String upLoadServerUri = "https://group5sep.000webhostapp.com/upload_files.php";
 
                     // open a URL connection to the Servlet
                     FileInputStream fileInputStream = new FileInputStream(
@@ -66,7 +69,7 @@ public class UploadFilesAsync extends AsyncTask<String, Void, Integer> {
 
                     dos.writeBytes(twoHyphens + boundary + lineEnd);
                     dos.writeBytes("Content-Disposition: form-data; name=\"bill\";filename=\""
-                            + file_name + ".stl" + "\"" + lineEnd);
+                            + file_name + ending + "\"" + lineEnd);
 
                     dos.writeBytes(lineEnd);
 
