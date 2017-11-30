@@ -10,10 +10,6 @@ import java.util.List;
 
 import static android.content.ContentValues.TAG;
 
-/**
- * Created by Geek on 10/21/2017.
- */
-
 public class Insert extends AsyncTask<String, String, Integer> {
     int success = -1;
     Config config = new Config();
@@ -31,6 +27,7 @@ public class Insert extends AsyncTask<String, String, Integer> {
         else if (do_what == config.TAG_INSERT_PRINTING) success = insertToDB(config.url_insert_printing);
         else if (do_what == config.TAG_INSERT_SIGNUP) success = insertToDB(config.url_insert_sign_up);
         else if (do_what == config.TAG_INSERT_POSTPRINTING) success = insertToDB(config.url_insert_post_printing);
+        else if(do_what == config.TAG_INSERT_ACCESS) success = insertToDB(config.url_insert_access);
         return success;
     }
 

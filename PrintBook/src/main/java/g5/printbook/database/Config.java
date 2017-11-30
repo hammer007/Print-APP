@@ -1,9 +1,5 @@
 package g5.printbook.database;
 
-/**
- * Created by Geek on 10/21/2017.
- */
-
 public class Config {
     public static final String PREPRINTING_pre_printing_id = "pre_printing_id";
     public static final String PREPRINTING_project_id = "project_id";
@@ -63,6 +59,7 @@ public class Config {
     public static final String TAG_CREATE_PROJECT = "create_project";
     public static final String TAG_CREATE_NOTHING = "nothing";
     public static final String TAG_SUCCESS = "success";
+    public static final String TAG_INSERT_ACCESS = "insert_access";
     public static final String url_create_project = "https://group5sep.000webhostapp.com/create_project.php";//"http://10.0.2.2:8081/PrintBook/create_project.php";
     public static final String url_insert_preprinting = "https://group5sep.000webhostapp.com/insert_pre_printing.php";
     public static final String url_insert_printing = "https://group5sep.000webhostapp.com/insert_printing.php";
@@ -71,5 +68,7 @@ public class Config {
     public static final String ServerUploadPath = "https://group5sep.000webhostapp.com/upload_magic_to_server.php" ;
     public static final String url_search = "https://group5sep.000webhostapp.com/search.php";
     public static final String url_insert_sign_up = "https://group5sep.000webhostapp.com/insert_sign_up.php";
+    public static final String url_get_users = "https://group5sep.000webhostapp.com/users.php";
+    public static final String url_insert_access = "https://group5sep.000webhostapp.com/insert_access_table.php";
     public static final String url_image_preview = "https://group5sep.000webhostapp.com/get_image_from_server.php";
 }
