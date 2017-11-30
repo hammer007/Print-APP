@@ -1,6 +1,8 @@
 package g5.printbook;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -11,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +22,11 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.w3c.dom.Text;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -64,6 +72,12 @@ public class SearchFragment extends Fragment {
 
     private String mParam1;
     private String mParam2;
+
+    private ImageView imageview;
+    Bitmap bitmap;
+    private Button download_button;
+    private byte[] picByteArray;
+
     public SearchFragment() {
         // Required empty public constructor
     }
@@ -181,6 +195,7 @@ public class SearchFragment extends Fragment {
                 make_editable_uneditable(false);
                 search_Result(returned);
                 searched_result_printingid.setVisibility(View.VISIBLE);
+                show_preview();
             }
         }
         catch (Exception e) {
@@ -190,6 +205,24 @@ public class SearchFragment extends Fragment {
 
     private void search_Result(String returned []) {
         search_result_printing(returned);
+    }
+
+    private void show_preview() throws MalformedURLException {
+       try {
+           bitmap = BitmapFactory.decodeStream((InputStream) new URL(Config.url_image_preview).getContent());
+           ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+           Bitmap preview = bitmap.copy(bitmap.getConfig(), true);
+           ByteArrayOutputStream pictureByteStream = new ByteArrayOutputStream();
+           preview.compress(Bitmap.CompressFormat.PNG, 100, pictureByteStream);
+           picByteArray = pictureByteStream.toByteArray();
+
+           bitmap.compress(Bitmap.CompressFormat.PNG, 40, bytes);
+
+           imageview.setImageBitmap(bitmap);
+       }catch (IOException e){
+           e.printStackTrace();
+       }
+
     }
 
     private void search_result_printing(String returned []){
@@ -385,6 +418,9 @@ public class SearchFragment extends Fragment {
         agingNumberofCycles_editText = (EditText)view.findViewById(R.id.searched_result_agingNumberofCycles_editText);
         agingComment_Text = (TextView)view.findViewById(R.id.searched_result_agingComment_textView);
         agingComment_editText = (EditText)view.findViewById(R.id.searched_result_agingComment_editText);
+
+        imageview = (ImageView)view.findViewById(R.id.image_preview);
+        download_button = (Button)view.findViewById(R.id.download);
     }
     private void hide_all(){
         edit_key.setVisibility(View.GONE);
@@ -392,6 +428,8 @@ public class SearchFragment extends Fragment {
         preprinting_expand_button.setVisibility(View.GONE);
         printing_expand_button.setVisibility(View.GONE);
         submit_Button.setVisibility(View.GONE);
+        imageview.setVisibility(View.GONE);
+        download_button.setVisibility(View.GONE);
         hide_preprining();
         hide_prining();
         hide_posprinting();
@@ -401,6 +439,8 @@ public class SearchFragment extends Fragment {
         posprinting_expand_button.setVisibility(View.VISIBLE);
         preprinting_expand_button.setVisibility(View.VISIBLE);
         printing_expand_button.setVisibility(View.VISIBLE);
+        imageview.setVisibility(View.VISIBLE);
+        download_button.setVisibility(View.VISIBLE);
     }
     private void hide_preprining(){
         projectID_editText.setVisibility(View.GONE);

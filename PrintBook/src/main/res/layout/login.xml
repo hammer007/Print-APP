@@ -66,9 +66,9 @@
             <AutoCompleteTextView
                 android:id="@+id/username"
                 android:layout_width="359dp"
-                android:hint="@string/prompt_username"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:hint="@string/prompt_username" />
 
             <Button
                 android:id="@+id/login_button"

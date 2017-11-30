@@ -71,5 +71,5 @@ public class Config {
     public static final String ServerUploadPath = "https://group5sep.000webhostapp.com/upload_magic_to_server.php" ;
     public static final String url_search = "https://group5sep.000webhostapp.com/search.php";
     public static final String url_insert_sign_up = "https://group5sep.000webhostapp.com/insert_sign_up.php";
-
+    public static final String url_image_preview = "https://group5sep.000webhostapp.com/get_image_from_server.php";
 }

@@ -395,7 +395,7 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
             try {
 
                 bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
-
+                Log.d("Image", "" + bitmap);
                 imageView.setImageBitmap(bitmap);
 
             } catch (IOException e) {
