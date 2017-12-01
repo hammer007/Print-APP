@@ -1,6 +1,9 @@
 package android.app.printerapp;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -11,27 +14,31 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.w3c.dom.Text;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import android.app.printerapp.database.Insert;
 import android.app.printerapp.database.Config;
 import android.app.printerapp.database.Search;
+import android.app.printerapp.database.CheckIfFileExists;
 
 public class SearchFragment extends Fragment {
     String returned [] = new String[19];
     View view;
     Button search_by_slm_button;
-    EditText search_by_slm_EditText, searched_result_printingid;
+    EditText search_by_slm_EditText;// searched_result_printingid;
     String submitted_slm_id;
     View focusView = null;
     Config config;
@@ -54,7 +61,7 @@ public class SearchFragment extends Fragment {
     TextView projectID_Text, partnumber_Text, numberofparts_Text, printingparameters_Text, comment_Text, if_textView, solutionTreatmentTemp_Text;
     TextView starttime_Text, endtime_Text, date_Text, operator_Text, typeofmachine_Text, powerweight_Text;
     TextView powerweightatEnd_Text, powderwaste_Text,material_Text, buildplatform_Text, printTune_Text, powderCondition_Text, numberofLayers_Text;
-    TextView dpcFactor_Text, minExposureTime_Text, printingComments_Text;
+    TextView dpcFactor_Text, minExposureTime_Text, printingComments_Text, magic_file_text_description;
     Spinner spinner, supportremovalSpinner, WEDMSpinner, blastingSpinner, shieldingSpinner;
     boolean expanded_preprinting = false, expanded_printing = false, expanded_posprinting = false;
     Button edit_key;
@@ -64,6 +71,10 @@ public class SearchFragment extends Fragment {
 
     private String mParam1;
     private String mParam2;
+    private ImageView imageview;
+    Bitmap bitmap;
+    private byte[] picByteArray;
+
     public SearchFragment() {
         // Required empty public constructor
     }
@@ -180,7 +191,8 @@ public class SearchFragment extends Fragment {
                 show_all();
                 make_editable_uneditable(false);
                 search_Result(returned);
-                searched_result_printingid.setVisibility(View.VISIBLE);
+                //searched_result_printingid.setVisibility(View.VISIBLE);
+                show_preview();
             }
         }
         catch (Exception e) {
@@ -246,6 +258,7 @@ public class SearchFragment extends Fragment {
         search_by_slm_EditText = (EditText)view.findViewById(R.id.search_by_slm_EditText);
     }
     private void initialize_returned() {
+        magic_file_text_description = (TextView)view.findViewById(R.id.magic_file_text_description);
         spinner = (Spinner) view.findViewById(R.id.searched_result_powderCondition_editText);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.powder_condition_string, android.R.layout.simple_spinner_item);
@@ -385,22 +398,28 @@ public class SearchFragment extends Fragment {
         agingNumberofCycles_editText = (EditText)view.findViewById(R.id.searched_result_agingNumberofCycles_editText);
         agingComment_Text = (TextView)view.findViewById(R.id.searched_result_agingComment_textView);
         agingComment_editText = (EditText)view.findViewById(R.id.searched_result_agingComment_editText);
+
+        imageview = (ImageView)view.findViewById(R.id.image_preview);
     }
     private void hide_all(){
+        magic_file_text_description.setVisibility(View.GONE);
         edit_key.setVisibility(View.GONE);
         posprinting_expand_button.setVisibility(View.GONE);
         preprinting_expand_button.setVisibility(View.GONE);
         printing_expand_button.setVisibility(View.GONE);
         submit_Button.setVisibility(View.GONE);
+        imageview.setVisibility(View.GONE);
         hide_preprining();
         hide_prining();
         hide_posprinting();
     }
     private void show_all(){
+        magic_file_text_description.setVisibility(View.VISIBLE);
         edit_key.setVisibility(View.VISIBLE);
         posprinting_expand_button.setVisibility(View.VISIBLE);
         preprinting_expand_button.setVisibility(View.VISIBLE);
         printing_expand_button.setVisibility(View.VISIBLE);
+        imageview.setVisibility(View.VISIBLE);
     }
     private void hide_preprining(){
         projectID_editText.setVisibility(View.GONE);
@@ -766,4 +785,42 @@ public class SearchFragment extends Fragment {
         minExposureTime_Text.setEnabled(editable);
         printingComments_Text.setEnabled(editable);
     }
+
+    private void show_preview() throws ExecutionException, InterruptedException {
+        String url = "https://group5sep.000webhostapp.com/magic_files/" + submitted_slm_id + ".png";
+        Log.d("URLISHERE", url + "");
+        CheckIfFileExists checkIfFileExists = new CheckIfFileExists();
+        if(checkIfFileExists.execute(url).get()) {
+            Drawable magic = null;
+            try {
+                magic = new FetchMagic().execute(url).get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+            imageview.setImageDrawable(magic);
+        }
+        else {
+            Drawable drawable = this.getResources().getDrawable(R.drawable.no_magic);
+            imageview.setImageDrawable(drawable);
+        }
+    }
+
+    private class FetchMagic extends AsyncTask<String, String, Drawable>{
+
+        @Override
+        protected Drawable doInBackground(String... urls) {
+            InputStream is = null;
+            try {
+                is = (InputStream) new URL(urls[0]).getContent();
+                Log.d("what am here?" , is + "");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Drawable d = Drawable.createFromStream(is, "src name");
+            return d;
+        }
+    }
+
 }

@@ -12,7 +12,9 @@ android {
         versionCode 1
 
     }
-
+    aaptOptions {
+        cruncherEnabled = false
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -59,6 +61,7 @@ repositories {
 }
 
 dependencies {
+    compile 'org.apache.commons:commons-io:1.3.2' //FileUtils
     compile 'com.android.support:design:25.3.1'
     compile 'com.google.android.gms:play-services-plus:11.6.0'
     compile fileTree(dir: 'libs', include: ['*.jar'])

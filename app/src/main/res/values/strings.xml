@@ -82,6 +82,7 @@
     <string name="library_menu_refresh">Refresh models</string>
     <string name="library_menu_search">Search model</string>
     <string name="library_menu_scan">Scan device</string>
+    <string name="download">Download</string>
     <string name="library_menu_sort">Sort by</string>
     <string name="library_menu_add">Add model</string>
     <string name="library_menu_folder">New folder</string>

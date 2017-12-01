@@ -175,4 +175,5 @@ public class Config {
     public static final String url_get_aging_ids = "https://group5sep.000webhostapp.com/postpringint_get_aging_ids.php";
     public static final String url_upload_stl = "https://group5sep.000webhostapp.com/upload_files.php";
     public static final String url_upload_cad = "https://group5sep.000webhostapp.com/upload_cad.php";
+    public static final String url_image_preview = "https://group5sep.000webhostapp.com/get_image_from_server.php";
 }
