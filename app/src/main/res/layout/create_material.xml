@@ -409,6 +409,9 @@
                     android:inputType="text"
                     tools:ignore="TextFields" />
             </android.support.design.widget.TextInputLayout>
+            <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -677,6 +680,9 @@
                     android:inputType="text"
                     tools:ignore="TextFields" />
             </android.support.design.widget.TextInputLayout>
+            <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -975,6 +981,15 @@
                     android:inputType="text"
                     tools:ignore="TextFields" />
             </android.support.design.widget.TextInputLayout>
+            <Button
+                android:id="@+id/submit_material"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:textStyle="bold"
+                android:background="#5a8b28"
+                android:text="SUBMIT"
+                android:textColor="#fff" />
 
     </LinearLayout>
 </ScrollView>
