@@ -688,8 +688,6 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         minExposureTime_Text = (TextView)view.findViewById(R.id.minExposureTime_textView);
         printingComments_Text = (TextView)view.findViewById(R.id.printingComments_textView);
 
-        printingSave_Button = (Button)view.findViewById(R.id.printingSave_Button);
-        preprintingSave_Button = (Button)view.findViewById(R.id.preprintingSave_Button);
         submit_Button = (Button)view.findViewById(R.id.submit_Button);
 
         //------ Post-Printing Fields ------//
@@ -746,7 +744,6 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         agingNumberofCycles_editText = (EditText)view.findViewById(R.id.agingNumberofCycles_editText);
         agingComment_Text = (TextView)view.findViewById(R.id.agingComment_textView);
         agingComment_editText = (EditText)view.findViewById(R.id.agingComment_editText);
-        postprintingSave_Button = (Button)view.findViewById(R.id.postprintingSave_Button);
 
         upload_stl = (Button)view.findViewById(R.id.upload_stl);
         upload_cad = (Button)view.findViewById(R.id.upload_cad);
@@ -800,7 +797,6 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         numberofparts_editText.setVisibility(View.GONE);
         printingparameters_editText.setVisibility(View.GONE);
         comment_editText.setVisibility(View.GONE);
-        preprintingSave_Button.setVisibility(View.GONE);
         projectID_Text.setVisibility(View.GONE);
         partnumber_Text.setVisibility(View.GONE);
         numberofparts_Text.setVisibility(View.GONE);
@@ -847,7 +843,6 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         dpcFactor_editText.setVisibility(View.GONE);
         minExposureTime_editText.setVisibility(View.GONE);
         printingComments_editText.setVisibility(View.GONE);
-        printingSave_Button.setVisibility(View.GONE);
         spinner.setVisibility(View.GONE);
 
         slmid_Text.setVisibility(View.GONE);
@@ -967,7 +962,6 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         agingNumberofCycles_editText.setVisibility(View.GONE);
         agingComment_Text.setVisibility(View.GONE);
         agingComment_editText.setVisibility(View.GONE);
-        postprintingSave_Button.setVisibility(View.GONE);
 
         posprinting_expand_button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.expand, 0);
 
