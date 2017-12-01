@@ -29,7 +29,8 @@
                 android:textAlignment="center"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:background="@color/colorPrimaryGreen"
+                android:textColor="@color/colorWhite"
+                android:background="@color/colorPrimaryDark"
                 android:drawableRight="@drawable/expand"/>
 
             <EditText
@@ -195,16 +196,6 @@
                 android:ems="10"
                 android:inputType="text" />
 
-            <Button
-                android:id="@+id/preprintingSave_Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/comment_editText"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="16dp"
-                android:text="Save" />
-
         </RelativeLayout>
 
         <RelativeLayout
@@ -226,7 +217,8 @@
                 android:textAlignment="center"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:background="@color/colorPrimaryGreen"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/colorWhite"
                 android:drawableRight="@drawable/expand"/>
 
             <TextView
@@ -680,16 +672,6 @@
                 android:inputType="text"
                 android:gravity="center"/>
 
-            <Button
-                android:id="@+id/printingSave_Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/printingComments_editText"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="16dp"
-                android:text="Save" />
-
 
         </RelativeLayout>
 
@@ -712,7 +694,8 @@
                 android:textAlignment="center"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:background="@color/colorPrimaryGreen"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/colorWhite"
                 android:drawableRight="@drawable/expand"/>
 
 
@@ -1312,19 +1295,10 @@
                 android:ems="10"
                 android:inputType="text"/>
 
-            <Button
-                android:id="@+id/postprintingSave_Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/agingComment_editText"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="16dp"
-                android:text="Save" />
-
         </RelativeLayout>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/posprinting_relativeLayout"
             android:id="@+id/uploadfiles_insert">
@@ -1373,6 +1347,8 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:textColor="@color/colorWhite"
             android:text="Submit" />
 
     </RelativeLayout>

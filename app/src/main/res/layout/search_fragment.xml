@@ -53,6 +53,8 @@
                 android:layout_marginStart="41dp"
                 android:layout_toEndOf="@+id/search_by_slm_EditText"
                 android:layout_toRightOf="@+id/search_by_slm_EditText"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/colorWhite"
                 android:text="@android:string/search_go" />
 
             <Button
@@ -65,6 +67,7 @@
                 android:layout_toLeftOf="@+id/search_by_slm_button"
                 android:layout_toStartOf="@+id/search_by_slm_button"
                 android:drawableLeft="@drawable/unlock"
+                android:backgroundTint="@color/colorPrimary"
                 android:drawableStart="@drawable/unlock" />
         </RelativeLayout>
         <RelativeLayout
@@ -92,7 +95,8 @@
                     android:textAlignment="center"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:background="@color/colorPrimaryGreen"
+                    android:background="@color/colorPrimaryDark"
+                    android:textColor="@color/colorWhite"
                     android:drawableRight="@drawable/expand"/>
 
                 <EditText
@@ -241,7 +245,8 @@
                     android:textAlignment="center"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:background="@color/colorPrimaryGreen"
+                    android:background="@color/colorPrimaryDark"
+                    android:textColor="@color/colorWhite"
                     android:drawableRight="@drawable/expand"/>
 
                 <TextView
@@ -658,7 +663,8 @@
                     android:textAlignment="center"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:background="@color/colorPrimaryGreen"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorPrimaryDark"
                     android:drawableRight="@drawable/expand"/>
 
                 <TextView
@@ -1332,6 +1338,8 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="16dp"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:textColor="@color/colorWhite"
                 android:text="Submit" />
 
         </RelativeLayout>
