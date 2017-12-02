@@ -2,6 +2,7 @@ package android.app.printerapp.viewer;
 
 import android.app.Activity;
 import android.app.printerapp.library.LibraryController;
+import android.util.Log;
 
 
 import org.json.JSONException;
@@ -193,7 +194,7 @@ public class SlicingHandler {
     public void setOriginalProject(String path) {
 
         mOriginalProject = path;
-        //Log.i("OUT", "Workspace: " + path);
+        Log.d("OUT", "Workspace: " + path);
 
     }
 

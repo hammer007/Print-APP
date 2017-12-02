@@ -2,6 +2,7 @@ package android.app.printerapp.viewer;
 
 import android.app.AlertDialog;
 import android.app.printerapp.R;
+import android.app.printerapp.database.FetchMagic;
 import android.app.printerapp.library.LibraryController;
 import android.app.printerapp.library.LibraryModelCreation;
 import android.app.printerapp.viewer.Geometry.Point;
@@ -10,9 +11,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.opengl.Matrix;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -25,9 +28,11 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 
 public class StlFile {
@@ -49,7 +54,7 @@ public class StlFile {
     private static final int MAX_SIZE = 50000000; //50Mb
 
 
-    public static void openStlFile(Context context, File file, DataStorage data, int mode) {
+    public static void openStlFile(Context context, File file, DataStorage data, int mode, String filepath, InputStream inputstream_sent) {
         mContext = context;
 
         mMode = mode;
@@ -67,17 +72,18 @@ public class StlFile {
         mData.initMaxMin();
 
 
-        startThreadToOpenFile(context, uri);
+        startThreadToOpenFile(context, uri, filepath, inputstream_sent);
 
 
     }
 
-    public static void startThreadToOpenFile(final Context context, final Uri uri) {
+    public static void startThreadToOpenFile(final Context context, final Uri uri, final String filepath, final InputStream inputstream_sent) {
 
         mThread = new Thread() {
             @Override
             public void run() {
-                byte[] arrayBytes = toByteArray(context, uri);
+                byte[] arrayBytes = toByteArray(context, uri, filepath, inputstream_sent);
+                Log.d("what",arrayBytes + "");
 
                 try {
                     if (isText(arrayBytes)) {
@@ -101,11 +107,16 @@ public class StlFile {
     }
 
 
-    private static byte[] toByteArray(Context context, Uri filePath) {
+    private static byte[] toByteArray(Context context, Uri filePath, String file_path_string, InputStream inputStream_sent) {
         InputStream inputStream = null;
         byte[] arrayBytes = null;
         try {
-            inputStream = context.getContentResolver().openInputStream(filePath);
+            if(!file_path_string.contains("https")) inputStream = context.getContentResolver().openInputStream(filePath);
+            else {
+                //inputStream = inputStream_sent;
+//                FetchMagic fetchMagic = new FetchMagic();
+//                inputStream = fetchMagic.execute("https://group5sep.000webhostapp.com/stl/miniWhistle.stl").get();
+            }
             arrayBytes = IOUtils.toByteArray(inputStream);
         } catch (Exception e) {
             e.printStackTrace();

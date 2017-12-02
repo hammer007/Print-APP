@@ -93,13 +93,6 @@
                 android:text="@string/action_signup"
                 android:textColor="@color/colorWhite"
                 android:background="@color/colorPrimaryDark"/>
-            <Button
-                android:id="@+id/test_3d"
-                android:layout_width="358dp"
-                android:layout_marginTop="15dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="3d" />
         </android.support.design.widget.TextInputLayout>
 
     </LinearLayout>

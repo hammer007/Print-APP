@@ -10,6 +10,7 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 
 import java.nio.ByteBuffer;
@@ -645,8 +646,6 @@ public class ViewerRenderer implements GLSurfaceView.Renderer  {
                 }
 
             }
-
-
 		
 		if (mMode == ViewerMainFragment.DO_SNAPSHOT || mMode == ViewerMainFragment.PRINT_PREVIEW) mInfinitePlane = new WitboxPlate (mContext, true, ViewerMainFragment.getCurrentPlate());
 

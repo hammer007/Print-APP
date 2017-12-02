@@ -3,13 +3,11 @@ package android.app.printerapp.login;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.printerapp.MainActivity;
-import android.app.printerapp.database.PathUtil;
-import android.app.printerapp.database.UploadFilesAsync;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.PowerManager;
 import android.support.v7.app.AppCompatActivity;
 
 import android.database.Cursor;
@@ -35,8 +33,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -47,7 +51,6 @@ import android.app.printerapp.database.JSONParser;
 import android.widget.Toast;
 
 public class Login extends AppCompatActivity {
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -73,16 +76,6 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        Button test_3d = (Button)findViewById(R.id.test_3d);
-        test_3d.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent mainIntent = new Intent().setClass(Login.this, MainActivity.class);
-                mainIntent.putExtra("path","/storage/emulated/0/PrintManager/Files/Kcs_clamp_left/_stl/Kcs_clamp_left.stl");
-                startActivity(mainIntent);
-                //MainActivity.requestOpenFile("/storage/emulated/0/PrintManager/Files/Kcs_clamp_left/_stl/Kcs_clamp_left.stl");
-            }
-        });
         usernameText = (AutoCompleteTextView) findViewById(R.id.username);
         passwordText = (EditText) findViewById(R.id.password);
         passwordText.setOnEditorActionListener(new TextView.OnEditorActionListener() {

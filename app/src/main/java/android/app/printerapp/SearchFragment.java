@@ -1,10 +1,15 @@
 package android.app.printerapp;
 
+import android.app.ProgressDialog;
+import android.app.printerapp.database.FetchMagic;
+import android.app.printerapp.login.Login;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
@@ -22,8 +27,10 @@ import android.widget.Toast;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -35,6 +42,7 @@ import android.app.printerapp.database.Search;
 import android.app.printerapp.database.CheckIfFileExists;
 
 public class SearchFragment extends Fragment {
+    ProgressDialog mProgressDialog;
     String returned [] = new String[19];
     View view;
     Button search_by_slm_button;
@@ -173,6 +181,44 @@ public class SearchFragment extends Fragment {
                     expanded_posprinting = true;
                 }
 
+            }
+        });
+        imageview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CheckIfFileExists checkIfFileExists = new CheckIfFileExists();
+                String searchPath = "https://group5sep.000webhostapp.com/stl/" + submitted_slm_id + ".stl";
+                try {
+                    if(checkIfFileExists.execute(searchPath).get()){
+                        mProgressDialog = new ProgressDialog(getContext());
+                        mProgressDialog.setMessage("A message");
+                        mProgressDialog.setIndeterminate(true);
+                        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                        mProgressDialog.setCancelable(true);
+                        final SearchFragment.DownloadFile downloadTask = new SearchFragment.DownloadFile(getContext());
+                        String pathNew = "";
+                        try {
+                            pathNew = downloadTask.execute(searchPath, submitted_slm_id + ".stl").get();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        }
+                        Intent mainIntent = new Intent().setClass(getContext(), MainActivity.class);
+                        mainIntent.putExtra("path",pathNew);
+                        startActivity(mainIntent);
+
+                    }
+                    else{
+                        Toast.makeText(getContext(),"NO STL FOUND",Toast.LENGTH_LONG).show();
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(),"ERROR IN DOWNLOADING STL ",Toast.LENGTH_LONG).show();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(),"ERROR IN DOWNLOADING STL ",Toast.LENGTH_LONG).show();
+                }
             }
         });
         return view;
@@ -788,18 +834,20 @@ public class SearchFragment extends Fragment {
 
     private void show_preview() throws ExecutionException, InterruptedException {
         String url = "https://group5sep.000webhostapp.com/magic_files/" + submitted_slm_id + ".png";
-        Log.d("URLISHERE", url + "");
         CheckIfFileExists checkIfFileExists = new CheckIfFileExists();
         if(checkIfFileExists.execute(url).get()) {
-            Drawable magic = null;
+            Bitmap drawable = null;
             try {
-                magic = new FetchMagic().execute(url).get();
+                drawable = new FetchMagic().execute(url).get();
+                Log.d("magic", drawable + "");
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                Log.d("Problem FetchMagic", url + "");
             } catch (ExecutionException e) {
                 e.printStackTrace();
+                Log.d("Problem FetchMagic 2", url + "");
             }
-            imageview.setImageDrawable(magic);
+            imageview.setImageBitmap(drawable);
         }
         else {
             Drawable drawable = this.getResources().getDrawable(R.drawable.no_magic);
@@ -807,20 +855,102 @@ public class SearchFragment extends Fragment {
         }
     }
 
-    private class FetchMagic extends AsyncTask<String, String, Drawable>{
+    private class DownloadFile extends AsyncTask<String, Integer, String> {
+
+        private Context context;
+        private PowerManager.WakeLock mWakeLock;
+
+        public DownloadFile(Context context) {
+            this.context = context;
+        }
 
         @Override
-        protected Drawable doInBackground(String... urls) {
-            InputStream is = null;
+        protected String doInBackground(String... sUrl) {
+            String downloaded_path = "";
+            InputStream input = null;
+            OutputStream output = null;
+            HttpURLConnection connection = null;
             try {
-                is = (InputStream) new URL(urls[0]).getContent();
-                Log.d("what am here?" , is + "");
-            } catch (IOException e) {
-                e.printStackTrace();
+                URL url = new URL(sUrl[0]);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+
+                // expect HTTP 200 OK, so we don't mistakenly save error report
+                // instead of the file
+                if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                    return "Server returned HTTP " + connection.getResponseCode()
+                            + " " + connection.getResponseMessage();
+                }
+
+                // this will be useful to display download percentage
+                // might be -1: server did not report the length
+                int fileLength = connection.getContentLength();
+
+                // download the file
+                input = connection.getInputStream();
+                downloaded_path = "/storage/emulated/0/PrintManager/Files/" + sUrl[1];
+                output = new FileOutputStream(downloaded_path);
+
+                byte data[] = new byte[4096];
+                long total = 0;
+                int count;
+                while ((count = input.read(data)) != -1) {
+                    // allow canceling with back button
+                    if (isCancelled()) {
+                        input.close();
+                        return null;
+                    }
+                    total += count;
+                    // publishing the progress....
+                    if (fileLength > 0) // only if total length is known
+                        publishProgress((int) (total * 100 / fileLength));
+                    output.write(data, 0, count);
+                }
+            } catch (Exception e) {
+                return e.toString();
+            } finally {
+                try {
+                    if (output != null)
+                        output.close();
+                    if (input != null)
+                        input.close();
+                } catch (IOException ignored) {
+                }
+
+                if (connection != null)
+                    connection.disconnect();
             }
-            Drawable d = Drawable.createFromStream(is, "src name");
-            return d;
+            return downloaded_path;
+        }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // take CPU lock to prevent CPU from going off if the user
+            // presses the power button during download
+            PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+            mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+                    getClass().getName());
+            mWakeLock.acquire();
+            mProgressDialog.show();
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... progress) {
+            super.onProgressUpdate(progress);
+            // if we get here, length is known, now set indeterminate to false
+            mProgressDialog.setIndeterminate(false);
+            mProgressDialog.setMax(100);
+            mProgressDialog.setProgress(progress[0]);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            mWakeLock.release();
+            mProgressDialog.dismiss();
+            if (result != null)
+                Toast.makeText(context,"Download error: "+result, Toast.LENGTH_LONG).show();
+            else
+                Toast.makeText(context,"File downloaded", Toast.LENGTH_SHORT).show();
         }
     }
-
 }

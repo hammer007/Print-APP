@@ -9,7 +9,7 @@ import java.net.URL;
  * Created by Geek on 12/1/2017.
  */
 
-public class CheckIfFileExists extends AsyncTask<String, String, Boolean> {
+public class CheckIfFileExists extends AsyncTask<String, Boolean, Boolean> {
 
     @Override
     protected Boolean doInBackground(String... urls) {
@@ -24,5 +24,10 @@ public class CheckIfFileExists extends AsyncTask<String, String, Boolean> {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    protected void onPostExecute(Boolean aBoolean) {
+        super.onPostExecute(aBoolean);
     }
 }

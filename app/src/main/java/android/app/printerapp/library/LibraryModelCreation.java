@@ -160,7 +160,7 @@ public class LibraryModelCreation {
         if (StlFile.checkFileSize(file,mContext)){
 
             if(LibraryController.hasExtension(0, path)) {
-                StlFile.openStlFile (context, file, data, ViewerMainFragment.DO_SNAPSHOT);
+                StlFile.openStlFile (context, file, data, ViewerMainFragment.DO_SNAPSHOT,"",null);
             } else if (LibraryController.hasExtension(1, path)) {
                 GcodeFile.openGcodeFile(context, file, data, ViewerMainFragment.DO_SNAPSHOT);
             }

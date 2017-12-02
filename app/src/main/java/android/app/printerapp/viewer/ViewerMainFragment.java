@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.DownloadManager;
 import android.app.Fragment;
 import android.app.printerapp.R;
+import android.app.printerapp.database.FetchMagic;
 import android.app.printerapp.library.LibraryController;
 import android.app.printerapp.model.ModelProfile;
 import android.app.printerapp.util.ui.CustomEditableSlider;
@@ -19,11 +20,13 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -63,11 +66,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
+import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 
 
 public class ViewerMainFragment extends Fragment {
@@ -640,9 +645,25 @@ public class ViewerMainFragment extends Fragment {
             data = new DataStorage();
 
             mVisibilityModeButton.setVisibility(View.VISIBLE);
-            mFile = new File(filePath);
-            StlFile.openStlFile(mContext, mFile, data, DONT_SNAPSHOT);
-            mCurrentViewMode = NORMAL;
+//            if(filePath.contains("https")) {
+//                FetchMagic fetchMagic = new FetchMagic();
+//                InputStream inputStream = null;
+//                try {
+//                    inputStream = fetchMagic.execute(filePath).get();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                } catch (ExecutionException e) {
+//                    e.printStackTrace();
+//                }
+//                mFile = new File(String.valueOf(inputStream));
+//                Log.d("File", mFile + "");
+//                StlFile.openStlFile(mContext, mFile, data, DONT_SNAPSHOT, filePath, inputStream);
+//                mCurrentViewMode = NORMAL;
+//            }else{
+                mFile = new File(filePath);
+                StlFile.openStlFile(mContext, mFile, data, DONT_SNAPSHOT, filePath, null);
+                mCurrentViewMode = NORMAL;
+           // }
 
         } else if (LibraryController.hasExtension(1, filePath)) {
 
@@ -659,18 +680,22 @@ public class ViewerMainFragment extends Fragment {
 
         mDataList.add(data);
 
+            //Adding original project //TODO elsewhere?
+            if (mSlicingHandler != null)
+                if (mSlicingHandler.getOriginalProject() == null) {
+                    if(!filePath.contains("https")) {
+                        mSlicingHandler.setOriginalProject(mFile.getParentFile().getParent());
+                    }else{
 
-
-        //Adding original project //TODO elsewhere?
-        if (mSlicingHandler != null)
-            if (mSlicingHandler.getOriginalProject() == null){
-                mSlicingHandler.setOriginalProject(mFile.getParentFile().getParent());
-            } else {
-                if (!mFile.getAbsolutePath().contains("/temp")){
-                    mSlicingHandler.setOriginalProject(mFile.getParentFile().getParent());
+                    }
+                } else {
+                    if (!mFile.getAbsolutePath().contains("/temp")) {
+                        if(!filePath.contains("https")) {
+                            mSlicingHandler.setOriginalProject(mFile.getParentFile().getParent());
+                        }else{
+                        }
+                    }
                 }
-            }
-
 
 
 

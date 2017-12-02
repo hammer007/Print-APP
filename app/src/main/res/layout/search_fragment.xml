@@ -800,7 +800,6 @@
                     android:layout_toRightOf="@+id/searched_result_blasting_textView"
                     android:ems="10"
                     android:background="@android:drawable/btn_dropdown"
-                    android:ems="10"
                     android:spinnerMode="dropdown" />
 
                 <TextView
@@ -1358,6 +1357,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:text="MAGIC FILE"
+                android:textStyle="bold"
                 android:textSize="30dp" />
 
             <ImageView
@@ -1367,6 +1367,7 @@
                 android:layout_below="@+id/magic_file_text_description"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="76dp"
+                android:clickable="true"
                 app:srcCompat="@drawable/no_magic" />
 
 
