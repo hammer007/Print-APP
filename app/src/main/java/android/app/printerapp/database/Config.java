@@ -134,6 +134,11 @@ public class Config {
     public static final String TAG_INSERT_PREPRINTING = "insert_pre_printing";
     public static final String TAG_INSERT_PRINTING = "insert_printing";
     public static final String TAG_INSERT_POSTPRINTING = "insert_post_printing";
+
+    public static final String TAG_UPDATE_PREPRINTING = "update_pre_printing";
+    public static final String TAG_UPDATE_PRINTING = "update_printing";
+    public static final String TAG_UPDATE_POSTPRINTING = "update_post_printing";
+    public static final String TAG_UPDATE_PROJECT = "update_project";
     public static final String TAG_INSERT_MATERIAL = "insert_material";
     public static final String TAG_INSERT_BET_SURFACE = "insert_bet_surface";
     public static final String TAG_INSERT_HALLFLOW = "insert_hall_flow";
@@ -160,6 +165,7 @@ public class Config {
     public static final String url_login = "https://group5sep.000webhostapp.com/login.php";
     public static final String ServerUploadPath = "https://group5sep.000webhostapp.com/upload_magic_to_server.php" ;
     public static final String url_search = "https://group5sep.000webhostapp.com/search.php";
+    public static final String url_search_by_prininId = "https://group5sep.000webhostapp.com/search_by_printingId.php";
     public static final String url_insert_sign_up = "https://group5sep.000webhostapp.com/insert_sign_up.php";
     public static final String url_get_users = "https://group5sep.000webhostapp.com/users.php";
     public static final String url_insert_access = "https://group5sep.000webhostapp.com/insert_access_table.php";
@@ -176,4 +182,16 @@ public class Config {
     public static final String url_upload_stl = "https://group5sep.000webhostapp.com/upload_files.php";
     public static final String url_upload_cad = "https://group5sep.000webhostapp.com/upload_cad.php";
     public static final String url_image_preview = "https://group5sep.000webhostapp.com/get_image_from_server.php";
+    public static final String url_search_slm = "https://group5sep.000webhostapp.com/search_slm.php";
+    public static final String url_project_number = "https://group5sep.000webhostapp.com/search_project_number.php";
+    public static final String url_project_acronym = "https://group5sep.000webhostapp.com/search_project_acronym.php";
+    public static final String url_search_by_all = "https://group5sep.000webhostapp.com/search_search_by_all.php";
+    public static final String url_search_slm_projNumber = "https://group5sep.000webhostapp.com/search_slm_projnumber.php";
+    public static final String url_search_slm_projAcro = "https://group5sep.000webhostapp.com/search_slm_projacro.php";
+    public static final String url_projectAcro_projNumber = "https://group5sep.000webhostapp.com/search_projectacro_projnumber.php";
+    public static final String url_update_preprinting = "https://group5sep.000webhostapp.com/update_pre_printing.php";
+    public static final String url_update_printing = "https://group5sep.000webhostapp.com/update_printing.php";
+    public static final String url_update_postprinting = "https://group5sep.000webhostapp.com/update_post_printing.php";
+    public static final String url_update_project = "https://group5sep.000webhostapp.com/update_project.php";
+
 }

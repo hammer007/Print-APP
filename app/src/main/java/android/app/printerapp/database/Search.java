@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Geek on 11/13/2017.
  */
 public class Search extends AsyncTask<String, String, String[]> {
-    String returned [] = new String[19];
+    String returned [] = new String[33];
     JSONParser jsonParser = new JSONParser();
     String url;
     Config config;
@@ -40,7 +40,6 @@ public class Search extends AsyncTask<String, String, String[]> {
             try {
                 productObj = json
                         .getJSONArray("printJob");
-                returned[0] = "101";
                 returned = gather_returned_files(productObj);
 
             } catch (JSONException e) {
@@ -56,7 +55,7 @@ public class Search extends AsyncTask<String, String, String[]> {
         JSONObject product = null;
         try {
             product = productObj.getJSONObject(0);
-            //returned[0] = product.getString(config.PRINTING_printing_id);
+            returned[0] = product.getString(config.PRINTING_slm_id);
             returned[1] = product.getString(config.PRINTING_start_time);
             Log.d("ONE ONE", returned[1]);
             returned[2] = product.getString(config.PRINTING_end_time);
@@ -77,6 +76,26 @@ public class Search extends AsyncTask<String, String, String[]> {
             returned[17] = product.getString(config.PRINTING_exposure_time);
             returned[18] = product.getString(config.PRINTING_comments);
 
+            //PRE PRINTING
+            returned[19] = product.getString(config.PREPRINTING_build_id);
+            returned[20] = product.getString(config.PREPRINTING_no_parts);
+            returned[21] = product.getString(config.PREPRINTING_printing_parameter);
+            returned[22] = product.getString("pre_comments");
+
+            //POST PRINTING
+            returned[23] = product.getString(config.POSTPRINTING_support_removal);
+            returned[24] = product.getString(config.POSTPRINTING_wedm);
+            returned[25] = product.getString(config.POSTPRINTING_wedm_comment);
+            returned[26] = product.getString(config.POSTPRINTING_blasting);
+            returned[27] = product.getString(config.POSTPRINTING_blasting_time);
+            returned[28] = product.getString(config.POSTPRINTING_blasting_type);
+            returned[29] = product.getString(config.POSTPRINTING_blasting_comment);
+
+            //PROJECT
+
+            returned[30] = product.getString(config.PREPRINTING_project_id);
+            returned[31] = product.getString(config.PROJECT_number);
+            returned[32] = product.getString(config.PROJECT_name);
         } catch (JSONException e) {
             e.printStackTrace();
         }

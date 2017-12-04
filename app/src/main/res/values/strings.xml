@@ -218,21 +218,25 @@
     </string-array>
 
     <string-array name="support_removal_string">
+        <item> </item>
         <item>Yes</item>
         <item>No</item>
     </string-array>
 
     <string-array name="WEDM_string">
+        <item> </item>
         <item>Yes</item>
         <item>No</item>
     </string-array>
 
     <string-array name="blasting_string">
+        <item> </item>
         <item>Yes</item>
         <item>No</item>
     </string-array>
 
     <string-array name="shielding_string">
+        <item> </item>
         <item>Yes</item>
         <item>No</item>
     </string-array>

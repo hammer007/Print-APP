@@ -70,7 +70,8 @@ public class MainFragment extends Fragment {
 
                 if(v.getId() == R.id.search2_button){
 
-                    SearchFragment fragment = new SearchFragment();
+                    //SearchFragment fragment = new SearchFragment();
+                    SearchFragmentList fragment = new SearchFragmentList();
                     android.support.v4.app.FragmentTransaction fragmentTransaction =
                             getFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.fragment_container, fragment);

@@ -2,6 +2,7 @@ package android.app.printerapp;
 
 import android.app.ProgressDialog;
 import android.app.printerapp.database.FetchMagic;
+import android.app.printerapp.database.Insert;
 import android.app.printerapp.login.Login;
 import android.content.Context;
 import android.content.Intent;
@@ -41,19 +42,18 @@ import android.app.printerapp.database.Config;
 import android.app.printerapp.database.Search;
 import android.app.printerapp.database.CheckIfFileExists;
 
+import static android.content.ContentValues.TAG;
+
 public class SearchFragment extends Fragment {
     ProgressDialog mProgressDialog;
-    String returned [] = new String[19];
+    String returned [] = new String[33];
     View view;
-    Button search_by_slm_button;
-    EditText search_by_slm_EditText;// searched_result_printingid;
     String submitted_slm_id;
-    View focusView = null;
     Config config;
     Search search;
     Button  submit_Button, preprinting_expand_button, printing_expand_button, posprinting_expand_button;
     EditText projectID_editText, partnumber_editText, numberofparts_editText, printingparameters_editText, comment_editText;
-    EditText slmid_editText, starttime_editText, endtime_editText, date_editText, operator_editText, agingComment_editText;
+    EditText starttime_editText, endtime_editText, date_editText, operator_editText, agingComment_editText;
     EditText typeofmachine_editText, powerweight_editText, powerweightatEnd_editText, powderwaste_editText, material_editText;
     EditText buildplatform_editText, printTune_editText, powderCondition_editText, reused_times_editText, agingNumberofCycles_editText;
     EditText numberofLayers_editText, dpcFactor_editText, minExposureTime_editText, printingComments_editText, hardeningComment_editText;
@@ -71,26 +71,22 @@ public class SearchFragment extends Fragment {
     TextView powerweightatEnd_Text, powderwaste_Text,material_Text, buildplatform_Text, printTune_Text, powderCondition_Text, numberofLayers_Text;
     TextView dpcFactor_Text, minExposureTime_Text, printingComments_Text, magic_file_text_description;
     Spinner spinner, supportremovalSpinner, WEDMSpinner, blastingSpinner, shieldingSpinner;
+    EditText searched_result_projectAcronym_editText, searched_result_buildId_editText;
+    TextView searched_result_projectAcronym_textView, searched_result_buildId_textView;
     boolean expanded_preprinting = false, expanded_printing = false, expanded_posprinting = false;
     Button edit_key;
     boolean edit_key_pressed = false;
     private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    private String mParam1;
-    private String mParam2;
+    private int printing_id;
     private ImageView imageview;
-    Bitmap bitmap;
-    private byte[] picByteArray;
-
     public SearchFragment() {
         // Required empty public constructor
     }
-    public static SearchFragment newInstance(String param1, String param2) {
+    public static SearchFragment newInstance(int printing_id) {
         SearchFragment fragment = new SearchFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt(ARG_PARAM1, printing_id);
         fragment.setArguments(args);
         return fragment;
     }
@@ -99,9 +95,14 @@ public class SearchFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            printing_id = getArguments().getInt(ARG_PARAM1);
         }
+    }
+
+    public void start(){
+        reset();
+        hide_all();
+        search_by_slm(printing_id);
     }
 
     @Override
@@ -112,21 +113,6 @@ public class SearchFragment extends Fragment {
         initialize();
         initialize_returned();
         hide_all();
-        search_by_slm_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                reset();
-                hide_all();
-                submitted_slm_id = search_by_slm_EditText.getText().toString();
-                if (TextUtils.isEmpty(submitted_slm_id)) {
-                    search_by_slm_EditText.setError(getString(R.string.error_field_required));
-                    focusView = search_by_slm_EditText;
-                    focusView.requestFocus();
-                }else {
-                    search_by_slm(submitted_slm_id);
-                }
-            }
-        });
         edit_key.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -221,23 +207,34 @@ public class SearchFragment extends Fragment {
                 }
             }
         });
+        start();
+        submit_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                update_preprinting();
+                update_printing();
+                update_project();
+                update_postprinting();
+                make_editable_uneditable(false);
+            }
+        });
         return view;
     }
 
-    private void search_by_slm(String slm_id) {
+    private void search_by_slm(int slm_id) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair(config.PRINTING_slm_id, slm_id));
-        search = new Search(params, config.url_search);
+        params.add(new BasicNameValuePair(config.PRINTING_slm_id, slm_id +""));
+        search = new Search(params, config.url_search_by_prininId);
         try {
             returned = search.execute().get();
             if(returned[0] == "-101"){
                 Toast.makeText(view.getContext(),"No SLM FOUND", Toast.LENGTH_LONG).show();
             }
             else {
+                submitted_slm_id = returned[0];
                 show_all();
                 make_editable_uneditable(false);
                 search_Result(returned);
-                //searched_result_printingid.setVisibility(View.VISIBLE);
                 show_preview();
             }
         }
@@ -248,6 +245,8 @@ public class SearchFragment extends Fragment {
 
     private void search_Result(String returned []) {
         search_result_printing(returned);
+        search_result_PostPrinting(returned);
+        search_result_PrePrinting(returned);
     }
 
     private void search_result_printing(String returned []){
@@ -262,30 +261,66 @@ public class SearchFragment extends Fragment {
         material_editText.setText(returned[10]);
         buildplatform_editText.setText(returned[11]);
         printTune_editText.setText(returned[12]);
-        //if_textView.setText(returned[]);
         reused_times_editText.setText(returned[14]);
         numberofLayers_editText.setText(returned[15]);
         dpcFactor_editText.setText(returned[16]);
         minExposureTime_editText.setText(returned[17]);
         printingComments_editText.setText(returned[18]);
-        /*
-        //slmid_Text.setText(returned[]);
-        starttime_Text.setText(returned[]);
-        endtime_Text.setText(returned[]);
-        date_Text.setText(returned[]);
-        operator_Text.setText(returned[]);
-        typeofmachine_Text.setText(returned[]);
-        powerweight_Text.setText(returned[]);
-        powerweightatEnd_Text.setText(returned[]);
-        powderwaste_Text.setText(returned[]);
-        material_Text.setText(returned[]);
-        buildplatform_Text.setText(returned[]);
-        printTune_Text.setText(returned[]);
-        powderCondition_Text.setText(returned[]);
-        numberofLayers_Text.setText(returned[]);
-        dpcFactor_Text.setText(returned[]);
-        minExposureTime_Text.setText(returned[]);
-        printingComments_Text.setText(returned[]); */
+    }
+    private void search_result_PrePrinting(String returned []){
+        projectID_editText.setText(returned[30]);
+        partnumber_editText.setText(returned[31]);
+        numberofparts_editText.setText(returned[20]);
+        printingparameters_editText.setText(returned[21]);
+        comment_editText.setText(returned[22]);
+        searched_result_buildId_editText.setText(returned[19]);
+        searched_result_projectAcronym_editText.setText(returned[32]);
+    }
+    private void reset_PrePrinting(){
+        String reset = null;
+        projectID_editText.setText(reset);
+        partnumber_editText.setText(reset);
+        numberofparts_editText.setText(reset);
+        printingparameters_editText.setText(reset);
+        comment_editText.setText(reset);
+        searched_result_buildId_editText.setText(reset);
+        searched_result_projectAcronym_editText.setText(reset);
+    }
+    private void search_result_PostPrinting(String returned []){
+        int selectionId_WEDM = -1, selectionId_Support = -1, selectionId_blasting = -1;
+        if(returned[23].equals("Yes"))selectionId_Support = 1;
+        else if(returned[23].equals("No"))selectionId_Support = 2;
+        else selectionId_Support = 0;
+        if(returned[24].equals("Yes"))selectionId_WEDM = 1;
+        else if(returned[24].equals("No"))selectionId_WEDM = 2;
+        else selectionId_WEDM = 0;
+        if(returned[26].equals("Yes"))selectionId_blasting = 1;
+        else if(returned[26].equals("No"))selectionId_blasting = 2;
+        else selectionId_blasting = 0;
+        supportremovalSpinner.setSelection(selectionId_Support);
+        WEDMSpinner.setSelection(selectionId_WEDM);
+        WEDMcomments_editText.setText(returned[25]);
+        blastingSpinner.setSelection(selectionId_blasting);
+        blastingType_editText.setText(returned[28]);
+        blastingTime_editText.setText(returned[27]);
+        blastingComment_editText.setText(returned[29]);
+        /*stressTemp_editText.setVisibility(View.GONE);
+        stressTime_editText.setVisibility(View.GONE);
+        shieldingSpinner.setVisibility(View.GONE);
+        stressComment_editText.setVisibility(View.GONE);
+        hardeningTemp_editText.setVisibility(View.GONE);
+        hardeningTime_editText.setVisibility(View.GONE);
+        hardeningComment_editText.setVisibility(View.GONE);
+        temperingTemp_editText.setVisibility(View.GONE);
+        temperingTime_editText.setVisibility(View.GONE);
+        temperingNumberofCycles_editText.setVisibility(View.GONE);
+        temperingComment_editText.setVisibility(View.GONE);
+        solutionTreatmentTemp_editText.setVisibility(View.GONE);
+        solutionTreatmentTime_editText.setVisibility(View.GONE);
+        solutionTreatmentComment_editText.setVisibility(View.GONE);
+        agingTemp_editText.setVisibility(View.GONE);
+        agingNumberofCycles_editText.setVisibility(View.GONE);
+        agingComment_editText.setVisibility(View.GONE);*/
     }
 
     @Override
@@ -300,39 +335,37 @@ public class SearchFragment extends Fragment {
 
     public void initialize(){
         edit_key = (Button) view.findViewById(R.id.edit_key);
-        search_by_slm_button = (Button) view.findViewById(R.id.search_by_slm_button);
-        search_by_slm_EditText = (EditText)view.findViewById(R.id.search_by_slm_EditText);
     }
     private void initialize_returned() {
         magic_file_text_description = (TextView)view.findViewById(R.id.magic_file_text_description);
         spinner = (Spinner) view.findViewById(R.id.searched_result_powderCondition_editText);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.powder_condition_string, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.powder_condition_string, R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
         supportremovalSpinner = (Spinner) view.findViewById(R.id.searched_result_supportRemoval_editText);
         ArrayAdapter<CharSequence> supportremovalAdapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.support_removal_string, android.R.layout.simple_spinner_item);
-        supportremovalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.support_removal_string, R.layout.simple_spinner_item);
+        supportremovalAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
         supportremovalSpinner.setAdapter(supportremovalAdapter);
 
         WEDMSpinner = (Spinner) view.findViewById(R.id.searched_result_WEDM_editText);
         ArrayAdapter<CharSequence> WEDMSpinnerAdapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.WEDM_string, android.R.layout.simple_spinner_item);
-        WEDMSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.WEDM_string, R.layout.simple_spinner_item);
+        WEDMSpinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
         WEDMSpinner.setAdapter(WEDMSpinnerAdapter);
 
         blastingSpinner = (Spinner) view.findViewById(R.id.searched_result_blasting_editText);
         ArrayAdapter<CharSequence> blastingSpinnerAdapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.blasting_string, android.R.layout.simple_spinner_item);
-        blastingSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.blasting_string, R.layout.simple_spinner_item);
+        blastingSpinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
         blastingSpinner.setAdapter(blastingSpinnerAdapter);
 
         shieldingSpinner = (Spinner) view.findViewById(R.id.searched_result_shielding_editText);
         ArrayAdapter<CharSequence> shieldingSpinnerAdapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.blasting_string, android.R.layout.simple_spinner_item);
-        shieldingSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.blasting_string, R.layout.simple_spinner_item);
+        shieldingSpinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
         shieldingSpinner.setAdapter(shieldingSpinnerAdapter);
 
         preprinting_expand_button = (Button)view.findViewById(R.id.searched_result_preprinting_expand_button);
@@ -341,6 +374,10 @@ public class SearchFragment extends Fragment {
         numberofparts_editText =  (EditText)view.findViewById(R.id.searched_result_numberofparts_editText);
         printingparameters_editText = (EditText)view.findViewById(R.id.searched_result_printingparameters_editText);
         comment_editText = (EditText)view.findViewById(R.id.searched_result_comment_editText);
+        searched_result_projectAcronym_editText = (EditText)view.findViewById(R.id.searched_result_projectAcronym_editText);
+        searched_result_buildId_editText = (EditText)view.findViewById(R.id.searched_result_buildId_editText);
+        searched_result_projectAcronym_textView = (TextView) view.findViewById(R.id.searched_result_projectAcronym_textView);
+        searched_result_buildId_textView = (TextView) view.findViewById(R.id.searched_result_buildId_textView);
 
         projectID_Text = (TextView) view.findViewById(R.id.searched_result_projectID_textView);
         partnumber_Text = (TextView)view.findViewById(R.id.searched_result_partnumber_textView);
@@ -478,6 +515,10 @@ public class SearchFragment extends Fragment {
         numberofparts_Text.setVisibility(View.GONE);
         printingparameters_Text.setVisibility(View.GONE);
         comment_Text.setVisibility(View.GONE);
+        searched_result_projectAcronym_editText.setVisibility(View.GONE);
+        searched_result_buildId_editText.setVisibility(View.GONE);
+        searched_result_projectAcronym_textView.setVisibility(View.GONE);
+        searched_result_buildId_textView.setVisibility(View.GONE);
         preprinting_expand_button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.expand, 0);
     }
     private void show_preprining(){
@@ -492,6 +533,10 @@ public class SearchFragment extends Fragment {
         numberofparts_Text.setVisibility(View.VISIBLE);
         printingparameters_Text.setVisibility(View.VISIBLE);
         comment_Text.setVisibility(View.VISIBLE);
+        searched_result_projectAcronym_editText.setVisibility(View.VISIBLE);
+        searched_result_buildId_editText.setVisibility(View.VISIBLE);
+        searched_result_projectAcronym_textView.setVisibility(View.VISIBLE);
+        searched_result_buildId_textView.setVisibility(View.VISIBLE);
     }
     private void hide_prining() {
         starttime_editText.setVisibility(View.GONE);
@@ -700,6 +745,7 @@ public class SearchFragment extends Fragment {
     }
     private void reset(){
         reset_printing();
+        reset_PrePrinting();
     }
     private void reset_printing(){
         String set_to = null;
@@ -729,71 +775,73 @@ public class SearchFragment extends Fragment {
         numberofparts_editText.setEnabled(editable);
         printingparameters_editText.setEnabled(editable);
         comment_editText.setEnabled(editable);
-        projectID_Text.setEnabled(editable);
-        partnumber_Text.setEnabled(editable);
-        numberofparts_Text.setEnabled(editable);
-        printingparameters_Text.setEnabled(editable);
-        comment_Text.setEnabled(editable);
+        //projectID_Text.setEnabled(editable);
+        //partnumber_Text.setEnabled(editable);
+        //numberofparts_Text.setEnabled(editable);
+        //printingparameters_Text.setEnabled(editable);
+        //comment_Text.setEnabled(editable);
+        searched_result_projectAcronym_editText.setEnabled(editable);
+        searched_result_buildId_editText.setEnabled(editable);
 
-        postID_Text.setEnabled(editable);
+        //postID_Text.setEnabled(editable);
         postID_editText.setEnabled(editable);
-        urlphoto_Text.setEnabled(editable);
+        //urlphoto_Text.setEnabled(editable);
         urlphoto_editText.setEnabled(editable);
-        supportremoval_Text.setEnabled(editable);
+        //supportremoval_Text.setEnabled(editable);
         supportremovalSpinner.setEnabled(editable);
-        WEDM_Text.setEnabled(editable);
+        //WEDM_Text.setEnabled(editable);
         WEDMSpinner.setEnabled(editable);
-        WEDMcomments_Text.setEnabled(editable);
+        //WEDMcomments_Text.setEnabled(editable);
         WEDMcomments_editText.setEnabled(editable);
-        blasting_Text.setEnabled(editable);
+        //blasting_Text.setEnabled(editable);
         blastingSpinner.setEnabled(editable);
-        blastingType_Text.setEnabled(editable);
+        //blastingType_Text.setEnabled(editable);
         blastingType_editText.setEnabled(editable);
-        blastingTime_Text.setEnabled(editable);
+        //blastingTime_Text.setEnabled(editable);
         blastingTime_editText.setEnabled(editable);
-        blastingComment_Text.setEnabled(editable);
+        //blastingComment_Text.setEnabled(editable);
         blastingComment_editText.setEnabled(editable);
-        heatTreatment_Text.setEnabled(editable);
-        stressRelieving_Text.setEnabled(editable);
-        stressTemp_Text.setEnabled(editable);
+        //heatTreatment_Text.setEnabled(editable);
+        //stressRelieving_Text.setEnabled(editable);
+        //stressTemp_Text.setEnabled(editable);
         stressTemp_editText.setEnabled(editable);
-        stressTime_Text.setEnabled(editable);
+        //stressTime_Text.setEnabled(editable);
         stressTime_editText.setEnabled(editable);
-        stressShieldingGas_Text.setEnabled(editable);
+        //stressShieldingGas_Text.setEnabled(editable);
         shieldingSpinner.setEnabled(editable);
-        stressComment_Text.setEnabled(editable);
+        //stressComment_Text.setEnabled(editable);
         stressComment_editText.setEnabled(editable);
-        hardening_Text.setEnabled(editable);
-        hardeningTemp_Text.setEnabled(editable);
+        //hardening_Text.setEnabled(editable);
+        //hardeningTemp_Text.setEnabled(editable);
         hardeningTemp_editText.setEnabled(editable);
-        hardeningTime_Text.setEnabled(editable);
+        //hardeningTime_Text.setEnabled(editable);
         hardeningTime_editText.setEnabled(editable);
-        hardeningComment_Text.setEnabled(editable);
+        //hardeningComment_Text.setEnabled(editable);
         hardeningComment_editText.setEnabled(editable);
-        tempering_Text.setEnabled(editable);
-        temperingTemp_Text.setEnabled(editable);
+        //tempering_Text.setEnabled(editable);
+        //temperingTemp_Text.setEnabled(editable);
         temperingTemp_editText.setEnabled(editable);
-        temperingTime_Text.setEnabled(editable);
+        //temperingTime_Text.setEnabled(editable);
         temperingTime_editText.setEnabled(editable);
-        temperingNumberofCycles_Text.setEnabled(editable);
+        //temperingNumberofCycles_Text.setEnabled(editable);
         temperingNumberofCycles_editText.setEnabled(editable);
-        temperingComment_Text.setEnabled(editable);
+        //temperingComment_Text.setEnabled(editable);
         temperingComment_editText.setEnabled(editable);
-        solutionTreatment_Text.setEnabled(editable);
-        solutionTreatmentTemp_Text.setEnabled(editable);
+        //solutionTreatment_Text.setEnabled(editable);
+        //solutionTreatmentTemp_Text.setEnabled(editable);
         solutionTreatmentTemp_editText.setEnabled(editable);
-        solutionTreatmentTime_Text.setEnabled(editable);
+        //solutionTreatmentTime_Text.setEnabled(editable);
         solutionTreatmentTime_editText.setEnabled(editable);
-        solutionTreatmentComment_Text.setEnabled(editable);
+        //solutionTreatmentComment_Text.setEnabled(editable);
         solutionTreatmentComment_editText.setEnabled(editable);
-        agingTreatment_Text.setEnabled(editable);
-        agingTemp_Text.setEnabled(editable);
+        //agingTreatment_Text.setEnabled(editable);
+        //agingTemp_Text.setEnabled(editable);
         agingTemp_editText.setEnabled(editable);
-        agingTime_Text.setEnabled(editable);
+        //agingTime_Text.setEnabled(editable);
         agingTime_editText.setEnabled(editable);
-        agingNumberofCycles_Text.setEnabled(editable);
+        //agingNumberofCycles_Text.setEnabled(editable);
         agingNumberofCycles_editText.setEnabled(editable);
-        agingComment_Text.setEnabled(editable);
+        //agingComment_Text.setEnabled(editable);
         agingComment_editText.setEnabled(editable);
 
         //slmid_editText.setEnabled(editable);
@@ -814,22 +862,22 @@ public class SearchFragment extends Fragment {
         printingComments_editText.setEnabled(editable);
         spinner.setEnabled(editable);
         //slmid_Text.setEnabled(editable);
-        starttime_Text.setEnabled(editable);
-        endtime_Text.setEnabled(editable);
-        date_Text.setEnabled(editable);
-        operator_Text.setEnabled(editable);
-        typeofmachine_Text.setEnabled(editable);
-        powerweight_Text.setEnabled(editable);
-        powerweightatEnd_Text.setEnabled(editable);
-        powderwaste_Text.setEnabled(editable);
-        material_Text.setEnabled(editable);
-        buildplatform_Text.setEnabled(editable);
-        printTune_Text.setEnabled(editable);
-        powderCondition_Text.setEnabled(editable);
-        numberofLayers_Text.setEnabled(editable);
-        dpcFactor_Text.setEnabled(editable);
-        minExposureTime_Text.setEnabled(editable);
-        printingComments_Text.setEnabled(editable);
+        //starttime_Text.setEnabled(editable);
+        //endtime_Text.setEnabled(editable);
+        //date_Text.setEnabled(editable);
+        //operator_Text.setEnabled(editable);
+        //typeofmachine_Text.setEnabled(editable);
+        //powerweight_Text.setEnabled(editable);
+        //powerweightatEnd_Text.setEnabled(editable);
+        //powderwaste_Text.setEnabled(editable);
+        //material_Text.setEnabled(editable);
+        //buildplatform_Text.setEnabled(editable);
+        //printTune_Text.setEnabled(editable);
+        //powderCondition_Text.setEnabled(editable);
+        //numberofLayers_Text.setEnabled(editable);
+        //dpcFactor_Text.setEnabled(editable);
+        //minExposureTime_Text.setEnabled(editable);
+        //printingComments_Text.setEnabled(editable);
     }
 
     private void show_preview() throws ExecutionException, InterruptedException {
@@ -952,5 +1000,150 @@ public class SearchFragment extends Fragment {
             else
                 Toast.makeText(context,"File downloaded", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private int update_preprinting(){
+        String slm_id = submitted_slm_id;
+        String buildId = searched_result_buildId_editText.getText().toString();
+        String numberofparts = numberofparts_editText.getText().toString();
+        String printingparameters = printingparameters_editText.getText().toString();
+        String comment = comment_editText.getText().toString();
+        if(TextUtils.isEmpty(buildId)) buildId = "null";
+        if(TextUtils.isEmpty(numberofparts)) numberofparts = "null";
+        if(TextUtils.isEmpty(printingparameters)) printingparameters = "null";
+        if(TextUtils.isEmpty(comment)) comment = "null";
+        int success = -1;
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair(config.PROJECT_slm_id, slm_id));
+        params.add(new BasicNameValuePair(config.PREPRINTING_build_id, buildId));
+        params.add(new BasicNameValuePair(config.PREPRINTING_no_parts, numberofparts));
+        params.add(new BasicNameValuePair(config.PREPRINTING_printing_parameter, printingparameters));
+        params.add(new BasicNameValuePair(config.PREPRINTING_comment, comment));
+        Log.d(TAG, "params" + params);
+        Insert insert = new Insert(params, config.TAG_UPDATE_PREPRINTING);
+        try {
+            success = insert.execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return success;
+    }
+    private int update_printing() {
+        String starttime = starttime_editText.getText().toString();
+        String endtime = endtime_editText.getText().toString();
+        String date = date_editText.getText().toString();
+        String powerweight = powerweight_editText.getText().toString();
+        String powderatend = powerweightatEnd_editText.getText().toString();
+        String powderused=null;
+        String powderwaste = powderwaste_editText.getText().toString();
+        String buildplatform = buildplatform_editText.getText().toString();
+        String printTime = printTune_editText.getText().toString();
+        String reused_times = reused_times_editText.getText().toString();
+        String numberofLayers = numberofLayers_editText.getText().toString();
+        String dpcFactor = dpcFactor_editText.getText().toString();
+        String minExposureTime = minExposureTime_editText.getText().toString();
+        if(TextUtils.isEmpty(starttime)) starttime = "null";
+        if(TextUtils.isEmpty(endtime)) endtime = "null";
+        if(TextUtils.isEmpty(date)) date = "null";
+        if(!(TextUtils.isEmpty(powerweight) || TextUtils.isEmpty(powderatend)))
+        {
+            powderused = "" + (Integer.parseInt(powerweight_editText.getText().toString()) - Integer.parseInt(powerweightatEnd_editText.getText().toString()));
+        }
+        if(TextUtils.isEmpty(powerweight))
+        {
+            powerweight = "null";
+            powderused = "null";
+        }
+        if(TextUtils.isEmpty(powderatend)){
+            powderatend = "null";
+            powderused = "null";
+        }
+        if(TextUtils.isEmpty(powderwaste)) powderwaste = "null";
+        if(TextUtils.isEmpty(buildplatform)) buildplatform = "null";
+        if(TextUtils.isEmpty(printTime)) printTime = "null";
+        if(TextUtils.isEmpty(reused_times)) reused_times = "null";
+        if(TextUtils.isEmpty(numberofLayers)) numberofLayers = "null";
+        if(TextUtils.isEmpty(dpcFactor)) dpcFactor = "null";
+        if(TextUtils.isEmpty(minExposureTime)) minExposureTime = "null";
+        int success = -1;
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        //AUTO INCREMENT params.add(new BasicNameValuePair(config.PRINTING_printing_id, 2 + ""));
+        params.add(new BasicNameValuePair(config.PRINTING_slm_id, submitted_slm_id));
+        params.add(new BasicNameValuePair(config.PRINTING_start_time, starttime));
+        params.add(new BasicNameValuePair(config.PRINTING_end_time, endtime));
+        params.add(new BasicNameValuePair(config.PRINTING_date, date));
+        params.add(new BasicNameValuePair(config.PRINTING_operator, operator_editText.getText().toString()));
+        params.add(new BasicNameValuePair(config.PRINTING_machine_type, typeofmachine_editText.getText().toString()));
+        params.add(new BasicNameValuePair(config.PRINTING_powder_weight_start, powerweight));
+        params.add(new BasicNameValuePair(config.PRINTING_powder_weight_end, powderatend));
+        params.add(new BasicNameValuePair(config.PRINTING_powder_used, powderused));
+        params.add(new BasicNameValuePair(config.PRINTING_powder_waste_weight, powderwaste));
+        params.add(new BasicNameValuePair(config.PRINTING_material_id, material_editText.getText().toString()));
+        params.add(new BasicNameValuePair(config.PRINTING_build_platform_weight, buildplatform));
+        params.add(new BasicNameValuePair(config.PRINTING_print_time, printTime));
+        params.add(new BasicNameValuePair(config.PRINTING_powder_condition, spinner.getSelectedItem().toString()));
+        params.add(new BasicNameValuePair(config.PRINTING_reused_times, reused_times));
+        params.add(new BasicNameValuePair(config.PRINTING_number_of_layers, numberofLayers));
+        params.add(new BasicNameValuePair(config.PRINTING_dpc_factor, dpcFactor));
+        params.add(new BasicNameValuePair(config.PRINTING_exposure_time, minExposureTime));
+        params.add(new BasicNameValuePair(config.PRINTING_comments, printingComments_editText.getText().toString()));
+        Insert insert = new Insert(params, config.TAG_UPDATE_PRINTING);
+        try {
+            success = insert.execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        Log.d(TAG, "Am here too" + params);
+        return success;
+    }
+
+    private int update_project() {
+        int success = -1;
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        String projectId = projectID_editText.getText().toString();
+        String slm_id_project = submitted_slm_id;
+        if(projectId.isEmpty()) projectId = "null";
+        params.add(new BasicNameValuePair(config.PROJECT_number, projectId));
+        params.add(new BasicNameValuePair(config.PROJECT_slm_id, slm_id_project));
+        params.add(new BasicNameValuePair(config.PROJECT_name, searched_result_projectAcronym_editText.getText().toString()));
+        Insert insert = new Insert(params, config.TAG_UPDATE_PROJECT);
+        try {
+            success = insert.execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return success;
+
+    }
+
+    private int update_postprinting() {
+        String blastingTime = blastingTime_editText.getText().toString();
+        if(TextUtils.isEmpty(blastingTime)) blastingTime = "null";
+        int success = -1;
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        //AUTO INCREMENT params.add(new BasicNameValuePair(config.PRINTING_printing_id, 2 + ""));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_slm_id, submitted_slm_id));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_support_removal, supportremovalSpinner.getSelectedItem().toString()));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_wedm, WEDMSpinner.getSelectedItem().toString()));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_wedm_comment, WEDMcomments_editText.getText().toString()));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_blasting, blastingSpinner.getSelectedItem().toString()));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_blasting_time, blastingTime));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_blasting_type, blastingType_editText.getText().toString()));
+        params.add(new BasicNameValuePair(config.POSTPRINTING_blasting_comment, blastingComment_editText.getText().toString()));
+        Insert insert = new Insert(params, config.TAG_UPDATE_POSTPRINTING);
+        try {
+            success = insert.execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return success;
     }
 }

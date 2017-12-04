@@ -154,7 +154,7 @@ public class Login extends AppCompatActivity {
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            if(isNetworkAvailable()) {
+            if(hasActiveInternetConnection(this)) {
                 Log.d("Internet found? ", "true");
                 showProgress(true);
                 mAuthTask = new UserLoginTask(username, password);
@@ -166,11 +166,46 @@ public class Login extends AppCompatActivity {
         }
     }
 
-    private boolean isNetworkAvailable() {
+    private class CheckInternet extends AsyncTask<String, String, Boolean>{
+
+        @Override
+        protected Boolean doInBackground(String... strings) {
+            try {
+                HttpURLConnection urlc = (HttpURLConnection)
+                        (new URL("http://clients3.google.com/generate_204")
+                                .openConnection());
+                urlc.setRequestProperty("User-Agent", "Test");
+                urlc.setRequestProperty("Connection", "close");
+                urlc.setConnectTimeout(1500);
+                urlc.connect();
+                return (urlc.getResponseCode() == 204 && urlc.getContentLength() == 0);
+            } catch (IOException e) {
+                Log.d("LOG_TAG", "Error checking internet connection", e);
+            }
+            return false;
+        }
+    }
+    private boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager
-                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                = (ConnectivityManager) getSystemService(context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+    public boolean hasActiveInternetConnection(Context context) {
+        CheckInternet checkInternet = new CheckInternet();
+        boolean internet = false;
+        if (isNetworkAvailable(context)) {
+            try {
+                internet = checkInternet.execute().get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Log.d("LOG_TAG", "No network available!");
+        }
+        return internet;
     }
 
     private boolean isPasswordValid(String password) {

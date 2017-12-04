@@ -5,100 +5,60 @@
     android:layout_height="match_parent"
     android:id="@+id/search_scrollView"
     tools:context="android.app.printerapp.SearchFragment">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:baselineAligned="false">
-    <RelativeLayout
-        android:id="@+id/search_relativeLayout"
-        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1.3">
-
-
-        <RelativeLayout
-            android:id="@+id/search_boxes_relativeLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <SearchView
-                android:id="@+id/searched_result_search_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="13dp"
-                android:layout_marginStart="13dp"
-                android:layout_marginTop="21dp" />
-
-            <EditText
-                android:id="@+id/search_by_slm_EditText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/searched_result_search_view"
-                android:layout_alignLeft="@+id/searched_result_search_view"
-                android:layout_alignStart="@+id/searched_result_search_view"
-                android:layout_alignTop="@+id/searched_result_search_view"
-                android:layout_marginLeft="37dp"
-                android:layout_marginStart="37dp"
-                android:layout_toStartOf="@+id/search_by_slm_button"
-                android:ems="25"
-                android:hint="SLM ID"
-                android:inputType="textPersonName"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/search_by_slm_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/search_by_slm_EditText"
-                android:layout_alignParentEnd="true"
-                android:text="@android:string/search_go"
-                android:background="@color/colorPrimaryDark"
-                android:textColor="@color/colorWhite"/>
-
-            <Button
-                android:id="@+id/edit_key"
-                android:layout_width="@android:dimen/notification_large_icon_width"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/search_by_slm_button"
-                android:layout_marginEnd="178dp"
-                android:layout_marginRight="178dp"
-                android:layout_toLeftOf="@+id/search_by_slm_button"
-                android:layout_toStartOf="@+id/search_by_slm_button"
-                android:drawableLeft="@drawable/unlock"
-                android:backgroundTint="@color/colorPrimary"
-                android:drawableStart="@drawable/unlock" />
-        </RelativeLayout>
+        android:baselineAligned="false"
+        android:orientation="horizontal">
 
         <RelativeLayout
-            android:id="@+id/searched_result_search_relativeLayout"
-            android:layout_width="match_parent"
+            android:id="@+id/search_relativeLayout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/search_boxes_relativeLayout"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
-            android:paddingBottom="25dp"
-            tools:context="g5.printbook.SearchFragment">
+            android:layout_weight="1.3">
+
 
             <RelativeLayout
+                android:id="@+id/search_boxes_relativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="20dp">
+
+                <Button
+                    android:id="@+id/edit_key"
+                    android:layout_width="@android:dimen/notification_large_icon_width"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/unlock"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:gravity="center" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/searched_result_preprinting_relativeLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/searched_result_preprinting_relativeLayout">
+                android:layout_below="@+id/search_boxes_relativeLayout"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
 
                 <Button
                     android:id="@+id/searched_result_preprinting_expand_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/colorPrimaryDark"
+                    android:drawableRight="@drawable/expand"
                     android:text="Pre Printing"
                     android:textAlignment="center"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:background="@color/colorPrimaryDark"
                     android:textColor="@color/colorWhite"
-                    android:drawableRight="@drawable/expand"/>
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/searched_result_projectID_editText"
@@ -110,6 +70,7 @@
                     android:layout_toEndOf="@+id/searched_result_projectID_textView"
                     android:layout_toRightOf="@+id/searched_result_projectID_textView"
                     android:ems="10"
+                    android:gravity="center"
                     android:inputType="text"
                     android:textStyle="bold" />
 
@@ -120,9 +81,55 @@
                     android:layout_alignBottom="@+id/searched_result_projectID_editText"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:text="Project ID:"
+                    android:text="Project Number:"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/searched_result_projectAcronym_editText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/searched_result_projectID_editText"
+                    android:layout_toEndOf="@+id/searched_result_projectAcronym_textView"
+                    android:layout_toRightOf="@+id/searched_result_projectAcronym_textView"
+                    android:ems="10"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center"
+                    android:inputType="text"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/searched_result_projectAcronym_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/searched_result_projectAcronym_editText"
+                    android:text="Project Acronym:"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/searched_result_buildId_editText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/searched_result_projectAcronym_editText"
+                    android:layout_toEndOf="@+id/searched_result_buildId_textView"
+                    android:layout_toRightOf="@+id/searched_result_buildId_textView"
+                    android:ems="10"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center"
+                    android:inputType="text"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/searched_result_buildId_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/searched_result_buildId_editText"
+                    android:text="Build Id:"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/searched_result_partnumber_textView"
@@ -130,11 +137,11 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/searched_result_projectID_textView"
+                    android:layout_below="@+id/searched_result_buildId_textView"
                     android:layout_marginTop="20dp"
                     android:text="Part Number:"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/searched_result_partnumber_editText"
@@ -142,12 +149,13 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:layout_below="@+id/searched_result_projectID_editText"
+                    android:layout_below="@+id/searched_result_buildId_textView"
                     android:layout_toEndOf="@+id/searched_result_partnumber_textView"
                     android:layout_toRightOf="@+id/searched_result_partnumber_textView"
                     android:ems="10"
+                    android:gravity="center"
                     android:inputType="number"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/searched_result_numberparts_textView"
@@ -159,7 +167,7 @@
                     android:layout_marginTop="20dp"
                     android:text="Number of Parts:"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/searched_result_numberofparts_editText"
@@ -171,8 +179,9 @@
                     android:layout_toEndOf="@+id/searched_result_numberparts_textView"
                     android:layout_toRightOf="@+id/searched_result_numberparts_textView"
                     android:ems="10"
+                    android:gravity="center"
                     android:inputType="number"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/searched_result_prinringparameters_textView"
@@ -184,17 +193,18 @@
                     android:layout_marginTop="20dp"
                     android:text="Printing Parameters:"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/searched_result_printingparameters_editText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/searched_result_prinringparameters_textView"
+                    android:layout_toEndOf="@+id/searched_result_prinringparameters_textView"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:layout_toEndOf="@+id/searched_result_prinringparameters_textView"
-                    android:layout_toRightOf="@+id/searched_result_prinringparameters_textView"
                     android:ems="10"
+                    android:gravity="center"
                     android:inputType="text"
                     android:textStyle="bold" />
 
@@ -220,6 +230,7 @@
                     android:layout_toEndOf="@+id/searched_result_coment_textView"
                     android:layout_toRightOf="@+id/searched_result_coment_textView"
                     android:ems="10"
+                    android:gravity="center"
                     android:inputType="text"
                     android:textStyle="bold" />
 
@@ -227,10 +238,12 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/searched_result_printing_relativeLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/searched_result_preprinting_relativeLayout"
-                android:id="@+id/searched_result_printing_relativeLayout">
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
 
                 <Button
                     android:id="@+id/searched_result_Printing_expand_button"
@@ -241,13 +254,13 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentStart="true"
                     android:layout_marginTop="40dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:drawableRight="@drawable/expand"
                     android:text="Printing"
                     android:textAlignment="center"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:background="@color/colorPrimaryDark"
                     android:textColor="@color/colorWhite"
-                    android:drawableRight="@drawable/expand"/>
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/searched_result_starttime_textView"
@@ -259,7 +272,7 @@
                     android:layout_marginTop="20dp"
                     android:text="Start Time:"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/searched_result_starttime_editText"
@@ -271,8 +284,9 @@
                     android:layout_toEndOf="@+id/searched_result_starttime_textView"
                     android:layout_toRightOf="@+id/searched_result_starttime_textView"
                     android:ems="10"
+                    android:gravity="center"
                     android:inputType="date|time"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/searched_result_endtime_textView"
@@ -282,7 +296,7 @@
                     android:layout_marginTop="20dp"
                     android:text="End Time:"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/searched_result_endtime_editText"
@@ -294,8 +308,9 @@
                     android:layout_toEndOf="@+id/searched_result_endtime_textView"
                     android:layout_toRightOf="@+id/searched_result_endtime_textView"
                     android:ems="10"
+                    android:gravity="center"
                     android:inputType="date|time"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/searched_result_date_textView"
@@ -305,7 +320,7 @@
                     android:layout_marginTop="20dp"
                     android:text="Date:"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/searched_result_date_editText"
@@ -317,8 +332,9 @@
                     android:layout_toEndOf="@+id/date_textView"
                     android:layout_toRightOf="@+id/searched_result_date_textView"
                     android:ems="32"
+                    android:gravity="center"
                     android:inputType="date|time"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/searched_result_operator_textView"
@@ -328,7 +344,7 @@
                     android:layout_marginTop="20dp"
                     android:text="Operator:"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/searched_result_operator_editText"
@@ -340,8 +356,9 @@
                     android:layout_toEndOf="@+id/searched_result_operator_textView"
                     android:layout_toRightOf="@+id/searched_result_operator_textView"
                     android:ems="10"
+                    android:gravity="center"
                     android:inputType="text"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/searched_result_typeofmachine_textView"
@@ -351,7 +368,7 @@
                     android:layout_marginTop="20dp"
                     android:text="Type of Machine:"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/searched_result_typeofmachine_editText"
@@ -363,8 +380,9 @@
                     android:layout_toEndOf="@+id/searched_result_typeofmachine_textView"
                     android:layout_toRightOf="@+id/searched_result_typeofmachine_textView"
                     android:ems="10"
+                    android:gravity="center"
                     android:inputType="text"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/searched_result_powderweight_textView"
@@ -374,7 +392,7 @@
                     android:layout_marginTop="20dp"
                     android:text="Powder Weight:"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/searched_result_powderweight_editText"
@@ -386,6 +404,7 @@
                     android:layout_toEndOf="@+id/searched_result_powderweight_textView"
                     android:layout_toRightOf="@+id/searched_result_powderweight_textView"
                     android:ems="10"
+                    android:gravity="center"
                     android:inputType="number"
                     android:textStyle="bold" />
 
@@ -409,6 +428,7 @@
                     android:layout_toEndOf="@+id/searched_result_powderweightatEnd_textView"
                     android:layout_toRightOf="@+id/searched_result_powderweightatEnd_textView"
                     android:ems="10"
+                    android:gravity="center"
                     android:inputType="number"
                     android:textStyle="bold" />
 
@@ -432,8 +452,9 @@
                     android:layout_toEndOf="@+id/searched_result_powderwaste_textView"
                     android:layout_toRightOf="@+id/searched_result_powderwaste_textView"
                     android:ems="10"
+                    android:gravity="center"
                     android:inputType="number"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
 
                 <TextView
@@ -444,7 +465,7 @@
                     android:layout_marginTop="20dp"
                     android:text="Material:"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/searched_result_material_editText"
@@ -456,8 +477,9 @@
                     android:layout_toEndOf="@+id/searched_result_material_textView"
                     android:layout_toRightOf="@+id/searched_result_material_textView"
                     android:ems="10"
+                    android:gravity="center"
                     android:inputType="text"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/searched_result_buildplatform_textView"
@@ -467,7 +489,7 @@
                     android:layout_marginTop="20dp"
                     android:text="Build Platform Weight:"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/searched_result_buildplatform_editText"
@@ -479,8 +501,9 @@
                     android:layout_toEndOf="@+id/searched_result_buildplatform_textView"
                     android:layout_toRightOf="@+id/searched_result_buildplatform_textView"
                     android:ems="10"
+                    android:gravity="center"
                     android:inputType="text"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/searched_result_printTune_textView"
@@ -490,7 +513,7 @@
                     android:layout_marginTop="20dp"
                     android:text="Print Tune:"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/searched_result_printTune_editText"
@@ -502,8 +525,9 @@
                     android:layout_toEndOf="@+id/searched_result_printTune_textView"
                     android:layout_toRightOf="@+id/searched_result_printTune_textView"
                     android:ems="10"
+                    android:gravity="center"
                     android:inputType="text"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/searched_result_powderCondition_textView"
@@ -513,7 +537,8 @@
                     android:layout_marginTop="20dp"
                     android:text="Powder Condition:"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
+
                 <Spinner
                     android:id="@+id/searched_result_powderCondition_editText"
                     android:layout_width="wrap_content"
@@ -523,9 +548,9 @@
                     android:layout_alignParentRight="true"
                     android:layout_toEndOf="@+id/searched_result_powderCondition_textView"
                     android:layout_toRightOf="@+id/searched_result_powderCondition_textView"
-                    android:ems="10"
                     android:background="@android:drawable/btn_dropdown"
-                    android:spinnerMode="dropdown"/>
+                    android:ems="10"
+                    android:spinnerMode="dropdown" />
 
                 <TextView
                     android:id="@+id/searched_result_if_textView"
@@ -535,7 +560,7 @@
                     android:layout_marginTop="20dp"
                     android:text="How many times:"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/searched_result_if_editText"
@@ -547,8 +572,9 @@
                     android:layout_toEndOf="@+id/searched_result_if_textView"
                     android:layout_toRightOf="@+id/searched_result_if_textView"
                     android:ems="10"
+                    android:gravity="center"
                     android:inputType="text"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/searched_result_numberofLayers_textView"
@@ -558,7 +584,7 @@
                     android:layout_marginTop="20dp"
                     android:text="Number of Layers:"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/searched_result_numberofLayers_editText"
@@ -570,8 +596,9 @@
                     android:layout_toEndOf="@+id/searched_result_numberofLayers_textView"
                     android:layout_toRightOf="@+id/searched_result_numberofLayers_textView"
                     android:ems="10"
+                    android:gravity="center"
                     android:inputType="number"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/searched_result_dpcFactor_textView"
@@ -581,7 +608,7 @@
                     android:layout_marginTop="20dp"
                     android:text="DPC Factor:"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/searched_result_dpcFactor_editText"
@@ -593,8 +620,9 @@
                     android:layout_toEndOf="@+id/searched_result_dpcFactor_textView"
                     android:layout_toRightOf="@+id/searched_result_dpcFactor_textView"
                     android:ems="10"
+                    android:gravity="center"
                     android:inputType="number"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/searched_result_minExposureTime_textView"
@@ -604,7 +632,7 @@
                     android:layout_marginTop="20dp"
                     android:text="Min Exposure Time:"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/searched_result_minExposureTime_editText"
@@ -616,8 +644,9 @@
                     android:layout_toEndOf="@+id/searched_result_minExposureTime_textView"
                     android:layout_toRightOf="@+id/searched_result_minExposureTime_textView"
                     android:ems="10"
+                    android:gravity="center"
                     android:inputType="text"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/searched_result_printingComments_textView"
@@ -627,7 +656,7 @@
                     android:layout_marginTop="20dp"
                     android:text="Comments:"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/searched_result_printingComments_editText"
@@ -639,710 +668,742 @@
                     android:layout_toEndOf="@+id/searched_result_printingComments_textView"
                     android:layout_toRightOf="@+id/searched_result_printingComments_textView"
                     android:ems="10"
+                    android:gravity="center"
                     android:inputType="text"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/searched_result_search_relativeLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/searched_result_printing_relativeLayout"
-                android:id="@+id/searched_result_posprinting_relativeLayout">
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
+
+                <RelativeLayout
+                    android:id="@+id/searched_result_posprinting_relativeLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true">
+
+                    <Button
+                        android:id="@+id/searched_result_posprinting_expand_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop="40dp"
+                        android:background="@color/colorPrimaryDark"
+                        android:drawableRight="@drawable/expand"
+                        android:text="Post-Printing"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_postID_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/searched_result_posprinting_expand_button"
+                        android:layout_marginTop="20dp"
+                        android:text="Post ID:"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/searched_result_postID_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/searched_result_postID_textView"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/searched_result_postID_textView"
+                        android:layout_toRightOf="@+id/searched_result_postID_textView"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_urlphoto_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/searched_result_postID_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="URL Photo:"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/searched_result_urlphoto_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/searched_result_urlphoto_textView"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/searched_result_urlphoto_textView"
+                        android:layout_toRightOf="@+id/searched_result_urlphoto_textView"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_supportRemoval_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/searched_result_urlphoto_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="Support Removal:"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/searched_result_supportRemoval_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/searched_result_supportRemoval_textView"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/searched_result_supportRemoval_textView"
+                        android:layout_toRightOf="@+id/searched_result_supportRemoval_textView"
+                        android:background="@android:drawable/btn_dropdown"
+                        android:ems="10"
+                        android:spinnerMode="dropdown" />
+
+                    <TextView
+                        android:id="@+id/searched_result_WEDM_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/searched_result_supportRemoval_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="WEDM:"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/searched_result_WEDM_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignTop="@+id/searched_result_WEDM_textView"
+                        android:layout_toEndOf="@+id/searched_result_urlphoto_textView"
+                        android:background="@android:drawable/btn_dropdown"
+                        android:ems="30"
+                        android:spinnerMode="dropdown" />
+
+                    <TextView
+                        android:id="@+id/searched_result_WEDMcomments_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/searched_result_WEDM_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="WEDM Comments:"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/searched_result_WEDMcomments_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/searched_result_WEDMcomments_textView"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/searched_result_WEDMcomments_textView"
+                        android:layout_toRightOf="@+id/searched_result_WEDMcomments_textView"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_blasting_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/searched_result_WEDMcomments_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="Blasting:"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/searched_result_blasting_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignStart="@+id/searched_result_WEDM_editText"
+                        android:layout_alignTop="@+id/searched_result_blasting_textView"
+                        android:background="@android:drawable/btn_dropdown"
+                        android:ems="10"
+                        android:spinnerMode="dropdown" />
+
+                    <TextView
+                        android:id="@+id/searched_result_blastingType_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/searched_result_blasting_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="Blasting Type:"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/searched_result_blastingType_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/searched_result_blastingType_textView"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/searched_result_blastingType_textView"
+                        android:layout_toRightOf="@+id/searched_result_blastingType_textView"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_blastingTime_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/searched_result_blastingType_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="Blasting Time:"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/searched_result_blastingTime_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/searched_result_blastingTime_textView"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/searched_result_blastingTime_textView"
+                        android:layout_toRightOf="@+id/searched_result_blastingTime_textView"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_blastingComment_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/searched_result_blastingTime_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="Blasting Comment:"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/searched_result_blastingComment_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/searched_result_blastingComment_textView"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/searched_result_blastingComment_textView"
+                        android:layout_toRightOf="@+id/searched_result_blastingComment_textView"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_heatTreatment_textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/searched_result_blastingComment_editText"
+                        android:layout_marginTop="20dp"
+                        android:text="Heat Treatment(Material Dependant):"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_stressRelieving_textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/searched_result_heatTreatment_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="Stress Relieving:"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_stressTemp_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/searched_result_stressRelieving_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="Temperature:"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/searched_result_stressTemp_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/searched_result_stressTemp_textView"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/searched_result_stressTemp_textView"
+                        android:layout_toRightOf="@+id/searched_result_stressTemp_textView"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_stressTime_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/searched_result_stressTemp_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="Time:"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/searched_result_stressTime_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/searched_result_stressTime_textView"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/searched_result_stressTime_textView"
+                        android:layout_toRightOf="@+id/searched_result_stressTime_textView"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_stressShieldingGas_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/searched_result_stressTime_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="Shielding gas:"
+                        android:textSize="18sp" />
+
+                    <Spinner
+                        android:id="@+id/searched_result_shielding_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/searched_result_stressShieldingGas_textView"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/searched_result_stressShieldingGas_textView"
+                        android:layout_toRightOf="@+id/searched_result_stressShieldingGas_textView"
+                        android:background="@android:drawable/btn_dropdown"
+                        android:ems="10"
+                        android:spinnerMode="dropdown" />
+
+                    <TextView
+                        android:id="@+id/searched_result_stressComment_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/searched_result_stressShieldingGas_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="Comment:"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/searched_result_stressComment_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/searched_result_stressComment_textView"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/searched_result_stressComment_textView"
+                        android:layout_toRightOf="@+id/searched_result_stressComment_textView"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_hardening_textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/searched_result_stressComment_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="Hardening:"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_hardeningTemp_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/searched_result_hardening_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="Temperature:"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/searched_result_hardeningTemp_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/searched_result_hardeningTemp_textView"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/searched_result_hardeningTemp_textView"
+                        android:layout_toRightOf="@+id/searched_result_hardeningTemp_textView"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_hardeningTime_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/searched_result_hardeningTemp_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="Time:"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/searched_result_hardeningTime_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/searched_result_hardeningTime_textView"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/searched_result_hardeningTime_textView"
+                        android:layout_toRightOf="@+id/searched_result_hardeningTime_textView"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_hardeningComment_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/searched_result_hardeningTime_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="Comment:"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/searched_result_hardeningComment_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/searched_result_hardeningComment_textView"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/searched_result_hardeningComment_textView"
+                        android:layout_toRightOf="@+id/searched_result_hardeningComment_textView"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_tempering_textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/searched_result_hardeningComment_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="Tempering:"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_temperingTemp_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/searched_result_tempering_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="Temperature:"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/searched_result_temperingTemp_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/searched_result_temperingTemp_textView"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/searched_result_temperingTemp_textView"
+                        android:layout_toRightOf="@+id/searched_result_temperingTemp_textView"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_temperingTime_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/searched_result_temperingTemp_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="Time:"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/searched_result_temperingTime_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/searched_result_temperingTime_textView"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/searched_result_temperingTime_textView"
+                        android:layout_toRightOf="@+id/searched_result_temperingTime_textView"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_temperingNumberofCycles_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/searched_result_temperingTime_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="No of Cycles:"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/searched_result_temperingNumberofCycles_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/searched_result_temperingNumberofCycles_textView"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/searched_result_temperingNumberofCycles_textView"
+                        android:layout_toRightOf="@+id/searched_result_temperingNumberofCycles_textView"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_temperingComment_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/searched_result_temperingNumberofCycles_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="Comment:"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/searched_result_temperingComment_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/searched_result_temperingComment_textView"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/searched_result_temperingComment_textView"
+                        android:layout_toRightOf="@+id/searched_result_temperingComment_textView"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_solutionTreatment_textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/searched_result_temperingComment_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="Solution Treatment:"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_solutionTreatmentTemp_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/searched_result_solutionTreatment_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="Temperature:"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/searched_result_solutionTreatmentTemp_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/searched_result_solutionTreatmentTemp_textView"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/searched_result_solutionTreatmentTemp_textView"
+                        android:layout_toRightOf="@+id/searched_result_solutionTreatmentTemp_textView"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_solutionTreatmentTime_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/searched_result_solutionTreatmentTemp_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="Time:"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/searched_result_solutionTreatmentTime_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/searched_result_solutionTreatmentTime_textView"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/searched_result_solutionTreatmentTime_textView"
+                        android:layout_toRightOf="@+id/searched_result_solutionTreatmentTime_textView"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_solutionTreatmentComment_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/searched_result_solutionTreatmentTime_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="Comment:"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/searched_result_solutionTreatmentComment_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/searched_result_solutionTreatmentComment_textView"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/searched_result_solutionTreatmentComment_textView"
+                        android:layout_toRightOf="@+id/searched_result_solutionTreatmentComment_textView"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_agingTreatment_textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/searched_result_solutionTreatmentComment_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="Aging Treatment:"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_agingTemp_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/searched_result_agingTreatment_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="Temperature:"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/searched_result_agingTemp_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/searched_result_agingTemp_textView"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/searched_result_agingTemp_textView"
+                        android:layout_toRightOf="@+id/searched_result_agingTemp_textView"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_agingTime_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/searched_result_agingTemp_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="Time:"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/searched_result_agingTime_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/searched_result_agingTime_textView"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/searched_result_agingTime_textView"
+                        android:layout_toRightOf="@+id/searched_result_agingTime_textView"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_agingNumberofCycles_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/searched_result_agingTime_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="No of Cycles:"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/searched_result_agingNumberofCycles_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/searched_result_agingNumberofCycles_textView"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/searched_result_agingNumberofCycles_textView"
+                        android:layout_toRightOf="@+id/searched_result_agingNumberofCycles_textView"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/searched_result_agingComment_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/searched_result_agingNumberofCycles_textView"
+                        android:layout_marginTop="20dp"
+                        android:text="Comment:"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/searched_result_agingComment_editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/searched_result_agingComment_textView"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_toEndOf="@+id/searched_result_agingComment_textView"
+                        android:layout_toRightOf="@+id/searched_result_agingComment_textView"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
 
                 <Button
-                    android:id="@+id/searched_result_posprinting_expand_button"
+                    android:id="@+id/searched_result_submit_Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="40dp"
-                    android:text="Post-Printing"
-                    android:textAlignment="center"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorWhite"
-                    android:background="@color/colorPrimaryDark"
-                    android:drawableRight="@drawable/expand"/>
-
-                <TextView
-                    android:id="@+id/searched_result_postID_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searched_result_posprinting_expand_button"
-                    android:layout_marginTop="20dp"
-                    android:text="Post ID:"
-                    android:textSize="18sp"
-                    android:textStyle="bold"/>
-
-                <EditText
-                    android:id="@+id/searched_result_postID_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/searched_result_postID_textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toEndOf="@+id/searched_result_postID_textView"
-                    android:layout_toRightOf="@+id/searched_result_postID_textView"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:id="@+id/searched_result_urlphoto_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searched_result_postID_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="URL Photo:"
-                    android:textSize="18sp"
-                    android:textStyle="bold"/>
-
-                <EditText
-                    android:id="@+id/searched_result_urlphoto_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/searched_result_urlphoto_textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toEndOf="@+id/searched_result_urlphoto_textView"
-                    android:layout_toRightOf="@+id/searched_result_urlphoto_textView"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/searched_result_supportRemoval_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searched_result_urlphoto_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="Support Removal:"
-                    android:textSize="18sp"
-                    android:textStyle="bold"/>
-                <Spinner
-                    android:id="@+id/searched_result_supportRemoval_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/searched_result_supportRemoval_textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toEndOf="@+id/searched_result_supportRemoval_textView"
-                    android:layout_toRightOf="@+id/searched_result_supportRemoval_textView"
-                    android:background="@android:drawable/btn_dropdown"
-                    android:ems="10"
-                    android:spinnerMode="dropdown" />
-
-                <TextView
-                    android:id="@+id/searched_result_WEDM_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searched_result_supportRemoval_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="WEDM:"
-                    android:textSize="18sp"
-                    android:textStyle="bold"/>
-
-                <Spinner
-                    android:id="@+id/searched_result_WEDM_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="92dp"
-                    android:layout_marginStart="92dp"
-                    android:layout_marginTop="1371dp"
-                    android:background="@android:drawable/btn_dropdown"
-                    android:ems="10"
-                    android:spinnerMode="dropdown" />
-
-                <TextView
-                    android:id="@+id/searched_result_WEDMcomments_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searched_result_WEDM_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="WEDM Comments:"
-                    android:textSize="18sp"
-                    android:textStyle="bold"/>
-
-                <EditText
-                    android:id="@+id/searched_result_WEDMcomments_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/searched_result_WEDMcomments_textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toEndOf="@+id/searched_result_WEDMcomments_textView"
-                    android:layout_toRightOf="@+id/searched_result_WEDMcomments_textView"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/searched_result_blasting_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searched_result_WEDMcomments_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="Blasting:"
-                    android:textSize="18sp"
-                    android:textStyle="bold"/>
-
-                <Spinner
-                    android:id="@+id/searched_result_blasting_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/searched_result_blasting_textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toEndOf="@+id/searched_result_blasting_textView"
-                    android:layout_toRightOf="@+id/searched_result_blasting_textView"
-                    android:ems="10"
-                    android:background="@android:drawable/btn_dropdown"
-                    android:spinnerMode="dropdown" />
-
-                <TextView
-                    android:id="@+id/searched_result_blastingType_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searched_result_blasting_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="Blasting Type:"
-                    android:textSize="18sp"
-                    android:textStyle="bold"/>
-
-                <EditText
-                    android:id="@+id/searched_result_blastingType_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/searched_result_blastingType_textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toEndOf="@+id/searched_result_blastingType_textView"
-                    android:layout_toRightOf="@+id/searched_result_blastingType_textView"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/searched_result_blastingTime_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searched_result_blastingType_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="Blasting Time:"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/searched_result_blastingTime_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/searched_result_blastingTime_textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toEndOf="@+id/searched_result_blastingTime_textView"
-                    android:layout_toRightOf="@+id/searched_result_blastingTime_textView"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/searched_result_blastingComment_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searched_result_blastingTime_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="Blasting Comment:"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/searched_result_blastingComment_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/searched_result_blastingComment_textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toEndOf="@+id/searched_result_blastingComment_textView"
-                    android:layout_toRightOf="@+id/searched_result_blastingComment_textView"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/searched_result_heatTreatment_textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/searched_result_blastingComment_editText"
-                    android:layout_marginTop="20dp"
-                    android:text="Heat Treatment(Material Dependant):"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/searched_result_stressRelieving_textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/searched_result_heatTreatment_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="Stress Relieving:"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/searched_result_stressTemp_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searched_result_stressRelieving_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="Temperature:"
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:id="@+id/searched_result_stressTemp_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/searched_result_stressTemp_textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toEndOf="@+id/searched_result_stressTemp_textView"
-                    android:layout_toRightOf="@+id/searched_result_stressTemp_textView"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/searched_result_stressTime_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searched_result_stressTemp_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="Time:"
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:id="@+id/searched_result_stressTime_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/searched_result_stressTime_textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toEndOf="@+id/searched_result_stressTime_textView"
-                    android:layout_toRightOf="@+id/searched_result_stressTime_textView"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/searched_result_stressShieldingGas_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searched_result_stressTime_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="Shielding gas:"
-                    android:textSize="18sp" />
-
-                <Spinner
-                    android:id="@+id/searched_result_shielding_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/searched_result_stressShieldingGas_textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toEndOf="@+id/searched_result_stressShieldingGas_textView"
-                    android:layout_toRightOf="@+id/searched_result_stressShieldingGas_textView"
-                    android:ems="10"
-                    android:background="@android:drawable/btn_dropdown"
-                    android:spinnerMode="dropdown"/>
-
-                <TextView
-                    android:id="@+id/searched_result_stressComment_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searched_result_stressShieldingGas_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="Comment:"
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:id="@+id/searched_result_stressComment_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/searched_result_stressComment_textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toEndOf="@+id/searched_result_stressComment_textView"
-                    android:layout_toRightOf="@+id/searched_result_stressComment_textView"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/searched_result_hardening_textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/searched_result_stressComment_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="Hardening:"
-                    android:textSize="18sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/searched_result_hardeningTemp_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searched_result_hardening_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="Temperature:"
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:id="@+id/searched_result_hardeningTemp_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/searched_result_hardeningTemp_textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toEndOf="@+id/searched_result_hardeningTemp_textView"
-                    android:layout_toRightOf="@+id/searched_result_hardeningTemp_textView"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/searched_result_hardeningTime_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searched_result_hardeningTemp_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="Time:"
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:id="@+id/searched_result_hardeningTime_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/searched_result_hardeningTime_textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toEndOf="@+id/searched_result_hardeningTime_textView"
-                    android:layout_toRightOf="@+id/searched_result_hardeningTime_textView"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/searched_result_hardeningComment_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searched_result_hardeningTime_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="Comment:"
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:id="@+id/searched_result_hardeningComment_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/searched_result_hardeningComment_textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toEndOf="@+id/searched_result_hardeningComment_textView"
-                    android:layout_toRightOf="@+id/searched_result_hardeningComment_textView"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/searched_result_tempering_textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/searched_result_hardeningComment_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="Tempering:"
-                    android:textSize="18sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/searched_result_temperingTemp_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searched_result_tempering_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="Temperature:"
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:id="@+id/searched_result_temperingTemp_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/searched_result_temperingTemp_textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toEndOf="@+id/searched_result_temperingTemp_textView"
-                    android:layout_toRightOf="@+id/searched_result_temperingTemp_textView"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/searched_result_temperingTime_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searched_result_temperingTemp_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="Time:"
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:id="@+id/searched_result_temperingTime_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/searched_result_temperingTime_textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toEndOf="@+id/searched_result_temperingTime_textView"
-                    android:layout_toRightOf="@+id/searched_result_temperingTime_textView"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/searched_result_temperingNumberofCycles_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searched_result_temperingTime_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="No of Cycles:"
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:id="@+id/searched_result_temperingNumberofCycles_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/searched_result_temperingNumberofCycles_textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toEndOf="@+id/searched_result_temperingNumberofCycles_textView"
-                    android:layout_toRightOf="@+id/searched_result_temperingNumberofCycles_textView"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/searched_result_temperingComment_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searched_result_temperingNumberofCycles_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="Comment:"
-                    android:textSize="18sp"/>
-
-                <EditText
-                    android:id="@+id/searched_result_temperingComment_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/searched_result_temperingComment_textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toEndOf="@+id/searched_result_temperingComment_textView"
-                    android:layout_toRightOf="@+id/searched_result_temperingComment_textView"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/searched_result_solutionTreatment_textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/searched_result_temperingComment_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="Solution Treatment:"
-                    android:textSize="18sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/searched_result_solutionTreatmentTemp_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searched_result_solutionTreatment_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="Temperature:"
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:id="@+id/searched_result_solutionTreatmentTemp_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/searched_result_solutionTreatmentTemp_textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toEndOf="@+id/searched_result_solutionTreatmentTemp_textView"
-                    android:layout_toRightOf="@+id/searched_result_solutionTreatmentTemp_textView"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/searched_result_solutionTreatmentTime_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searched_result_solutionTreatmentTemp_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="Time:"
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:id="@+id/searched_result_solutionTreatmentTime_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/searched_result_solutionTreatmentTime_textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toEndOf="@+id/searched_result_solutionTreatmentTime_textView"
-                    android:layout_toRightOf="@+id/searched_result_solutionTreatmentTime_textView"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/searched_result_solutionTreatmentComment_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searched_result_solutionTreatmentTime_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="Comment:"
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:id="@+id/searched_result_solutionTreatmentComment_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/searched_result_solutionTreatmentComment_textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toEndOf="@+id/searched_result_solutionTreatmentComment_textView"
-                    android:layout_toRightOf="@+id/searched_result_solutionTreatmentComment_textView"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/searched_result_agingTreatment_textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/searched_result_solutionTreatmentComment_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="Aging Treatment:"
-                    android:textSize="18sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/searched_result_agingTemp_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searched_result_agingTreatment_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="Temperature:"
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:id="@+id/searched_result_agingTemp_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/searched_result_agingTemp_textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toEndOf="@+id/searched_result_agingTemp_textView"
-                    android:layout_toRightOf="@+id/searched_result_agingTemp_textView"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/searched_result_agingTime_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searched_result_agingTemp_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="Time:"
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:id="@+id/searched_result_agingTime_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/searched_result_agingTime_textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toEndOf="@+id/searched_result_agingTime_textView"
-                    android:layout_toRightOf="@+id/searched_result_agingTime_textView"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/searched_result_agingNumberofCycles_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searched_result_agingTime_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="No of Cycles:"
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:id="@+id/searched_result_agingNumberofCycles_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/searched_result_agingNumberofCycles_textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toEndOf="@+id/searched_result_agingNumberofCycles_textView"
-                    android:layout_toRightOf="@+id/searched_result_agingNumberofCycles_textView"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/searched_result_agingComment_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/searched_result_agingNumberofCycles_textView"
-                    android:layout_marginTop="20dp"
-                    android:text="Comment:"
-                    android:textSize="18sp"/>
-
-                <EditText
-                    android:id="@+id/searched_result_agingComment_editText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/searched_result_agingComment_textView"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_toEndOf="@+id/searched_result_agingComment_textView"
-                    android:layout_toRightOf="@+id/searched_result_agingComment_textView"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textStyle="bold"/>
+                    android:layout_alignParentBottom="true"
+                    android:layout_below="@+id/searched_result_posprinting_relativeLayout"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:text="Submit"
+                    android:textColor="@color/colorWhite" />
 
             </RelativeLayout>
-
-            <Button
-                android:id="@+id/searched_result_submit_Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_below="@+id/searched_result_posprinting_relativeLayout"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="@color/colorPrimaryDark"
-                android:textColor="@color/colorWhite"
-                android:text="Submit" />
-
         </RelativeLayout>
-    </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/preview_relattiveLayout"
@@ -1357,8 +1418,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:text="MAGIC FILE"
-                android:textStyle="bold"
-                android:textSize="30dp" />
+                android:textSize="30dp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/image_preview"

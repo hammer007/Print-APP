@@ -1,12 +1,9 @@
-package android.app.printerapp.database;
+package android.app.printerapp;
 
-/**
- * Created by Geek on 11/24/2017.
- */
-
-import android.content.Intent;
+import android.app.printerapp.database.Config;
+import android.app.printerapp.database.JSONParser;
 import android.os.AsyncTask;
-import android.util.Log;
+
 import org.apache.http.NameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,22 +12,24 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchUser extends  AsyncTask<String, String, JSONArray>{
-    String returned [] = new String[3];
-    JSONParser jsonParser = new JSONParser();
+/**
+ * Created by Geek on 12/2/2017.
+ */
+
+public class SearchList extends AsyncTask<String, JSONArray, JSONArray> {
     String url;
     Config config;
+    JSONParser jsonParser = new JSONParser();
     List<NameValuePair> params = new ArrayList<NameValuePair>();
-    public SearchUser(List<NameValuePair> params, String url){
+    public SearchList(List<NameValuePair> params, String url){
         this.params = params;
         this.url = url;
     }
-
     @Override
     protected JSONArray doInBackground(String... strings) {
         JSONArray productObj = null;
         JSONObject json = jsonParser.makeHttpRequest(
-                url, "GET", params);
+                url, "POST", params);
         int success = 0;
         try {
             success = json.getInt(config.TAG_SUCCESS);
@@ -40,7 +39,7 @@ public class SearchUser extends  AsyncTask<String, String, JSONArray>{
         if (success == 1) {
             try {
                 productObj = json
-                        .getJSONArray("users");
+                        .getJSONArray("data");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -48,4 +47,8 @@ public class SearchUser extends  AsyncTask<String, String, JSONArray>{
         return productObj;
     }
 
+    @Override
+    protected void onPostExecute(JSONArray jsonArray) {
+        super.onPostExecute(jsonArray);
+    }
 }
