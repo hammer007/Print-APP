@@ -62,7 +62,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
     Config config;
     Insert insert;
     String slm_id;
-    Button printingSave_Button, preprintingSave_Button, submit_Button, preprinting_expand_button, printing_expand_button, posprinting_expand_button, postprintingSave_Button;
+    Button submit_Button, preprinting_expand_button, printing_expand_button, posprinting_expand_button;
     EditText projectID_editText, partnumber_editText, buildId_editText, numberofparts_editText, printingparameters_editText, comment_editText;
     EditText slmid_editText, starttime_editText, endtime_editText, date_editText, operator_editText, agingComment_editText;
     EditText typeofmachine_editText, powerweight_editText, powerweightatEnd_editText, powderwaste_editText, material_editText;
@@ -371,7 +371,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         if(TextUtils.isEmpty(time)) time = "null";
         if(TextUtils.isEmpty(cycles)) cycles = "null";
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        int aging_ids = get_post_ids(config.url_get_aging_ids, "ids");
+        int aging_ids = get_post_ids(config.url_get_aging_ids, "aging_id");
         params.add(new BasicNameValuePair(config.POSTPRINTING_aging_id, aging_ids + ""));
         params.add(new BasicNameValuePair(config.POSTPRINTING_aging_temperature, temp));
         params.add(new BasicNameValuePair(config.POSTPRINTING_aging_time, time));
@@ -394,7 +394,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         if(TextUtils.isEmpty(temp)) temp = "null";
         if(TextUtils.isEmpty(time)) time = "null";
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        int solution_ids = get_post_ids(config.url_get_solution_ids, "ids");
+        int solution_ids = get_post_ids(config.url_get_solution_ids, "solution_id");
         params.add(new BasicNameValuePair(config.POSTPRINTING_solution_id, solution_ids + ""));
         params.add(new BasicNameValuePair(config.POSTPRINTING_solution_temperature, temp));
         params.add(new BasicNameValuePair(config.POSTPRINTING_solution_time, time));
@@ -418,7 +418,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         if(TextUtils.isEmpty(time)) time = "null";
         if(TextUtils.isEmpty(cycles)) cycles = "null";
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        int tempering_ids = get_post_ids(config.url_get_tempering_ids, "ids");
+        int tempering_ids = get_post_ids(config.url_get_tempering_ids, "tempering_id");
         params.add(new BasicNameValuePair(config.POSTPRINTING_tempering_id, tempering_ids + ""));
         params.add(new BasicNameValuePair(config.POSTPRINTING_tempering_temperature, temp));
         params.add(new BasicNameValuePair(config.POSTPRINTING_tempering_time, time));
@@ -441,7 +441,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         if(TextUtils.isEmpty(temp)) temp = "null";
         if(TextUtils.isEmpty(time)) time = "null";
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        int hardening_ids = get_post_ids(config.url_get_hardening_ids, "ids");
+        int hardening_ids = get_post_ids(config.url_get_hardening_ids, "hardening_id");
         params.add(new BasicNameValuePair(config.POSTPRINTING_hardening_id, hardening_ids + ""));
         params.add(new BasicNameValuePair(config.POSTPRINTING_hardening_temperature, temp));
         params.add(new BasicNameValuePair(config.POSTPRINTING_hardening_time, time));
@@ -463,7 +463,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         if(TextUtils.isEmpty(temp)) temp = "null";
         if(TextUtils.isEmpty(time)) time = "null";
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        int stress_ids = get_post_ids(config.url_get_ids, "ids");
+        int stress_ids = get_post_ids(config.url_get_ids, "stress_id");
         params.add(new BasicNameValuePair(config.POSTPRINTING_stress_id, stress_ids + ""));
         params.add(new BasicNameValuePair(config.POSTPRINTING_stress_temprature, temp));
         params.add(new BasicNameValuePair(config.POSTPRINTING_stress_time, time));
@@ -602,32 +602,32 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
     private void initialize(View view) {
         spinner = (Spinner) view.findViewById(R.id.powderCondition_editText);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.powder_condition_string, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.powder_condition_string, R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
         supportremovalSpinner = (Spinner) view.findViewById(R.id.supportRemoval_editText);
         ArrayAdapter<CharSequence> supportremovalAdapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.support_removal_string, android.R.layout.simple_spinner_item);
-        supportremovalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.support_removal_string, R.layout.simple_spinner_item);
+        supportremovalAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
         supportremovalSpinner.setAdapter(supportremovalAdapter);
 
         WEDMSpinner = (Spinner) view.findViewById(R.id.WEDM_editText);
         ArrayAdapter<CharSequence> WEDMSpinnerAdapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.WEDM_string, android.R.layout.simple_spinner_item);
-        WEDMSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.WEDM_string, R.layout.simple_spinner_item);
+        WEDMSpinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
         WEDMSpinner.setAdapter(WEDMSpinnerAdapter);
 
         blastingSpinner = (Spinner) view.findViewById(R.id.blasting_editText);
         ArrayAdapter<CharSequence> blastingSpinnerAdapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.blasting_string, android.R.layout.simple_spinner_item);
-        blastingSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.blasting_string, R.layout.simple_spinner_item);
+        blastingSpinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
         blastingSpinner.setAdapter(blastingSpinnerAdapter);
 
         shieldingSpinner = (Spinner) view.findViewById(R.id.shielding_editText);
         ArrayAdapter<CharSequence> shieldingSpinnerAdapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.blasting_string, android.R.layout.simple_spinner_item);
-        shieldingSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.blasting_string, R.layout.simple_spinner_item);
+        shieldingSpinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
         shieldingSpinner.setAdapter(shieldingSpinnerAdapter);
 
         preprinting_expand_button = (Button)view.findViewById(R.id.preprinting_expand_button);
@@ -814,7 +814,6 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         numberofparts_editText.setVisibility(View.VISIBLE);
         printingparameters_editText.setVisibility(View.VISIBLE);
         comment_editText.setVisibility(View.VISIBLE);
-        preprintingSave_Button.setVisibility(View.GONE);
         preprinting_expand_button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.shrink, 0);
         projectID_Text.setVisibility(View.VISIBLE);
         partnumber_Text.setVisibility(View.VISIBLE);
@@ -884,7 +883,6 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         dpcFactor_editText.setVisibility(View.VISIBLE);
         minExposureTime_editText.setVisibility(View.VISIBLE);
         printingComments_editText.setVisibility(View.VISIBLE);
-        printingSave_Button.setVisibility(View.GONE);
         spinner.setVisibility(View.VISIBLE);
         slmid_Text.setVisibility(View.VISIBLE);
         starttime_Text.setVisibility(View.VISIBLE);
@@ -1023,7 +1021,6 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         agingNumberofCycles_editText.setVisibility(View.VISIBLE);
         agingComment_Text.setVisibility(View.VISIBLE);
         agingComment_editText.setVisibility(View.VISIBLE);
-        postprintingSave_Button.setVisibility(View.GONE);
 
         posprinting_expand_button.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.shrink, 0);
 

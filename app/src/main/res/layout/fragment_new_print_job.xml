@@ -43,7 +43,8 @@
                 android:layout_toEndOf="@+id/projectID_textView"
                 android:layout_toRightOf="@+id/projectID_textView"
                 android:ems="10"
-                android:inputType="text" />
+                android:inputType="text"
+                android:paddingBottom="30dp"/>
 
             <TextView
                 android:id="@+id/projectID_textView"
@@ -60,7 +61,7 @@
                 android:id="@+id/projectAcronym_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/partnumber_textView"
+                android:layout_above="@+id/partnumber_editText"
                 android:layout_alignParentStart="true"
                 android:text="Project Acronym:"
                 android:textSize="18sp"
@@ -75,19 +76,18 @@
                 android:layout_toEndOf="@+id/projectAcronym_textView"
                 android:layout_toRightOf="@+id/projectAcronym_textView"
                 android:ems="10"
-                android:inputType="text" />
+                android:inputType="text"
+                android:paddingBottom="40dp"/>
 
             <TextView
                 android:id="@+id/partnumber_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
+                android:layout_above="@+id/buildId_textView"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/projectAcronym_Edittext"
-                android:layout_marginTop="20dp"
                 android:text="Part Number:"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/partnumber_editText"
@@ -99,18 +99,20 @@
                 android:layout_toEndOf="@+id/partnumber_textView"
                 android:layout_toRightOf="@+id/partnumber_textView"
                 android:ems="10"
-                android:inputType="number" />
+                android:inputType="number"
+                android:paddingBottom="40dp"/>
+
             <TextView
                 android:id="@+id/buildId_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/partnumber_editText"
-                android:layout_marginTop="20dp"
+                android:layout_alignTop="@+id/buildId_editText"
+                android:layout_marginTop="47dp"
+                android:paddingBottom="40dp"
                 android:text="Build Id:"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/buildId_editText"
@@ -122,7 +124,8 @@
                 android:layout_toEndOf="@+id/buildId_textView"
                 android:layout_toRightOf="@+id/buildId_textView"
                 android:ems="10"
-                android:inputType="number" />
+                android:inputType="number"
+                android:paddingBottom="40dp"/>
 
             <TextView
                 android:id="@+id/numberparts_textView"
@@ -146,7 +149,8 @@
                 android:layout_toEndOf="@+id/numberparts_textView"
                 android:layout_toRightOf="@+id/numberparts_textView"
                 android:ems="10"
-                android:inputType="number" />
+                android:inputType="number"
+                android:paddingBottom="40dp"/>
 
             <TextView
                 android:id="@+id/prinringparameters_textView"
@@ -155,10 +159,10 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/numberparts_textView"
-                android:layout_marginTop="20dp"
                 android:text="Printing Parameters:"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:layout_marginTop="40dp"/>
 
             <EditText
                 android:id="@+id/printingparameters_editText"
@@ -170,19 +174,18 @@
                 android:layout_toEndOf="@+id/prinringparameters_textView"
                 android:layout_toRightOf="@+id/prinringparameters_textView"
                 android:ems="10"
-                android:inputType="text" />
+                android:inputType="text"
+                android:paddingBottom="40dp"/>
 
             <TextView
                 android:id="@+id/coment_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/prinringparameters_textView"
-                android:layout_marginTop="20dp"
                 android:text="Comments:"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/comment_editText"
@@ -194,7 +197,8 @@
                 android:layout_toEndOf="@+id/coment_textView"
                 android:layout_toRightOf="@+id/coment_textView"
                 android:ems="10"
-                android:inputType="text" />
+                android:inputType="text"
+                android:paddingBottom="40dp"/>
 
         </RelativeLayout>
 
@@ -228,7 +232,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/Printing_expand_button"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="SLM ID:"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -244,7 +248,8 @@
                 android:layout_toRightOf="@+id/slmid_textView"
                 android:ems="10"
                 android:inputType="none"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/starttime_textView"
@@ -253,7 +258,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/slmid_editText"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Start Time:"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -272,14 +277,15 @@
                 android:clickable="true"
                 android:inputType="none"
                 android:gravity="center"
-                android:drawableRight="@drawable/time" />
+                android:drawableRight="@drawable/time"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/endtime_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/starttime_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="End Time:"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -298,14 +304,15 @@
                 android:clickable="true"
                 android:inputType="none"
                 android:gravity="center"
-                android:drawableRight="@drawable/time" />
+                android:drawableRight="@drawable/time"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/date_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/endtime_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Date:"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -324,14 +331,15 @@
                 android:clickable="true"
                 android:inputType="none"
                 android:gravity="center"
-                android:drawableRight="@drawable/calandar"/>
+                android:drawableRight="@drawable/calandar"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/operator_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/date_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Operator:"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -347,14 +355,15 @@
                 android:layout_toRightOf="@+id/operator_textView"
                 android:ems="10"
                 android:inputType="text"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/typeofmachine_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/operator_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Type of Machine:"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -370,14 +379,15 @@
                 android:layout_toRightOf="@+id/typeofmachine_textView"
                 android:ems="10"
                 android:inputType="text"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/powderweight_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/typeofmachine_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Powder Weight:"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -393,14 +403,15 @@
                 android:layout_toRightOf="@+id/powderweight_textView"
                 android:ems="10"
                 android:inputType="number"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/powderweightatEnd_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/powderweight_editText"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Powder Weight at End:"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -416,13 +427,14 @@
                 android:layout_toRightOf="@+id/powderweightatEnd_textView"
                 android:ems="10"
                 android:inputType="number"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:layout_marginTop="30dp"/>
             <TextView
                 android:id="@+id/powderused_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/powderweightatEnd_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Powder Used:"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -439,13 +451,14 @@
                 android:ems="10"
                 android:inputType="none"
                 android:gravity="center"
-                android:enabled="false"/>
+                android:enabled="false"
+                android:layout_marginTop="30dp"/>
             <TextView
                 android:id="@+id/powderwaste_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/powderused_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Powder Waste:"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -461,7 +474,8 @@
                 android:layout_toRightOf="@+id/powderwaste_textView"
                 android:ems="10"
                 android:inputType="number"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:layout_marginTop="30dp"/>
 
 
             <TextView
@@ -469,7 +483,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/powderwaste_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Material:"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -486,14 +500,15 @@
                 android:layout_toRightOf="@+id/material_textView"
                 android:ems="10"
                 android:inputType="text"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/buildplatform_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/material_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Build Platform Weight:"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -509,14 +524,15 @@
                 android:layout_toRightOf="@+id/buildplatform_textView"
                 android:ems="10"
                 android:inputType="number"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/printTune_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/buildplatform_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Calculated Print Time:"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -532,14 +548,15 @@
                 android:layout_toRightOf="@+id/printTune_textView"
                 android:ems="10"
                 android:inputType="text"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/powderCondition_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/printTune_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Powder Condition:"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -555,14 +572,15 @@
                 android:ems="10"
                 android:background="@android:drawable/btn_dropdown"
                 android:spinnerMode="dropdown"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/if_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/powderCondition_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="How many times:"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -578,14 +596,15 @@
                 android:layout_toRightOf="@+id/if_textView"
                 android:ems="10"
                 android:inputType="number"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/numberofLayers_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/if_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Number of Layers:"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -601,14 +620,15 @@
                 android:layout_toRightOf="@+id/numberofLayers_textView"
                 android:ems="10"
                 android:inputType="number"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/dpcFactor_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/numberofLayers_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="DPC Factor:"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -624,14 +644,15 @@
                 android:layout_toRightOf="@+id/dpcFactor_textView"
                 android:ems="10"
                 android:inputType="number"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/minExposureTime_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/dpcFactor_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Min Exposure Time:"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -647,14 +668,15 @@
                 android:layout_toRightOf="@+id/minExposureTime_textView"
                 android:ems="10"
                 android:inputType="text"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/printingComments_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/minExposureTime_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Comments:"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -670,7 +692,8 @@
                 android:layout_toRightOf="@+id/printingComments_textView"
                 android:ems="10"
                 android:inputType="text"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:layout_marginTop="30dp"/>
 
 
         </RelativeLayout>
@@ -704,7 +727,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/posprinting_expand_button"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Support Removal:"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -719,14 +742,15 @@
                 android:layout_toRightOf="@+id/supportRemoval_textView"
                 android:ems="10"
                 android:background="@android:drawable/btn_dropdown"
-                android:spinnerMode="dropdown"/>
+                android:spinnerMode="dropdown"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/WEDM_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/supportRemoval_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="WEDM:"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -742,14 +766,15 @@
                 android:layout_toRightOf="@+id/WEDM_textView"
                 android:ems="10"
                 android:background="@android:drawable/btn_dropdown"
-                android:spinnerMode="dropdown"/>
+                android:spinnerMode="dropdown"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/WEDMcomments_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/WEDM_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="WEDM Comments:"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -764,14 +789,15 @@
                 android:layout_toEndOf="@+id/WEDMcomments_textView"
                 android:layout_toRightOf="@+id/WEDMcomments_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/blasting_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/WEDMcomments_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Blasting:"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -787,14 +813,15 @@
                 android:layout_toRightOf="@+id/blasting_textView"
                 android:ems="10"
                 android:background="@android:drawable/btn_dropdown"
-                android:spinnerMode="dropdown"/>
+                android:spinnerMode="dropdown"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/blastingType_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/blasting_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Blasting Type:"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -809,14 +836,15 @@
                 android:layout_toEndOf="@+id/blastingType_textView"
                 android:layout_toRightOf="@+id/blastingType_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/blastingTime_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/blastingType_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Blasting Time:"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -831,14 +859,15 @@
                 android:layout_toEndOf="@+id/blastingTime_textView"
                 android:layout_toRightOf="@+id/blastingTime_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/blastingComment_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/blastingTime_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Blasting Comment:"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -853,35 +882,38 @@
                 android:layout_toEndOf="@+id/blastingComment_textView"
                 android:layout_toRightOf="@+id/blastingComment_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/heatTreatment_textView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/blastingComment_editText"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Heat Treatment(Material Dependant):"
                 android:textSize="18sp"
                 android:background="@color/colorlightGreen"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/stressRelieving_textView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/heatTreatment_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:text="Stress Relieving:"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/stressTemp_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/stressRelieving_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Temperature:"
                 android:textSize="18sp" />
 
@@ -895,14 +927,15 @@
                 android:layout_toEndOf="@+id/stressTemp_textView"
                 android:layout_toRightOf="@+id/stressTemp_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/stressTime_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/stressTemp_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Time:"
                 android:textSize="18sp" />
 
@@ -916,14 +949,15 @@
                 android:layout_toEndOf="@+id/stressTime_textView"
                 android:layout_toRightOf="@+id/stressTime_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/stressShieldingGas_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/stressTime_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Shielding gas:"
                 android:textSize="18sp" />
 
@@ -938,14 +972,15 @@
                 android:layout_toRightOf="@+id/stressShieldingGas_textView"
                 android:ems="10"
                 android:background="@android:drawable/btn_dropdown"
-                android:spinnerMode="dropdown"/>
+                android:spinnerMode="dropdown"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/stressComment_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/stressShieldingGas_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Comment:"
                 android:textSize="18sp" />
 
@@ -959,24 +994,26 @@
                 android:layout_toEndOf="@+id/stressComment_textView"
                 android:layout_toRightOf="@+id/stressComment_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/hardening_textView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/stressComment_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Hardening:"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/hardeningTemp_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/hardening_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Temperature:"
                 android:textSize="18sp" />
 
@@ -990,14 +1027,15 @@
                 android:layout_toEndOf="@+id/hardeningTemp_textView"
                 android:layout_toRightOf="@+id/hardeningTemp_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/hardeningTime_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/hardeningTemp_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Time:"
                 android:textSize="18sp" />
 
@@ -1011,14 +1049,15 @@
                 android:layout_toEndOf="@+id/hardeningTime_textView"
                 android:layout_toRightOf="@+id/hardeningTime_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/hardeningComment_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/hardeningTime_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Comment:"
                 android:textSize="18sp" />
 
@@ -1032,24 +1071,26 @@
                 android:layout_toEndOf="@+id/hardeningComment_textView"
                 android:layout_toRightOf="@+id/hardeningComment_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/tempering_textView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/hardeningComment_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Tempering:"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/temperingTemp_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tempering_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Temperature:"
                 android:textSize="18sp" />
 
@@ -1063,14 +1104,15 @@
                 android:layout_toEndOf="@+id/temperingTemp_textView"
                 android:layout_toRightOf="@+id/temperingTemp_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/temperingTime_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/temperingTemp_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Time:"
                 android:textSize="18sp" />
 
@@ -1084,14 +1126,15 @@
                 android:layout_toEndOf="@+id/temperingTime_textView"
                 android:layout_toRightOf="@+id/temperingTime_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/temperingNumberofCycles_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/temperingTime_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="No of Cycles:"
                 android:textSize="18sp" />
 
@@ -1105,14 +1148,15 @@
                 android:layout_toEndOf="@+id/temperingNumberofCycles_textView"
                 android:layout_toRightOf="@+id/temperingNumberofCycles_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/temperingComment_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/temperingNumberofCycles_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Comment:"
                 android:textSize="18sp"/>
 
@@ -1126,24 +1170,26 @@
                 android:layout_toEndOf="@+id/temperingComment_textView"
                 android:layout_toRightOf="@+id/temperingComment_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/solutionTreatment_textView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/temperingComment_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Solution Treatment:"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/solutionTreatmentTemp_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/solutionTreatment_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Temperature:"
                 android:textSize="18sp" />
 
@@ -1157,14 +1203,15 @@
                 android:layout_toEndOf="@+id/solutionTreatmentTemp_textView"
                 android:layout_toRightOf="@+id/solutionTreatmentTemp_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/solutionTreatmentTime_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/solutionTreatmentTemp_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Time:"
                 android:textSize="18sp" />
 
@@ -1178,14 +1225,15 @@
                 android:layout_toEndOf="@+id/solutionTreatmentTime_textView"
                 android:layout_toRightOf="@+id/solutionTreatmentTime_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/solutionTreatmentComment_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/solutionTreatmentTime_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Comment:"
                 android:textSize="18sp" />
 
@@ -1199,24 +1247,26 @@
                 android:layout_toEndOf="@+id/solutionTreatmentComment_textView"
                 android:layout_toRightOf="@+id/solutionTreatmentComment_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/agingTreatment_textView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/solutionTreatmentComment_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Aging Treatment:"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/agingTemp_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/agingTreatment_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Temperature:"
                 android:textSize="18sp" />
 
@@ -1230,14 +1280,15 @@
                 android:layout_toEndOf="@+id/agingTemp_textView"
                 android:layout_toRightOf="@+id/agingTemp_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/agingTime_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/agingTemp_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Time:"
                 android:textSize="18sp" />
 
@@ -1251,14 +1302,15 @@
                 android:layout_toEndOf="@+id/agingTime_textView"
                 android:layout_toRightOf="@+id/agingTime_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/agingNumberofCycles_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/agingTime_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="No of Cycles:"
                 android:textSize="18sp" />
 
@@ -1272,14 +1324,15 @@
                 android:layout_toEndOf="@+id/agingNumberofCycles_textView"
                 android:layout_toRightOf="@+id/agingNumberofCycles_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:layout_marginTop="30dp"/>
 
             <TextView
                 android:id="@+id/agingComment_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/agingNumberofCycles_textView"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:text="Comment:"
                 android:textSize="18sp"/>
 
@@ -1293,7 +1346,8 @@
                 android:layout_toEndOf="@+id/agingComment_textView"
                 android:layout_toRightOf="@+id/agingComment_textView"
                 android:ems="10"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:layout_marginTop="30dp"/>
 
         </RelativeLayout>
         <LinearLayout
