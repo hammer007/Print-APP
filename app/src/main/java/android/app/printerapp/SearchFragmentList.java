@@ -3,6 +3,7 @@ package android.app.printerapp;
 import android.app.printerapp.database.Config;
 import android.app.printerapp.database.Search;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -33,6 +34,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 public class SearchFragmentList extends Fragment  implements View.OnClickListener {
     Config config;
@@ -43,6 +46,7 @@ public class SearchFragmentList extends Fragment  implements View.OnClickListene
     String slm_id, project_number, project_acronym;
     View focusView;
     View view;
+    String user_name;
 
     public SearchFragmentList() {
         // Required empty public constructor
@@ -52,6 +56,9 @@ public class SearchFragmentList extends Fragment  implements View.OnClickListene
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences sp1=getContext().getSharedPreferences("Login", MODE_PRIVATE);
+
+         user_name =sp1.getString("user", null);
     }
 
     @Override
@@ -107,6 +114,7 @@ public class SearchFragmentList extends Fragment  implements View.OnClickListene
         Log.d("am here", "here");
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair(config.PRINTING_slm_id, slm_id));
+        params.add(new BasicNameValuePair(config.username, user_name));
         SearchList searchlist = new SearchList(params, config.url_search_slm);
         try {
             JSONArray returned = searchlist.execute().get();
@@ -124,6 +132,7 @@ public class SearchFragmentList extends Fragment  implements View.OnClickListene
     private void search_project_number(String project_number) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair(config.PROJECT_number, project_number));
+        params.add(new BasicNameValuePair(config.username, user_name));
         SearchList searchlist = new SearchList(params, config.url_project_number);
         try {
             JSONArray returned = searchlist.execute().get();
@@ -141,6 +150,7 @@ public class SearchFragmentList extends Fragment  implements View.OnClickListene
     private void search_project_acronym(String project_acronym) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair(config.PROJECT_name, project_acronym));
+        params.add(new BasicNameValuePair(config.username, user_name));
         SearchList searchlist = new SearchList(params, config.url_project_acronym);
         try {
             JSONArray returned = searchlist.execute().get();
@@ -159,6 +169,7 @@ public class SearchFragmentList extends Fragment  implements View.OnClickListene
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair(config.PROJECT_slm_id, slm_id));
         params.add(new BasicNameValuePair(config.PROJECT_number, project_number));
+        params.add(new BasicNameValuePair(config.username, user_name));
         SearchList searchlist = new SearchList(params, config.url_search_slm_projNumber);
         try {
             JSONArray returned = searchlist.execute().get();
@@ -177,6 +188,7 @@ public class SearchFragmentList extends Fragment  implements View.OnClickListene
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair(config.PROJECT_name, project_acronym));
         params.add(new BasicNameValuePair(config.PROJECT_number, project_number));
+        params.add(new BasicNameValuePair(config.username, user_name));
         SearchList searchlist = new SearchList(params, config.url_projectAcro_projNumber);
         try {
             JSONArray returned = searchlist.execute().get();
@@ -195,6 +207,7 @@ public class SearchFragmentList extends Fragment  implements View.OnClickListene
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair(config.PROJECT_slm_id, slm_id));
         params.add(new BasicNameValuePair(config.PROJECT_name, project_acronym));
+        params.add(new BasicNameValuePair(config.username, user_name));
         SearchList searchlist = new SearchList(params, config.url_search_slm_projAcro);
         try {
             JSONArray returned = searchlist.execute().get();
@@ -214,6 +227,7 @@ public class SearchFragmentList extends Fragment  implements View.OnClickListene
         params.add(new BasicNameValuePair(config.PROJECT_slm_id, slm_id));
         params.add(new BasicNameValuePair(config.PROJECT_name, project_acronym));
         params.add(new BasicNameValuePair(config.PROJECT_number, project_number));
+        params.add(new BasicNameValuePair(config.username, user_name));
         SearchList searchlist = new SearchList(params, config.url_search_by_all);
         try {
             JSONArray returned = searchlist.execute().get();

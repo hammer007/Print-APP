@@ -5,6 +5,7 @@ import android.app.printerapp.MainFragment;
 import android.app.printerapp.NewProjectMandatoryFragment;
 import android.app.printerapp.R;
 import android.app.printerapp.SearchFragment;
+import android.app.printerapp.SearchFragmentList;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -111,7 +112,8 @@ public class MainActivityNew extends AppCompatActivity
             fragmentTransaction.commit();
 
         } else if (id == R.id.nav_search){
-            SearchFragment fragment = new SearchFragment();
+            //SearchFragment fragment = new SearchFragment();
+            SearchFragmentList fragment = new SearchFragmentList();
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment);

@@ -72,14 +72,14 @@ public class SearchFragment extends Fragment {
     TextView dpcFactor_Text, minExposureTime_Text, printingComments_Text, magic_file_text_description;
     Spinner spinner, supportremovalSpinner, WEDMSpinner, blastingSpinner, shieldingSpinner;
     EditText searched_result_projectAcronym_editText, searched_result_buildId_editText;
-    TextView searched_result_projectAcronym_textView, searched_result_buildId_textView;
+    TextView searched_result_projectAcronym_textView, searched_result_buildId_textView, postprinting_file_text_description;
     boolean expanded_preprinting = false, expanded_printing = false, expanded_posprinting = false;
     Button edit_key;
     boolean edit_key_pressed = false;
     private static final String ARG_PARAM1 = "param1";
 
     private int printing_id;
-    private ImageView imageview;
+    private ImageView imageview, image_preview_post_printing;
     public SearchFragment() {
         // Required empty public constructor
     }
@@ -236,6 +236,7 @@ public class SearchFragment extends Fragment {
                 make_editable_uneditable(false);
                 search_Result(returned);
                 show_preview();
+                show_preview_postprinting();
             }
         }
         catch (Exception e) {
@@ -483,6 +484,8 @@ public class SearchFragment extends Fragment {
         agingComment_editText = (EditText)view.findViewById(R.id.searched_result_agingComment_editText);
 
         imageview = (ImageView)view.findViewById(R.id.image_preview);
+        image_preview_post_printing = (ImageView)view.findViewById(R.id.image_preview_post_printing);
+        postprinting_file_text_description = (TextView)view.findViewById(R.id.postprinting_file_text_description);
     }
     private void hide_all(){
         magic_file_text_description.setVisibility(View.GONE);
@@ -492,6 +495,8 @@ public class SearchFragment extends Fragment {
         printing_expand_button.setVisibility(View.GONE);
         submit_Button.setVisibility(View.GONE);
         imageview.setVisibility(View.GONE);
+        image_preview_post_printing.setVisibility(View.GONE);
+        postprinting_file_text_description.setVisibility(View.GONE);
         hide_preprining();
         hide_prining();
         hide_posprinting();
@@ -503,6 +508,8 @@ public class SearchFragment extends Fragment {
         preprinting_expand_button.setVisibility(View.VISIBLE);
         printing_expand_button.setVisibility(View.VISIBLE);
         imageview.setVisibility(View.VISIBLE);
+        image_preview_post_printing.setVisibility(View.VISIBLE);
+        postprinting_file_text_description.setVisibility(View.VISIBLE);
     }
     private void hide_preprining(){
         projectID_editText.setVisibility(View.GONE);
@@ -900,6 +907,28 @@ public class SearchFragment extends Fragment {
         else {
             Drawable drawable = this.getResources().getDrawable(R.drawable.no_magic);
             imageview.setImageDrawable(drawable);
+        }
+    }
+    private void show_preview_postprinting() throws ExecutionException, InterruptedException {
+        String url = "https://group5sep.000webhostapp.com/post_printing/" + submitted_slm_id + ".png";
+        CheckIfFileExists checkIfFileExists = new CheckIfFileExists();
+        if(checkIfFileExists.execute(url).get()) {
+            Bitmap drawable = null;
+            try {
+                drawable = new FetchMagic().execute(url).get();
+                Log.d("Post printing", drawable + "");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                Log.d("Problem Fetch Snapshot", url + "");
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+                Log.d("Problem FetchSnapshot 2", url + "");
+            }
+            image_preview_post_printing.setImageBitmap(drawable);
+        }
+        else {
+            Drawable drawable = this.getResources().getDrawable(R.drawable.no_magic);
+            image_preview_post_printing.setImageDrawable(drawable);
         }
     }
 

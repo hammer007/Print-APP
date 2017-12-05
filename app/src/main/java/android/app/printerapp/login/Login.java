@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.PowerManager;
@@ -300,6 +301,11 @@ public class Login extends AppCompatActivity {
     }
 
     private void successful_login() {
+        SharedPreferences sp=getSharedPreferences("Login", MODE_PRIVATE);
+        SharedPreferences.Editor Ed=sp.edit();
+        Ed.putString("user", usernameText.getText().toString());
+        Ed.putString("password",passwordText.getText().toString());
+        Ed.commit();
         Intent intent = new Intent(this, MainActivityNew.class);
         startActivity(intent);
     }
