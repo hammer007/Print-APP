@@ -367,6 +367,7 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
 
                         stringBuilder.append(RC2);
                     }
+                    bufferedReaderObject.close();
                 }
 
             } catch (Exception e) {

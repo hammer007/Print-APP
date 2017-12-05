@@ -164,6 +164,7 @@ public class Config {
     public static final String url_insert_shear_cell = "https://group5sep.000webhostapp.com/insert_shear_cell.php";
     public static final String url_login = "https://group5sep.000webhostapp.com/login.php";
     public static final String ServerUploadPath = "https://group5sep.000webhostapp.com/upload_magic_to_server.php" ;
+    public static final String ServerUploadPath_postPrinting =  "https://group5sep.000webhostapp.com/upload_post_snapshot_to_server.php" ;
     public static final String url_search = "https://group5sep.000webhostapp.com/search.php";
     public static final String url_search_by_prininId = "https://group5sep.000webhostapp.com/search_by_printingId.php";
     public static final String url_insert_sign_up = "https://group5sep.000webhostapp.com/insert_sign_up.php";

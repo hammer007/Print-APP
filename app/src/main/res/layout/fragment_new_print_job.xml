@@ -1351,11 +1351,12 @@
 
         </RelativeLayout>
         <LinearLayout
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/posprinting_relativeLayout"
-            android:id="@+id/uploadfiles_insert">
+            android:id="@+id/uploadfiles_insert"
+            android:layout_marginBottom="40dp">
             <Button
                 android:id="@+id/upload_stl"
                 android:layout_width="match_parent"
@@ -1392,12 +1393,24 @@
                 tools:text="Upload your Snapshot" />
 
         </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/postprint_preview"
+            android:layout_below="@+id/uploadfiles_insert"
+            android:layout_marginBottom="40dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/post_print_snapshot"
+                android:src="@drawable/no_magic"/>
+        </RelativeLayout>
 
         <Button
             android:id="@+id/submit_Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/uploadfiles_insert"
+            android:layout_below="@+id/postprint_preview"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"

@@ -1,7 +1,9 @@
 package android.app.printerapp;
 
 
+import android.Manifest;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.app.printerapp.database.CheckRandom;
 import android.app.printerapp.database.PathUtil;
@@ -9,12 +11,20 @@ import android.app.printerapp.database.Postprint_getIDs;
 import android.app.printerapp.database.UploadFilesAsync;
 import android.app.printerapp.login.MainActivityNew;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +34,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -34,14 +45,29 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import android.app.printerapp.database.Insert;
 import android.app.printerapp.database.Config;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.ContentValues.TAG;
@@ -53,6 +79,10 @@ import static android.content.ContentValues.TAG;
 public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     private static final int STL_SELECT_CODE = 0;
     private static final int CAD_SELECT_CODE = 1;
+    ProgressDialog progressDialog;
+    String ImageName = "slm_id", ImagePath = "image_path" ;
+    String SLM_FOUND = "";
+    Bitmap bitmap;
     String stlpath = "";
     String cadpath = "";
     int success_stl = -1;
@@ -91,6 +121,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
     TextView dpcFactor_Text, minExposureTime_Text, printingComments_Text, buildId_textView, powderused_textView;
     Spinner spinner, supportremovalSpinner, WEDMSpinner, blastingSpinner, shieldingSpinner;
     TextView projectAcronym_textView, projectAcronym_Edittext;
+    ImageView post_print_snapshot;
     Button upload_stl,upload_cad,upload_snapshot;
     boolean expanded_preprinting = false, expanded_printing = false, expanded_posprinting = false;
 
@@ -126,14 +157,15 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
                 success_postprinting = insert_to_postprinting();
                 if(success == 1 & success_postprinting == 1 & success_pre_printing ==1 & success_printing ==1){
                     Toast.makeText(getContext(), "SUCCESSFUL", Toast.LENGTH_LONG).show();
+                    ImageUploadToServerFunction();
                 }
                 else if(success != 1 & success_postprinting != 1 & success_pre_printing !=1 & success_printing !=1){
                     Toast.makeText(getContext(), "Nothing was Successful", Toast.LENGTH_LONG).show();
                 }
-                else if(success != 1) Toast.makeText(getContext(), "Insertion to Project was Successful", Toast.LENGTH_LONG).show();
-                else if(success_postprinting != 1) Toast.makeText(getContext(), "Insertion to Post printing was Successful", Toast.LENGTH_LONG).show();
-                else if(success_pre_printing != 1) Toast.makeText(getContext(), "Insertion to Pre printing was Successful", Toast.LENGTH_LONG).show();
-                else if(success_printing != 1) Toast.makeText(getContext(), "Insertion to Printing was Successful", Toast.LENGTH_LONG).show();
+                else if(success != 1) Toast.makeText(getContext(), "Insertion to Project was Not Successful", Toast.LENGTH_LONG).show();
+                else if(success_postprinting != 1) Toast.makeText(getContext(), "Insertion to Post printing was Not Successful", Toast.LENGTH_LONG).show();
+                else if(success_pre_printing != 1) Toast.makeText(getContext(), "Insertion to Pre printing was Not Successful", Toast.LENGTH_LONG).show();
+                else if(success_printing != 1) Toast.makeText(getContext(), "Insertion to Printing was Not Successful", Toast.LENGTH_LONG).show();
                 if(!stlpath.isEmpty()) {
                     int stl_uploaded = upload_stl(".stl", stlpath,config.url_upload_stl);
                     if (stl_uploaded == 1)
@@ -289,6 +321,14 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
                 showcadFileChooser();
             }
         });
+        upload_snapshot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(photoPickerIntent, 1);
+            }
+        });
         return view;
 
     }
@@ -316,7 +356,9 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
             Log.d("length", jarray.length() + "");
             for (int i = 0; i < jarray.length(); i++) {
                 JSONObject jsonObject = jarray.getJSONObject(i);
-                stress_ids[i] =(int)jsonObject.getInt(name);
+                String result = jsonObject.getString(name);
+                if(result.equals("null")) stress_ids[i] = 0;
+                else stress_ids[i] =Integer.parseInt(result);
             }
             CheckRandom checkRandom = new CheckRandom();
             random = checkRandom.check_random(stress_ids,random);
@@ -748,6 +790,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         upload_stl = (Button)view.findViewById(R.id.upload_stl);
         upload_cad = (Button)view.findViewById(R.id.upload_cad);
         upload_snapshot = (Button)view.findViewById(R.id.upload_postprinting);
+        post_print_snapshot = (ImageView)view.findViewById(R.id.post_print_snapshot);
 
         hide_preprining();
         hide_prining();
@@ -1058,6 +1101,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case STL_SELECT_CODE:
                 if (resultCode == RESULT_OK) {
@@ -1085,7 +1129,138 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
                     // File file = new File(path);
                     // Initiate the upload
                 }
+                break;
         }
-        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+
+            Uri uri = data.getData();
+
+            try {
+                if (Build.VERSION.SDK_INT >= 23)
+                {
+                    if (checkPermission())
+                    {
+                        bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
+
+                        post_print_snapshot.setImageBitmap(bitmap);
+                    } else {
+                        int x = requestPermission();
+                        if (x == 1){
+                            bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
+
+                            post_print_snapshot.setImageBitmap(bitmap);}
+                    }
+                }
+                else
+                {
+
+                    bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
+
+                    post_print_snapshot.setImageBitmap(bitmap);
+                }
+
+
+
+                Log.d("empty", " " + data);
+            } catch (IOException e) {
+
+                e.printStackTrace();
+            }
+        }
+
     }
+    private boolean checkPermission() {
+        int result = ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (result == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    private int requestPermission() {
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            Log.d("fail", "Write External Storage permission allows us to do store images. Please allow this permission in App Settings");
+            return 1;
+        } else {
+            Log.d("true", "Write External Storage permission allows us to do store images. Please allow this permission in App Settings");
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+            return 1;
+        }
+    }
+
+    private String ImageUploadToServerFunction(){
+        Log.d("First","1");
+
+        ByteArrayOutputStream byteArrayOutputStreamObject ;
+
+        byteArrayOutputStreamObject = new ByteArrayOutputStream();
+
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStreamObject);
+
+        byte[] byteArrayVar = byteArrayOutputStreamObject.toByteArray();
+
+        final String ConvertImage = Base64.encodeToString(byteArrayVar, Base64.DEFAULT);
+
+        class AsyncTaskUploadClass extends AsyncTask<Void,Void,String> {
+
+            @Override
+            protected void onPreExecute() {
+
+                super.onPreExecute();
+                Log.d("Second","2");
+
+                progressDialog = ProgressDialog.show(getContext(),"Image is Uploading","Please Wait",false,false);
+            }
+
+            @Override
+            protected void onPostExecute(String string1) {
+
+                super.onPostExecute(string1);
+
+                // Dismiss the progress dialog after done uploading.
+                progressDialog.dismiss();
+
+                // Printing uploading success message coming from server on android app.
+                Log.d("SERVER UPLOAD",string1);
+
+                // Setting image as transparent after done uploading.
+                post_print_snapshot.setImageResource(android.R.color.transparent);
+
+
+            }
+
+            @Override
+            protected String doInBackground(Void... params) {
+                Log.d("Third","3");
+
+                ImageProcessClass imageProcessClass = new ImageProcessClass();
+
+                HashMap<String,String> HashMapParams = new HashMap<String,String>();
+
+                HashMapParams.put(ImageName, slmid_editText.getText().toString());
+
+                HashMapParams.put(ImagePath, ConvertImage);
+
+                String FinalData = imageProcessClass.ImageHttpRequest(config.ServerUploadPath_postPrinting, HashMapParams);
+                Log.d("FirThirdst",FinalData);
+
+                return FinalData;
+            }
+        }
+        AsyncTaskUploadClass AsyncTaskUploadClassOBJ = new AsyncTaskUploadClass();
+
+        try {
+            SLM_FOUND = AsyncTaskUploadClassOBJ.execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return SLM_FOUND;
+    }
+
+
 }
