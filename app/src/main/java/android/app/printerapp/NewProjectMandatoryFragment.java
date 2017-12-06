@@ -1,6 +1,9 @@
 package android.app.printerapp;
 
 import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.app.printerapp.database.Insert;
@@ -102,6 +105,8 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
     boolean check = true;
     View focusView = null;
     String SLM_FOUND = "";
+    private View newProjectMandatoryView;
+    private View mProgressView;
     public NewProjectMandatoryFragment() {
         // Required empty public constructor
     }
@@ -264,6 +269,7 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
             protected void onPostExecute(String string1) {
 
                 super.onPostExecute(string1);
+                showProgress(false);
 
                 // Dismiss the progress dialog after done uploading.
                 progressDialog.dismiss();
@@ -275,6 +281,11 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
                 imageView.setImageResource(android.R.color.transparent);
 
 
+            }
+
+            @Override
+            protected void onCancelled() {
+                showProgress(false);
             }
 
             @Override
@@ -296,6 +307,7 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
         AsyncTaskUploadClass AsyncTaskUploadClassOBJ = new AsyncTaskUploadClass();
 
         try {
+            showProgress(true);
             SLM_FOUND = AsyncTaskUploadClassOBJ.execute().get();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -418,6 +430,8 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
     }
 
     private void initialize(){
+        newProjectMandatoryView = view.findViewById(R.id.mandatoryFragment_RelativeLayout);
+        mProgressView = view.findViewById(R.id.mandatory_progress);
         magic_upload_button = (Button)view.findViewById(R.id.magic_upload_button);
         imageView = (ImageView)view.findViewById(R.id.magic_image_view);
         create_printjob_continue = (Button)view.findViewById(R.id.create_printjob_continue);
@@ -511,15 +525,16 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
         }
     }
     public int insert_to_access_table(){
+        String privacy = jobTypeSpinner.getSelectedItem().toString();
         int success = -1;
-        List<NameValuePair> params = new ArrayList<NameValuePair>();
-                //AUTO INCREMENT params.add(new BasicNameValuePair(config.PRINTING_printing_id, 2 + ""));
-                Log.d("Lengthx", selectedStrings.size() + "");
-                for(int i=0; i<selectedStrings.size();i++) {
+            if(privacy.equals("private")) {
+                List<NameValuePair> params = new ArrayList<NameValuePair>();
+                for (int i = 0; i < selectedStrings.size(); i++) {
                     String username = (selectedStrings.get(i)).toString().split("\\[", 2)[0];
                     Log.d("values", username + "");
                     params.add(new BasicNameValuePair("slm_id", slm_id.getText().toString()));
                     params.add(new BasicNameValuePair("username", username));
+                    params.add(new BasicNameValuePair("privacy", privacy));
                     insert = new Insert(params, config.TAG_INSERT_ACCESS);
                     try {
                         success = insert.execute().get();
@@ -530,6 +545,21 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
                     }
                 }
                 return success;
+            }else{
+                List<NameValuePair> params = new ArrayList<NameValuePair>();
+                params.add(new BasicNameValuePair("slm_id", slm_id.getText().toString()));
+                params.add(new BasicNameValuePair("username", "all"));
+                params.add(new BasicNameValuePair("privacy", privacy));
+                insert = new Insert(params, config.TAG_INSERT_ACCESS);
+                try {
+                    success = insert.execute().get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+                return success;
+            }
     }
 
     private int show_users(){
@@ -557,4 +587,38 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
         }
         return returned.length();
     }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgress(final boolean show) {
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+            newProjectMandatoryView.setVisibility(show ? View.GONE : View.VISIBLE);
+            newProjectMandatoryView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    newProjectMandatoryView.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mProgressView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            newProjectMandatoryView.setVisibility(show ? View.GONE : View.VISIBLE);
+        }
+    }
+
 }

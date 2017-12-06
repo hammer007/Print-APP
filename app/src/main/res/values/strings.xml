@@ -245,8 +245,8 @@
     <string name="sign_up">Signup</string>
 
     <string-array name="jobType_string">
-        <item>Public</item>
-        <item>Private</item>
+        <item>public</item>
+        <item>private</item>
     </string-array>
 
     <string-array name="users_string">

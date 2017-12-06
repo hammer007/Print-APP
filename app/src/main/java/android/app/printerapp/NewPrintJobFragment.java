@@ -2,6 +2,9 @@ package android.app.printerapp;
 
 
 import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
@@ -124,6 +127,8 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
     ImageView post_print_snapshot;
     Button upload_stl,upload_cad,upload_snapshot;
     boolean expanded_preprinting = false, expanded_printing = false, expanded_posprinting = false;
+    private View newProjectView;
+    private View ProgressView;
 
     public NewPrintJobFragment() {
         // Required empty public constructor
@@ -642,6 +647,8 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         return success;
     }
     private void initialize(View view) {
+        ProgressView = view.findViewById(R.id.newprintjob_progress);
+        newProjectView = view.findViewById(R.id.uploadfiles_insert);
         spinner = (Spinner) view.findViewById(R.id.powderCondition_editText);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.powder_condition_string, R.layout.simple_spinner_item);
@@ -1219,6 +1226,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
             protected void onPostExecute(String string1) {
 
                 super.onPostExecute(string1);
+                showProgress(false);
 
                 // Dismiss the progress dialog after done uploading.
                 progressDialog.dismiss();
@@ -1230,6 +1238,10 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
                 post_print_snapshot.setImageResource(android.R.color.transparent);
 
 
+            }
+            @Override
+            protected void onCancelled() {
+                showProgress(false);
             }
 
             @Override
@@ -1253,6 +1265,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         AsyncTaskUploadClass AsyncTaskUploadClassOBJ = new AsyncTaskUploadClass();
 
         try {
+            showProgress(true);
             SLM_FOUND = AsyncTaskUploadClassOBJ.execute().get();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -1262,5 +1275,37 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         return SLM_FOUND;
     }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgress(final boolean show) {
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+            newProjectView.setVisibility(show ? View.GONE : View.VISIBLE);
+            newProjectView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    newProjectView.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            ProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            ProgressView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    ProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            ProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            newProjectView.setVisibility(show ? View.GONE : View.VISIBLE);
+        }
+    }
 
 }

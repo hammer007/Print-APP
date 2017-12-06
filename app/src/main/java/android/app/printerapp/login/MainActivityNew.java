@@ -7,6 +7,7 @@ import android.app.printerapp.R;
 import android.app.printerapp.SearchFragment;
 import android.app.printerapp.SearchFragmentList;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -120,7 +121,10 @@ public class MainActivityNew extends AppCompatActivity
             fragmentTransaction.commit();
 
         } else if (id == R.id.nav_logout){
-
+            SharedPreferences preferences = getSharedPreferences("Login", MODE_PRIVATE);
+            preferences.edit().remove("user");
+            preferences.edit().remove("password");
+            preferences.edit().apply();
             logout();
         }
 

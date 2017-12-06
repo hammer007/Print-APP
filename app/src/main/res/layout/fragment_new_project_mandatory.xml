@@ -7,6 +7,14 @@
     android:layout_marginRight="35dp"
     tools:context="android.app.printerapp.NewProjectMandatoryFragment">
 
+    <ProgressBar
+        android:id="@+id/mandatory_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone" />
     <RelativeLayout
         android:id="@+id/mandatoryFragment_RelativeLayout"
         android:layout_width="match_parent"
@@ -15,7 +23,8 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="100dp"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/mandatory_progress">
 
         <TextView
             android:id="@+id/SLM_ID_TEXT"
