@@ -45,6 +45,12 @@ import android.app.printerapp.database.CheckIfFileExists;
 import static android.content.ContentValues.TAG;
 
 public class SearchFragment extends Fragment {
+    String url_server_stl = "https://group5sep.000webhostapp.com/stl/";
+    String url_server_magic = "https://group5sep.000webhostapp.com/magic_files/";
+    String url_server_postprint = "https://group5sep.000webhostapp.com/post_printing/";
+    //String url_server_stl = "http://10.0.2.2:8081/PrinterBook/stl/";
+    //String url_server_magic = "http://10.0.2.2:8081/PrinterBook/magic_files/";
+    //String url_server_postprint = "http://10.0.2.2:8081/PrinterBook/post_printing/";
     ProgressDialog mProgressDialog;
     String returned [] = new String[33];
     View view;
@@ -173,7 +179,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 CheckIfFileExists checkIfFileExists = new CheckIfFileExists();
-                String searchPath = "https://group5sep.000webhostapp.com/stl/" + submitted_slm_id + ".stl";
+                String searchPath = url_server_stl + submitted_slm_id + ".stl";
                 try {
                     if(checkIfFileExists.execute(searchPath).get()){
                         mProgressDialog = new ProgressDialog(getContext());
@@ -888,7 +894,7 @@ public class SearchFragment extends Fragment {
     }
 
     private void show_preview() throws ExecutionException, InterruptedException {
-        String url = "https://group5sep.000webhostapp.com/magic_files/" + submitted_slm_id + ".png";
+        String url = url_server_magic + submitted_slm_id + ".png";
         CheckIfFileExists checkIfFileExists = new CheckIfFileExists();
         if(checkIfFileExists.execute(url).get()) {
             Bitmap drawable = null;
@@ -910,7 +916,7 @@ public class SearchFragment extends Fragment {
         }
     }
     private void show_preview_postprinting() throws ExecutionException, InterruptedException {
-        String url = "https://group5sep.000webhostapp.com/post_printing/" + submitted_slm_id + ".png";
+        String url = url_server_postprint + submitted_slm_id + ".png";
         CheckIfFileExists checkIfFileExists = new CheckIfFileExists();
         if(checkIfFileExists.execute(url).get()) {
             Bitmap drawable = null;

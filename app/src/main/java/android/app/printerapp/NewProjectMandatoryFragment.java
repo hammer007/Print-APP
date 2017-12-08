@@ -11,6 +11,7 @@ import android.app.printerapp.database.SearchUser;
 import android.app.printerapp.login.MainActivityNew;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -79,6 +80,7 @@ import android.app.printerapp.database.Config;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
+import static android.content.Context.MODE_PRIVATE;
 
 
 public class NewProjectMandatoryFragment extends Fragment implements AdapterView.OnItemSelectedListener{
@@ -167,6 +169,7 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
                     }
                     else {
                         insert_to_access_table();
+                        insert_to_access_table_owner();
                         NewPrintJobFragment fragment = new NewPrintJobFragment();
                         FragmentManager fragmentManager = getFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -200,6 +203,7 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
                     }
                     else {
                         insert_to_access_table();
+                        insert_to_access_table_owner();
                         Intent intent = new Intent(getContext(), MainActivityNew.class);
                         startActivity(intent);
                     }
@@ -560,6 +564,28 @@ public class NewProjectMandatoryFragment extends Fragment implements AdapterView
                 }
                 return success;
             }
+    }
+
+    public int insert_to_access_table_owner(){
+        String privacy = jobTypeSpinner.getSelectedItem().toString();
+        int success = -1;
+        SharedPreferences sp1=getContext().getSharedPreferences("Login", MODE_PRIVATE);
+        String user_name =sp1.getString("user", null);
+        if(privacy.equals("private")) {
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("slm_id", slm_id.getText().toString()));
+            params.add(new BasicNameValuePair("username", user_name));
+            params.add(new BasicNameValuePair("privacy", privacy));
+            insert = new Insert(params, config.TAG_INSERT_ACCESS);
+            try {
+                success = insert.execute().get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
+            return success;
     }
 
     private int show_users(){

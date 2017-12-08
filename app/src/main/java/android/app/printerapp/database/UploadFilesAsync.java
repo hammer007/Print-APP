@@ -42,6 +42,7 @@ public class UploadFilesAsync extends AsyncTask<String, Void, Integer> {
             byte[] buffer;
             int maxBufferSize = 1 * 1024 * 1024;
             File sourceFile = new File(sourceFileUri);
+            Log.d("sourceFileUrlxxxxx", sourceFile +"");
 
             if (sourceFile.isFile()) {
 
@@ -51,7 +52,7 @@ public class UploadFilesAsync extends AsyncTask<String, Void, Integer> {
                     FileInputStream fileInputStream = new FileInputStream(
                             sourceFile);
                     URL url = new URL(upLoadServerUri);
-
+                    Log.d("sourceFileUrlyyyyyyyyy", url +"");
                     // Open a HTTP connection to the URL
                     conn = (HttpURLConnection) url.openConnection();
                     conn.setDoInput(true); // Allow Inputs
@@ -90,7 +91,7 @@ public class UploadFilesAsync extends AsyncTask<String, Void, Integer> {
                                 .min(bytesAvailable, maxBufferSize);
                         bytesRead = fileInputStream.read(buffer, 0,
                                 bufferSize);
-
+                        Log.d("WHILE WHILE ", bytesRead + "");
                     }
                     dos.writeBytes(lineEnd);
                     dos.writeBytes(twoHyphens + boundary + twoHyphens

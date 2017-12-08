@@ -162,6 +162,7 @@ public class Config {
     public static final String url_insert_printing = local + "insert_printing.php";
     public static final String url_insert_post_printing = local + "insert_post_printing.php";
     public static final String url_insert_material = local + "insert_material.php";
+    public static final String url_insert_material_path = local + "insert_material_path.php";
     public static final String url_insert_bet_surface = local + "insert_bet_surface.php";
     public static final String url_insert_hall_flow = local + "insert_hall_flow.php";
     public static final String url_insert_flow_energy = local + "insert_flow_energy.php";
@@ -186,6 +187,7 @@ public class Config {
     public static final String url_get_aging_ids = local + "postpringint_get_aging_ids.php";
     public static final String url_upload_stl = local + "upload_files.php";
     public static final String url_upload_cad = local + "upload_cad.php";
+    public static final String url_upload_pdf= local + "upload_pdf.php";
     public static final String url_image_preview = local + "get_image_from_server.php";
     public static final String url_search_slm = local + "search_slm.php";
     public static final String url_project_number = local + "search_project_number.php";
