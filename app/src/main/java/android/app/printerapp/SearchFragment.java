@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.PowerManager;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -28,6 +29,7 @@ import android.widget.Toast;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -971,8 +973,17 @@ public class SearchFragment extends Fragment {
 
                 // download the file
                 input = connection.getInputStream();
-                downloaded_path = "/storage/emulated/0/PrintManager/Files/" + sUrl[1];
-                output = new FileOutputStream(downloaded_path);
+                //downloaded_path = "/storage/emulated/0/PrintManager/Files/" + sUrl[1];
+                String PATH = Environment.getExternalStorageDirectory().toString()
+                        + "/printbook";
+                Log.v("LOG_TAG", "PATH: " + PATH);
+
+                File file = new File(PATH);
+                file.mkdirs();
+                File _downloaded_path = new File(file + "/" + sUrl[1]);
+                downloaded_path = _downloaded_path.toString();
+                Log.d("xxxxxxxxxxxxx", _downloaded_path.toString());
+                output = new FileOutputStream(_downloaded_path);
 
                 byte data[] = new byte[4096];
                 long total = 0;
