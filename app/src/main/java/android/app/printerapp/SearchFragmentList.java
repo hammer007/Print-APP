@@ -1,14 +1,21 @@
 package android.app.printerapp;
 
+import android.app.Activity;
 import android.app.printerapp.database.Config;
 import android.app.printerapp.database.Search;
+import android.app.printerapp.login.MainActivityNew;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -47,6 +54,7 @@ public class SearchFragmentList extends Fragment  implements View.OnClickListene
     View focusView;
     View view;
     String user_name;
+    protected FragmentActivity mActivity;
 
     public SearchFragmentList() {
         // Required empty public constructor
@@ -56,11 +64,13 @@ public class SearchFragmentList extends Fragment  implements View.OnClickListene
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(null == savedInstanceState){
+            Log.d("yyyyyyyyyyy","y");
+        }
         SharedPreferences sp1=getContext().getSharedPreferences("Login", MODE_PRIVATE);
 
          user_name =sp1.getString("user", null);
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

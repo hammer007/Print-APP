@@ -1,6 +1,8 @@
 package android.app.printerapp.login;
 
+import android.app.Activity;
 import android.app.printerapp.AboutUsFragment;
+import android.app.printerapp.MainActivity;
 import android.app.printerapp.MainFragment;
 import android.app.printerapp.NewProjectMandatoryFragment;
 import android.app.printerapp.R;
@@ -8,15 +10,21 @@ import android.app.printerapp.SearchFragment;
 import android.app.printerapp.SearchFragmentList;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 
 public class MainActivityNew extends AppCompatActivity
@@ -29,8 +37,9 @@ public class MainActivityNew extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         MainFragment fragment = new MainFragment();
-        android.support.v4.app.FragmentTransaction fragmentTransaction =
+        FragmentTransaction fragmentTransaction =
                 getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
@@ -115,7 +124,7 @@ public class MainActivityNew extends AppCompatActivity
         } else if (id == R.id.nav_search){
             //SearchFragment fragment = new SearchFragment();
             SearchFragmentList fragment = new SearchFragmentList();
-            android.support.v4.app.FragmentTransaction fragmentTransaction =
+            FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment);
             fragmentTransaction.commit();
@@ -138,4 +147,5 @@ public class MainActivityNew extends AppCompatActivity
         Intent intent = new Intent().setClass(this, Login.class);
         startActivity(intent);
     }
+
 }
