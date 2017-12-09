@@ -25,6 +25,12 @@ public class Config {
     public static final String PRINTING_powder_weight_end = "powder_weight_end";
     public static final String PRINTING_powder_waste_weight = "powder_waste_weight";
     public static final String PRINTING_powder_used = "powder_used";
+
+    public static final String PRINTING_right_recycle_start = "right_recycle_start";
+    public static final String PRINTING_right_recycle_end = "right_recycle_end";
+    public static final String PRINTING_left_recycle_start = "left_recycle_start";
+    public static final String PRINTING_left_recycle_end = "left_recycle_end";
+
     public static final String PRINTING_material_id = "material_id";
     public static final String PRINTING_build_platform_weight = "build_platform_weight";
     public static final String PRINTING_print_time = "print_time";

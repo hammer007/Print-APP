@@ -126,6 +126,8 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
     TextView projectAcronym_textView, projectAcronym_Edittext;
     ImageView post_print_snapshot;
     Button upload_stl,upload_cad,upload_snapshot;
+    EditText recycle_start_edit, recycle_end_edit, right_recycle_start_edit, right_recycle_end_edit;
+    TextView recycle_start_left,recycle_end_left,right_recycle_start,right_recycle_end;
     boolean expanded_preprinting = false, expanded_printing = false, expanded_posprinting = false;
     private View newProjectView;
     private View ProgressView;
@@ -292,7 +294,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
 
             }
         });
-        powderwaste_editText.addTextChangedListener(new TextWatcher() {
+        material_editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -300,17 +302,27 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!(TextUtils.isEmpty(powerweight_editText.getText().toString()) || TextUtils.isEmpty(powerweightatEnd_editText.getText().toString())))
+                if(!(TextUtils.isEmpty(powerweight_editText.getText().toString()) || TextUtils.isEmpty(powerweightatEnd_editText.getText().toString()) || TextUtils.isEmpty(recycle_start_edit.getText().toString()) || TextUtils.isEmpty(recycle_end_edit.getText().toString()) || TextUtils.isEmpty(right_recycle_end_edit.getText().toString())|| TextUtils.isEmpty(right_recycle_start_edit.getText().toString()) || TextUtils.isEmpty(buildplatform_editText.getText().toString())))
                 {
-                    powderused_editText.setText( "" + (Integer.parseInt(powerweight_editText.getText().toString()) - Integer.parseInt(powerweightatEnd_editText.getText().toString())));
+                    int A_B = Integer.parseInt(powerweight_editText.getText().toString()) - Integer.parseInt(powerweightatEnd_editText.getText().toString());
+                    int D_C = Integer.parseInt(recycle_end_edit.getText().toString()) - Integer.parseInt(recycle_start_edit.getText().toString());
+                    int F_E = Integer.parseInt(right_recycle_end_edit.getText().toString()) - Integer.parseInt(right_recycle_start_edit.getText().toString());
+                    int H_G = Integer.parseInt(powderused_editText.getText().toString()) - Integer.parseInt(buildplatform_editText.getText().toString());
+                    int _final = A_B - (D_C + F_E) - H_G;
+                    powderwaste_editText.setText("" +  _final );
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(!(TextUtils.isEmpty(powerweight_editText.getText().toString()) || TextUtils.isEmpty(powerweightatEnd_editText.getText().toString())))
+                if(!(TextUtils.isEmpty(powerweight_editText.getText().toString()) || TextUtils.isEmpty(powerweightatEnd_editText.getText().toString()) || TextUtils.isEmpty(recycle_start_edit.getText().toString()) || TextUtils.isEmpty(recycle_end_edit.getText().toString()) || TextUtils.isEmpty(right_recycle_end_edit.getText().toString())|| TextUtils.isEmpty(right_recycle_start_edit.getText().toString()) || TextUtils.isEmpty(buildplatform_editText.getText().toString())))
                 {
-                    powderused_editText.setText( "" + (Integer.parseInt(powerweight_editText.getText().toString()) - Integer.parseInt(powerweightatEnd_editText.getText().toString())));
+                    int A_B = Integer.parseInt(powerweight_editText.getText().toString()) - Integer.parseInt(powerweightatEnd_editText.getText().toString());
+                    int D_C = Integer.parseInt(recycle_end_edit.getText().toString()) - Integer.parseInt(recycle_start_edit.getText().toString());
+                    int F_E = Integer.parseInt(right_recycle_end_edit.getText().toString()) - Integer.parseInt(right_recycle_start_edit.getText().toString());
+                    int H_G = Integer.parseInt(powderused_editText.getText().toString()) - Integer.parseInt(buildplatform_editText.getText().toString());
+                    int _final = A_B - (D_C + F_E) - H_G;
+                    powderwaste_editText.setText("" +  _final );
                 }
             }
         });
@@ -528,12 +540,16 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
     }
 
     private int insert_to_printing() {
+        String recycle_startLeft = recycle_start_edit.getText().toString();
+        String recycle_endLeft = recycle_end_edit.getText().toString();
+        String recycle_startRight = right_recycle_start_edit.getText().toString();
+        String recycle_endRight = right_recycle_end_edit.getText().toString();
         String starttime = starttime_editText.getText().toString();
         String endtime = endtime_editText.getText().toString();
         String date = date_editText.getText().toString();
         String powerweight = powerweight_editText.getText().toString();
         String powderatend = powerweightatEnd_editText.getText().toString();
-        String powderused=null;
+        String powderused= powderused_editText.getText().toString();
         String powderwaste = powderwaste_editText.getText().toString();
         String buildplatform = buildplatform_editText.getText().toString();
         String printTime = printTune_editText.getText().toString();
@@ -544,21 +560,47 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         if(TextUtils.isEmpty(starttime)) starttime = "null";
         if(TextUtils.isEmpty(endtime)) endtime = "null";
         if(TextUtils.isEmpty(date)) date = "null";
-        if(!(TextUtils.isEmpty(powerweight) || TextUtils.isEmpty(powderatend)))
+        if(!(TextUtils.isEmpty(powerweight) || TextUtils.isEmpty(powderatend) || TextUtils.isEmpty(recycle_startLeft) || TextUtils.isEmpty(recycle_endLeft) || TextUtils.isEmpty(recycle_startRight)|| TextUtils.isEmpty(recycle_endRight) || TextUtils.isEmpty(buildplatform)))
         {
-            powderused = "" + (Integer.parseInt(powerweight_editText.getText().toString()) - Integer.parseInt(powerweightatEnd_editText.getText().toString()));
+            int A_B = Integer.parseInt(powerweight_editText.getText().toString()) - Integer.parseInt(powerweightatEnd_editText.getText().toString());
+            int D_C = Integer.parseInt(recycle_end_edit.getText().toString()) - Integer.parseInt(recycle_start_edit.getText().toString());
+            int F_E = Integer.parseInt(right_recycle_end_edit.getText().toString()) - Integer.parseInt(right_recycle_start_edit.getText().toString());
+            int H_G = Integer.parseInt(powderused_editText.getText().toString()) - Integer.parseInt(buildplatform_editText.getText().toString());
+            int _final = A_B - (D_C + F_E) - H_G;
+            powderwaste = "" +  _final ;
+        }
+        if(TextUtils.isEmpty(recycle_startRight))
+        {
+            recycle_startRight = "null";
+            powderwaste = "null";
+        }
+        if(TextUtils.isEmpty(recycle_endRight)){
+            recycle_endRight = "null";
+            powderwaste = "null";
         }
         if(TextUtils.isEmpty(powerweight))
         {
             powerweight = "null";
-            powderused = "null";
+            powderwaste = "null";
         }
         if(TextUtils.isEmpty(powderatend)){
             powderatend = "null";
-            powderused = "null";
+            powderwaste = "null";
         }
-        if(TextUtils.isEmpty(powderwaste)) powderwaste = "null";
-        if(TextUtils.isEmpty(buildplatform)) buildplatform = "null";
+        if(TextUtils.isEmpty(recycle_startLeft))
+        {
+            recycle_startLeft = "null";
+            powderwaste = "null";
+        }
+        if(TextUtils.isEmpty(recycle_endLeft)){
+            recycle_endLeft = "null";
+            powderwaste = "null";
+        }
+        if(TextUtils.isEmpty(buildplatform))
+        {
+            buildplatform = "null";
+            powderwaste = "null";
+        }
         if(TextUtils.isEmpty(printTime)) printTime = "null";
         if(TextUtils.isEmpty(reused_times)) reused_times = "null";
         if(TextUtils.isEmpty(numberofLayers)) numberofLayers = "null";
@@ -576,6 +618,12 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         params.add(new BasicNameValuePair(config.PRINTING_powder_weight_start, powerweight));
         params.add(new BasicNameValuePair(config.PRINTING_powder_weight_end, powderatend));
         params.add(new BasicNameValuePair(config.PRINTING_powder_used, powderused));
+
+        params.add(new BasicNameValuePair(config.PRINTING_right_recycle_start, recycle_startRight));
+        params.add(new BasicNameValuePair(config.PRINTING_right_recycle_end, recycle_endRight));
+        params.add(new BasicNameValuePair(config.PRINTING_left_recycle_start, recycle_startLeft));
+        params.add(new BasicNameValuePair(config.PRINTING_left_recycle_end, recycle_endLeft));
+
         params.add(new BasicNameValuePair(config.PRINTING_powder_waste_weight, powderwaste));
         params.add(new BasicNameValuePair(config.PRINTING_material_id, material_editText.getText().toString()));
         params.add(new BasicNameValuePair(config.PRINTING_build_platform_weight, buildplatform));
@@ -649,6 +697,16 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         return success;
     }
     private void initialize(View view) {
+        recycle_start_edit = (EditText) view.findViewById(R.id.recycle_start_edit);
+        recycle_end_edit = (EditText) view.findViewById(R.id.recycle_end_edit);
+        right_recycle_start_edit = (EditText) view.findViewById(R.id.right_recycle_start_edit);
+        right_recycle_end_edit = (EditText) view.findViewById(R.id.right_recycle_end_edit);
+
+        recycle_start_left = (TextView)view.findViewById(R.id.recycle_start_left);
+        recycle_end_left = (TextView)view.findViewById(R.id.recycle_end_left);
+        right_recycle_start = (TextView)view.findViewById(R.id.right_recycle_start);
+        right_recycle_end = (TextView)view.findViewById(R.id.right_recycle_end);
+
         ProgressView = view.findViewById(R.id.newprintjob_progress);
         newProjectView = view.findViewById(R.id.uploadfiles_insert);
         spinner = (Spinner) view.findViewById(R.id.powderCondition_editText);
@@ -874,6 +932,14 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         comment_Text.setVisibility(View.VISIBLE);
     }
     private void hide_prining() {
+        recycle_start_left.setVisibility(View.GONE);
+        recycle_end_left.setVisibility(View.GONE);
+        right_recycle_start.setVisibility(View.GONE);
+        right_recycle_end.setVisibility(View.GONE);
+        recycle_start_edit.setVisibility(View.GONE);
+        recycle_end_edit.setVisibility(View.GONE);
+        right_recycle_start_edit.setVisibility(View.GONE);
+        right_recycle_end_edit.setVisibility(View.GONE);
         slmid_editText.setVisibility(View.GONE);
         starttime_editText.setVisibility(View.GONE);
         endtime_editText.setVisibility(View.GONE);
@@ -917,6 +983,14 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
 
     }
     private void show_prining() {
+        recycle_start_left.setVisibility(View.VISIBLE);
+        recycle_end_left.setVisibility(View.VISIBLE);
+        right_recycle_start.setVisibility(View.VISIBLE);
+        right_recycle_end.setVisibility(View.VISIBLE);
+        recycle_start_edit.setVisibility(View.VISIBLE);
+        recycle_end_edit.setVisibility(View.VISIBLE);
+        right_recycle_start_edit.setVisibility(View.VISIBLE);
+        right_recycle_end_edit.setVisibility(View.VISIBLE);
         slmid_editText.setVisibility(View.VISIBLE);
         starttime_editText.setVisibility(View.VISIBLE);
         endtime_editText.setVisibility(View.VISIBLE);

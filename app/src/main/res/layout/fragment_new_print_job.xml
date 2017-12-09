@@ -422,7 +422,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/typeofmachine_textView"
                 android:layout_marginTop="50dp"
-                android:text="Powder Weight:"
+                android:text="Big Canister at start (gram):"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
 
@@ -441,14 +441,110 @@
                 android:layout_marginTop="30dp"
                 android:textSize="10pt"
                 android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/recycle_start_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/powderweightatEnd_editText"
+                android:layout_marginTop="50dp"
+                android:text="Left Recycle at start (gram):"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+            <EditText
+                android:id="@+id/recycle_start_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/recycle_start_left"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_toEndOf="@+id/recycle_start_left"
+                android:layout_toRightOf="@+id/recycle_start_left"
+                android:ems="10"
+                android:inputType="number"
+                android:gravity="center"
+                android:layout_marginTop="30dp"
+                android:textSize="10pt"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/recycle_end_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/recycle_start_left"
+                android:layout_marginTop="50dp"
+                android:text="Left Recycle at end (gram):"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+            <EditText
+                android:id="@+id/recycle_end_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/recycle_end_left"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_toEndOf="@+id/recycle_end_left"
+                android:layout_toRightOf="@+id/recycle_end_left"
+                android:ems="10"
+                android:inputType="number"
+                android:gravity="center"
+                android:layout_marginTop="30dp"
+                android:textSize="10pt"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/right_recycle_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/recycle_end_left"
+                android:layout_marginTop="50dp"
+                android:text="Right Recycle at start (gram):"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+            <EditText
+                android:id="@+id/right_recycle_start_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/right_recycle_start"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_toEndOf="@+id/right_recycle_start"
+                android:layout_toRightOf="@+id/right_recycle_start"
+                android:ems="10"
+                android:inputType="number"
+                android:gravity="center"
+                android:layout_marginTop="30dp"
+                android:textSize="10pt"
+                android:textStyle="bold"/>
 
+            <TextView
+                android:id="@+id/right_recycle_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/right_recycle_start_edit"
+                android:layout_marginTop="50dp"
+                android:text="Right Recycle at end (gram):"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+            <EditText
+                android:id="@+id/right_recycle_end_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/right_recycle_end"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_toEndOf="@+id/right_recycle_end"
+                android:layout_toRightOf="@+id/right_recycle_end"
+                android:ems="10"
+                android:inputType="number"
+                android:gravity="center"
+                android:layout_marginTop="30dp"
+                android:textSize="10pt"
+                android:textStyle="bold"/>
             <TextView
                 android:id="@+id/powderweightatEnd_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/powderweight_editText"
                 android:layout_marginTop="50dp"
-                android:text="Powder Weight at End:"
+                android:text="Big Canister at end (gram):"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
 
@@ -471,9 +567,9 @@
                 android:id="@+id/powderused_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/powderweightatEnd_textView"
+                android:layout_below="@+id/buildplatform_editText"
                 android:layout_marginTop="50dp"
-                android:text="Powder Used:"
+                android:text="Build Platform Weight at end(gram):"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
 
@@ -489,7 +585,6 @@
                 android:ems="10"
                 android:inputType="none"
                 android:gravity="center"
-                android:enabled="false"
                 android:layout_marginTop="30dp"
                 android:textSize="10pt"
                 android:textStyle="bold"/>
@@ -497,7 +592,7 @@
                 android:id="@+id/powderwaste_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/powderused_textView"
+                android:layout_below="@+id/powderused_editText"
                 android:layout_marginTop="50dp"
                 android:text="Powder Waste:"
                 android:textSize="18sp"
@@ -517,7 +612,8 @@
                 android:gravity="center"
                 android:layout_marginTop="30dp"
                 android:textSize="10pt"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:enabled="false"/>
 
 
             <TextView
@@ -551,9 +647,9 @@
                 android:id="@+id/buildplatform_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/material_textView"
+                android:layout_below="@+id/right_recycle_end_edit"
                 android:layout_marginTop="50dp"
-                android:text="Build Platform Weight:"
+                android:text="Build Platform Weight at start(gram):"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
 
@@ -577,7 +673,7 @@
                 android:id="@+id/printTune_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/buildplatform_textView"
+                android:layout_below="@+id/material_textView"
                 android:layout_marginTop="50dp"
                 android:text="Calculated Print Time:"
                 android:textSize="18sp"
