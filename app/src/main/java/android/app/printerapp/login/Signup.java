@@ -37,7 +37,7 @@ import static android.content.ContentValues.TAG;
 public class Signup extends AppCompatActivity {
     Config config;
     Insert insert;
-    EditText edit_first_name, edit_last_name, edit_user_name, edit_email_address, edit_password, edit_retype_password;
+    EditText edit_first_name, edit_last_name, edit_user_name, edit_password, edit_retype_password;
     Button signUpbutton;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +61,6 @@ public class Signup extends AppCompatActivity {
                 if(edit_user_name.getText().toString().length()==0){
                     edit_user_name.setError("Username is Required");
                     edit_user_name.requestFocus();
-                }
-                if(edit_email_address.getText().toString().length()==0){
-                    edit_email_address.setError("Email Address is Required");
-                    edit_email_address.requestFocus();
                 }
                 if(edit_password.getText().toString().length()==0){
                     edit_password.setError("Password not entered");
@@ -105,7 +101,6 @@ public class Signup extends AppCompatActivity {
         edit_first_name =(EditText)findViewById(R.id.your_first_name);
         edit_last_name =(EditText)findViewById(R.id.your_last_name);
         edit_user_name = (EditText)findViewById(R.id.your_user_name);
-        edit_email_address = (EditText)findViewById(R.id.your_email_address);
         edit_password = (EditText)findViewById(R.id.create_new_password);
         edit_retype_password = (EditText)findViewById(R.id.new_retype_password);
         signUpbutton = (Button)findViewById(R.id.sign_up_button);
@@ -130,7 +125,7 @@ public class Signup extends AppCompatActivity {
         params.add(new BasicNameValuePair(config.SIGNUP_first_name, edit_first_name.getText().toString()));
         params.add(new BasicNameValuePair(config.SIGNUP_last_name, edit_last_name.getText().toString()));
         params.add(new BasicNameValuePair(config.SIGNUP_user_name, edit_user_name.getText().toString()));
-        params.add(new BasicNameValuePair(config.SIGNUP_email_address, edit_email_address.getText().toString()));
+        params.add(new BasicNameValuePair(config.SIGNUP_email_address, ""));
         params.add(new BasicNameValuePair(config.SIGNUP_password_name, edit_password.getText().toString()));
         params.add(new BasicNameValuePair(config.SIGNUP_retype_password_name, edit_retype_password.getText().toString()));
         insert = new Insert(params, config.TAG_INSERT_SIGNUP);
