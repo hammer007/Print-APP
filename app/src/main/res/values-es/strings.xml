@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">OctoPrint</string>
+    <string name="app_name">PrintBook</string>
 
     <string name="add">Añadir</string>
     <string name="cancel">Cancelar</string>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">OctoPrint</string>
+    <string name="app_name">PrintBook</string>
     <string name="about_app_name" translatable="false">OctoPrint 3d bq printer controller</string>
     <string name="about_url" translatable="false">http://www.octoprint.org</string>
 

@@ -14,7 +14,7 @@ public class Config {
     public static final String PREPRINTING_no_parts = "no_parts";
     public static final String PREPRINTING_printing_parameter = "printing_parameter";
     public static final String PREPRINTING_comment = "comment";
-    public static final String PRINTING_printing_id = "printing_id";
+    public static final String PRINTING_printing_partnumber = "partnumber";
     public static final String PRINTING_slm_id = "slm_id";
     public static final String PRINTING_start_time = "start_time";
     public static final String PRINTING_end_time = "end_time";

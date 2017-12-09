@@ -1038,6 +1038,7 @@ public class SearchFragment extends Fragment {
     }
 
     private int update_preprinting(){
+        String partnumber = partnumber_editText.getText().toString();
         String slm_id = submitted_slm_id;
         String buildId = searched_result_buildId_editText.getText().toString();
         String numberofparts = numberofparts_editText.getText().toString();
@@ -1052,6 +1053,7 @@ public class SearchFragment extends Fragment {
         params.add(new BasicNameValuePair(config.PROJECT_slm_id, slm_id));
         params.add(new BasicNameValuePair(config.PREPRINTING_build_id, buildId));
         params.add(new BasicNameValuePair(config.PREPRINTING_no_parts, numberofparts));
+        params.add(new BasicNameValuePair(config.PRINTING_printing_partnumber, "\"" + partnumber + "\""));
         params.add(new BasicNameValuePair(config.PREPRINTING_printing_parameter, printingparameters));
         params.add(new BasicNameValuePair(config.PREPRINTING_comment, comment));
         Log.d(TAG, "params" + params);
@@ -1084,8 +1086,10 @@ public class SearchFragment extends Fragment {
         if(TextUtils.isEmpty(date)) date = "null";
         if(!(TextUtils.isEmpty(powerweight) || TextUtils.isEmpty(powderatend)))
         {
-            powderused = "" + (Integer.parseInt(powerweight_editText.getText().toString()) - Integer.parseInt(powerweightatEnd_editText.getText().toString()));
-        }
+            if(!(powerweight.equals("null") || powderatend.equals("null"))) {
+                powderused = "" + (Integer.parseInt(powerweight_editText.getText().toString()) - Integer.parseInt(powerweightatEnd_editText.getText().toString()));
+            }
+            }
         if(TextUtils.isEmpty(powerweight))
         {
             powerweight = "null";

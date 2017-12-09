@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/buildId_textView"
                 android:layout_alignParentStart="true"
-                android:text="Part Number:"
+                android:text="Unique Parts(separated by comma):"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -105,7 +105,7 @@
                 android:layout_toEndOf="@+id/partnumber_textView"
                 android:layout_toRightOf="@+id/partnumber_textView"
                 android:ems="10"
-                android:inputType="number"
+                android:inputType="text"
                 android:paddingBottom="40dp"
                 android:textSize="10pt"
                 android:gravity="center"
@@ -137,7 +137,8 @@
                 android:paddingBottom="40dp"
                 android:textSize="10pt"
                 android:gravity="center"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:text=""/>
 
             <TextView
                 android:id="@+id/numberparts_textView"

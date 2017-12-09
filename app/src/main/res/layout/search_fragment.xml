@@ -155,7 +155,7 @@
                     android:layout_toRightOf="@+id/searched_result_partnumber_textView"
                     android:ems="10"
                     android:gravity="center"
-                    android:inputType="number"
+                    android:inputType="text"
                     android:textStyle="bold" />
 
                 <TextView
@@ -1454,7 +1454,8 @@
                 android:layout_below="@+id/postprinting_file_text_description"
                 android:layout_marginTop="46dp"
                 app:srcCompat="@drawable/no_magic"
-                android:layout_marginLeft="140dp"/>
+                android:layout_marginLeft="140dp"
+                android:layout_centerHorizontal="true"/>
         </RelativeLayout>
     </LinearLayout>
 </ScrollView>

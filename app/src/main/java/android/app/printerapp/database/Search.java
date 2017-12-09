@@ -94,7 +94,7 @@ public class Search extends AsyncTask<String, String, String[]> {
             //PROJECT
 
             returned[30] = product.getString(config.PREPRINTING_project_id);
-            returned[31] = product.getString(config.PROJECT_number);
+            returned[31] = product.getString(config.PRINTING_printing_partnumber);
             returned[32] = product.getString(config.PROJECT_name);
         } catch (JSONException e) {
             e.printStackTrace();

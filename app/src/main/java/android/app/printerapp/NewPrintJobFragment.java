@@ -85,7 +85,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
     ProgressDialog progressDialog;
     String ImageName = "slm_id", ImagePath = "image_path" ;
     String SLM_FOUND = "";
-    Bitmap bitmap;
+    Bitmap bitmap = null;
     String stlpath = "";
     String cadpath = "";
     int success_stl = -1;
@@ -162,7 +162,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
                 success_postprinting = insert_to_postprinting();
                 if(success == 1 & success_postprinting == 1 & success_pre_printing ==1 & success_printing ==1){
                     Toast.makeText(getContext(), "SUCCESSFUL", Toast.LENGTH_LONG).show();
-                    ImageUploadToServerFunction();
+                    if(post_print_snapshot.getDrawable() != null && bitmap != null) ImageUploadToServerFunction();
                 }
                 else if(success != 1 & success_postprinting != 1 & success_pre_printing !=1 & success_printing !=1){
                     Toast.makeText(getContext(), "Nothing was Successful", Toast.LENGTH_LONG).show();
@@ -618,6 +618,7 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
 
     }
     private int insert_to_pre_printing(){
+        String partnumber = partnumber_editText.getText().toString();
         String slm_id = slmid_editText.getText().toString();
         String buildId = buildId_editText.getText().toString();
         String numberofparts = numberofparts_editText.getText().toString();
@@ -634,8 +635,9 @@ public class NewPrintJobFragment extends Fragment implements AdapterView.OnItemS
         params.add(new BasicNameValuePair(config.PREPRINTING_build_id, buildId));
         params.add(new BasicNameValuePair(config.PREPRINTING_no_parts, numberofparts));
         params.add(new BasicNameValuePair(config.PREPRINTING_printing_parameter, printingparameters));
+        params.add(new BasicNameValuePair(config.PRINTING_printing_partnumber, "\"" + partnumber + "\""));
         params.add(new BasicNameValuePair(config.PREPRINTING_comment, comment));
-        Log.d(TAG, "params" + params);
+        Log.d(TAG, "paramspreprinting" + params);
         insert = new Insert(params, config.TAG_INSERT_PREPRINTING);
         try {
             success = insert.execute().get();
